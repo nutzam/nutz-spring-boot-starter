@@ -9,6 +9,7 @@
 	</parent>
 	<groupId>org.nutz</groupId>
 	<artifactId>nutz-spring-boot-starter</artifactId>
+	<version>2.2.2.SNAPSHOT</version>
 	<name>nutz-spring-boot-starter</name>
 	<description>spring boot nutz starter	</description>
 	<url>https://nutzam.com</url>
@@ -36,7 +37,7 @@
 		<url>git://github.com/nutzam/nutz-spring-boot-starter.git</url>
 	</scm>
 	<properties>
-		<nutz.version>[1.r.68,)</nutz.version>
+		<nutz.version>1.r.68-SNAPSHOT</nutz.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -109,6 +110,11 @@
 			<groupId>org.nutz</groupId>
 			<artifactId>nutz-plugins-ngrok</artifactId>
 			<version>${nutz.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

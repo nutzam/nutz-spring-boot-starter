@@ -1,0 +1,6 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.nutz.spring.boot.dao.NutzDaoAutoConfiguration,\
+org.nutz.spring.boot.dao.NutzDataBaseIniter,\
+org.nutz.spring.boot.json.NutzJsonMessageConverterAutoConfiguration,\
+org.nutz.spring.boot.ngrok.NgrokAutoConfiguration
