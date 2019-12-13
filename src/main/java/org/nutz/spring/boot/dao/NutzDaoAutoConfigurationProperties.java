@@ -15,17 +15,17 @@ public class NutzDaoAutoConfigurationProperties {
 	/**
 	 * 运行期配置
 	 */
-	Runtime runtime;
+	Runtime runtime = new Runtime();
 
 	/**
 	 * sql管理器配置
 	 */
-	SqlManager sqlManager;
+	SqlManager sqlManager = new SqlManager();
 
 	/**
 	 * sql 模板处理插件配置
 	 */
-	SqlTemplate sqlTemplate;
+	SqlTemplate sqlTemplate = new SqlTemplate();
 
 	@Data
 	public static class SqlTemplate {

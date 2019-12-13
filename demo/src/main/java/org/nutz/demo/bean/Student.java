@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table("t_student")
-@Comment("学生表")
 @EqualsAndHashCode(callSuper = false, of = "no")
 public class Student extends IdEntity {
 
