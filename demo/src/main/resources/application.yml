@@ -1,0 +1,15 @@
+nutz:
+  json:
+    enabled: true
+  dao:
+    sql-template:
+      enable: true
+      type: beetl
+    sql-manager:
+      paths:
+      - sqls
+    runtime:
+      create: true
+      migration: true
+      basepackage:
+      - org.nutz.demo.bean
