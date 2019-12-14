@@ -67,7 +67,7 @@ nutz:
       foce-create: false # 是否删表重建，注意此功能会删除全部表及数据，一般应用于demo或测试 默认false
       check-index: true # 是否检查索引 默认true
       basepackage: # 相关实体所在包
-        - org.nutz.demo.bean
+      - org.nutz.demo.bean
 ```
 
 根据 nutz 官方描述，相关包下配置了@Table 注解的实体均会自动创建表，自动建表有以下局限性：
@@ -88,7 +88,7 @@ nutz:
     sql-manager:
       mode: file #自定义sql管理模式 file和xml
       paths: # 自定义sql文件路径
-        - sqls
+      - sqls
 ```
 
 #### sql template
