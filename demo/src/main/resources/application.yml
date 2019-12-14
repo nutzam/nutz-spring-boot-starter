@@ -63,17 +63,29 @@ logging:
     springfox: off
     io.swagger: off
 nutz:
+  ngrok:
+    port: 8080
+    token: abcdef
   json:
     enabled: true
+    mode: compact
+    ignore-null: true
+    compact: true
+    date-format: yyyy-MM-dd Hh:mm:ss
   dao:
     sql-template:
       enable: true
       type: beetl
     sql-manager:
-      paths:
+      mode: file #自定义sql管理模式 file和xml
+      paths: # 自定义sql文件路径
       - sqls
     runtime:
-      create: true
-      migration: true
-      basepackage:
+      create: true #是否自动建表
+      migration: true #是否自动变更
+      add-column: true # 是否添加列
+      delete-column: true # 是否删除列
+      foce-create: false # 是否删表重建，注意此功能会删除全部表及数据，一般应用于demo或测试
+      check-index: true # 是否检查索引
+      basepackage: # 相关实体所在包
       - org.nutz.demo.bean
