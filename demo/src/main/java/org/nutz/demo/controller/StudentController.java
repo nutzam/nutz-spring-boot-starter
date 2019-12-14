@@ -2,6 +2,7 @@ package org.nutz.demo.controller;
 
 import java.util.Optional;
 
+import org.nutz.dao.Cnd;
 import org.nutz.demo.bean.Student;
 import org.nutz.demo.service.StudentService;
 import org.nutz.spring.boot.service.entity.Pager;
@@ -26,11 +27,8 @@ public class StudentController {
 	public Result<Pager<Student>> search(@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
 			@RequestParam(value = "key", required = false) String key) {
-		return Result
-				.success(studentService
-						.searchByKeyAndPage(Optional.ofNullable(key).orElse(""), page, pageSize, "no", "name",
-								"description")
-						.addParam("key", key));
+		return Result.success(studentService.searchByKeyAndPage(Optional.ofNullable(key).orElse(""), page, pageSize,
+				Cnd.NEW(), "no", "name", "description").addParam("key", key));
 	}
 
 }
