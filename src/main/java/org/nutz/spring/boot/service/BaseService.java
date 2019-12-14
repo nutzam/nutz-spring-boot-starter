@@ -330,7 +330,9 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
 			}
 			index++;
 		}
-		return searchByPage(page, pageSize, cnd.and(expressionGroup));
+		return searchByPage(page, pageSize,
+				expressionGroup.getExps() == null || expressionGroup.getExps().isEmpty() ? cnd
+						: cnd.and(expressionGroup));
 	}
 
 	/**
