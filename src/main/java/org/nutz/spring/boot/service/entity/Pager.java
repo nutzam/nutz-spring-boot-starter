@@ -3,6 +3,8 @@ package org.nutz.spring.boot.service.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.nutz.lang.util.NutMap;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +37,7 @@ public class Pager<T extends Serializable> extends org.nutz.dao.pager.Pager {
     /**
      * 数据列表
      */
+    @NotNull(message = "数据列表非空,没有数据是为空列表")
     private List<T> dataList;
 
     /**
