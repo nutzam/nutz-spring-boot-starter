@@ -32,61 +32,61 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-@ConditionalOnClass({ Dao.class })
-@AutoConfigureAfter({ DataSourceAutoConfiguration.class })
+@ConditionalOnClass({Dao.class})
+@AutoConfigureAfter({DataSourceAutoConfiguration.class})
 @EnableConfigurationProperties(NutzDaoAutoConfigurationProperties.class)
 public class NutzDaoAutoConfiguration {
 
-	@Autowired
-	NutzDaoAutoConfigurationProperties properties;
+    @Autowired
+    NutzDaoAutoConfigurationProperties properties;
 
-	@Bean
-	public Dao dao(DataSource dataSource, SqlManager sqlManager, DaoRunner daoRunner) {
-		NutDao dao = new NutDao(dataSource, sqlManager);
-		dao.setRunner(daoRunner);
-		return dao;
-	}
+    @Bean
+    public Dao dao(DataSource dataSource, SqlManager sqlManager, DaoRunner daoRunner) {
+        NutDao dao = new NutDao(dataSource, sqlManager);
+        dao.setRunner(daoRunner);
+        return dao;
+    }
 
-	@Bean
-	@ConditionalOnMissingBean(DaoRunner.class)
-	public DaoRunner daoRunner() {
-		return new SpringDaoRunner();
-	}
+    @Bean
+    @ConditionalOnMissingBean(DaoRunner.class)
+    public DaoRunner daoRunner() {
+        return new SpringDaoRunner();
+    }
 
-	@Bean
-	public SpringResourceLoaction springResourceLoaction() {
-		return new SpringResourceLoaction();
-	}
+    @Bean
+    public SpringResourceLoaction springResourceLoaction() {
+        return new SpringResourceLoaction();
+    }
 
-	@Bean
-	@ConditionalOnMissingBean
-	public SqlManager sqlManager() {
-		String[] paths = properties.getSqlManager().getPaths();
-		if (paths == null) {
-			paths = new String[] { "sqls" };
-		}
-		return properties.getSqlManager().getMode() == Mode.XML ? new XmlSqlManager(paths) : new FileSqlManager(paths);
-	}
+    @Bean
+    @ConditionalOnMissingBean
+    public SqlManager sqlManager() {
+        String[] paths = properties.getSqlManager().getPaths();
+        if (paths == null) {
+            paths = new String[]{"sqls"};
+        }
+        return properties.getSqlManager().getMode() == Mode.XML ? new XmlSqlManager(paths) : new FileSqlManager(paths);
+    }
 
-	@PostConstruct
-	public void initSqlTemplate() {
-		Scans.me().addResourceLocation(springResourceLoaction());
-		if (properties.getSqlTemplate().isEnable()) {
-			switch (properties.getSqlTemplate().getType()) {
-			case BEETL:
-				Sqls.setSqlBorning(BeetlSqlTpl.class);
-				break;
-			case FREEMARKER:
-				Sqls.setSqlBorning(FreeMarkerSqlTpl.class);
-				break;
-			case JETBRICK:
-				Sqls.setSqlBorning(JetbrickSqlTpl.class);
-				break;
-			default:
-				Sqls.setSqlBorning(VelocitySqlTpl.class);
-				break;
-			}
-		}
-	}
+    @PostConstruct
+    public void initSqlTemplate() {
+        Scans.me().addResourceLocation(springResourceLoaction());
+        if (properties.getSqlTemplate().isEnable()) {
+            switch (properties.getSqlTemplate().getType()) {
+            case BEETL:
+                Sqls.setSqlBorning(BeetlSqlTpl.class);
+                break;
+            case FREEMARKER:
+                Sqls.setSqlBorning(FreeMarkerSqlTpl.class);
+                break;
+            case JETBRICK:
+                Sqls.setSqlBorning(JetbrickSqlTpl.class);
+                break;
+            default:
+                Sqls.setSqlBorning(VelocitySqlTpl.class);
+                break;
+            }
+        }
+    }
 
 }

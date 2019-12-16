@@ -17,26 +17,26 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties(NgrokAutoConfigurationProperties.class)
 public class NgrokAutoConfiguration {
 
-	@Value("${server.port}")
-	int port;
+    @Value("${server.port}")
+    int port;
 
-	@Bean(initMethod = "start", destroyMethod = "stop")
-	@ConditionalOnProperty(name = "ngrok.token")
-	public NgrokClient ngrokClient(NgrokAutoConfigurationProperties ngrokConfigProperties) {
-		NgrokClient client = new NgrokClient();
-		client.to_port = getPort(ngrokConfigProperties);
-		client.auth_token = ngrokConfigProperties.getToken();
-		return client;
-	}
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    @ConditionalOnProperty(name = "ngrok.token")
+    public NgrokClient ngrokClient(NgrokAutoConfigurationProperties ngrokConfigProperties) {
+        NgrokClient client = new NgrokClient();
+        client.to_port = getPort(ngrokConfigProperties);
+        client.auth_token = ngrokConfigProperties.getToken();
+        return client;
+    }
 
-	/**
-	 * @param ngrokConfigProperties
-	 * @return
-	 */
-	private int getPort(NgrokAutoConfigurationProperties ngrokConfigProperties) {
-		if (ngrokConfigProperties.getPort() != 0) {
-			return ngrokConfigProperties.getPort();
-		}
-		return port == 0 ? 8080 : port;
-	}
+    /**
+     * @param ngrokConfigProperties
+     * @return
+     */
+    private int getPort(NgrokAutoConfigurationProperties ngrokConfigProperties) {
+        if (ngrokConfigProperties.getPort() != 0) {
+            return ngrokConfigProperties.getPort();
+        }
+        return port == 0 ? 8080 : port;
+    }
 }

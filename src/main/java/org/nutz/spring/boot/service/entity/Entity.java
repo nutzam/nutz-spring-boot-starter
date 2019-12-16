@@ -1,5 +1,7 @@
 package org.nutz.spring.boot.service.entity;
 
+import java.io.Serializable;
+
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 
@@ -7,14 +9,16 @@ import org.nutz.json.JsonFormat;
  * @author kerbores(kerbores@gmail.com)
  *
  */
-public class Entity {
+public class Entity implements Serializable {
 
-	public <T extends Entity> T exchange(Class<T> clazz) {
-		return Json.fromJson(clazz, Json.toJson(this, JsonFormat.compact().ignoreJsonShape()));
-	}
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	public String toString() {
-		return Json.toJson(this, JsonFormat.nice());
-	}
+    public <T extends Entity> T exchange(Class<T> clazz) {
+        return Json.fromJson(clazz, Json.toJson(this, JsonFormat.compact().ignoreJsonShape()));
+    }
+
+    @Override
+    public String toString() {
+        return Json.toJson(this, JsonFormat.nice());
+    }
 }
