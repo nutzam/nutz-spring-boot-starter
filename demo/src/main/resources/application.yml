@@ -27,7 +27,7 @@ spring:
     name: spring-boot-nutz-starter-demo
   datasource:
     druid:
-      url:  jdbc:sqlite::resource:sqlite/demo.db
+      url:  jdbc:sqlite:${user.home}/demo.db
       username: root
       password: G00dl^ck
       driver-class-name: org.sqlite.JDBC
@@ -42,8 +42,7 @@ spring:
       test-while-idle:  true
       test-on-borrow:  true
       test-on-return:  false
-      pool-prepared-statements:  true
-      max-pool-prepared-statement-per-connection-size: 20
+      pool-prepared-statements:  false
       web-stat-filter:
         enabled: true
         url-pattern: /*
@@ -77,15 +76,14 @@ nutz:
       enable: true
       type: beetl
     sql-manager:
-      mode: file #自定义sql管理模式 file和xml
-      paths: # 自定义sql文件路径
+      paths: 
       - sqls
     runtime:
-      create: true #是否自动建表
-      migration: true #是否自动变更
-      add-column: true # 是否添加列
-      delete-column: true # 是否删除列
-      foce-create: false # 是否删表重建，注意此功能会删除全部表及数据，一般应用于demo或测试
-      check-index: true # 是否检查索引
-      basepackage: # 相关实体所在包
+      create: true 
+      migration: true 
+      add-column: true 
+      delete-column: true 
+      foce-create: false 
+      check-index: false
+      basepackage: 
       - org.nutz.demo.bean

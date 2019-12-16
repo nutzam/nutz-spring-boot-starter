@@ -8,7 +8,9 @@ import org.nutz.dao.entity.annotation.Id;
  */
 public class IdEntity extends Entity {
 
-	@Id
-	long id;
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    long id;
 
 }

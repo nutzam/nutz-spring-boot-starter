@@ -12,13 +12,13 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "nutz.ngrok")
 public class NgrokAutoConfigurationProperties {
 
-	/**
-	 * token
-	 */
-	String token;
+    /**
+     * token
+     */
+    String token;
 
-	/**
-	 * 代理端口，默认会使用server.port
-	 */
-	int port;
+    /**
+     * 代理端口，默认会使用server.port
+     */
+    int port;
 }

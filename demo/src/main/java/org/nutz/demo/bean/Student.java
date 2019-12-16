@@ -25,12 +25,14 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false, of = "no")
 public class Student extends IdEntity {
 
-	@Name
-	@Column("s_no")
-	@Comment("学生学号")
-	String no;
+    private static final long serialVersionUID = 1L;
 
-	@Column("s_name")
-	@Comment("学生年龄")
-	String name;
+    @Name
+    @Column("s_no")
+    @Comment("学生学号")
+    String no;
+
+    @Column("s_name")
+    @Comment("学生年龄")
+    String name;
 }
