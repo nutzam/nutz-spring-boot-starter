@@ -21,7 +21,7 @@ public class NgrokAutoConfiguration {
     int port;
 
     @Bean(initMethod = "start", destroyMethod = "stop")
-    @ConditionalOnProperty(name = "ngrok.token")
+    @ConditionalOnProperty(name = "nutz.ngrok.token")
     public NgrokClient ngrokClient(NgrokAutoConfigurationProperties ngrokConfigProperties) {
         NgrokClient client = new NgrokClient();
         client.to_port = getPort(ngrokConfigProperties);

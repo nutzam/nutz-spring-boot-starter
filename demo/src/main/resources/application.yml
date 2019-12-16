@@ -64,7 +64,7 @@ logging:
 nutz:
   ngrok:
     port: 8080
-    token: abcdef
+    token: 2lu19cqqf2hciq1hoti37uvjo2
   json:
     enabled: true
     mode: compact
