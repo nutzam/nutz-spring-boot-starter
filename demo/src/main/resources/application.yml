@@ -70,7 +70,7 @@ nutz:
     mode: compact
     ignore-null: true
     compact: true
-    date-format: yyyy-MM-dd Hh:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
   dao:
     sql-template:
       enable: true

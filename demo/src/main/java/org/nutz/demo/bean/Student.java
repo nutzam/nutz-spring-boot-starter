@@ -4,6 +4,7 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
+import org.nutz.json.JsonField;
 import org.nutz.spring.boot.service.entity.IdEntity;
 
 import lombok.AllArgsConstructor;
@@ -35,4 +36,9 @@ public class Student extends IdEntity {
     @Column("s_name")
     @Comment("学生年龄")
     String name;
+
+    @Column("s_score")
+    @Comment("学分")
+    @JsonField(dataFormat = "###,###,###,###,##0.00")
+    double score;
 }

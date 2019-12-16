@@ -1,6 +1,5 @@
 package org.nutz.spring.boot.json;
 
-import java.text.DecimalFormat;
 import java.util.TimeZone;
 
 import org.nutz.integration.spring.NutzJsonMessageConverter;
@@ -59,9 +58,6 @@ public class NutzJsonMessageConverterAutoConfiguration {
         }
         if (Strings.isNotBlank(properties.getDateFormat())) {
             format.setDateFormat(properties.getDateFormat());
-        }
-        if (Strings.isNotBlank(properties.getNumberFormat())) {
-            format.setNumberFormat(new DecimalFormat(properties.getNumberFormat()));
         }
         if (Strings.isNotBlank(properties.getTimeZone())) {
             format.setTimeZone(TimeZone.getTimeZone(properties.getTimeZone()));
