@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import org.nutz.lang.Lang;
 import org.nutz.lang.util.NutMap;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -38,7 +40,8 @@ public class Pager<T extends Serializable> extends org.nutz.dao.pager.Pager {
      * 数据列表
      */
     @NotNull(message = "数据列表非空,没有数据是为空列表")
-    private List<T> dataList;
+    @Default
+    private List<T> dataList = Lang.list();
 
     /**
      * @param page

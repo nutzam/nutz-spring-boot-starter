@@ -364,19 +364,26 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
         if (cnd == null) {
             cnd = Cnd.NEW();
         }
+        String searchKey = String.format("%%%s%%", key);
         SqlExpressionGroup expressionGroup = Exps.begin();
         int index = 0;
         for (String field : fields) {
             if (index == 0) {
-                expressionGroup.and(Cnd.likeEX(field, key));
+                expressionGroup.and(field, "like", searchKey);
             } else {
-                expressionGroup.or(Cnd.likeEX(field, key));
+                expressionGroup.or(field, "like", searchKey);
             }
+            // if (index == 0) {
+            // expressionGroup.and(Cnd.likeEX(field, key));
+            // } else {
+            // expressionGroup.or(Cnd.likeEX(field, key));
+            // }
             index++;
         }
         return searchByPage(page,
                             pageSize,
                             expressionGroup.getExps() == null || expressionGroup.getExps().isEmpty() ? cnd
+
                                                                                                      : cnd.and(expressionGroup));
     }
 
