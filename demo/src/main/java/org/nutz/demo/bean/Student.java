@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table("t_student")
 @Comment("学生表")
-@EqualsAndHashCode(callSuper = false, of = "no")
+@EqualsAndHashCode(callSuper = true)
 public class Student extends IdEntity {
 
     private static final long serialVersionUID = 1L;
@@ -31,14 +31,14 @@ public class Student extends IdEntity {
     @Name
     @Column("s_no")
     @Comment("学生学号")
-    String no;
+    private String no;
 
     @Column("s_name")
     @Comment("学生年龄")
-    String name;
+    private String name;
 
     @Column("s_score")
     @Comment("学分")
     @JsonField(dataFormat = "###,###,###,###,##0.00")
-    double score;
+    private double score;
 }
