@@ -4,6 +4,7 @@ import org.nutz.dao.Dao;
 import org.nutz.dao.SqlManager;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.sql.Sql;
+import org.nutz.demo.bean.Student;
 import org.nutz.lang.random.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,4 +35,10 @@ public class TestController {
         dao.execute(sql);
         return Result.success(sql.getInt());
     }
+
+    @GetMapping("json")
+    public Result<Student> json() {
+        return Result.success(Student.builder().score(125644878.12155D).build());
+    }
+
 }
