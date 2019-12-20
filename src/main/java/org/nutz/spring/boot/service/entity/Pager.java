@@ -45,12 +45,23 @@ public class Pager<T extends Serializable> extends org.nutz.dao.pager.Pager {
 
     /**
      * @param page
+     *            页面
      * @param pageSize
+     *            页面大小
      */
     public Pager(int page, int pageSize) {
         super(page, pageSize);
     }
 
+    /**
+     * 添加参数
+     * 
+     * @param key
+     *            参数key
+     * @param value
+     *            参数值
+     * @return 当前分页对象
+     */
     public Pager<T> addParam(String key, Object value) {
         if (this.paras == null) {
             this.paras = NutMap.NEW();

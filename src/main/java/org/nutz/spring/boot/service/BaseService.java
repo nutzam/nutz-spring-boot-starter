@@ -72,7 +72,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      *            待保存对象
      * @param filter
      *            字段过滤器
-     * @return
+     * @return 保存后的对象
      */
     public T save(final T obj, FieldFilter filter) {
         return dao().insert(obj, filter);
@@ -113,7 +113,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      *            是否忽略零值
      * @param ignoreBlankStr
      *            是否忽略空字符串
-     * @return
+     * @return 保存后的对象
      */
     public T insert(final T t, boolean ignoreNull, boolean ignoreZero, boolean ignoreBlankStr) {
         return dao().insert(t, ignoreNull, ignoreZero, ignoreBlankStr);
@@ -126,7 +126,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      *            待保存对象
      * @param regex
      *            字段正则
-     * @return
+     * @return 保存后的对象
      */
     public T insertWith(T obj, String regex) {
         return dao().insertWith(obj, regex);
@@ -139,7 +139,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      *            对象
      * @param regex
      *            管理字段正则
-     * @return
+     * @return 保存后的对象
      */
     public T insertLinks(T obj, String regex) {
         return dao().insertLinks(obj, regex);
@@ -149,8 +149,10 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      * 插入中间表
      *
      * @param obj
+     *            对象
      * @param regex
-     * @return
+     *            正则
+     * @return 保存后的对象
      */
     public T insertRelation(T obj, String regex) {
         return dao().insertRelation(obj, regex);
@@ -159,7 +161,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
     /**
      * 查询全部
      *
-     * @return
+     * @return 对象列表
      */
     public List<T> all() {
         return query(null);
@@ -174,7 +176,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      *            当前页码
      * @param pageSize
      *            页面大小
-     * @return
+     * @return 对象列表
      */
     public List<T> list(Condition condition, int currentPage, int pageSize) {
         return dao().query(getEntityClass(), condition, dao().createPager(currentPage, pageSize));
@@ -187,7 +189,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      *            条件
      * @param currentPage
      *            页码
-     * @return
+     * @return 对象列表
      */
     public List<T> list(Condition condition, int currentPage) {
         return list(condition, currentPage, DEFAULT_PAGE_SIZE);
@@ -224,7 +226,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      * 
      * @param sql
      *            待执行sql
-     * @return
+     * @return 数据记录列表
      */
     public List<Record> listAsRecord(Sql sql) {
         sql.setCallback(Sqls.callback.records());
@@ -237,7 +239,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      * 
      * @param sql
      *            待执行sql
-     * @return
+     * @return 数据记录列表
      */
     public List<NutMap> listAsMap(Sql sql) {
         sql.setCallback(Sqls.callback.maps());
@@ -250,7 +252,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      * 
      * @param sql
      *            待执行sql
-     * @return
+     * @return 数据对象
      */
     public T fetch(Sql sql) {
         sql.setCallback(Sqls.callback.entity());
@@ -469,7 +471,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      *            待更新对象
      * @param fields
      *            字段列表
-     * @return
+     * @return 是否更新成功
      */
     public boolean update(T t, String... fields) {
         return dao().update(t.getClass(), makeChain(t, fields), getCnd(t)) == 1;
@@ -562,8 +564,10 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      * 删除关联数据
      *
      * @param obj
+     *            对象
      * @param regex
-     * @return
+     *            正则
+     * @return 是否删除成功
      */
     public T clearLinks(T obj, final String regex) {
         return dao().clearLinks(obj, regex);
