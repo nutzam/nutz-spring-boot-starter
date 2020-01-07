@@ -33,7 +33,7 @@
 	</repositories>
 	<properties>
 		<java.version>1.8</java.version>
-		<nutz.version>1.r.68-SNAPSHOT</nutz.version>
+		<nutz.version>[1.r.68.v20191031,)</nutz.version>
 	</properties>
 
 	<dependencies>

@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 0
 management:
   info:
     git:
@@ -61,7 +61,7 @@ logging:
     org.nutz: debug
     springfox: off
     io.swagger: off
-nutz:
+nutz: 
   ngrok:
     port: 8080
     token: 2lu19cqqf2hciq1hoti37uvjo2

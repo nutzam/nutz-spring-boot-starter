@@ -23,7 +23,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 public class NutzJsonMessageConverterAutoConfiguration {
 
     @Bean
-    @ConditionalOnExpression("${nutz.json.enabled:false}")
+    @ConditionalOnExpression("${nutz.json.enabled:true}")
     public HttpMessageConverter<Object> nutzJsonHttpMessageConverter(NutzJsonAutoConfigurationProperties properties) {
         JsonFormat format = null;
         if (properties.getMode() != null) {// 直接模式设置
