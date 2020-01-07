@@ -426,7 +426,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      * 
      * @param obj
      *            待更新对象
-     * @return
+     * @return 影响的记录条数
      */
     public int update(T obj) {
         return dao().update(obj);
@@ -450,7 +450,7 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      * 
      * @param obj
      *            待更新对象
-     * @return
+     * @return 影响的记录条数
      */
     public int updateIgnoreNull(final T obj) {
         return dao().updateIgnoreNull(obj);
