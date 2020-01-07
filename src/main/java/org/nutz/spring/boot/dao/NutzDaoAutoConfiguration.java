@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnClass({Dao.class})
-@ConditionalOnExpression("${nutz.dao.enabled:false}")
+@ConditionalOnExpression("${nutz.dao.enabled:true}")
 @AutoConfigureAfter({DataSourceAutoConfiguration.class})
 @EnableConfigurationProperties(NutzDaoAutoConfigurationProperties.class)
 public class NutzDaoAutoConfiguration {
