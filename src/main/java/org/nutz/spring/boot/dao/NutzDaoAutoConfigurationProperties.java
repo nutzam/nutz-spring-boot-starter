@@ -12,6 +12,7 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "nutz.dao")
 public class NutzDaoAutoConfigurationProperties {
 
+    boolean enabled = true;
     /**
      * 运行期配置
      */
