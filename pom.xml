@@ -9,7 +9,6 @@
 	</parent>
 	<groupId>org.nutz</groupId>
 	<artifactId>nutz-spring-boot-starter</artifactId>
-	<version>2.2.2-SNAPSHOT</version>
 	<name>nutz-spring-boot-starter</name>
 	<description>spring boot nutz starter	</description>
 	<url>https://nutzam.com</url>
