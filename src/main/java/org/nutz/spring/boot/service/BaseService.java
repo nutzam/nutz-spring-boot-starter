@@ -269,10 +269,25 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      * @return 对象列表
      */
     public List<T> list(Sql sql) {
+        return list(sql, getEntityClass());
+    }
+
+    /**
+     * 执行sql并返回对象列表
+     * 
+     * @param <E>
+     *            类型泛型
+     * @param sql
+     *            待执行sql
+     * @param clazz
+     *            返回的类型
+     * @return 对象列表
+     */
+    public <E> List<E> list(Sql sql, Class<E> clazz) {
         sql.setCallback(Sqls.callback.entities());
-        sql.setEntity(dao().getEntity(getEntityClass()));
+        sql.setEntity(dao().getEntity(clazz));
         dao().execute(sql);
-        return sql.getList(getEntityClass());
+        return sql.getList(clazz);
     }
 
     /**
