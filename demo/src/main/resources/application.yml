@@ -21,7 +21,7 @@ nutz:
       - club.zhcs.nutz.demo.entity
       check-index: true
       create: true
-      delete-column: false
+      delete-column: true
       migration: true
     sql-manager:
       paths:
