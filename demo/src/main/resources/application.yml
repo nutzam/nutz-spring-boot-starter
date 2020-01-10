@@ -69,9 +69,12 @@ spring:
         url-pattern: /druid/*
         reset-enable: true
 swagger:
-    base-package: .zhcs.nutz.demo.controller
+    base-package: club.zhcs.nutz.demo.controller
     title: nutz-spring-boot-starter-demo
     description: nutz-spring-boot-starter-demo swagger 接口手册示例
+    contact:      name: Kerbores
+      email: kerbores@gmail.com
+      url: https://github.com/kerbores
     authorization:
       key-name: Authorization
 logging:  
