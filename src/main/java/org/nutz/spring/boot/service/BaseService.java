@@ -115,7 +115,25 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      *            是否忽略空字符串
      * @return 保存后的对象
      */
+    @Deprecated
     public T insert(final T t, boolean ignoreNull, boolean ignoreZero, boolean ignoreBlankStr) {
+        return dao().insert(t, ignoreNull, ignoreZero, ignoreBlankStr);
+    }
+
+    /**
+     * 保存
+     *
+     * @param t
+     *            数据对象
+     * @param ignoreNull
+     *            是否忽略空值
+     * @param ignoreZero
+     *            是否忽略零值
+     * @param ignoreBlankStr
+     *            是否忽略空字符串
+     * @return 保存后的对象
+     */
+    public T save(final T t, boolean ignoreNull, boolean ignoreZero, boolean ignoreBlankStr) {
         return dao().insert(t, ignoreNull, ignoreZero, ignoreBlankStr);
     }
 
@@ -168,6 +186,17 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
     }
 
     /**
+     * 根据条件查询
+     * 
+     * @param cnd
+     *            条件
+     * @return 对象列表
+     */
+    public List<T> list(Condition cnd) {
+        return query(cnd);
+    }
+
+    /**
      * 分页查询
      *
      * @param condition
@@ -193,72 +222,6 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      */
     public List<T> list(Condition condition, int currentPage) {
         return list(condition, currentPage, DEFAULT_PAGE_SIZE);
-    }
-
-    /**
-     * 根据指定字段查询(仅限唯一属性,非唯一属性返回第一个满足条件的数据)
-     *
-     * @param field
-     *            字段
-     * @param value
-     *            值
-     * @return 单个对象
-     */
-    public T fetchByField(String field, Object value) {
-        return dao().fetch(getEntityClass(), Cnd.where(field, "=", value));
-    }
-
-    /**
-     * 执行sql并返回记录
-     * 
-     * @param sql
-     *            待执行sql
-     * @return 数据记录对象
-     */
-    public Record fetchAsRecord(Sql sql) {
-        sql.setCallback(Sqls.callback.record());
-        dao().execute(sql);
-        return sql.getObject(Record.class);
-    }
-
-    /**
-     * 执行sql并返回记录列表
-     * 
-     * @param sql
-     *            待执行sql
-     * @return 数据记录列表
-     */
-    public List<Record> listAsRecord(Sql sql) {
-        sql.setCallback(Sqls.callback.records());
-        dao().execute(sql);
-        return sql.getList(Record.class);
-    }
-
-    /**
-     * 执行sql并返回map列表,列别名作为key
-     * 
-     * @param sql
-     *            待执行sql
-     * @return 数据记录列表
-     */
-    public List<NutMap> listAsMap(Sql sql) {
-        sql.setCallback(Sqls.callback.maps());
-        dao().execute(sql);
-        return sql.getList(NutMap.class);
-    }
-
-    /**
-     * 执行sql并返回对象
-     * 
-     * @param sql
-     *            待执行sql
-     * @return 数据对象
-     */
-    public T fetch(Sql sql) {
-        sql.setCallback(Sqls.callback.entity());
-        sql.setEntity(dao().getEntity(getEntityClass()));
-        dao().execute(sql);
-        return sql.getObject(getEntityClass());
     }
 
     /**
@@ -291,16 +254,110 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
     }
 
     /**
+     * 执行sql并返回记录列表
+     * 
+     * @param sql
+     *            待执行sql
+     * @return 数据记录列表
+     */
+    public List<Record> listAsRecord(Sql sql) {
+        sql.setCallback(Sqls.callback.records());
+        dao().execute(sql);
+        return sql.getList(Record.class);
+    }
+
+    /**
+     * 执行sql并返回map列表,列别名作为key
+     * 
+     * @param sql
+     *            待执行sql
+     * @return 数据记录列表
+     */
+    public List<NutMap> listAsMap(Sql sql) {
+        sql.setCallback(Sqls.callback.maps());
+        dao().execute(sql);
+        return sql.getList(NutMap.class);
+    }
+
+    /**
+     * 根据指定字段查询(仅限唯一属性,非唯一属性返回第一个满足条件的数据)
+     *
+     * @param field
+     *            字段
+     * @param value
+     *            值
+     * @return 单个对象
+     */
+    public T fetchByField(String field, Object value) {
+        return dao().fetch(getEntityClass(), Cnd.where(field, "=", value));
+    }
+
+    /**
+     * 执行sql并返回记录
+     * 
+     * @param sql
+     *            待执行sql
+     * @return 数据记录对象
+     */
+    public Record fetchAsRecord(Sql sql) {
+        sql.setCallback(Sqls.callback.record());
+        dao().execute(sql);
+        return sql.getObject(Record.class);
+    }
+
+    /**
+     * 执行sql并返回对象
+     * 
+     * @param sql
+     *            待执行sql
+     * @return 数据对象
+     */
+    public T fetch(Sql sql) {
+        return fetch(sql, getEntityClass());
+    }
+
+    /**
+     * 执行sql并返回对象
+     * 
+     * @param <E>
+     *            对象类型
+     * @param sql
+     *            待执行sql
+     * @param claszz
+     *            类型
+     * @return 数据对象
+     */
+    public <E> E fetch(Sql sql, Class<E> claszz) {
+        sql.setCallback(Sqls.callback.entity());
+        sql.setEntity(dao().getEntity(claszz));
+        dao().execute(sql);
+        return sql.getObject(claszz);
+    }
+
+    /**
      * 执行删除或者更新语句
      * 
      * @param sql
      *            待执行sql
-     * @return 影响的记录条数
+     * @return 如果当前语句为 DELETE | UPDATE | INSERT，返回执行后所影响的记录数。否则返回 -1
      */
     public int executDeleteOrUpdateSql(Sql sql) {
         sql.setCallback(Sqls.callback.integer());
         dao().execute(sql);
         return sql.getUpdateCount();
+    }
+
+    /**
+     * 执行count sql
+     * 
+     * @param sql
+     *            待执行sql,请确保sql为count且仅返回一列count数
+     * @return 数量
+     */
+    public int executCountSql(Sql sql) {
+        sql.setCallback(Sqls.callback.integer());
+        dao().execute(sql);
+        return sql.getInt(0);
     }
 
     /**
@@ -614,8 +671,55 @@ public class BaseService<T extends Entity> extends IdNameEntityService<T> {
      *            sqlManager中的sql key
      * @return Sql 对象
      */
+    @Deprecated
     public Sql create(String key) {
         return dao().sqls().create(key);
+    }
+
+    /**
+     * 创建sql对象
+     *
+     * @param key
+     *            sqlManager中的sql key
+     * @return Sql 对象
+     */
+    public Sql createSql(String key) {
+        return dao().sqls().create(key);
+    }
+
+    /**
+     * 创建sql对象
+     *
+     * @param key
+     *            sqlManager中的sql key
+     * @return Sql 对象
+     */
+    public Sql sql(String key) {
+        return dao().sqls().create(key);
+    }
+
+    /**
+     * 获取entity
+     * 
+     * @param <E>
+     *            类型
+     * @param clazz
+     *            entity字节码
+     * @return entity实例
+     */
+    public <E> org.nutz.dao.entity.Entity<E> entity(Class<E> clazz) {
+        return dao().getEntity(clazz);
+    }
+
+    /**
+     * 执行sql
+     * 
+     * @param sql
+     *            待执行sql
+     * @return 执行后的sql对象
+     */
+    public Sql excute(Sql sql) {
+        return dao().execute(sql);
     }
 
 }

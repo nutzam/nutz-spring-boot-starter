@@ -5,7 +5,9 @@ import org.nutz.dao.SqlManager;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.sql.Sql;
 import org.nutz.demo.bean.Student;
+import org.nutz.lang.Lang;
 import org.nutz.lang.random.R;
+import org.nutz.spring.boot.service.entity.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +25,16 @@ public class TestController {
 
     @GetMapping("sqls")
     public Result<SqlManager> sql() {
+        Result.<Student> success(new Student());
         return Result.success(dao.sqls());
+    }
+
+    public Result<Pager<Student>> name() {
+        return Result.success(Pager.<Student> NEW()
+                                   .page(1)
+                                   .size(15)
+                                   .recordCount(300)
+                                   .dataList(Lang.list(new Student())));
     }
 
     @GetMapping("tpl")
