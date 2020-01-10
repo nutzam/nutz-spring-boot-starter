@@ -15,5 +15,5 @@ public class NutzDemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(NutzDemoApplication.class, args);
-    }   
+    }
 }

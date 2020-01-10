@@ -7,6 +7,7 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
+import club.zhcs.auth.AuthUser;
 import club.zhcs.nutz.demo.entity.DemoEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,5 +45,17 @@ public class User extends DemoEntity {
     @Comment("手机号")
     @Size(max = 128, message = "手机号不超过128个字符")
     private String mobile;
+
+    /**
+     * @return
+     */
+    public AuthUser toUser() {
+        return AuthUser.builder()
+                       .userName(getName())
+                       .password("nutz-demo")
+                       .build()
+                       .token()
+                       .addExt("user", this);
+    }
 
 }
