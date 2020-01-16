@@ -1,0 +1,3345 @@
+[
+  {
+    "mods": [
+      {
+        "description": "Action Controller",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "add",
+            "name": "add",
+            "method": "post",
+            "path": "/action",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Action",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "action",
+                "name": "action",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Action",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "edit",
+            "name": "edit",
+            "method": "put",
+            "path": "/action",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "action",
+                "name": "action",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Action",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "get",
+            "name": "get",
+            "method": "get",
+            "path": "/action/{id}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Action",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "delete",
+            "name": "remove",
+            "method": "delete",
+            "path": "/action/{id}",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "action"
+      },
+      {
+        "description": "Auth Controller",
+        "interfaces": [
+          {
+            "description": "check",
+            "name": "check",
+            "method": "get",
+            "path": "/auth/check",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": []
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "login",
+            "name": "login",
+            "method": "post",
+            "path": "/auth/login",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "AuthUser",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "login",
+                "name": "login",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Login",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "auth"
+      },
+      {
+        "description": "Captcha Controller",
+        "interfaces": [
+          {
+            "description": "captcha",
+            "name": "captcha",
+            "method": "get",
+            "path": "/captcha",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "length",
+                "name": "length",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "captcha"
+      },
+      {
+        "description": "Code Book Controller",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "add",
+            "name": "add",
+            "method": "post",
+            "path": "/code",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "CodeBook",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "codeBook",
+                "name": "codeBook",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "CodeBook",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "edit",
+            "name": "edit",
+            "method": "put",
+            "path": "/code",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "codeBook",
+                "name": "codeBook",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "CodeBook",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "vxeSave",
+            "name": "vxeSave",
+            "method": "post",
+            "path": "/code/vxe/save",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "vxeData",
+                "name": "vxeData",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "CodeBook",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "VXETableSaveDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "get",
+            "name": "get",
+            "method": "get",
+            "path": "/code/{id}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "CodeBook",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "delete",
+            "name": "remove",
+            "method": "delete",
+            "path": "/code/{id}",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "byGroup",
+            "name": "byGroup",
+            "method": "get",
+            "path": "/group/{id}/codes",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "CodeBook",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "codeBook"
+      },
+      {
+        "description": "Group Controller",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "add",
+            "name": "add",
+            "method": "post",
+            "path": "/group",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Group",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "group",
+                "name": "group",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Group",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "edit",
+            "name": "edit",
+            "method": "put",
+            "path": "/group",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "group",
+                "name": "group",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Group",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "get",
+            "name": "get",
+            "method": "get",
+            "path": "/group/{id}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Group",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "delete",
+            "name": "remove",
+            "method": "delete",
+            "path": "/group/{id}",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "search",
+            "name": "search",
+            "method": "get",
+            "path": "/groups",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "Group",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Pager",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "key",
+                "name": "key",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "page",
+                "name": "page",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "size",
+                "name": "size",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "state",
+                "name": "state",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "boolean",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "group"
+      },
+      {
+        "description": "Module Controller",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "add",
+            "name": "add",
+            "method": "post",
+            "path": "/module",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Module",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "module",
+                "name": "module",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Module",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "edit",
+            "name": "edit",
+            "method": "put",
+            "path": "/module",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "module",
+                "name": "module",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Module",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "get",
+            "name": "get",
+            "method": "get",
+            "path": "/module/{id}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Module",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "delete",
+            "name": "remove",
+            "method": "delete",
+            "path": "/module/{id}",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "actions",
+            "name": "actions",
+            "method": "get",
+            "path": "/module/{id}/actions",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "Action",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "search",
+            "name": "search",
+            "method": "get",
+            "path": "/modules",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "Module",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Pager",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "key",
+                "name": "key",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "page",
+                "name": "page",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "size",
+                "name": "size",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "module"
+      },
+      {
+        "description": "Role Controller",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "add",
+            "name": "add",
+            "method": "post",
+            "path": "/role",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Role",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "role",
+                "name": "role",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Role",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "edit",
+            "name": "edit",
+            "method": "put",
+            "path": "/role",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "role",
+                "name": "role",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Role",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "get",
+            "name": "get",
+            "method": "get",
+            "path": "/role/{id}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Role",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "delete",
+            "name": "remove",
+            "method": "delete",
+            "path": "/role/{id}",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "grant",
+            "name": "grant",
+            "method": "post",
+            "path": "/role/{id}/grant",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "actionInfos",
+                "name": "actionInfos",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "string",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "grantInfo",
+            "name": "grantInfo",
+            "method": "get",
+            "path": "/role/{id}/grant/info",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "ModuleInfo",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "mids",
+                "name": "mids",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "number",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "permissions",
+            "name": "permissions",
+            "method": "get",
+            "path": "/role/{id}/permissions",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "PermissionInfo",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "search",
+            "name": "search",
+            "method": "get",
+            "path": "/roles",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "Role",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Pager",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "key",
+                "name": "key",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "page",
+                "name": "page",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "size",
+                "name": "size",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "role"
+      },
+      {
+        "description": "Test Controller",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "jsr303",
+            "name": "jsr303",
+            "method": "post",
+            "path": "/jsr303",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "idCard",
+                "name": "idCard",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "TestIdCard",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "actions",
+            "name": "actions",
+            "method": "get",
+            "path": "/role/{id}/actions/info",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "mids",
+                "name": "mids",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "number",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "test"
+      },
+      {
+        "description": "User Controller",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "add",
+            "name": "add",
+            "method": "post",
+            "path": "/user",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "User",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "user",
+                "name": "user",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "User",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "edit",
+            "name": "edit",
+            "method": "put",
+            "path": "/user",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "user",
+                "name": "user",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "User",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "get",
+            "name": "get",
+            "method": "get",
+            "path": "/user/{id}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "User",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "delete",
+            "name": "remove",
+            "method": "delete",
+            "path": "/user/{id}",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "grant",
+            "name": "grant",
+            "method": "post",
+            "path": "/user/{id}/grant",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "actionInfos",
+                "name": "actionInfos",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "string",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "grantInfo",
+            "name": "grantInfo",
+            "method": "get",
+            "path": "/user/{id}/grant/info",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "ModuleInfo",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "mids",
+                "name": "mids",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "number",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "roles",
+            "name": "roles",
+            "method": "get",
+            "path": "/user/{id}/grant/role",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "RoleInfo",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "grantRoles",
+            "name": "grantRoles",
+            "method": "post",
+            "path": "/user/{id}/grant/role",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "body",
+                "description": "roles",
+                "name": "roles",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "number",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "permissions",
+            "name": "permissions",
+            "method": "get",
+            "path": "/user/{id}/permissions",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "PermissionInfo",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "search",
+            "name": "search",
+            "method": "get",
+            "path": "/users",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "User",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": []
+                    }
+                  ],
+                  "typeName": "Pager",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "key",
+                "name": "key",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "page",
+                "name": "page",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "size",
+                "name": "size",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "user"
+      }
+    ],
+    "baseClasses": [
+      {
+        "name": "Action",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "createTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "installed",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "key",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "moduleId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "name",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "updateTime",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "ActionInfo",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "id",
+            "description": "操作id",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "key",
+            "description": "操作key",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "name",
+            "description": "操作名称",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "selected",
+            "description": "是否选中标识",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "AuthUser",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                },
+                {
+                  "typeArgs": [],
+                  "typeName": "object",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "ObjectMap",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "extInfo",
+            "description": "扩展信息",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "password",
+            "description": "密码",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "permissions",
+            "description": "权限列表",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "roles",
+            "description": "角色列表",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "token",
+            "description": "jwt Token",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "userName",
+            "description": "User名",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "CodeBook",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "createTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "description",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "disabled",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "groupId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "index",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "key",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "parentId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "updateTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "value",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "Group",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "createTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "description",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "disabled",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "key",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "name",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "updateTime",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "Login",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "captcha",
+            "description": "验证码",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "name",
+            "description": "User名",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "password",
+            "description": "密码",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "rememberMe",
+            "description": "是否记住我",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "uuid",
+            "description": "验证码uuid",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "Module",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "createTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "descr",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "key",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "name",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "updateTime",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "ModuleInfo",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "ActionInfo",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "actions",
+            "description": "模块操作列表",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "descr",
+            "description": "模块描述",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "moduleId",
+            "description": "模块Id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "moduleKey",
+            "description": "模块key",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "moduleName",
+            "description": "模块名称",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "selected",
+            "description": "是否选中标识",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "Pager",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Group",
+                  "isDefsType": true,
+                  "templateIndex": 0,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "dataList",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "first",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "last",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "offset",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "pageCount",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "pageNumber",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "pageSize",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                },
+                {
+                  "typeArgs": [],
+                  "typeName": "object",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "ObjectMap",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "paras",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "recordCount",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "Group",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": []
+          }
+        ]
+      },
+      {
+        "name": "PermissionInfo",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "ModuleInfo",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "modules",
+            "description": "模块信息列表",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "Result",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "Action",
+              "isDefsType": true,
+              "templateIndex": 0,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "data",
+            "description": "响应数据",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "errors",
+            "description": "错误信息列表",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                },
+                {
+                  "typeArgs": [],
+                  "typeName": "object",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "ObjectMap",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "ext",
+            "description": "响应扩展数据",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [
+                "'SUCCESS'",
+                "'FAIL'",
+                "'EXCEPTION'"
+              ]
+            },
+            "name": "state",
+            "description": "响应状态",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "success",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "Action",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": []
+          }
+        ]
+      },
+      {
+        "name": "Role",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "createTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "description",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "key",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "name",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "updateTime",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "RoleInfo",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "createTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "description",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "key",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "name",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "selected",
+            "description": "是否选中标识",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "updateTime",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "TestIdCard",
+        "properties": [],
+        "templateArgs": []
+      },
+      {
+        "name": "User",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "createTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "mobile",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "pwd",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "updateTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "userName",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "VXETableSaveDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "CodeBook",
+                  "isDefsType": true,
+                  "templateIndex": 0,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "insertRecords",
+            "description": "新增记录数据",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "CodeBook",
+                  "isDefsType": true,
+                  "templateIndex": 0,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "removeRecords",
+            "description": "删除记录数据",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "CodeBook",
+                  "isDefsType": true,
+                  "templateIndex": 0,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": []
+            },
+            "name": "updateRecords",
+            "description": "更新记录数据",
+            "required": true
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "CodeBook",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": []
+          }
+        ]
+      }
+    ],
+    "name": ""
+  }
+]
