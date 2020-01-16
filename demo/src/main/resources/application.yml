@@ -1,5 +1,3 @@
-server:
-  port: 0
 management:
   info:
     git:
@@ -12,37 +10,60 @@ management:
       exposure:
         include:
           - '*'
-swagger:
-  base-package: org.nutz.demo
-  title: nutz-spring-boot-starter-demo
-  description: nutz-spring-boot-starter-demo swagger 接口手册示例
-  authorization:
-    key-name: Authorization
+nutz:
+  json:
+    enabled: true
+    mode: compact
+  dao:
+    runtime:
+      add-column: true
+      basepackage:
+      - club.zhcs.nutz.demo.entity
+      check-index: false
+      create: true
+      delete-column: true
+      migration: true
+    sql-manager:
+      paths:
+      - sqls
+server:
+  port: 8889
 spring:
+  output:
+    ansi:
+      enabled: always
+  pid:
+    fail-on-write-error: true
+    file: ${user.home}/${spring.application.name}.pid
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 50MB
   application:
-    name: spring-boot-nutz-starter-demo
+    name: nutz-spring-boot-starter-demo
   datasource:
     druid:
-      url:  jdbc:sqlite:${user.home}/demo.db
-      username: root
+      #url: jdbc:mysql://10.0.0.174:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      #username: root
+      #password: G00dl^ck
+      #driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:postgresql://10.0.0.174:5432/thunder
+      username: postgres
       password: G00dl^ck
-      driver-class-name: org.sqlite.JDBC
-      filters: stat,log4j2
+      driver-class-name: org.postgresql.Driver
+      filters: stat,wall,log4j2
       initial-size: 10
       min-idle:  1
       max-active:  50
       max-wait:  60000
       time-between-eviction-runs-millis:  60000
       min-evictable-idle-time-millis:  300000
-      validation-query:  SELECT '1'
+      validation-query:  SELECT 'nutz'
       test-while-idle:  true
       test-on-borrow:  true
       test-on-return:  false
-      pool-prepared-statements:  false
+      pool-prepared-statements:  true
+      max-pool-prepared-statement-per-connection-size: 20
       web-stat-filter:
         enabled: true
         url-pattern: /*
@@ -51,39 +72,22 @@ spring:
         enabled: true
         url-pattern: /druid/*
         reset-enable: true
-  config:
-    location: null
-logging:
-  file:
-    path: ${user.home}/log/
-    name: ${user.home}/log/${spring.application.name}.log
+swagger:
+    base-package: club.zhcs.nutz.demo.controller
+    title: nutz-spring-boot-starter-demo
+    description: nutz-spring-boot-starter-demo swagger 接口手册示例
+    contact:      name: Kerbores
+      email: kerbores@gmail.com
+      url: https://github.com/kerbores
+    authorization:
+      key-name: Authorization
+logging:  
+  file: 
+    name: ${user.home}/logs/${spring.application.name}.log
+    path: ${user.home}/logs
   level:
     org.nutz: debug
+    club.zhcs.nutz.demo:  debug
+    org.apache.logging: off
     springfox: off
     io.swagger: off
-nutz: 
-  ngrok:
-    port: 8080
-    token: 2lu19cqqf2hciq1hoti37uvjo2
-  json:
-    enabled: true
-    mode: compact
-    ignore-null: true
-    compact: true
-    date-format: yyyy-MM-dd HH:mm:ss
-  dao:
-    sql-template:
-      enable: true
-      type: beetl
-    sql-manager:
-      paths: 
-      - sqls
-    runtime:
-      create: true 
-      migration: true 
-      add-column: true 
-      delete-column: true 
-      foce-create: false 
-      check-index: false
-      basepackage: 
-      - org.nutz.demo.bean
