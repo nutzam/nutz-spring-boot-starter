@@ -43,7 +43,7 @@ public class Group extends DemoEntity {
     @Column("g_descr")
     @Comment("分组描述")
     @Size(max = 255, message = "分组描述不超过255个字符")
-    private String descr;
+    private String description;
 
     @Column("g_disabled")
     @Comment("禁用标识")

@@ -43,6 +43,6 @@ public class Permission extends DemoEntity {
     @Column("p_descr")
     @Comment("权限描述")
     @Size(max = 255, message = "权限描述不超过255个字符")
-    private String descr;
+    private String description;
 
 }

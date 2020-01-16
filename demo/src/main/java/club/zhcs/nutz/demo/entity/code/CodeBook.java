@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Table("t_codebook")
 @Comment("码本数据")
 @EqualsAndHashCode(callSuper = true)
-public class Codebook extends DemoEntity {
+public class CodeBook extends DemoEntity {
 
     private static final long serialVersionUID = 1L;
 

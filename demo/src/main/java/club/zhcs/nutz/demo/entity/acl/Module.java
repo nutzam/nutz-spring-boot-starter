@@ -38,11 +38,16 @@ public class Module extends DemoEntity {
     @Column("m_descr")
     @Comment("模块描述")
     @Size(max = 128, message = "模块描述不超过128个字符")
-    private String descr;
+    private String description;
 
     @Column("m_name")
     @Comment("模块名称")
     @Size(max = 50, message = "模块名称不超过50个字符")
     private String name;
+
+    public Module id(long id) {
+        setId(id);
+        return this;
+    }
 
 }
