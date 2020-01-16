@@ -1,0 +1,5 @@
+{
+  "originUrl": "http://127.0.0.1:8888/v2/api-docs",
+  "outDir": "./src/api",
+  "templatePath": "./serviceTemplate"
+}

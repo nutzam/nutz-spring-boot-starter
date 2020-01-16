@@ -1,0 +1,58 @@
+@import '~ant-design-vue/lib/style/themes/default.less';
+
+.setting-drawer-handle {
+  position: absolute;
+  top: 240px;
+  right: 300px;
+  width: 48px;
+  height: 48px;
+  background: @primary-color;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  line-height: 48px;
+  border-radius: 3px 0 0 3px;
+  cursor: pointer;
+}
+.setting-drawer-index-content {
+    .setting-drawer-index-blockChecbox {
+      display: flex;
+      .setting-drawer-index-item {
+        margin-right: 16px;
+        position: relative;
+        border-radius: 4px;
+        cursor: pointer;
+        img {
+          width: 48px;
+        }
+        .setting-drawer-index-selectIcon {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 100%;
+          padding-top: 15px;
+          padding-left: 24px;
+          height: 100%;
+          color: #1890ff;
+          font-size: 14px;
+          font-weight: 700;
+        }
+      }
+    }
+    .setting-drawer-theme-color-colorBlock {
+      width: 20px;
+      height: 20px;
+      border-radius: 2px;
+      float: left;
+      cursor: pointer;
+      margin-right: 8px;
+      padding-left: 0px;
+      padding-right: 0px;
+      text-align: center;
+      color: #fff;
+      font-weight: 700;
+      i {
+        font-size: 14px;
+      }
+    }
+  }
