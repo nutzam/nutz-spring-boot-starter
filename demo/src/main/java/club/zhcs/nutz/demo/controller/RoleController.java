@@ -1,24 +1,27 @@
 package club.zhcs.nutz.demo.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.nutz.spring.boot.service.entity.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import club.zhcs.Result;
+import club.zhcs.nutz.demo.dto.response.ModuleInfo;
+import club.zhcs.nutz.demo.dto.response.PermissionInfo;
 import club.zhcs.nutz.demo.entity.acl.Role;
-import club.zhcs.nutz.demo.service.RoleService;
+import club.zhcs.nutz.demo.service.acl.RoleService;
 
 /**
- * @author mdp 代码生成器
+ * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
  */
 @RestController
 public class RoleController {
@@ -26,38 +29,54 @@ public class RoleController {
     @Autowired
     RoleService roleService;
 
-    @GetMapping("/roles")
+    @GetMapping("roles")
     public Result<Pager<Role>> search(
                                       @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                       @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
                                       @RequestParam(value = "key", required = false) String key) {
-        return Result.success(roleService
-                                         .searchByKeyAndPage(Optional.ofNullable(key)
+        return Result.success(roleService.searchByKeyAndPage(Optional.ofNullable(key)
                                                                      .orElse(""),
                                                              page,
                                                              pageSize,
+                                                             "key",
                                                              "name",
-                                                             "email",
-                                                             "mobile")
+                                                             "description")
                                          .addParam("key", key));
-        // TODO 确定查询字段
     }
 
-    @GetMapping("/role/{id}")
+    @GetMapping("role/{id}/grant/info")
+    public Result<List<ModuleInfo>> grantInfo(@PathVariable("id") long id,
+                                              @RequestParam(value = "mids", required = false, defaultValue = "-1") Long[] moduleIds) {
+        return Result.success(roleService.actionInfo(id, moduleIds).getModules());
+    }
+
+    @PostMapping("role/{id}/grant")
+    public Result grant(@PathVariable("id") long id,
+                        @RequestBody List<String> actionInfos) {
+        return roleService.grant(id, actionInfos) ? Result.success() : Result.fail("授权失败");
+    }
+
+    @GetMapping("role/{id}/permissions")
+    public Result<PermissionInfo> permissions(@PathVariable("id") long id) {
+        return Result.success(roleService.permissionInfo(id));
+    }
+
+    @GetMapping("role/{id}")
     public Result<Role> get(@PathVariable("id") long id) {
         return Result.success(roleService.fetch(id));
     }
 
-    @PatchMapping("/role")
-    public Result<Role> addOrEdit(@Validated @RequestBody Role role) {
-        if (role.getId() > 0) {
-            // TODO 确定更新字段
-            return roleService.update(role, "name", "email", "mobile") ? Result.success(role) : Result.fail("更新角色失败");
-        }
+    @PostMapping("role")
+    public Result<Role> add(@RequestBody Role role) {
         return Result.success(roleService.save(role));
     }
 
-    @DeleteMapping("/role/{id}")
+    @PutMapping("role")
+    public Result edit(@RequestBody Role role) {
+        return roleService.update(role, "name", "description") ? Result.success() : Result.fail("更新角色失败");
+    }
+
+    @DeleteMapping("role/{id}")
     public Result delete(@PathVariable("id") long id) {
         return roleService.delete(id) == 1 ? Result.success() : Result.fail("删除角色失败");
     }

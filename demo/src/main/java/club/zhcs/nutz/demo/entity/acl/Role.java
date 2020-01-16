@@ -43,6 +43,6 @@ public class Role extends DemoEntity {
     @Column("r_descr")
     @Comment("角色描述")
     @Size(max = 255, message = "角色描述不超过255个字符")
-    private String descr;
+    private String description;
 
 }

@@ -20,7 +20,7 @@ import club.zhcs.auth.AuthException;
 import club.zhcs.auth.AuthUser;
 import club.zhcs.auth.PasswordUtils;
 import club.zhcs.nutz.demo.entity.acl.User;
-import club.zhcs.nutz.demo.service.UserService;
+import club.zhcs.nutz.demo.service.acl.UserService;
 
 /**
  * @author kerbores(kerbores@gmail.com)
