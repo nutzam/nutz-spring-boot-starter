@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.nutz.dao.Cnd;
-import org.nutz.dao.Sqls;
-import org.nutz.dao.sql.Sql;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.nutz.spring.boot.service.IdNameBaseService;
@@ -58,9 +56,8 @@ public class RoleService extends IdNameBaseService<Role> {
      * @return 角色列表
      */
     public List<Role> roles(long userId) {
-        Sql sql = createSql("list.all.roles.by.user.id");
-        sql.params().set("userId", userId);
-        return list(sql);
+        return list(createSql("list.all.roles.by.user.id")
+                                                          .setParam("userId", userId));
     }
 
     public PermissionInfo actionInfo(Long id, Long... moduleIds) {
@@ -72,13 +69,10 @@ public class RoleService extends IdNameBaseService<Role> {
                                .flatMap(Collection::stream)
                                .distinct()
                                .collect(Collectors.toList());
-        Sql sql = createSql("list.permissions.info.by.role.id.and.module.ids");
-        sql.params().set(ROLE_ID, id);
-        sql.vars().set("moduleIds", Strings.join(",", ids));
-        sql.setCallback(Sqls.callback.entities());
-        sql.setEntity(dao().getEntity(Permission.class));
-        dao().execute(sql);
-        return sql.getList(Permission.class);
+        return list(createSql("list.permissions.info.by.role.id.and.module.ids")
+                                                                                .setParam(ROLE_ID, id)
+                                                                                .setParam("moduleIds", Strings.join(",", ids)),
+                    Permission.class);
     }
 
     public List<Module> modules(long id) {
@@ -107,12 +101,9 @@ public class RoleService extends IdNameBaseService<Role> {
      * @return 权限列表
      */
     public List<Permission> permissions(String sqlKey, long roleId) {
-        Sql sql = createSql(sqlKey);
-        sql.params().set(ROLE_ID, roleId);
-        sql.setCallback(Sqls.callback.entities());
-        sql.setEntity(dao().getEntity(Permission.class));
-        dao().execute(sql);
-        return sql.getList(Permission.class);
+        return list(createSql(sqlKey)
+                                     .setParam(ROLE_ID, roleId),
+                    Permission.class);
     }
 
     private PermissionInfo toPermissionInfo(List<Permission> permissions) {
