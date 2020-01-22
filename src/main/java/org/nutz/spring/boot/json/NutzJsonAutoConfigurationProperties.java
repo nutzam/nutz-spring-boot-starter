@@ -18,7 +18,26 @@ public class NutzJsonAutoConfigurationProperties {
      *
      */
     public enum Mode {
-        COMPACT, FULL, NICE, FORLOOK, TIDY;
+        /**
+         * 压缩
+         */
+        COMPACT,
+        /**
+         * 完整
+         */
+        FULL,
+        /**
+         * 美化
+         */
+        NICE,
+        /**
+         * 阅读友好
+         */
+        FORLOOK,
+        /**
+         * 整洁
+         */
+        TIDY;
     }
 
     /**
