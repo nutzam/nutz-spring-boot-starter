@@ -33,21 +33,73 @@ import org.nutz.spring.boot.service.entity.Pager;
  */
 public interface ExtService<T extends Serializable> {
 
-    static final int DEFAULT_PAGE_SIZE = 15;
-
+    /**
+     * 获取dao实例
+     * 
+     * @return dao实例
+     */
     Dao dao();
 
+    /**
+     * 根据条件查询列表
+     * 
+     * @param cnd
+     *            条件
+     * @return 数据列表
+     */
     List<T> query(Condition cnd);
 
+    /**
+     * 获取泛型类型class
+     * 
+     * @return 泛型class
+     */
     Class<T> getEntityClass();
 
+    /**
+     * 根据条件删除
+     * 
+     * @param cnd
+     *            条件
+     * @return 删除的数据记录数
+     */
     int clear(Condition cnd);
 
+    /**
+     * 获取泛型的Entity描述
+     * 
+     * @return Entity描述
+     */
     Entity<T> getEntity();
 
+    /**
+     * 根据条件进行分页查询
+     * 
+     * @param cnd
+     *            条件
+     * @param pager
+     *            分页
+     * @return 数据列表
+     */
     List<T> query(Condition cnd, org.nutz.dao.pager.Pager pager);
 
+    /**
+     * 根据条件进行计数
+     * 
+     * @param cnd
+     *            条件
+     * @return 数量
+     */
     int count(Condition cnd);
+
+    /**
+     * 默认分页大小
+     * 
+     * @return 分页大小,默认15
+     */
+    default int getDefaultPageSize() {
+        return 15;
+    }
 
     /**
      * 保存实体
@@ -107,24 +159,6 @@ public interface ExtService<T extends Serializable> {
      */
     default void save(Class<?> classOfT, Chain chain) {
         dao().insert(classOfT, chain);
-    }
-
-    /**
-     * 保存
-     *
-     * @param t
-     *            数据对象
-     * @param ignoreNull
-     *            是否忽略空值
-     * @param ignoreZero
-     *            是否忽略零值
-     * @param ignoreBlankStr
-     *            是否忽略空字符串
-     * @return 保存后的对象
-     */
-    @Deprecated
-    default T insert(final T t, boolean ignoreNull, boolean ignoreZero, boolean ignoreBlankStr) {
-        return dao().insert(t, ignoreNull, ignoreZero, ignoreBlankStr);
     }
 
     /**
@@ -228,7 +262,7 @@ public interface ExtService<T extends Serializable> {
      * @return 对象列表
      */
     default List<T> list(Condition condition, int currentPage) {
-        return list(condition, currentPage, DEFAULT_PAGE_SIZE);
+        return list(condition, currentPage, getDefaultPageSize());
     }
 
     /**
@@ -388,7 +422,7 @@ public interface ExtService<T extends Serializable> {
      * @return 分页对象
      */
     default Pager<T> searchByPage(int page, Condition condition) {
-        return searchByPage(page, DEFAULT_PAGE_SIZE, condition);
+        return searchByPage(page, getDefaultPageSize(), condition);
     }
 
     /**
@@ -422,7 +456,7 @@ public interface ExtService<T extends Serializable> {
      * @return 分页数据对象
      */
     default Pager<T> searchByKeyAndPage(String key, int page, Cnd cnd, String... fields) {
-        return searchByKeyAndPage(key, page, DEFAULT_PAGE_SIZE, cnd, fields);
+        return searchByKeyAndPage(key, page, getDefaultPageSize(), cnd, fields);
     }
 
     /**
@@ -453,11 +487,6 @@ public interface ExtService<T extends Serializable> {
             } else {
                 expressionGroup.or(field, "like", searchKey);
             }
-            // if (index == 0) {
-            // expressionGroup.and(Cnd.likeEX(field, key));
-            // } else {
-            // expressionGroup.or(Cnd.likeEX(field, key));
-            // }
             index++;
         }
         return searchByPage(page,
@@ -496,7 +525,7 @@ public interface ExtService<T extends Serializable> {
      * @return 分页对象
      */
     default Pager<T> searchByKeyAndPage(String key, int page, String... fields) {
-        return searchByKeyAndPage(key, page, DEFAULT_PAGE_SIZE, null, fields);
+        return searchByKeyAndPage(key, page, getDefaultPageSize(), null, fields);
     }
 
     /**
@@ -667,18 +696,6 @@ public interface ExtService<T extends Serializable> {
 
     default int deleteLinks(T obj, final String regex) {
         return dao().deleteLinks(obj, regex);
-    }
-
-    /**
-     * 创建sql对象
-     *
-     * @param key
-     *            sqlManager中的sql key
-     * @return Sql 对象
-     */
-    @Deprecated
-    default Sql create(String key) {
-        return dao().sqls().create(key);
     }
 
     /**

@@ -6,6 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @author kerbores(kerbores@gmail.com)
+ *
+ */
 @Data
 @Builder
 @NoArgsConstructor

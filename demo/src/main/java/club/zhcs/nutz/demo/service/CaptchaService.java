@@ -19,7 +19,9 @@ import club.zhcs.nutz.demo.utils.CacheMap;
 @Service
 public class CaptchaService {
 
-    // XXX 此处为临时性的缓存,如果分布式部署,请使用集中式的缓存来实现
+    /**
+     * 此处为临时性的缓存,如果分布式部署,请使用集中式的缓存来实现
+     */
     CacheMap<String, String> cache = new CacheMap<>(60000);
 
     /**
