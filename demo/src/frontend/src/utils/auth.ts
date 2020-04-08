@@ -6,7 +6,7 @@ export function getCurrentAuthority(): string[] {
 export function check(authority: string): boolean {
   if (!isLogin()) return false;
   if (!authority || authority == null) return true;
-  return getCurrentAuthority().filter(p => p === authority).length > 0;
+  return getCurrentAuthority().filter((p) => p === authority).length > 0;
 }
 
 export function isLogin(): boolean {

@@ -20,7 +20,7 @@
           show-search
           :target-keys="targetKeys"
           :selected-keys="selectedKeys"
-          :render="item => item.title"
+          :render="(item) => item.title"
           @selectChange="handleSelectChange"
           @change="handleActionChange"
           :list-style="{
@@ -60,14 +60,14 @@ export default class UserPermissionForm extends Vue {
   watchAllActions() {
     this.targetKeys = !this.allActions
       ? []
-      : this.allActions.filter(item => item.selected).map(item => item.key);
+      : this.allActions.filter((item) => item.selected).map((item) => item.key);
   }
 
   get allActions() {
     if (!this.modules || !this.modules.length) return [];
     return this.modules
-      .map(item =>
-        (item.actions || []).map(action =>
+      .map((item) =>
+        (item.actions || []).map((action) =>
           Object.assign(action, {
             mod: {
               key: item.moduleKey,
@@ -81,7 +81,7 @@ export default class UserPermissionForm extends Vue {
         if (x == null) return y;
         return x.concat(y || []);
       })
-      .map(item => ({
+      .map((item) => ({
         key: `${item.mod.key}.${item.key}`,
         title: `${item.mod.name}.${item.name}`,
         description: `${item.mod.name}.${item.name}`,
@@ -126,7 +126,7 @@ export default class UserPermissionForm extends Vue {
     this.form.validateFields((errors: any, values: any) => {
       if (!errors) {
         this.confirmLoading = true;
-        this.$api.user.grant(this.userId, values.actionIds, result => {
+        this.$api.user.grant(this.userId, values.actionIds, (result) => {
           this.confirmLoading = false;
           this.$message.success('用户授权成功', 2, () => {
             this.visible = false;

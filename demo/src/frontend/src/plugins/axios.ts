@@ -75,7 +75,7 @@ _axios.interceptors.response.use(
 );
 
 const Plugin: PluginObject<any> = {
-  install: Vue => {
+  install: (Vue) => {
     Object.defineProperties(Vue.prototype, {
       $axios: {
         get() {

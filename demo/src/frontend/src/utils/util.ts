@@ -44,14 +44,14 @@ Utils.getRandomStr = (n: number = 6): string => {
   return str;
 };
 
-Utils.random = function(m: number, n: number) {
+Utils.random = function (m: number, n: number) {
   let max = m > n ? m : n;
   let min = m > n ? n : m;
   var random = max - min + 1;
   return Math.floor(Math.random() * random + min);
 };
 
-Utils.randomPassword = function() {
+Utils.randomPassword = function () {
   return Utils.getRandomStr(Utils.random(8, 16));
 };
 
@@ -103,8 +103,8 @@ Utils.setDocumentTitle = (title: string): void => {
     const i = document.createElement('iframe');
     i.src = '/favicon.ico';
     i.style.display = 'none';
-    i.onload = function() {
-      setTimeout(function() {
+    i.onload = function () {
+      setTimeout(function () {
         i.remove();
       }, 9);
     };
@@ -128,7 +128,7 @@ Utils.handleScrollHeader = (callback: any): void => {
   let beforeScrollTop = window.pageYOffset;
   callback =
     callback ||
-    function() {
+    function () {
       return;
     };
   window.addEventListener(

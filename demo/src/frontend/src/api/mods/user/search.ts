@@ -11,7 +11,7 @@ export class SearchParams {
   ) {}
 }
 
-export default async function(
+export default async function (
   params: SearchParams,
   success: ({
     data,

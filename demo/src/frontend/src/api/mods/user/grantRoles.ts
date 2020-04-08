@@ -4,7 +4,7 @@
 
 import {defaultSuccess, defaultError, http} from '@/plugins/axios';
 
-export default async function(
+export default async function (
   id: number,
   roles: Array<number>,
 

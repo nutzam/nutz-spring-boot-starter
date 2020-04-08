@@ -141,7 +141,7 @@ export default class DataList extends Vue {
   }
   removeEvent() {
     if (this.selected && this.selected.id) {
-      this.$api.codeBook.remove(this.selected.id, result => {
+      this.$api.codeBook.remove(this.selected.id, (result) => {
         this.$message.error('删除成功!', 2, () => {
           this.loadCodeBooks();
         });

@@ -56,7 +56,7 @@
         </a-popconfirm>
       </a-button-group>
 
-      <p slot="expandedRowRender" slot-scope="user" style="margin: 0">
+      <p slot="expandedRowRender" slot-scope="user" style="margin: 0;">
         <a-row
           v-if="user.permissionInfo && user.permissionInfo.length"
           :gutter="24"

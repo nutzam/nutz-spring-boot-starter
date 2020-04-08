@@ -53,7 +53,7 @@
           <a-avatar
             slot="avatar"
             icon="check"
-            style="backgroundColor:#87d068"
+            style="backgroundcolor: #87d068;"
             v-if="group.id === id"
           />
           <a-avatar slot="avatar" icon="close" v-else />
@@ -62,7 +62,7 @@
             :title="group.key"
             @click="groupClicked(group.id)"
             v-if="group.disabled"
-            style="text-decoration: line-through"
+            style="text-decoration: line-through;"
           >
             {{ group.name }}
           </a>

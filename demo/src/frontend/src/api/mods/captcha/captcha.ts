@@ -7,7 +7,7 @@ export class CaptchaParams {
   constructor(public length?: number) {}
 }
 
-export default async function(
+export default async function (
   params: CaptchaParams,
   success: ({
     data,

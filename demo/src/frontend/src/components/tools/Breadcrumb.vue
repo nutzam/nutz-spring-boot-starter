@@ -26,7 +26,7 @@ export default class Breadcrumb extends Vue {
   getBreadcrumb() {
     this.breadList = [];
     this.name = this.$route.name;
-    this.$route.matched.forEach(item => {
+    this.$route.matched.forEach((item) => {
       this.breadList.push(item);
     });
   }

@@ -3,7 +3,7 @@
     <div v-if="visible" class="header-animat">
       <a-layout-header
         v-if="visible"
-        style="padding:0;"
+        style="padding: 0;"
         :class="[
           AppModule.fixedHeader && 'ant-header-fixedHeader',
           AppModule.sidebar

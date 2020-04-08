@@ -31,7 +31,7 @@ import Component, {mixins} from 'vue-class-component';
   components: {RouteView},
 })
 export default class UserLayout extends Mixins(Mixin) {
-  @State(state => state.app.copyright) copyright?: string;
+  @State((state) => state.app.copyright) copyright?: string;
   mounted() {
     document.body.classList.add('userLayout');
   }
