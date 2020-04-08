@@ -103,7 +103,7 @@ export default class ModuleForm extends Vue {
         if (this.module) {
           this.$api.module.edit(
             Object.assign(values, {id: this.module.id}),
-            result => {
+            (result) => {
               this.confirmLoading = false;
               this.$message.success('模块信息更新成功', 2, () => {
                 this.visible = false;
@@ -112,7 +112,7 @@ export default class ModuleForm extends Vue {
             }
           );
         } else {
-          this.$api.module.add(values, result => {
+          this.$api.module.add(values, (result) => {
             this.confirmLoading = false;
             this.$message.success('模块添加成功', 2, () => {
               this.visible = false;

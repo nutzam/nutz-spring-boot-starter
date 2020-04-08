@@ -42,12 +42,12 @@ class User extends VuexModule implements IUserState {
   @Action
   public hasRole(role: string) {
     if (!role || role == null) return true;
-    return this.roles.filter(r => r === role).length > 0;
+    return this.roles.filter((r) => r === role).length > 0;
   }
   @Action
   public hasPermission(permission: string) {
     if (!permission || permission == null) return true;
-    return this.permissions.filter(p => p === permission).length > 0;
+    return this.permissions.filter((p) => p === permission).length > 0;
   }
 }
 

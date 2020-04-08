@@ -20,7 +20,7 @@
           show-search
           :target-keys="targetKeys"
           :selected-keys="selectedKeys"
-          :render="item => item.title"
+          :render="(item) => item.title"
           @selectChange="handleSelectChange"
           @change="handleActionChange"
           :list-style="{
@@ -60,12 +60,12 @@ export default class UserPermissionForm extends Vue {
   watchAllActions() {
     this.targetKeys = !this.allRoles
       ? []
-      : this.allRoles.filter(item => item.selected).map(item => item.key);
+      : this.allRoles.filter((item) => item.selected).map((item) => item.key);
   }
 
   get allRoles() {
     if (!this.roles || !this.roles.length) return [];
-    return this.roles.map(item =>
+    return this.roles.map((item) =>
       Object.assign(item, {key: `${item.id}`, title: item.name})
     );
   }
@@ -107,7 +107,7 @@ export default class UserPermissionForm extends Vue {
     this.form.validateFields((errors: any, values: any) => {
       if (!errors) {
         this.confirmLoading = true;
-        this.$api.user.grantRoles(this.userId, values.ids, result => {
+        this.$api.user.grantRoles(this.userId, values.ids, (result) => {
           this.confirmLoading = false;
           this.$message.success('用户授权成功', 2, () => {
             this.visible = false;

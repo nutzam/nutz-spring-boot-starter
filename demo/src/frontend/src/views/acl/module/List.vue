@@ -44,7 +44,7 @@
         </a-popconfirm>
       </a-button-group>
 
-      <p slot="expandedRowRender" slot-scope="module" style="margin: 0">
+      <p slot="expandedRowRender" slot-scope="module" style="margin: 0;">
         <Box :top="20" :bottom="20">{{ module.descr }}</Box>
         <a-row
           v-if="module.actions && module.actions.length"
@@ -127,7 +127,7 @@ export default class ModuleList extends Mixins(Mixin) {
   }
   deleteAction(e: any, action: any) {
     if (!action.installed && action.id) {
-      this.$api.action.remove(action.id, result => {
+      this.$api.action.remove(action.id, (result) => {
         this.$message.success('删除操作成功');
       });
       return;

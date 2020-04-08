@@ -103,7 +103,7 @@ export default class RoleForm extends Vue {
         if (this.role) {
           this.$api.role.edit(
             Object.assign(values, {id: this.role.id}),
-            result => {
+            (result) => {
               this.confirmLoading = false;
               this.$message.success('角色信息更新成功', 2, () => {
                 this.visible = false;
@@ -112,7 +112,7 @@ export default class RoleForm extends Vue {
             }
           );
         } else {
-          this.$api.role.add(values, result => {
+          this.$api.role.add(values, (result) => {
             this.confirmLoading = false;
             this.$message.success('角色添加成功', 2, () => {
               this.visible = false;

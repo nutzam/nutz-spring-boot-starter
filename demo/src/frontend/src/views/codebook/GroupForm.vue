@@ -102,7 +102,7 @@ export default class GroupForm extends Vue {
         if (this.group) {
           this.$api.group.edit(
             Object.assign(values, {id: this.group.id}),
-            result => {
+            (result) => {
               this.confirmLoading = false;
               this.$message.success('分组信息更新成功', 2, () => {
                 this.visible = false;
@@ -111,7 +111,7 @@ export default class GroupForm extends Vue {
             }
           );
         } else {
-          this.$api.group.add(values, result => {
+          this.$api.group.add(values, (result) => {
             this.confirmLoading = false;
             this.$message.success('分组信息添加成功', 2, () => {
               this.visible = false;

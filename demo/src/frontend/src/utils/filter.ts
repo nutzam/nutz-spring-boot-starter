@@ -3,7 +3,7 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 
-Vue.filter('NumberFormat', function(value: number) {
+Vue.filter('NumberFormat', function (value: number) {
   console.log(value);
   if (!value) {
     return '0';
@@ -12,14 +12,14 @@ Vue.filter('NumberFormat', function(value: number) {
   return intPartFormat;
 });
 
-Vue.filter('dayjs', function(
+Vue.filter('dayjs', function (
   dataStr: string,
   pattern: string = 'YYYY-MM-DD HH:mm:ss'
 ) {
   return moment(dataStr).format(pattern);
 });
 
-Vue.filter('moment', function(
+Vue.filter('moment', function (
   dataStr: string,
   pattern: string = 'YYYY-MM-DD HH:mm:ss'
 ) {

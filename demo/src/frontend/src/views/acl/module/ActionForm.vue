@@ -85,7 +85,7 @@ export default class ActionForm extends Vue {
         if (this.action && this.action.id) {
           this.$api.action.edit(
             Object.assign(values, {id: this.action.id}),
-            result => {
+            (result) => {
               this.confirmLoading = false;
               this.$message.success('操作信息更新成功', 2, () => {
                 this.visible = false;
@@ -94,7 +94,7 @@ export default class ActionForm extends Vue {
             }
           );
         } else {
-          this.$api.action.add(Object.assign(this.action, values), result => {
+          this.$api.action.add(Object.assign(this.action, values), (result) => {
             this.confirmLoading = false;
             this.$message.success('操作添加成功', 2, () => {
               this.visible = false;

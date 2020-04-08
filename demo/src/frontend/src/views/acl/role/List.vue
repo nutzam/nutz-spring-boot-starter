@@ -50,7 +50,7 @@
         </a-popconfirm>
       </a-button-group>
 
-      <p slot="expandedRowRender" slot-scope="role" style="margin: 0">
+      <p slot="expandedRowRender" slot-scope="role" style="margin: 0;">
         <Box :top="20" :bottom="20">{{ role.description }}</Box>
         <a-row
           v-if="role.permissionInfo && role.permissionInfo.length"

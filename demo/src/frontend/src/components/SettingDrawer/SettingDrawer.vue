@@ -15,7 +15,7 @@
         </div>
       </template>
       <div class="setting-drawer-index-content">
-        <div style="margin-bottom:24px;">
+        <div style="margin-bottom: 24px;">
           <h3 class="setting-drawer-index-title">
             {{ $t('settingDrawer.pageStyleTitle') }}
           </h3>
@@ -67,7 +67,7 @@
           <h3 class="setting-drawer-index-title">
             {{ $t('settingDrawer.themeTitle') }}
           </h3>
-          <div style="height: 20px">
+          <div style="height: 20px;">
             <a-tooltip
               class="setting-drawer-theme-color-colorBlock"
               v-for="(item, index) in colorList"
@@ -86,7 +86,7 @@
           </div>
         </div>
         <a-divider />
-        <div style="margin-bottom:24px;">
+        <div style="margin-bottom: 24px;">
           <h3 class="setting-drawer-index-title">
             {{ $t('settingDrawer.layoutTitle') }}
           </h3>

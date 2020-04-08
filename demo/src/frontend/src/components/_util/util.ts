@@ -4,7 +4,7 @@
  * @returns {*[]}
  */
 export function filterEmpty(children: Array<{tag: string; text: string}> = []) {
-  return children.filter(c => c.tag || (c.text && c.text.trim() !== ''));
+  return children.filter((c) => c.tag || (c.text && c.text.trim() !== ''));
 }
 
 /**

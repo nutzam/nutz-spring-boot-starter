@@ -12,11 +12,11 @@
         <a-tab-pane
           v-for="page in pages"
           :key="page.fullPath"
-          style="height: 0"
+          style="height: 0;"
           :closable="pages.length > 1"
         >
           <a-dropdown slot="tab" :trigger="['contextmenu']">
-            <span style="userSelect: none">{{
+            <span style="userselect: none;">{{
               $t(`menu.${page.meta.title}`)
             }}</span>
             <a-menu slot="overlay" @click="closeMenuClick">
@@ -63,8 +63,8 @@ export default class MultiTab extends Vue {
     if (action === 'remove') this.remove(targetKey);
   }
   remove(targetKey: string) {
-    this.pages = this.pages.filter(page => page.fullPath !== targetKey);
-    this.fullPathList = this.fullPathList.filter(path => path !== targetKey);
+    this.pages = this.pages.filter((page) => page.fullPath !== targetKey);
+    this.fullPathList = this.fullPathList.filter((path) => path !== targetKey);
     if (!this.fullPathList.includes(this.activeKey)) {
       this.selectedLastPath();
     }

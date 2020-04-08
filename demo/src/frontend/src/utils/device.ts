@@ -6,7 +6,7 @@ export enum DEVICE_TYPE {
   MOBILE = 'mobile',
 }
 
-export const deviceEnquire = function(callback: (type: string) => any) {
+export const deviceEnquire = function (callback: (type: string) => any) {
   const matchDesktop = {
     match: () => {
       callback && callback(DEVICE_TYPE.DESKTOP);

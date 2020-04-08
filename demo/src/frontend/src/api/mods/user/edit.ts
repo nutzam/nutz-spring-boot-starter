@@ -4,7 +4,7 @@
 
 import {defaultSuccess, defaultError, http} from '@/plugins/axios';
 
-export default async function(
+export default async function (
   user: defs.User,
 
   success: ({

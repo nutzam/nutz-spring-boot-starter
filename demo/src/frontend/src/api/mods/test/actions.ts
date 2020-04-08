@@ -7,7 +7,7 @@ export class ActionsParams {
   constructor(public mids?: Array<number>) {}
 }
 
-export default async function(
+export default async function (
   id: number,
 
   params: ActionsParams,

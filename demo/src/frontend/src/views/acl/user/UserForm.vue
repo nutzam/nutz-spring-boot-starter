@@ -123,7 +123,7 @@ export default class UserForm extends Vue {
         if (this.user) {
           this.$api.user.edit(
             Object.assign(values, {id: this.user.id}),
-            result => {
+            (result) => {
               this.confirmLoading = false;
               this.$message.success('用户信息更新成功', 2, () => {
                 this.visible = false;

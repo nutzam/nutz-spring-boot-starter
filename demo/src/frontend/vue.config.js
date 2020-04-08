@@ -37,7 +37,7 @@ module.exports = {
     // 需要单独在用时引入所需包
     plugins: [themePlugin, new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     const svgRule = config.module.rule('svg');
     svgRule.uses.clear();
     svgRule

@@ -20,7 +20,7 @@
                     description="一年前"
                   >
                     <a-avatar
-                      style="background-color: white"
+                      style="background-color: white;"
                       slot="avatar"
                       src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"
                     />
@@ -32,7 +32,7 @@
                     description="一年前"
                   >
                     <a-avatar
-                      style="background-color: white"
+                      style="background-color: white;"
                       slot="avatar"
                       src="https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png"
                     />
@@ -44,7 +44,7 @@
                     description="一年前"
                   >
                     <a-avatar
-                      style="background-color: white"
+                      style="background-color: white;"
                       slot="avatar"
                       src="https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png"
                     />
@@ -63,7 +63,7 @@
       </template>
       <span @click="fetchNotice" class="header-notice">
         <a-badge count="12">
-          <a-icon style="font-size: 16px; padding: 4px" type="bell" />
+          <a-icon style="font-size: 16px; padding: 4px;" type="bell" />
         </a-badge>
       </span>
     </a-popover>

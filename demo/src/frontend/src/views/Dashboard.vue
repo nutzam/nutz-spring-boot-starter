@@ -361,9 +361,7 @@ export default class Dashboard extends Mixins(DeviceMixin) {
         total: 1234.56 - i * 100,
       });
       this.searchUserData.push({
-        x: moment()
-          .add(i, 'days')
-          .format('YYYY-MM-DD'),
+        x: moment().add(i, 'days').format('YYYY-MM-DD'),
         y: Math.ceil(Math.random() * 10),
       });
       for (let i = 0; i < 50; i += 1) {
