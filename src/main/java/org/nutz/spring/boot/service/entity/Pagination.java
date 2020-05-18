@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false, of = {"paras", "dataList"})
-public class Pager<T extends Serializable> extends org.nutz.dao.pager.Pager {
+public class Pagination<T extends Serializable> extends org.nutz.dao.pager.Pager {
 
     /**
      * 
@@ -49,44 +49,44 @@ public class Pager<T extends Serializable> extends org.nutz.dao.pager.Pager {
      * @param pageSize
      *            页面大小
      */
-    public Pager(int page, int pageSize) {
+    public Pagination(int page, int pageSize) {
         super(page, pageSize);
     }
 
-    public static <T extends Serializable> Pager<T> NEW() {
-        return Pager.<T> builder()
+    public static <T extends Serializable> Pagination<T> instance() {
+        return Pagination.<T> builder()
                     .build();
     }
 
-    public static <T extends Serializable> Pager<T> NEW(int page, int pageSize) {
-        return Pager.<T> builder()
+    public static <T extends Serializable> Pagination<T> instance(int page, int pageSize) {
+        return Pagination.<T> builder()
                     .build()
                     .page(page)
                     .size(pageSize);
     }
 
-    public static <T extends Serializable> Pager<T> NEW(List<T> dataList) {
-        return Pager.<T> builder()
+    public static <T extends Serializable> Pagination<T> instance(List<T> dataList) {
+        return Pagination.<T> builder()
                     .dataList(dataList)
                     .build();
     }
 
-    public Pager<T> dataList(List<T> dataList) {
+    public Pagination<T> dataList(List<T> dataList) {
         setDataList(dataList);
         return this;
     }
 
-    public Pager<T> page(int page) {
+    public Pagination<T> page(int page) {
         setPageNumber(page);
         return this;
     }
 
-    public Pager<T> size(int size) {
+    public Pagination<T> size(int size) {
         setPageSize(size);
         return this;
     }
 
-    public Pager<T> recordCount(int recordCount) {
+    public Pagination<T> recordCount(int recordCount) {
         setRecordCount(recordCount);
         return this;
     }
@@ -100,7 +100,7 @@ public class Pager<T extends Serializable> extends org.nutz.dao.pager.Pager {
      *            参数值
      * @return 当前分页对象
      */
-    public Pager<T> addParam(String key, Object value) {
+    public Pagination<T> addParam(String key, Object value) {
         if (this.paras == null) {
             this.paras = NutMap.NEW();
         }

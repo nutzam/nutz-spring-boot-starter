@@ -25,7 +25,7 @@ import org.nutz.lang.Lang;
 import org.nutz.lang.Mirror;
 import org.nutz.lang.util.NutMap;
 import org.nutz.log.Logs;
-import org.nutz.spring.boot.service.entity.Pager;
+import org.nutz.spring.boot.service.entity.Pagination;
 
 /**
  * 
@@ -408,7 +408,7 @@ public interface ExtService<T extends Serializable> {
      *            页码
      * @return 分页数据对象
      */
-    default Pager<T> searchByPage(int page) {
+    default Pagination<T> searchByPage(int page) {
         return searchByPage(page, null);
     }
 
@@ -421,7 +421,7 @@ public interface ExtService<T extends Serializable> {
      *            条件
      * @return 分页对象
      */
-    default Pager<T> searchByPage(int page, Condition condition) {
+    default Pagination<T> searchByPage(int page, Condition condition) {
         return searchByPage(page, getDefaultPageSize(), condition);
     }
 
@@ -436,9 +436,9 @@ public interface ExtService<T extends Serializable> {
      *            条件
      * @return 分页数据对象
      */
-    default Pager<T> searchByPage(int page, int pageSize, Condition condition) {
-        return Pager.<T> NEW(page, pageSize)
-                    .dataList(query(condition, new Pager(page, pageSize)))
+    default Pagination<T> searchByPage(int page, int pageSize, Condition condition) {
+        return Pagination.<T> instance(page, pageSize)
+                    .dataList(query(condition, new Pagination(page, pageSize)))
                     .recordCount(count(condition));
     }
 
@@ -455,7 +455,7 @@ public interface ExtService<T extends Serializable> {
      *            关键词匹配的字段列表
      * @return 分页数据对象
      */
-    default Pager<T> searchByKeyAndPage(String key, int page, Cnd cnd, String... fields) {
+    default Pagination<T> searchByKeyAndPage(String key, int page, Cnd cnd, String... fields) {
         return searchByKeyAndPage(key, page, getDefaultPageSize(), cnd, fields);
     }
 
@@ -474,7 +474,7 @@ public interface ExtService<T extends Serializable> {
      *            关键词匹配的字段列表
      * @return 分页数据对象
      */
-    default Pager<T> searchByKeyAndPage(String key, int page, int pageSize, Cnd cnd, String... fields) {
+    default Pagination<T> searchByKeyAndPage(String key, int page, int pageSize, Cnd cnd, String... fields) {
         if (cnd == null) {
             cnd = Cnd.NEW();
         }
@@ -509,7 +509,7 @@ public interface ExtService<T extends Serializable> {
      *            检索字段列表
      * @return 分页对象
      */
-    default Pager<T> searchByKeyAndPage(String key, int page, int pageSize, String... fields) {
+    default Pagination<T> searchByKeyAndPage(String key, int page, int pageSize, String... fields) {
         return searchByKeyAndPage(key, page, pageSize, null, fields);
     }
 
@@ -524,7 +524,7 @@ public interface ExtService<T extends Serializable> {
      *            检索字段列表
      * @return 分页对象
      */
-    default Pager<T> searchByKeyAndPage(String key, int page, String... fields) {
+    default Pagination<T> searchByKeyAndPage(String key, int page, String... fields) {
         return searchByKeyAndPage(key, page, getDefaultPageSize(), null, fields);
     }
 
