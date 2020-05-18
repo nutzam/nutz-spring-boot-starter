@@ -3,7 +3,7 @@ package club.zhcs.nutz.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.nutz.spring.boot.service.entity.Pager;
+import org.nutz.spring.boot.service.entity.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +29,7 @@ public class ModuleController {
     ModuleService moduleService;
 
     @GetMapping("modules")
-    public Result<Pager<Module>> search(
+    public Result<Pagination<Module>> search(
                                         @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                         @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
                                         @RequestParam(value = "key", required = false) String key) {

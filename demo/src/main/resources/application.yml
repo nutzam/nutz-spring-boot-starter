@@ -43,14 +43,14 @@ spring:
     name: nutz-spring-boot-starter-demo
   datasource:
     druid:
-      #url: jdbc:mysql://10.0.0.174:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-      #username: root
-      #password: G00dl^ck
-      #driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:postgresql://10.0.0.174:5432/thunder
-      username: postgres
+      url: jdbc:mysql://172.29.121.10:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      username: root
       password: G00dl^ck
-      driver-class-name: org.postgresql.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
+#      url: jdbc:postgresql://10.0.0.174:5432/thunder
+#      username: postgres
+#      password: G00dl^ck
+#      driver-class-name: org.postgresql.Driver
       filters: stat,wall,log4j2
       initial-size: 10
       min-idle:  1
@@ -72,11 +72,13 @@ spring:
         enabled: true
         url-pattern: /druid/*
         reset-enable: true
-swagger:
+axe:
+  swagger: 
     base-package: club.zhcs.nutz.demo.controller
     title: nutz-spring-boot-starter-demo
     description: nutz-spring-boot-starter-demo swagger 接口手册示例
-    contact:      name: Kerbores
+    contact:
+      name: Kerbores
       email: kerbores@gmail.com
       url: https://github.com/kerbores
     authorization:
