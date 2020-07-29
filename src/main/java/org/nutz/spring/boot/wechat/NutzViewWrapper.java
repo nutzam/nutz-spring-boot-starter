@@ -18,9 +18,6 @@ public class NutzViewWrapper implements View {
 
     Log log = Logs.get();
 
-    /**
-     * @param view
-     */
     public NutzViewWrapper(org.nutz.mvc.View view) {
         super();
         this.view = view;
