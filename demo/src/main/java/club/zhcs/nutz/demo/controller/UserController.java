@@ -34,9 +34,9 @@ public class UserController {
 
     @GetMapping("users")
     public Result<Pagination<User>> search(
-                                      @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                      @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
-                                      @RequestParam(value = "key", required = false) String key) {
+                                           @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                           @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
+                                           @RequestParam(value = "key", required = false) String key) {
         return Result.success(userService.searchByKeyAndPage(
                                                              Optional.ofNullable(key).orElse(""),
                                                              page,

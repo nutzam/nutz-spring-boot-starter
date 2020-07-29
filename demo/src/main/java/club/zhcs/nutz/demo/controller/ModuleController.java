@@ -30,15 +30,15 @@ public class ModuleController {
 
     @GetMapping("modules")
     public Result<Pagination<Module>> search(
-                                        @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                        @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
-                                        @RequestParam(value = "key", required = false) String key) {
+                                             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                             @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
+                                             @RequestParam(value = "key", required = false) String key) {
         return Result.success(moduleService.searchByKeyAndPage(Optional.ofNullable(key).orElse(""),
                                                                page,
                                                                pageSize,
                                                                "key",
                                                                "name",
-                                                               "descr")
+                                                               "description")
                                            .addParam("key", key));
     }
 
@@ -59,7 +59,7 @@ public class ModuleController {
 
     @PutMapping("module")
     public Result edit(@RequestBody Module module) {
-        return moduleService.update(module, "name", "descr") ? Result.success() : Result.fail("更新模块失败");
+        return moduleService.update(module, "name", "description") ? Result.success() : Result.fail("更新模块失败");
     }
 
     @DeleteMapping("module/{id}")

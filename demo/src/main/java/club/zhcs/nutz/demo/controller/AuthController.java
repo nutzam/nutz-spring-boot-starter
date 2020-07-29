@@ -35,7 +35,7 @@ public class AuthController {
     }
 
     @GetMapping("check")
-    public Result check() {
+    public Result<Void> check() {
         return authService.userName() == null ? Result.fail("token无效") : Result.success();
     }
 

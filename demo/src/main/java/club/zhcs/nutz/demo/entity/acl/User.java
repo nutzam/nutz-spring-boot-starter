@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import club.zhcs.auth.AuthUser;
@@ -31,6 +32,7 @@ public class User extends DemoEntity {
     private static final long serialVersionUID = 1L;
 
     @Column("u_name")
+    @Name
     @Comment("用户名")
     @NotNull(message = "用户名不能为空")
     @Size(max = 128, message = "用户名不超过128个字符")
