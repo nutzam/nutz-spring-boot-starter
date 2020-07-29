@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import club.zhcs.nutz.demo.entity.DemoEntity;
@@ -29,6 +30,7 @@ public class Permission extends DemoEntity {
 
     private static final long serialVersionUID = 1L;
 
+    @Name
     @Column("p_key")
     @Comment("权限唯一键")
     @NotNull(message = "权限唯一键不能为空")

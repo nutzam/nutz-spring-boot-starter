@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import club.zhcs.nutz.demo.entity.DemoEntity;
@@ -29,6 +30,7 @@ public class Action extends DemoEntity {
 
     private static final long serialVersionUID = 1L;
 
+    @Name
     @Column("a_key")
     @Comment("动作key")
     @NotNull(message = "动作key不能为空")

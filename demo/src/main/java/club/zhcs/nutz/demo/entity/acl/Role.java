@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import club.zhcs.nutz.demo.entity.DemoEntity;
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 public class Role extends DemoEntity {
 
     private static final long serialVersionUID = 1L;
-
+    @Name
     @Column("r_key")
     @Comment("角色唯一键")
     @NotNull(message = "角色唯一键不能为空")

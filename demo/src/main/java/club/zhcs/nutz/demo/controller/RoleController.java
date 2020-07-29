@@ -31,9 +31,9 @@ public class RoleController {
 
     @GetMapping("roles")
     public Result<Pagination<Role>> search(
-                                      @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                      @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
-                                      @RequestParam(value = "key", required = false) String key) {
+                                           @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                           @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
+                                           @RequestParam(value = "key", required = false) String key) {
         return Result.success(roleService.searchByKeyAndPage(Optional.ofNullable(key)
                                                                      .orElse(""),
                                                              page,
@@ -51,8 +51,8 @@ public class RoleController {
     }
 
     @PostMapping("role/{id}/grant")
-    public Result grant(@PathVariable("id") long id,
-                        @RequestBody List<String> actionInfos) {
+    public Result<Void> grant(@PathVariable("id") long id,
+                              @RequestBody List<String> actionInfos) {
         return roleService.grant(id, actionInfos) ? Result.success() : Result.fail("授权失败");
     }
 
@@ -72,12 +72,12 @@ public class RoleController {
     }
 
     @PutMapping("role")
-    public Result edit(@RequestBody Role role) {
+    public Result<Void> edit(@RequestBody Role role) {
         return roleService.update(role, "name", "description") ? Result.success() : Result.fail("更新角色失败");
     }
 
     @DeleteMapping("role/{id}")
-    public Result delete(@PathVariable("id") long id) {
+    public Result<Void> delete(@PathVariable("id") long id) {
         return roleService.delete(id) == 1 ? Result.success() : Result.fail("删除角色失败");
     }
 
