@@ -1,4 +1,4 @@
-let Utils: any = {};
+const Utils: any = {};
 
 /** 参数说明：
  * 根据长度截取先使用字符串，超长部分追加…
@@ -45,9 +45,9 @@ Utils.getRandomStr = (n: number = 6): string => {
 };
 
 Utils.random = function (m: number, n: number) {
-  let max = m > n ? m : n;
-  let min = m > n ? n : m;
-  var random = max - min + 1;
+  const max = m > n ? m : n;
+  const min = m > n ? n : m;
+  const random = max - min + 1;
   return Math.floor(Math.random() * random + min);
 };
 

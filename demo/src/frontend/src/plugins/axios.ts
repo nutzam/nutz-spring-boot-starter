@@ -8,10 +8,10 @@ import zhCN from '@/locale/zhCN';
 import {AppModule} from '../store/modules/app';
 
 const lan = AppModule.language;
-let errorTitle = lan === 'enUS' ? enUS.http.error : zhCN.http.error;
-let forbidden = lan === 'enUS' ? enUS.http.forbidden : zhCN.http.forbidden;
-let notFount = lan === 'enUS' ? enUS.http.notFount : zhCN.http.notFount;
-let configError =
+const errorTitle = lan === 'enUS' ? enUS.http.error : zhCN.http.error;
+const forbidden = lan === 'enUS' ? enUS.http.forbidden : zhCN.http.forbidden;
+const notFount = lan === 'enUS' ? enUS.http.notFount : zhCN.http.notFount;
+const configError =
   lan === 'enUS' ? enUS.http.configError : zhCN.http.configError;
 export function defaultSuccess(data: any) {
   console.log(data);
@@ -35,7 +35,7 @@ const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
   (cfg: any) => {
-    var token = store && store.getters.token;
+    const token = store && store.getters.token;
     if (token) {
       cfg.headers.Authorization = token;
     }
