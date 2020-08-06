@@ -438,7 +438,7 @@ public interface ExtService<T extends Serializable> {
      */
     default Pagination<T> searchByPage(int page, int pageSize, Condition condition) {
         return Pagination.<T> instance(page, pageSize)
-                    .dataList(query(condition, new Pagination(page, pageSize)))
+                    .dataList(query(condition, new Pagination<T>(page, pageSize)))
                     .recordCount(count(condition));
     }
 
