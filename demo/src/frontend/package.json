@@ -32,7 +32,7 @@
     "vue-ls": "^3.2.1",
     "vue-property-decorator": "^9.0.0",
     "vue-quill-editor": "^3.0.6",
-    "vue-router": "^3.3.4",
+    "vue-router": "^3.4.0",
     "vue-svg-component-runtime": "^1.0.1",
     "vuex": "^3.5.1",
     "vuex-class": "^0.3.2",

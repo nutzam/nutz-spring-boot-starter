@@ -56,12 +56,12 @@ public class GroupController {
     }
 
     @PutMapping("group")
-    public Result edit(@RequestBody Group group) {
+    public Result<Void> edit(@RequestBody Group group) {
         return groupService.update(group, "name", "description") ? Result.success() : Result.fail("更新分组失败");
     }
 
     @DeleteMapping("group/{id}")
-    public Result delete(@PathVariable("id") long id) {
+    public Result<Void> delete(@PathVariable("id") long id) {
         return groupService.update(Chain.make("disabled", true), Cnd.where("id", "=", id)) == 1 ? Result.success() : Result.fail("删除分组失败");
     }
 }

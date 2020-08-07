@@ -33,12 +33,12 @@ public class ActionController {
     }
 
     @PutMapping("action")
-    public Result edit(@RequestBody Action action) {
+    public Result<Void> edit(@RequestBody Action action) {
         return actionService.update(action, "name", "key") ? Result.success() : Result.fail("更新操作失败");
     }
 
     @DeleteMapping("action/{id}")
-    public Result delete(@PathVariable("id") long id) {
+    public Result<Void> delete(@PathVariable("id") long id) {
         return actionService.delete(id) == 1 ? Result.success() : Result.fail("删除操作失败");
     }
 }

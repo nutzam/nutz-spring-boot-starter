@@ -58,12 +58,12 @@ public class ModuleController {
     }
 
     @PutMapping("module")
-    public Result edit(@RequestBody Module module) {
+    public Result<Void> edit(@RequestBody Module module) {
         return moduleService.update(module, "name", "description") ? Result.success() : Result.fail("更新模块失败");
     }
 
     @DeleteMapping("module/{id}")
-    public Result delete(@PathVariable("id") long id) {
+    public Result<Void> delete(@PathVariable("id") long id) {
         return moduleService.delete(id) == 1 ? Result.success() : Result.fail("删除模块失败");
     }
 }
