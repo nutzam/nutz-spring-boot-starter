@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import club.zhcs.Result;
 import club.zhcs.apm.APM;
 import club.zhcs.nutz.demo.dto.request.TestIdCard;
+import club.zhcs.nutz.demo.dto.response.PermissionInfo;
 import club.zhcs.nutz.demo.service.acl.RoleService;
 
 /**
@@ -27,12 +28,12 @@ public class TestController {
     RoleService roleService;
 
     @PostMapping("jsr303")
-    public Result jsr303(@RequestBody @Validated TestIdCard idCard) {
+    public Result<Void> jsr303(@RequestBody @Validated TestIdCard idCard) {
         return Result.success();
     }
 
     @GetMapping("role/{id}/actions/info")
-    public Result actions(@PathVariable("id") long id,
+    public Result<PermissionInfo> actions(@PathVariable("id") long id,
                           @RequestParam(value = "mids", required = false, defaultValue = "-1") Long[] moduleIds) {
         return Result.success(roleService.actionInfo(id, moduleIds));
     }

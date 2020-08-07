@@ -43,18 +43,18 @@ public class CodeBookController {
     }
 
     @PutMapping("code")
-    public Result edit(@RequestBody CodeBook codeBook) {
+    public Result<Void> edit(@RequestBody CodeBook codeBook) {
         return codeBookService.update(codeBook, "index", "name", "description") ? Result.success() : Result.fail("更新码本失败");
     }
 
     @DeleteMapping("code/{id}")
-    public Result delete(@PathVariable("id") long id) {
+    public Result<Void> delete(@PathVariable("id") long id) {
         return codeBookService.update(Chain.make("disabled", true), Cnd.where("id", "=", id)) == 1 ? Result.success()
                                                                                                    : Result.fail("删除码本失败");
     }
 
     @PostMapping("code/vxe/save")
-    public Result vxeSave(@RequestBody VXETableSaveDTO<CodeBook> vxeData) {
+    public Result<Void> vxeSave(@RequestBody VXETableSaveDTO<CodeBook> vxeData) {
         return codeBookService.vxeSave(vxeData) ? Result.success() : Result.fail("保存失败!");
     }
 }
