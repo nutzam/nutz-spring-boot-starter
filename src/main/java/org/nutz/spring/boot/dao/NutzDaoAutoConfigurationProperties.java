@@ -28,6 +28,28 @@ public class NutzDaoAutoConfigurationProperties {
      */
     SqlTemplate sqlTemplate = new SqlTemplate();
 
+    /**
+     * dao的全局设置
+     */
+    Global global = new Global();
+
+    @Data
+    public static class Global {
+        /** 是否检查字段为数据库的关键字 */
+        public boolean checkColumnNameKeyword = false;
+
+        /** 是否把字段名用字符包裹来进行关键字逃逸 */
+        public boolean forceWrapColumnName = false;
+
+        /** 是否把字段名给变成大写 */
+        public boolean forceUpperColumnName = false;
+
+        public boolean forceHumpColumnName = false;
+
+        /** varchar 字段的默认字段长度 */
+        public int defaultVarcharWidth = 128;
+    }
+
     @Data
     public static class SqlTemplate {
         public enum Type {

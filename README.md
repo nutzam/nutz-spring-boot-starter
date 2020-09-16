@@ -16,7 +16,7 @@ nutz-spring-boot-starter release 版本已发布至 maven 中央仓库，使用 
 <dependency>
 	<groupId>org.nutz</groupId>
 	<artifactId>nutz-spring-boot-starter</artifactId>
-	<version>2.2.7.RELEASE</version>
+	<version>2.3.3.RELEASE</version>
 </dependency>
 ```
 
@@ -26,7 +26,7 @@ snapshot 版本发布至 https://jfrog.nutz.cn/artifactory/snapshots, 如需使�
 <repositories>
 	<repository>
 		<id>nutz</id>
-		<url>https://jfrog.nutz.cn/artifactory/jcenter</url>
+		<url>https://jfrog.nutz.cn/artifactory/public</url>
 	</repository>
 	<repository>
 		<id>nutz-snapshots</id>

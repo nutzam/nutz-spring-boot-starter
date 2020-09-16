@@ -4,4 +4,5 @@ org.nutz.spring.boot.dao.NutzDaoAutoConfiguration,\
 org.nutz.spring.boot.dao.NutzDatabaseInitializer,\
 org.nutz.spring.boot.json.NutzJsonMessageConverterAutoConfiguration,\
 org.nutz.spring.boot.wechat.WechatAutoConfiguration,\
+org.nutz.spring.boot.filepool.FilePoolAutoConfiguration,\
 org.nutz.spring.boot.ngrok.NgrokAutoConfiguration

@@ -7,7 +7,7 @@ import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 import org.nutz.lang.Strings;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 public class NutzJsonMessageConverterAutoConfiguration {
 
     @Bean
-    @ConditionalOnExpression("${nutz.json.enabled:true}")
+    @ConditionalOnProperty(prefix = "nutz.json", name = "enabled", havingValue = "true", matchIfMissing = true)
     public HttpMessageConverter<Object> nutzJsonHttpMessageConverter(NutzJsonAutoConfigurationProperties properties) {
         JsonFormat format = null;
         if (properties.getMode() != null) {// 直接模式设置
