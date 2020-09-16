@@ -13,6 +13,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false, of = "id")
 public class IdEntity extends Entity {
 
+    public static final String ID = "id";
+
     private static final long serialVersionUID = 1L;
 
     @Id

@@ -13,9 +13,12 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false, of = "id")
+@Deprecated(since = "2.4.0.RELEASE")
 public class NamedEntity extends Entity {
 
     private static final long serialVersionUID = 1L;
+
+    public static final String ID = "id";
 
     @Name(casesensitive = false)
     @Prev(els = @EL("uuid(64)"))

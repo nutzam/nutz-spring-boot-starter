@@ -39,7 +39,7 @@ public class Pagination<T extends Serializable> extends org.nutz.dao.pager.Pager
     /**
      * 数据列表
      */
-    @NotNull(message = "数据列表非空,没有数据是为空列表")
+    @NotNull(message = "数据列表非空,没有数据时为空列表")
     @Default
     private List<T> dataList = Lang.list();
 
@@ -55,20 +55,20 @@ public class Pagination<T extends Serializable> extends org.nutz.dao.pager.Pager
 
     public static <T extends Serializable> Pagination<T> instance() {
         return Pagination.<T> builder()
-                    .build();
+                         .build();
     }
 
     public static <T extends Serializable> Pagination<T> instance(int page, int pageSize) {
         return Pagination.<T> builder()
-                    .build()
-                    .page(page)
-                    .size(pageSize);
+                         .build()
+                         .page(page)
+                         .size(pageSize);
     }
 
     public static <T extends Serializable> Pagination<T> instance(List<T> dataList) {
         return Pagination.<T> builder()
-                    .dataList(dataList)
-                    .build();
+                         .dataList(dataList)
+                         .build();
     }
 
     public Pagination<T> dataList(List<T> dataList) {
