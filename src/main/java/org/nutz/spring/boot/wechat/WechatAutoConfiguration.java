@@ -10,11 +10,10 @@ import org.nutz.weixin.repo.com.qq.weixin.mp.aes.WXBizMsgCrypt;
 import org.nutz.weixin.spi.WxApi2;
 import org.nutz.weixin.spi.WxHandler;
 import org.nutz.weixin.util.Wxs;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
 public class WechatAutoConfiguration {
 
     @Bean(name = "wxapi")
-    @ConditionalOnExpression("${nutz.wechat.enabled:true}")
+    @ConditionalOnProperty(prefix = "nutz.wechat", name = "enabled", havingValue = "true", matchIfMissing = true)
     @ConditionalOnMissingBean(WxApi2.class)
     public WxApi2Impl api(WechatConfigurationProperties wechatConfigProperties) {
         return new WxApi2Impl(
@@ -47,7 +46,7 @@ public class WechatAutoConfiguration {
         return new WechatJsSdkConfig(wechatConfigProperties.getApis().split(","));
     }
 
-    @Autowired
+    @Bean
     public WechatController wechatController() {
         return new WechatController();
     }
