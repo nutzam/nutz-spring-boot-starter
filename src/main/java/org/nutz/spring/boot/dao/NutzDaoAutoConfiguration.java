@@ -21,8 +21,8 @@ import org.nutz.spring.boot.dao.NutzDaoAutoConfigurationProperties.SqlManager.Mo
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnClass({Dao.class})
-@ConditionalOnProperty(prefix = "nutz.dao", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnExpression("${nutz.dao.enabled:true}")
 @AutoConfigureAfter({DataSourceAutoConfiguration.class})
 @EnableConfigurationProperties(NutzDaoAutoConfigurationProperties.class)
 public class NutzDaoAutoConfiguration {
@@ -65,7 +65,7 @@ public class NutzDaoAutoConfiguration {
     public SqlManager sqlManager() {
         String[] paths = properties.getSqlManager().getPaths();
         if (paths == null) {
-            paths = new String[]{"sqls"};
+            paths = new String[] {"sqls"};
         }
         return properties.getSqlManager().getMode() == Mode.XML ? new XmlSqlManager(paths) : new FileSqlManager(paths);
     }
@@ -75,18 +75,18 @@ public class NutzDaoAutoConfiguration {
         Scans.me().addResourceLocation(springResourceLoaction());
         if (properties.getSqlTemplate().isEnable()) {
             switch (properties.getSqlTemplate().getType()) {
-            case BEETL:
-                Sqls.setSqlBorning(BeetlSqlTpl.class);
-                break;
-            case FREEMARKER:
-                Sqls.setSqlBorning(FreeMarkerSqlTpl.class);
-                break;
-            case JETBRICK:
-                Sqls.setSqlBorning(JetbrickSqlTpl.class);
-                break;
-            default:
-                Sqls.setSqlBorning(VelocitySqlTpl.class);
-                break;
+                case BEETL:
+                    Sqls.setSqlBorning(BeetlSqlTpl.class);
+                    break;
+                case FREEMARKER:
+                    Sqls.setSqlBorning(FreeMarkerSqlTpl.class);
+                    break;
+                case JETBRICK:
+                    Sqls.setSqlBorning(JetbrickSqlTpl.class);
+                    break;
+                default:
+                    Sqls.setSqlBorning(VelocitySqlTpl.class);
+                    break;
             }
         }
     }

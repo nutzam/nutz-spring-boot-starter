@@ -4,6 +4,7 @@ import org.nutz.plugins.ngrok.client.NgrokClient;
 import org.nutz.plugins.ngrok.server.NgrokServer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +34,7 @@ public class NgrokAutoConfiguration {
     }
 
     @Bean(initMethod = "start", destroyMethod = "stop")
-    @ConditionalOnProperty(prefix = "nutz.ngrok.server", name = "enabled", havingValue = "true", matchIfMissing = false)
+    @ConditionalOnExpression("${nutz.ngrok.server.enabled:false}")
     public NgrokServer ngrokServer(NgrokAutoConfigurationProperties config) {
         NgrokServer server = new NgrokServer();
         server.ssl_jks_password = config.getServer().getSslJksPassword();
