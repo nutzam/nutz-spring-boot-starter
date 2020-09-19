@@ -12,8 +12,8 @@ import org.nutz.weixin.spi.WxHandler;
 import org.nutz.weixin.util.Wxs;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,15 +28,11 @@ import org.springframework.context.annotation.Configuration;
 public class WechatAutoConfiguration {
 
     @Bean(name = "wxapi")
-    @ConditionalOnProperty(prefix = "nutz.wechat", name = "enabled", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnExpression("${nutz.wechat.enabled:true}")
     @ConditionalOnMissingBean(WxApi2.class)
     public WxApi2Impl api(WechatConfigurationProperties wechatConfigProperties) {
-        return new WxApi2Impl(
-                              wechatConfigProperties.getToken(),
-                              wechatConfigProperties.getAppId(),
-                              wechatConfigProperties.getAppSecret(),
-                              null,
-                              wechatConfigProperties.getEncodingAesKey());
+        return new WxApi2Impl(wechatConfigProperties.getToken(), wechatConfigProperties.getAppId(),
+            wechatConfigProperties.getAppSecret(), null, wechatConfigProperties.getEncodingAesKey());
     }
 
     @Bean
@@ -61,8 +57,7 @@ public class WechatAutoConfiguration {
             public WXBizMsgCrypt getMsgCrypt() {
                 try {
                     return new WXBizMsgCrypt(api.getToken(), api.getEncodingAesKey(), api.getAppid());
-                }
-                catch (AesException e) {
+                } catch (AesException e) {
                     logger.debug(e);
                     throw Lang.wrapThrow(e);
                 }

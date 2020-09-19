@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false, of = "id")
-@Deprecated(since = "2.4.0.RELEASE")
+@Deprecated
 public class NamedEntity extends Entity {
 
     private static final long serialVersionUID = 1L;

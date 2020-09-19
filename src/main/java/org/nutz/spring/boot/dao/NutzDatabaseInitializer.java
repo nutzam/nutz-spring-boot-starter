@@ -9,7 +9,7 @@ import org.nutz.dao.util.Daos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnBean({Dao.class})
-@ConditionalOnProperty(prefix = "nutz.dao", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnExpression("${nutz.dao.enabled:true}")
 @EnableConfigurationProperties(NutzDaoAutoConfigurationProperties.class)
 @AutoConfigureAfter({NutzDaoAutoConfiguration.class})
 public class NutzDatabaseInitializer {
@@ -46,11 +46,8 @@ public class NutzDatabaseInitializer {
                 Daos.createTablesInPackage(dao, pkg, properties.getRuntime().isFoceCreate());
             }
             if (migration) {
-                Daos.migration(dao,
-                               pkg,
-                               properties.getRuntime().isAddColumn(),
-                               properties.getRuntime().isDeleteColumn(),
-                               properties.getRuntime().isCheckIndex());
+                Daos.migration(dao, pkg, properties.getRuntime().isAddColumn(),
+                    properties.getRuntime().isDeleteColumn(), properties.getRuntime().isCheckIndex());
             }
         });
     }
