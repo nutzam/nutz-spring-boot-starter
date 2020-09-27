@@ -24,6 +24,11 @@ public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageC
 
 	Pattern ignoreType;
 
+	/**
+	 * 
+	 * @param ignoreType 忽略包
+	 * @return SpringBootNutzJsonMessageConverter
+	 */
 	public SpringBootNutzJsonMessageConverter setIgnoreType(String ignoreType) {
 		if (Strings.isBlank(ignoreType)) {
 			return this;
@@ -33,7 +38,9 @@ public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageC
 	}
 
 	/**
-	 * @param format the format to set
+	 * 
+	 * @param format json格式
+	 * @return SpringBootNutzJsonMessageConverter
 	 */
 	public SpringBootNutzJsonMessageConverter setFormat(JsonFormat format) {
 		this.format = format;
