@@ -1,23 +1,24 @@
 package org.nutz.spring.boot.dao;
 
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.nutz.dao.Dao;
+import org.nutz.dao.DaoInterceptor;
 import org.nutz.dao.SqlManager;
 import org.nutz.dao.Sqls;
 import org.nutz.dao.impl.DaoRunner;
 import org.nutz.dao.impl.FileSqlManager;
 import org.nutz.dao.impl.NutDao;
-import org.nutz.integration.spring.SpringDaoRunner;
-import org.nutz.integration.spring.SpringResourceLoaction;
-import org.nutz.plugins.sqlmanager.xml.XmlSqlManager;
-import org.nutz.plugins.sqltpl.impl.beetl.BeetlSqlTpl;
-import org.nutz.plugins.sqltpl.impl.freemarker.FreeMarkerSqlTpl;
-import org.nutz.plugins.sqltpl.impl.jetbrick.JetbrickSqlTpl;
-import org.nutz.plugins.sqltpl.impl.velocity.VelocitySqlTpl;
 import org.nutz.resource.Scans;
 import org.nutz.spring.boot.dao.NutzDaoAutoConfigurationProperties.SqlManager.Mode;
+import org.nutz.spring.boot.dao.sqlmanager.XmlSqlManager;
+import org.nutz.spring.boot.dao.sqltpl.impl.beetl.BeetlSqlTpl;
+import org.nutz.spring.boot.dao.sqltpl.impl.freemarker.FreeMarkerSqlTpl;
+import org.nutz.spring.boot.dao.sqltpl.impl.jetbrick.JetbrickSqlTpl;
+import org.nutz.spring.boot.dao.sqltpl.impl.velocity.VelocitySqlTpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -25,6 +26,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,9 +45,13 @@ public class NutzDaoAutoConfiguration {
     NutzDaoAutoConfigurationProperties properties;
 
     @Bean
-    public Dao dao(DataSource dataSource, SqlManager sqlManager, DaoRunner daoRunner) {
+    public Dao dao(DataSource dataSource, SqlManager sqlManager, DaoRunner daoRunner, ApplicationContext context) {
         NutDao dao = new NutDao(dataSource, sqlManager);
         dao.setRunner(daoRunner);
+
+        Map<String, DaoInterceptor> interceptors = context.getBeansOfType(DaoInterceptor.class);
+        interceptors.values().forEach(dao::addInterceptor);
+
         return dao;
     }
 
@@ -65,7 +71,7 @@ public class NutzDaoAutoConfiguration {
     public SqlManager sqlManager() {
         String[] paths = properties.getSqlManager().getPaths();
         if (paths == null) {
-            paths = new String[] {"sqls"};
+            paths = new String[]{"sqls"};
         }
         return properties.getSqlManager().getMode() == Mode.XML ? new XmlSqlManager(paths) : new FileSqlManager(paths);
     }
@@ -75,18 +81,18 @@ public class NutzDaoAutoConfiguration {
         Scans.me().addResourceLocation(springResourceLoaction());
         if (properties.getSqlTemplate().isEnable()) {
             switch (properties.getSqlTemplate().getType()) {
-                case BEETL:
-                    Sqls.setSqlBorning(BeetlSqlTpl.class);
-                    break;
-                case FREEMARKER:
-                    Sqls.setSqlBorning(FreeMarkerSqlTpl.class);
-                    break;
-                case JETBRICK:
-                    Sqls.setSqlBorning(JetbrickSqlTpl.class);
-                    break;
-                default:
-                    Sqls.setSqlBorning(VelocitySqlTpl.class);
-                    break;
+            case BEETL:
+                Sqls.setSqlBorning(BeetlSqlTpl.class);
+                break;
+            case FREEMARKER:
+                Sqls.setSqlBorning(FreeMarkerSqlTpl.class);
+                break;
+            case JETBRICK:
+                Sqls.setSqlBorning(JetbrickSqlTpl.class);
+                break;
+            default:
+                Sqls.setSqlBorning(VelocitySqlTpl.class);
+                break;
             }
         }
     }
