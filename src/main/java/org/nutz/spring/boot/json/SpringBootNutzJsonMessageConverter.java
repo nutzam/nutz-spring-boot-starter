@@ -16,87 +16,90 @@ import org.springframework.http.converter.json.AbstractJsonHttpMessageConverter;
 
 public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageConverter {
 
-	@Autowired
-	HttpServletRequest request;
+    @Autowired
+    HttpServletRequest request;
 
-	static final String IGNORE_JSON_SHAP_HEADER_KEY = "json_shap_ignore";
-	JsonFormat format = JsonFormat.compact();
+    static final String IGNORE_JSON_SHAP_HEADER_KEY = "json_shap_ignore";
 
-	Pattern ignoreType;
+    JsonFormat format = JsonFormat.compact();
 
-	/**
-	 * 
-	 * @param ignoreType 忽略包
-	 * @return SpringBootNutzJsonMessageConverter
-	 */
-	public SpringBootNutzJsonMessageConverter setIgnoreType(String ignoreType) {
-		if (Strings.isBlank(ignoreType)) {
-			return this;
-		}
-		this.ignoreType = Pattern.compile(ignoreType);
-		return this;
-	}
+    Pattern ignoreType;
 
-	/**
-	 * 
-	 * @param format json格式
-	 * @return SpringBootNutzJsonMessageConverter
-	 */
-	public SpringBootNutzJsonMessageConverter setFormat(JsonFormat format) {
-		this.format = format;
-		return this;
-	}
+    /**
+     * 
+     * @param ignoreType
+     *            忽略包
+     * @return SpringBootNutzJsonMessageConverter
+     */
+    public SpringBootNutzJsonMessageConverter setIgnoreType(String ignoreType) {
+        if (Strings.isBlank(ignoreType)) {
+            return this;
+        }
+        this.ignoreType = Pattern.compile(ignoreType);
+        return this;
+    }
 
-	@Override
-	protected boolean supports(Class<?> clazz) {
-		return true;
-	}
+    /**
+     * 
+     * @param format
+     *            json格式
+     * @return SpringBootNutzJsonMessageConverter
+     */
+    public SpringBootNutzJsonMessageConverter setFormat(JsonFormat format) {
+        this.format = format;
+        return this;
+    }
 
-	@Override
-	public boolean canWrite(Type type, Class<?> clazz, MediaType mediaType) {
+    @Override
+    protected boolean supports(Class<?> clazz) {
+        return true;
+    }
 
-		/**
-		 * 放过swagger
-		 */
-		if (Pattern.matches(".*springfox.*", clazz.getName()) || Pattern.matches(".*springfox.*", type.getTypeName())) {
-			return false;
-		}
-		/**
-		 * 放过spring 本身的各种玩意儿
-		 */
-		if (Pattern.matches("org.springframework.*", clazz.getName())
-				|| Pattern.matches("org.springframework.*", type.getTypeName())) {
-			return false;
-		}
-		return ignoreType == null || !ignoreType.matcher(clazz.getName()).matches();
-	}
+    @Override
+    public boolean canWrite(Type type, Class<?> clazz, MediaType mediaType) {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.http.converter.json.AbstractJsonHttpMessageConverter#
-	 * readInternal(java.lang.reflect.Type, java.io.Reader)
-	 */
-	@Override
-	protected Object readInternal(Type resolvedType, Reader reader) throws Exception {
-		return Json.fromJson(resolvedType, reader);
-	}
+        /**
+         * 放过swagger
+         */
+        if (Pattern.matches(".*springfox.*", clazz.getName()) || Pattern.matches(".*springfox.*", type.getTypeName())) {
+            return false;
+        }
+        /**
+         * 放过spring 本身的各种玩意儿
+         */
+        if (Pattern.matches("org.springframework.*", clazz.getName())
+            || Pattern.matches("org.springframework.*", type.getTypeName())) {
+            return false;
+        }
+        return ignoreType == null || !ignoreType.matcher(clazz.getName()).matches();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.http.converter.json.AbstractJsonHttpMessageConverter#
-	 * writeInternal(java.lang.Object, java.lang.reflect.Type, java.io.Writer)
-	 */
-	@Override
-	protected void writeInternal(Object o, Type type, Writer writer) throws Exception {
-		if (Strings.isNotBlank(request.getHeader(IGNORE_JSON_SHAP_HEADER_KEY)) && !format.isIgnoreJsonShape()) {
-			Json.toJson(writer, o, format.clone().ignoreJsonShape());
-			return;
-		}
-		Json.toJson(writer, o, format);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.springframework.http.converter.json.AbstractJsonHttpMessageConverter#
+     * readInternal(java.lang.reflect.Type, java.io.Reader)
+     */
+    @Override
+    protected Object readInternal(Type resolvedType, Reader reader) throws Exception {
+        return Json.fromJson(resolvedType, reader);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.springframework.http.converter.json.AbstractJsonHttpMessageConverter#
+     * writeInternal(java.lang.Object, java.lang.reflect.Type, java.io.Writer)
+     */
+    @Override
+    protected void writeInternal(Object o, Type type, Writer writer) throws Exception {
+        if (Strings.isNotBlank(request.getHeader(IGNORE_JSON_SHAP_HEADER_KEY)) && !format.isIgnoreJsonShape()) {
+            Json.toJson(writer, o, format.clone().ignoreJsonShape());
+            return;
+        }
+        Json.toJson(writer, o, format);
+    }
 
 }
