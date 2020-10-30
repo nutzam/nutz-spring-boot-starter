@@ -52,6 +52,9 @@ public class NutzDaoAutoConfiguration {
         Map<String, DaoInterceptor> interceptors = context.getBeansOfType(DaoInterceptor.class);
         interceptors.values().forEach(dao::addInterceptor);
 
+        if (properties.getInterceptor().isTime()) {
+            dao.addInterceptor("time");
+        }
         return dao;
     }
 

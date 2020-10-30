@@ -18,6 +18,6 @@ public class IdEntity extends Entity {
     private static final long serialVersionUID = 1L;
 
     @Id
-    long id;
+    private long id;
 
 }

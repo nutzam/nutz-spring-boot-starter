@@ -29,6 +29,11 @@ public class NutzDaoAutoConfigurationProperties {
     SqlTemplate sqlTemplate = new SqlTemplate();
 
     /**
+     * Interceptor
+     */
+    Interceptor interceptor = new Interceptor();
+
+    /**
      * dao的全局设置
      */
     Global global = new Global();
@@ -36,18 +41,18 @@ public class NutzDaoAutoConfigurationProperties {
     @Data
     public static class Global {
         /** 是否检查字段为数据库的关键字 */
-        public boolean checkColumnNameKeyword = false;
+        private boolean checkColumnNameKeyword = false;
 
         /** 是否把字段名用字符包裹来进行关键字逃逸 */
-        public boolean forceWrapColumnName = false;
+        private boolean forceWrapColumnName = false;
 
         /** 是否把字段名给变成大写 */
-        public boolean forceUpperColumnName = false;
+        private boolean forceUpperColumnName = false;
 
-        public boolean forceHumpColumnName = false;
+        private boolean forceHumpColumnName = false;
 
         /** varchar 字段的默认字段长度 */
-        public int defaultVarcharWidth = 128;
+        private int defaultVarcharWidth = 128;
     }
 
     @Data
@@ -66,6 +71,14 @@ public class NutzDaoAutoConfigurationProperties {
          */
         boolean enable = false;
 
+    }
+
+    @Data
+    public static class Interceptor {
+        /**
+         * sql 记时
+         */
+        boolean time = true;
     }
 
     @Data

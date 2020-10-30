@@ -3,6 +3,8 @@ package org.nutz.spring.boot.service;
 import javax.annotation.Resource;
 
 import org.nutz.dao.Dao;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 import org.nutz.service.EntityService;
 import org.nutz.spring.boot.service.entity.Entity;
 
@@ -11,6 +13,8 @@ import org.nutz.spring.boot.service.entity.Entity;
  *
  */
 public class BaseService<T extends Entity> extends EntityService<T> implements ExtService<T> {
+
+    protected Log logger = Logs.get();
 
     @Resource(type = Dao.class)
     public void init(Dao dao) {

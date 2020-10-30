@@ -285,7 +285,7 @@ public class UserService extends IdNameBaseService<User> {
                                .collect(Collectors.toList());
         return list(createSql("list.permissions.info.by.user.id.and.module.ids")
                                                                                 .setParam(USER_ID, id)
-                                                                                .setParam("moduleIds", Strings.join(",", ids)),
+                                                                                .setVar("moduleIds", Strings.join(",", ids)),
                     Permission.class);
     }
 

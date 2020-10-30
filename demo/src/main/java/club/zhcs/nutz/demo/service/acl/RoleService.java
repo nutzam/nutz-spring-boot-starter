@@ -71,7 +71,7 @@ public class RoleService extends IdNameBaseService<Role> {
                                .collect(Collectors.toList());
         return list(createSql("list.permissions.info.by.role.id.and.module.ids")
                                                                                 .setParam(ROLE_ID, id)
-                                                                                .setParam("moduleIds", Strings.join(",", ids)),
+                                                                                .setVar("moduleIds", Strings.join(",", ids)),
                     Permission.class);
     }
 
