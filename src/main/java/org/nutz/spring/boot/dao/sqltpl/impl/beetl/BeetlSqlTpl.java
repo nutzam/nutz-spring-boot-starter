@@ -35,7 +35,7 @@ public class BeetlSqlTpl extends NutSqlTpl {
      * @return 原对象,用于链式调用
      */
     public static Sql c(Sql sql) {
-        String source = sql.getSourceSql();
+        Object source = sql.getSourceSql();
         Template t = gt().getTemplate(source);
         t.binding(VarSetMap.asCtx(sql));
         String n = t.render();
