@@ -88,8 +88,8 @@ logging:
     name: ${user.home}/logs/${spring.application.name}.log
     path: ${user.home}/logs
   level:
-    org.nutz: debug
-    club.zhcs.nutz.demo:  debug
-    org.apache.logging: off
+    '[org.nutz]': debug
+    '[club.zhcs.nutz.demo]': debug
+    '[org.apache.logging]': off
     springfox: off
-    io.swagger: off
+    '[io.swagger]': off
