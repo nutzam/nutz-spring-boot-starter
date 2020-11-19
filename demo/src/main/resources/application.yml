@@ -74,7 +74,6 @@ spring:
         reset-enable: true
 axe:
   swagger: 
-    base-package: club.zhcs.nutz.demo.controller
     title: nutz-spring-boot-starter-demo
     description: nutz-spring-boot-starter-demo swagger 接口手册示例
     contact:
@@ -83,6 +82,25 @@ axe:
       url: https://github.com/kerbores
     authorization:
       key-name: Authorization
+    docket:
+      acl: 
+        base-package: club.zhcs.nutz.demo.controller.acl
+        contact:
+          email: kerbores@gmail.com
+          name: Kerbores
+          url: https://www.kerbores.com
+        description: 访问控制
+        title: ACL
+        version: 1.0.0
+      code: 
+        base-package: club.zhcs.nutz.demo.controller.code
+        contact:
+          email: kerbores@zhcs.club
+          name: ZHCS
+          url: https://www.zhcs.club
+        description: 通用码表
+        title: Code book
+        version: 1.1.0
 logging:  
   file: 
     name: ${user.home}/logs/${spring.application.name}.log
