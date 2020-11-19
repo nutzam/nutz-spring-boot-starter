@@ -1,4 +1,4 @@
-package club.zhcs.nutz.demo.controller;
+package club.zhcs.nutz.demo.controller.code;
 
 import java.util.Optional;
 
