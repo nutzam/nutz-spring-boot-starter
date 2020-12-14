@@ -128,12 +128,12 @@ public class NutzDaoAutoConfigurationProperties {
         /**
          * 是否删除列
          */
-        private boolean deleteColumn = true;
+        private boolean deleteColumn = false;
 
         /**
          * 检查索引
          */
-        private boolean checkIndex = true;
+        private boolean checkIndex = false;
     }
 
 }
