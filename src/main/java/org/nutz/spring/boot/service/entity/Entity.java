@@ -5,10 +5,17 @@ import java.io.Serializable;
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
 /**
  * @author kerbores(kerbores@gmail.com)
  *
  */
+@Data
+@SuperBuilder
+@NoArgsConstructor
 public class Entity implements Serializable {
 
     private static final long serialVersionUID = 1L;
