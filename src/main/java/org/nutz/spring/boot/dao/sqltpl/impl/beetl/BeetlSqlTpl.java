@@ -60,15 +60,14 @@ public class BeetlSqlTpl extends NutSqlTpl {
      */
     public static GroupTemplate gt() {
         if (gt == null) {
-            ClasspathStringResourceLoader resourceLoader = new ClasspathStringResourceLoader();
             Configuration cfg;
-            try {
+            try (ClasspathStringResourceLoader resourceLoader = new ClasspathStringResourceLoader()) {
                 cfg = Configuration.defaultConfiguration();
+                gt = new GroupTemplate(resourceLoader, cfg);
             }
             catch (IOException e) {
                 throw Lang.wrapThrow(e);
             }
-            gt = new GroupTemplate(resourceLoader, cfg);
         }
         return gt;
     }
