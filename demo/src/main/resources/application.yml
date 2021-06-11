@@ -43,7 +43,7 @@ spring:
     name: nutz-spring-boot-starter-demo
   datasource:
     druid:
-      url: jdbc:mysql://www.emasapple.cn:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://gitea.kerbores.com:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: root
       password: G00dl^ck
       driver-class-name: com.mysql.cj.jdbc.Driver

@@ -10,17 +10,17 @@ import org.nutz.dao.entity.annotation.Table;
 
 import club.zhcs.nutz.demo.entity.DemoEntity;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @author mdp 代码生成器
  *
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("t_permission")

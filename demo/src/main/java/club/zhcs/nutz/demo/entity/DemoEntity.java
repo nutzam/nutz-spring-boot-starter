@@ -7,13 +7,20 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.lang.Times;
 import org.nutz.spring.boot.service.entity.IdEntity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @author mdp 代码生成器
  */
 @Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class DemoEntity extends IdEntity {
 
@@ -25,6 +32,7 @@ public class DemoEntity extends IdEntity {
 
     @Column("created_time")
     @Comment("创建时间")
+    @Default
     private Date createTime = Times.now();
 
     @Column("updated_by")
@@ -33,6 +41,7 @@ public class DemoEntity extends IdEntity {
 
     @Column("updated_time")
     @Comment("更新时间")
+    @Default
     private Date updateTime = Times.now();
 
 }
