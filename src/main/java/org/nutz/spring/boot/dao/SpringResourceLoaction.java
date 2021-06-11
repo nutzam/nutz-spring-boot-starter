@@ -30,11 +30,8 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
         try {
             Resource[] tmp = applicationContext.getResources(base);
             for (Resource resource : tmp) {
-                if (resource.getFilename() == null)
+                if (resource.getFilename() == null || !pattern.matcher(resource.getFilename()).find())
                     continue;
-                if (!pattern.matcher(resource.getFilename()).find()) {
-                    continue;
-                }
                 SpringResource sr = new SpringResource();
                 sr.resource = resource;
                 sr.setName(resource.getFilename());
