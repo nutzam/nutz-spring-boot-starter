@@ -438,8 +438,8 @@ public interface ExtService<T extends Serializable> {
      */
     default Pagination<T> searchByPage(int page, int pageSize, Condition condition) {
         return Pagination.<T> instance(page, pageSize)
-                    .dataList(query(condition, new Pagination<T>(page, pageSize)))
-                    .recordCount(count(condition));
+                         .dataList(query(condition, new Pagination<T>(page, pageSize)))
+                         .recordCount(count(condition));
     }
 
     /**
@@ -742,5 +742,80 @@ public interface ExtService<T extends Serializable> {
      */
     default Sql excute(Sql sql) {
         return dao().execute(sql);
+    }
+    
+    /**
+     * 最大值
+     * @param field 字段
+     * @param condition 条件
+     * @return 满足条件的字段最大值
+     */
+    default int max(String field,Cnd condition) {
+    	return dao().func(getEntityClass(), "max", field,condition);
+    }
+    
+    /**
+     * 最小值
+     * @param field 字段
+     * @param condition 条件
+     * @return 满足条件的字段最小值
+     */
+    default int min(String field,Cnd condition) {
+    	return dao().func(getEntityClass(), "min", field,condition);
+    }
+    
+    /**
+     * 平均值
+     * @param field 字段
+     * @param condition 条件
+     * @return 满足条件的字段平均值
+     */
+    default int avg(String field,Cnd condition) {
+    	return dao().func(getEntityClass(), "avg", field,condition);
+    }
+    
+    /**
+     * 求和
+     * @param field 字段
+     * @param condition 条件
+     * @return 满足条件的字段求和值
+     */
+    default int sum(String field,Cnd condition) {
+    	return dao().func(getEntityClass(), "sum", field,condition);
+    }
+    
+    /**
+     * 最大值
+     * @param field 字段
+     * @return 字段最大值
+     */
+    default int max(String field) {
+    	return max(field, null);
+    }
+    /**
+     * 最小值
+     * @param field 字段
+     * @return 字段最小值
+     */
+    default int min(String field) {
+    	return min(field, null);
+    }
+    
+    /**
+     * 平均值
+     * @param field 字段
+     * @return 字段平均值
+     */
+    default int avg(String field) {
+    	return avg(field, null);
+    }
+    
+    /**
+     * 求和
+     * @param field 字段
+     * @return 字段求和值
+     */
+    default int sum(String field) {
+    	return sum(field, null);
     }
 }

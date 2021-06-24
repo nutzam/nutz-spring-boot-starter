@@ -3,7 +3,7 @@ package club.zhcs.nutz.demo.vo;
 import club.zhcs.nutz.demo.entity.acl.Module;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 public enum InstalledModule {
     /**

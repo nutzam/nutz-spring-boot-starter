@@ -10,7 +10,7 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 public class CacheMap<K, V> extends AbstractMap<K, V> {
 

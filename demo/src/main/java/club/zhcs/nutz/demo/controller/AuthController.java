@@ -15,7 +15,7 @@ import club.zhcs.nutz.demo.dto.request.Login;
 import club.zhcs.nutz.demo.service.CaptchaService;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @RestController
 @RequestMapping("auth")

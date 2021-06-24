@@ -19,7 +19,7 @@ import club.zhcs.nutz.demo.entity.code.CodeBook;
 import club.zhcs.nutz.demo.service.codebook.CodeBookService;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @RestController
 public class CodeBookController {

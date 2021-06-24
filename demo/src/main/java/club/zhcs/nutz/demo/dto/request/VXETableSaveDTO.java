@@ -12,7 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @Data
 @Builder

@@ -22,7 +22,7 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 public class QiNiuUploader {
     String accessKey;

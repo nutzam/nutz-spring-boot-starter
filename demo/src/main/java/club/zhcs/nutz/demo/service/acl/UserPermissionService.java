@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import club.zhcs.nutz.demo.entity.acl.UserPermission;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @Service
 public class UserPermissionService extends IdNameBaseService<UserPermission> {

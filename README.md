@@ -16,7 +16,7 @@ nutz-spring-boot-starter release 版本已发布至 maven 中央仓库，使用 
 <dependency>
 	<groupId>org.nutz</groupId>
 	<artifactId>nutz-spring-boot-starter</artifactId>
-	<version>2.3.3.RELEASE</version>
+	<version>2.5.1</version>
 </dependency>
 ```
 
