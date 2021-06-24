@@ -14,7 +14,7 @@ import club.zhcs.nutz.demo.entity.acl.Action;
 import club.zhcs.nutz.demo.service.acl.ActionService;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @RestController
 public class ActionController {

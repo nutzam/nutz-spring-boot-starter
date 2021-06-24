@@ -13,7 +13,7 @@ import club.zhcs.apm.APM;
 import club.zhcs.nutz.demo.service.CaptchaService;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @RestController
 @APM

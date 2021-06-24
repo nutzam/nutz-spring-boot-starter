@@ -14,7 +14,7 @@ import club.zhcs.captcha.ImageVerification;
 import club.zhcs.nutz.demo.utils.CacheMap;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @Service
 public class CaptchaService {

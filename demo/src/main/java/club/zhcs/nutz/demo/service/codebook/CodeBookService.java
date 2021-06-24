@@ -9,7 +9,7 @@ import club.zhcs.nutz.demo.dto.request.VXETableSaveDTO;
 import club.zhcs.nutz.demo.entity.code.CodeBook;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @Service
 public class CodeBookService extends IdNameBaseService<CodeBook> {

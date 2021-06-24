@@ -24,7 +24,7 @@ import club.zhcs.nutz.demo.entity.acl.User;
 import club.zhcs.nutz.demo.service.acl.UserService;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @RestController
 public class UserController {

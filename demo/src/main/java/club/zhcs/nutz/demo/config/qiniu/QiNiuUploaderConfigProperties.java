@@ -3,7 +3,7 @@ package club.zhcs.nutz.demo.config.qiniu;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @ConfigurationProperties(prefix = "oss.qiniu")
 public class QiNiuUploaderConfigProperties {

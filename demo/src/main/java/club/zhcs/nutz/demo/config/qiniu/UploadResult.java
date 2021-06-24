@@ -5,7 +5,7 @@ import org.nutz.lang.Lang;
 import org.nutz.lang.util.NutMap;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 public class UploadResult {
 

@@ -20,7 +20,7 @@ import club.zhcs.nutz.demo.entity.code.Group;
 import club.zhcs.nutz.demo.service.codebook.GroupService;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @RestController
 public class GroupController {

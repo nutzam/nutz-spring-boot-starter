@@ -21,7 +21,7 @@ import club.zhcs.nutz.demo.entity.acl.Role;
 import club.zhcs.nutz.demo.service.acl.RoleService;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @RestController
 public class RoleController {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import club.zhcs.nutz.demo.entity.acl.UserRole;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @Service
 public class UserRoleService extends IdNameBaseService<UserRole> {

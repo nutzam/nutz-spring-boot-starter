@@ -22,7 +22,7 @@ import club.zhcs.nutz.demo.entity.acl.Role;
 import club.zhcs.nutz.demo.entity.acl.RolePermission;
 
 /**
- * @author 王贵源(wangguiyuan@chinarecrm.com.cn)
+ * @author Kerbores(kerbores@gmail.com)
  */
 @Service
 public class RoleService extends IdNameBaseService<Role> {
