@@ -57,13 +57,18 @@ public class NutzHttpAutoConfiguration {
     @Bean
     @ConditionalOnBean(ProxySwitcher.class)
     public RestTemplate restTemplate(ProxySwitcher proxySwitcher) {
-        return new RestTemplate(new NutzHttpRequestFactory(proxySwitcher));
+        return new RestTemplate(NutzHttpRequestFactory.builder()
+                                                      .proxySwitcher(proxySwitcher)
+                                                      .http(config.getHttp())
+                                                      .build());
     }
 
     @Bean
     @ConditionalOnMissingBean(RestTemplate.class)
     public RestTemplate restTemplate() {
-        return new RestTemplate(new NutzHttpRequestFactory());
+        return new RestTemplate(NutzHttpRequestFactory.builder()
+                                                      .http(config.getHttp())
+                                                      .build());
     }
 
 }
