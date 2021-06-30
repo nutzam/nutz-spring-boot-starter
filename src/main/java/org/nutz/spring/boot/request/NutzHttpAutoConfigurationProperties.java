@@ -20,15 +20,45 @@ public class NutzHttpAutoConfigurationProperties {
      */
     boolean enabled = true;
 
-    long connectionTimeout;
-
-    boolean followRedirects = true;
+    /**
+     * sender http 配置
+     */
+    Http http = new Http();
 
     /**
      * 代理配置
      */
     Proxy proxy = new Proxy();
 
+    @Data
+    public class Http {
+        /**
+         * 连接超时时间
+         */
+        int connectionTimeout = 30 * 1000;
+
+        /**
+         * 读取超时时间
+         */
+        int timeout = 10 * 60 * 1000;
+
+        /**
+         * 支持重定向跟随
+         */
+        boolean followRedirects = true;
+
+        /**
+         * 开启ssl证书验证
+         */
+        boolean jvmHttpsCheck = true;
+    }
+
+    /**
+     * 代理配置
+     * 
+     * @author kerbores
+     *
+     */
     @Data
     public class Proxy {
         /**
