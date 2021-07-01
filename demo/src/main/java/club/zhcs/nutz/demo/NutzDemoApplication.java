@@ -2,9 +2,11 @@ package club.zhcs.nutz.demo;
 
 import org.nutz.json.JsonShape;
 import org.nutz.json.JsonShape.Type;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.client.RestTemplate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,18 +20,21 @@ import lombok.Getter;
 @EnableTransactionManagement
 public class NutzDemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NutzDemoApplication.class, args);
-	}
+    @Autowired
+    RestTemplate restTemplate;
 
-	@Getter
-	@AllArgsConstructor
-	@JsonShape(value = Type.OBJECTWITHNAME, nameKey = "value")
-	public enum Tets {
-		A("a", "AA");
+    public static void main(String[] args) {
+        SpringApplication.run(NutzDemoApplication.class, args);
+    }
 
-		String name;
-		String code;
-	}
+    @Getter
+    @AllArgsConstructor
+    @JsonShape(value = Type.OBJECTWITHNAME, nameKey = "value")
+    public enum Tets {
+        A("a", "AA");
+
+        String name;
+        String code;
+    }
 
 }
