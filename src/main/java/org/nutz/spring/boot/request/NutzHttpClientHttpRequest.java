@@ -99,14 +99,12 @@ public class NutzHttpClientHttpRequest extends AbstractClientHttpRequest impleme
             request.setData(bufferedOutput.toByteArray());
         }
 
-        SenderFactory senderFactory = applicationContext.getBean(SenderFactory.class);
-        if (senderFactory != null) {
-            Sender.setFactory(senderFactory);
+        if (hasBean(SenderFactory.class)) {
+            Sender.setFactory(applicationContext.getBean(SenderFactory.class));
         }
 
-        ExecutorService executorService = applicationContext.getBean(ExecutorService.class);
-        if (executorService != null) {
-            Sender.setup(executorService);
+        if (hasBean(ExecutorService.class)) {
+            Sender.setup(applicationContext.getBean(ExecutorService.class));
         }
 
         Sender sender = Sender.create(request)
@@ -127,17 +125,25 @@ public class NutzHttpClientHttpRequest extends AbstractClientHttpRequest impleme
             sender.setProxy(proxySwitcher.getProxy(request));
         }
 
-        HostnameVerifier hostnameVerifier = applicationContext.getBean(HostnameVerifier.class);
-        if (hostnameVerifier != null) {
-            sender.setHostnameVerifier(hostnameVerifier);
+        if (hasBean(HostnameVerifier.class)) {
+            sender.setHostnameVerifier(applicationContext.getBean(HostnameVerifier.class));
         }
 
-        HttpReqRespInterceptor interceptor = applicationContext.getBean(HttpReqRespInterceptor.class);
-        if (interceptor != null) {
-            sender.setInterceptor(interceptor);
+        if (hasBean(HttpReqRespInterceptor.class)) {
+            sender.setInterceptor(applicationContext.getBean(HttpReqRespInterceptor.class));
         }
 
         return new NutzClientHttpResponse(sender.send());
+    }
+
+    public boolean hasBean(Class<?> clazz) {
+        try {
+            applicationContext.getBean(clazz);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
 
     /**
