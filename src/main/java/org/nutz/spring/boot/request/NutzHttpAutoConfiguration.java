@@ -11,7 +11,6 @@ import org.nutz.lang.Lang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,18 +54,19 @@ public class NutzHttpAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnBean(ProxySwitcher.class)
-    public RestTemplate restTemplate(ProxySwitcher proxySwitcher) {
+    @ConditionalOnExpression("${!nutz.http.proxy.enabled:true}")
+    public RestTemplate restTemplate() {
         return new RestTemplate(NutzHttpRequestFactory.builder()
-                                                      .proxySwitcher(proxySwitcher)
                                                       .http(config.getHttp())
                                                       .build());
     }
 
     @Bean
-    @ConditionalOnMissingBean(RestTemplate.class)
-    public RestTemplate restTemplate() {
+    @ConditionalOnBean(ProxySwitcher.class)
+    @ConditionalOnExpression("${nutz.http.proxy.enabled:false}")
+    public RestTemplate restTemplate(ProxySwitcher proxySwitcher) {
         return new RestTemplate(NutzHttpRequestFactory.builder()
+                                                      .proxySwitcher(proxySwitcher)
                                                       .http(config.getHttp())
                                                       .build());
     }
