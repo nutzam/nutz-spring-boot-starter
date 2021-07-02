@@ -123,6 +123,28 @@ nutz:
     date-format: yyyy-MM-dd Hh:mm:ss # 日期格式化
     ... #更多相关配置参照ide提示进行即可
 ```
+### 使用 nutz http
+
+nutz http是nutz内置的http客户端,此部分主要提供nutz http客户端对RestTemplate的支持,相关配置说明如下:
+
+```yml
+nutz:
+  http:
+    enabled: true #是否启用nutz http client 的 RestTemplate 支持 默认 true
+    http:
+      connection-timeout: 5000 # http 连接超时时间 ,默认 30 * 1000
+      follow-redirects: true # 是否跟随重定向 默认 true
+      jvm-https-check: false # 是否启用jvm的https证书检查, 默认 true
+      timeout: 60000 # 读取超时时间 默认 10 * 60 * 1000
+    proxy:
+      enabled: true # 是否启用代理(默认仅支持http代理)
+      host: 10.1.1.1 # 代理主机
+      port: 8080 # 代理端口
+      proxied-hosts: # 被代理的域名列表
+      - baidu.com
+      - oschina.net
+```
+
 
 ### 使用 ngrok
 
