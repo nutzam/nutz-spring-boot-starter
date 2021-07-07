@@ -1,9 +1,11 @@
 package org.nutz.spring.boot.request;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.nutz.http.Response;
+import org.nutz.lang.Strings;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.AbstractClientHttpResponse;
@@ -59,7 +61,7 @@ public class NutzClientHttpResponse extends AbstractClientHttpResponse {
      */
     @Override
     public InputStream getBody() throws IOException {
-        return response.getStream();
+        return new ByteArrayInputStream(response.getContent().getBytes());
     }
 
     /**
@@ -70,9 +72,11 @@ public class NutzClientHttpResponse extends AbstractClientHttpResponse {
     public HttpHeaders getHeaders() {
         HttpHeaders headers = new HttpHeaders();
         response.getHeader().keys().stream().forEach(key -> {
-            response.getHeader().getValues(key).stream().forEach(item -> {
-                headers.add(key, item);
-            });
+            if (Strings.isNotBlank(key)) {
+                response.getHeader().getValues(key).stream().forEach(item -> {
+                    headers.add(key, item);
+                });
+            }
         });
         return headers;
     }

@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -27,6 +29,18 @@ public class NutzHttpAutoConfiguration {
 
     @Autowired
     NutzHttpAutoConfigurationProperties config;
+
+    @Autowired
+    ApplicationContext applicationContext;
+
+    public boolean hasBean(Class<? extends Object> clazz) {
+        try {
+            return applicationContext.getBean(clazz) != null;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
 
     @Bean
     @ConditionalOnExpression("${nutz.http.proxy.enabled:false}")
@@ -56,19 +70,27 @@ public class NutzHttpAutoConfiguration {
     @Bean
     @ConditionalOnExpression("${!nutz.http.proxy.enabled:true}")
     public RestTemplate restTemplate() {
-        return new RestTemplate(NutzHttpRequestFactory.builder()
-                                                      .http(config.getHttp())
-                                                      .build());
+        RestTemplate restTemplate = new RestTemplate(NutzHttpRequestFactory.builder()
+                                                                           .http(config.getHttp())
+                                                                           .build());
+        if (hasBean(ResponseErrorHandler.class)) {
+            restTemplate.setErrorHandler(applicationContext.getBean(ResponseErrorHandler.class));
+        }
+        return restTemplate;
     }
 
     @Bean
     @ConditionalOnBean(ProxySwitcher.class)
     @ConditionalOnExpression("${nutz.http.proxy.enabled:false}")
     public RestTemplate restTemplate(ProxySwitcher proxySwitcher) {
-        return new RestTemplate(NutzHttpRequestFactory.builder()
-                                                      .proxySwitcher(proxySwitcher)
-                                                      .http(config.getHttp())
-                                                      .build());
+        RestTemplate restTemplate = new RestTemplate(NutzHttpRequestFactory.builder()
+                                                                           .proxySwitcher(proxySwitcher)
+                                                                           .http(config.getHttp())
+                                                                           .build());
+        if (hasBean(ResponseErrorHandler.class)) {
+            restTemplate.setErrorHandler(applicationContext.getBean(ResponseErrorHandler.class));
+        }
+        return restTemplate;
     }
 
 }
