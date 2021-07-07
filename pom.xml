@@ -219,4 +219,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<version>2.5.2.20210701</version>
 </project>
