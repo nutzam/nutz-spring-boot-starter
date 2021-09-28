@@ -11,7 +11,7 @@
     "@ant-design-vue/pro-layout": "^1.0.8",
     "@form-create/ant-design-vue": "^2.5.8",
     "ant-design-vue": "^1.7.7",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "core-js": "^3.16.2",
     "exceljs": "^4.2.1",
     "nprogress": "^0.2.0",
