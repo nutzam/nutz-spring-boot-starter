@@ -60,7 +60,7 @@ spring:
 # 数据源
     druid:
       url: jdbc:mysql://127.0.0.1:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-      username: root
+      username: developer
       password: G00dl^ck
       driver-class-name: com.mysql.cj.jdbc.Driver
       filters: stat,wall,log4j2
