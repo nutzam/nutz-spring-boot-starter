@@ -1,65 +1,41 @@
 <template>
-  <a-locale-provider :locale="locale">
+  <a-config-provider :locale="locale">
     <div id="app">
       <router-view />
     </div>
-  </a-locale-provider>
+  </a-config-provider>
 </template>
 <script lang="ts">
-import {Component, Prop, Vue, Mixins, Watch} from 'vue-property-decorator';
-import {AppDeviceEnquireMixin, Mixin} from '@/utils/mixin';
-import {Getter} from 'vuex-class';
-import {Initializer} from './core';
-import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN';
-import enUS from 'ant-design-vue/lib/locale-provider/en_US';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-import {deviceEnquire, DEVICE_TYPE} from '@/utils/device';
-import {check} from './utils/auth';
+import { LocaleMessage } from "vue-i18n";
+import { Component, Mixins } from "vue-property-decorator";
+import { Mixin } from "./utils/mixin";
+import Utils from "@/utils/util";
+import config from "@/core/config";
 
 @Component({
   components: {},
 })
-export default class App extends Mixins(AppDeviceEnquireMixin) {
-  @Getter language?: string;
-
-  get locale() {
-    moment.locale(this.language === 'enUS' ? 'en' : 'zh-cn');
-    this.$i18n.locale = this.language === 'enUS' ? 'enUS' : 'zhCN';
-    return this.language === 'enUS' ? enUS : zhCN;
-  }
-  @Getter('token') token?: string;
-  beforeCreate() {
-    Initializer(false);
+export default class App extends Mixins(Mixin) {
+  mounted(): void {
+    Utils.setDocumentTitle(config.title);
   }
 
-  @Watch('$route.path')
-  routePathChange(val: any) {
-    const isUserPage = val.indexOf('/user') == 0 || val.indexOf('/test') == 0;
-    const token = this.token;
-    if (!token && !isUserPage) {
-      this.$router.push({path: '/user'});
-    } else if (token) {
-      this.$api.auth.check(
-        (data: any) => {
-          if (isUserPage) {
-            console.log(this.$router);
-            this.$router.push({path: '/index'});
-          }
-        },
-        (error: string) => {
-          if (!isUserPage) {
-            this.$router.push({path: '/user'});
-          }
-        }
-      );
-    }
+  get locale(): LocaleMessage {
+    console.log(this.$store.getters.language);
+    return this.$i18n.getLocaleMessage(this.$store.getters.language).antLocale;
+  }
+  created(): void {
+    document.title = this.AppModule.title;
   }
 }
 </script>
 <style lang="less">
 #app {
   height: 100%;
+}
+.icon-font {
+  margin-right: 6px;
+  font-size: 24px;
 }
 /**这个样式很奇特吧 */
 .uuid_no_show {

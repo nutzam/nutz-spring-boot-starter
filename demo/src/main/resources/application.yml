@@ -1,3 +1,4 @@
+# actuator
 management:
   info:
     git:
@@ -10,47 +11,58 @@ management:
       exposure:
         include:
           - '*'
+# server
+server:
+  port: 8888
+  http2:
+    enabled: true
+  undertow:
+    threads:
+      io: 16
+      worker: 256
+    buffer-size: 1024
+    direct-buffers: true
+# nutz
 nutz:
   json:
     enabled: true
     mode: compact
   dao:
+    sql-template:
+      enable: true
+      type: beetl
     runtime:
       add-column: true
       basepackage:
-      - club.zhcs.nutz.demo.entity
-      check-index: false
+      - tech.riemann.demo.entity
+      check-index: true
       create: true
-      delete-column: true
+      delete-column: false
       migration: true
     sql-manager:
       paths:
       - sqls
-server:
-  port: 8889
+# spring      
 spring:
   output:
     ansi:
       enabled: always
   pid:
     fail-on-write-error: true
-    file: ${user.home}/${spring.application.name}.pid
+    file: ${user.home}/${spring.application.name}.pid #pid文件
   servlet:
-    multipart:
+    multipart: # 文件上传
       max-file-size: 10MB
       max-request-size: 50MB
   application:
-    name: nutz-spring-boot-starter-demo
+    name: spring-boot-nutz-demo
   datasource:
+# 数据源
     druid:
-      url: jdbc:mysql://gitea.kerbores.com:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://127.0.0.1:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: root
       password: G00dl^ck
       driver-class-name: com.mysql.cj.jdbc.Driver
-#      url: jdbc:postgresql://10.0.0.174:5432/thunder
-#      username: postgres
-#      password: G00dl^ck
-#      driver-class-name: org.postgresql.Driver
       filters: stat,wall,log4j2
       initial-size: 10
       min-idle:  1
@@ -58,7 +70,7 @@ spring:
       max-wait:  60000
       time-between-eviction-runs-millis:  60000
       min-evictable-idle-time-millis:  300000
-      validation-query:  SELECT 'nutz'
+      validation-query:  SELECT 'ezalor'
       test-while-idle:  true
       test-on-borrow:  true
       test-on-return:  false
@@ -72,42 +84,48 @@ spring:
         enabled: true
         url-pattern: /druid/*
         reset-enable: true
-axe:
-  swagger: 
-    title: nutz-spring-boot-starter-demo
-    description: nutz-spring-boot-starter-demo swagger 接口手册示例
-    contact:
-      name: Kerbores
-      email: kerbores@gmail.com
-      url: https://github.com/kerbores
-    authorization:
-      key-name: Authorization
-    docket:
-      acl: 
-        base-package: club.zhcs.nutz.demo.controller.acl
-        contact:
-          email: kerbores@gmail.com
-          name: Kerbores
-          url: https://www.kerbores.com
-        description: 访问控制
-        title: ACL
-        version: 1.0.0
-      code: 
-        base-package: club.zhcs.nutz.demo.controller.code
-        contact:
-          email: kerbores@zhcs.club
-          name: ZHCS
-          url: https://www.zhcs.club
-        description: 通用码表
-        title: Code book
-        version: 1.1.0
+# 日志配置
 logging:  
   file: 
     name: ${user.home}/logs/${spring.application.name}.log
     path: ${user.home}/logs
   level:
     '[org.nutz]': debug
-    '[club.zhcs.nutz.demo]': debug
+    '[club.zhcs]': debug
+    '[tech.riemann]': debug
     '[org.apache.logging]': off
-    springfox: off
     '[io.swagger]': off
+# swagger配置
+axe:
+  global:
+    exception:
+      enabled: true
+  swagger:
+    docket:      auth: 
+        base-package: tech.riemann.demo.controller.auth
+        description: 登录认证模块
+        title: Auth
+      acl: 
+        base-package: tech.riemann.demo.controller.acl
+        description: Access Control Label 访问控制模块
+        title: ACL
+      dictionary: 
+        base-package: tech.riemann.demo.controller.dictionary
+        description: 统一数据字典管理模块
+        title: 数据字典
+      all: 
+        base-package: tech.riemann.demo.controller
+    customer:
+      logo: http://image.kerbores.com/xsj/icon.png
+      title: NUTZ项目示例
+      url: https://www.riemann.tech/
+    title: ${spring.application.name}
+    description: 基于nutz的项目示例
+    
+    version: 1.0
+    contact:
+      email: kerbores@gmail.com
+      name: Kerbores
+      url: https://www.riemann.tech/
+    authorization:
+      key-name: Authorization

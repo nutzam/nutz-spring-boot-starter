@@ -1,8 +1,9 @@
-import Vue, {VNode} from 'vue';
+import Vue, { VNode } from "vue";
 
 declare global {
   interface Window {
-    less: any;
+    umi_plugin_ant_themeVar: any;
+    acl: any;
   }
   namespace JSX {
     // tslint:disable no-empty-interface

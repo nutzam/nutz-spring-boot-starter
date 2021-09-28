@@ -1,16 +1,16 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import getters from './getters';
-import {IAppState} from './modules/app';
-import {IUserState} from './modules/user';
+import Vue from "vue";
+import Vuex from "vuex";
+import getters from "./getters";
+import { AppState } from "./modules/app";
+import { UserState } from "./modules/user";
 
 Vue.use(Vuex);
 
-export interface IRootState {
-  app: IAppState;
-  user: IUserState;
+export interface RootState {
+  app: AppState;
+  user: UserState;
 }
 // Declare empty store first, dynamically register all modules later.
-export default new Vuex.Store<IRootState>({
+export default new Vuex.Store<RootState>({
   getters,
 });

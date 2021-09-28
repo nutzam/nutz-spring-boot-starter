@@ -20,10 +20,18 @@
       </li>
       <li>
         <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript"
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router"
           target="_blank"
           rel="noopener"
-          >typescript</a
+          >router</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex"
+          target="_blank"
+          rel="noopener"
+          >vuex</a
         >
       </li>
       <li>
@@ -32,6 +40,14 @@
           target="_blank"
           rel="noopener"
           >eslint</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript"
+          target="_blank"
+          rel="noopener"
+          >typescript</a
         >
       </li>
     </ul>
@@ -95,7 +111,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class HelloWorld extends Vue {

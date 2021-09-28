@@ -5,6 +5,7 @@
     :visible="visible"
     @ok="handleSubmit"
     :confirm-loading="confirmLoading"
+    centered
     @cancel="handleCancel"
   >
     <a-form :form="form" @submit="handleSubmit">
@@ -20,11 +21,11 @@
           show-search
           :target-keys="targetKeys"
           :selected-keys="selectedKeys"
-          :render="(item) => item.title"
+          :render="transferRender"
           @selectChange="handleSelectChange"
           @change="handleActionChange"
           :list-style="{
-            width: '200px',
+            width: '225px',
             height: '300px',
           }"
           v-decorator="['actionIds', {}]"
@@ -34,39 +35,48 @@
   </a-modal>
 </template>
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
+import { FormCol } from "@/types";
+import { WrappedFormUtils } from "ant-design-vue/types/form/form";
+import { Component, Vue, Watch } from "vue-property-decorator";
 @Component({
   components: {},
 })
 export default class RolePermissionForm extends Vue {
-  visible: boolean = false;
-  confirmLoading: boolean = false;
-  public roleId: number = 0;
-  public form: any;
+  visible = false;
+  confirmLoading = false;
+  public roleId = 0;
+  public form!: WrappedFormUtils;
   selectedKeys: Array<string> = [];
   targetKeys: Array<string> = [];
-  modules: Array<defs.ModuleInfo> = [];
-  labelCol: any = {
-    xs: {span: 24},
-    sm: {span: 5},
+  modules: Array<acl.ModuleInfo> = [];
+  labelCol: FormCol = {
+    xs: { span: 24 },
+    sm: { span: 5 },
   };
-  wrapperCol: any = {
-    xs: {span: 24},
-    sm: {span: 17},
+  wrapperCol: FormCol = {
+    xs: { span: 24 },
+    sm: { span: 17 },
   };
 
-  @Watch('allActions')
-  watchAllActions() {
-    this.targetKeys = !this.allActions
-      ? []
-      : this.allActions.filter((item) => item.selected).map((item) => item.key);
+  @Watch("allActions")
+  watchAllActions(): void {
+    this.targetKeys =
+      this.allActions.length === 0
+        ? []
+        : this.allActions
+            .filter((item) => item.selected)
+            .map((item) => item.key || "");
   }
 
-  get allActions() {
+  transferRender(item: { title: string }): string {
+    return item.title;
+  }
+
+  get allActions(): Partial<acl.ActionInfo>[] {
     if (!this.modules || !this.modules.length) return [];
     return this.modules
       .map((item) =>
-        (item.actions || []).map((action) =>
+        (item.actions || []).map((action: acl.ActionInfo) =>
           Object.assign(action, {
             mod: {
               key: item.moduleKey,
@@ -82,61 +92,80 @@ export default class RolePermissionForm extends Vue {
       })
       .map((item) => ({
         key: `${item.mod.key}.${item.key}`,
-        title: `${item.mod.name}.${item.name}`,
-        description: `${item.mod.name}.${item.name}`,
+        title: `${item.mod.name} - ${item.name}`,
+        description: `${item.mod.name} - ${item.name}`,
         selected: item.selected,
       }));
   }
 
-  created() {
+  created(): void {
     this.form = this.$form.createForm(this);
   }
 
-  filterOption(inputValue: any, option: any) {
+  filterOption(inputValue: string, option: { title: string }): boolean {
     return option.title.indexOf(inputValue) > -1;
   }
 
   handleSelectChange(
     sourceSelectedKeys: Array<string>,
     targetSelectedKeys: Array<string>
-  ) {
+  ): void {
     this.selectedKeys = [...sourceSelectedKeys, ...targetSelectedKeys];
   }
 
-  handleActionChange(nextTargetKeys: Array<string>) {
+  handleActionChange(nextTargetKeys: Array<string>): void {
     this.targetKeys = nextTargetKeys;
   }
 
-  public show(id: number) {
+  public show(id: number): void {
     this.form.resetFields();
     this.visible = true;
     this.roleId = id;
     this.loadModuleInfos(id);
   }
 
-  public loadModuleInfos(roleId: number, moduleIds?: Array<number>) {
-    this.$api.role.grantInfo(roleId, {mids: moduleIds}, ({data: modules}) => {
+  public loadModuleInfos(roleId: number): void {
+    this.$api.aclApi.role.grantInfo(roleId, {}, ({ data: modules }) => {
       this.modules = modules;
     });
   }
 
-  handleSubmit(e: any) {
+  handleSubmit(): void {
     this.confirmLoading = true;
-    this.form.validateFields((errors: any, values: any) => {
-      if (!errors) {
-        this.confirmLoading = true;
-        this.$api.role.grant(this.roleId, values.actionIds, () => {
-          this.confirmLoading = false;
-          this.$message.success('角色授权成功', 2, () => {
-            this.visible = false;
-            this.$emit('submited');
-          });
-        });
+    this.form.validateFields(
+      (errors: Array<Error>, values: { actionIds: Array<string> }) => {
+        if (!errors) {
+          this.confirmLoading = true;
+          this.$api.aclApi.role.grant(
+            this.roleId,
+            values.actionIds,
+            () => {
+              this.handleCancel();
+              this.$notification.success({
+                message: "操作提示",
+                description: "角色授权成功",
+                duration: 3,
+                onClose: () => {
+                  this.$emit("submited", { id: this.roleId });
+                },
+              });
+            },
+            (error) => {
+              this.confirmLoading = false;
+              this.$notification.error({
+                message: "Error",
+                description: error,
+              });
+            }
+          );
+        }
       }
-    });
+    );
   }
-  handleCancel(e: any) {
+  handleCancel(): void {
+    this.confirmLoading = false;
     this.visible = false;
+    this.selectedKeys = [];
   }
 }
 </script>

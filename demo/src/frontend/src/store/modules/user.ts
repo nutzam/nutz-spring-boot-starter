@@ -1,49 +1,77 @@
-import Vue from 'vue';
-
 import {
   VuexModule,
   Module,
   Mutation,
   Action,
   getModule,
-} from 'vuex-module-decorators';
-import store from '@/store';
-import * as types from '@/store/mutation-types';
+} from "vuex-module-decorators";
+import store from "@/store";
+import * as types from "@/store/mutation-types";
+import storage from "store";
 
-export interface IUserState {
-  token: string | null;
+export interface UserState {
+  /**
+   * 用户名
+   */
   name: string;
-  welcome: string;
-  avatar: string;
+  /**
+   * 姓名
+   */
+  fullName?: string;
+  /**
+   * 头像
+   */
+  avatarUrl?: string;
+  /**
+   * 邮箱
+   */
+  email?: string;
+  /**
+   * 电话
+   */
+  mobile?: string;
+  /**
+   * jwtToken
+   */
+  token: string;
+  /**
+   * 角色
+   */
   roles: Array<string>;
+  /**
+   * 权限
+   */
   permissions: Array<string>;
 }
 
-@Module({dynamic: true, store, name: 'user'})
-class User extends VuexModule implements IUserState {
-  public token: string | null = null;
-  public name: string = 'Admin';
-  public welcome: string = '';
-  public avatar: string = '';
+@Module({ dynamic: true, store, name: "user" })
+class User extends VuexModule implements UserState {
+  public name = "";
+  public fullName = "";
+  public avatarUrl = "";
+  public email = "";
+  public mobile = "";
+  public token = "";
   public roles: Array<string> = [];
   public permissions: Array<string> = [];
 
   @Mutation
-  public login(user: IUserState) {
-    Vue.ls.set(types.LOGIN_USER, user);
+  public login(user: UserState) {
+    storage.set(types.LOGIN_USER, user);
     Object.assign(this, user);
   }
 
   @Mutation
   public logout() {
-    Vue.ls.set(types.LOGIN_USER, {});
-    this.token = null;
+    this.token = "";
   }
+
   @Action
   public hasRole(role: string) {
     if (!role || role == null) return true;
     return this.roles.filter((r) => r === role).length > 0;
   }
+
   @Action
   public hasPermission(permission: string) {
     if (!permission || permission == null) return true;

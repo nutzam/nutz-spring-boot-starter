@@ -6,6 +6,7 @@
     @ok="handleSubmit"
     :confirm-loading="confirmLoading"
     @cancel="handleCancel"
+    centered
   >
     <a-form :form="form" @submit="handleSubmit">
       <a-form-item
@@ -20,11 +21,11 @@
           show-search
           :target-keys="targetKeys"
           :selected-keys="selectedKeys"
-          :render="(item) => item.title"
+          :render="transferRender"
           @selectChange="handleSelectChange"
           @change="handleActionChange"
           :list-style="{
-            width: '200px',
+            width: '225px',
             height: '300px',
           }"
           v-decorator="['ids', {}]"
@@ -34,91 +35,118 @@
   </a-modal>
 </template>
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
-import {Role} from '@/types';
+import { FormCol } from "@/types";
+import { WrappedFormUtils } from "ant-design-vue/types/form/form";
+import { Component, Vue, Watch } from "vue-property-decorator";
 @Component({
   components: {},
 })
-export default class UserPermissionForm extends Vue {
-  visible: boolean = false;
-  confirmLoading: boolean = false;
-  public userId: number = 0;
-  public form: any;
+export default class UserRoleForm extends Vue {
+  visible = false;
+  confirmLoading = false;
+  public userId = 0;
+  public form!: WrappedFormUtils;
   selectedKeys: Array<string> = [];
   targetKeys: Array<string> = [];
-  roles: Array<defs.RoleInfo> = [];
-  labelCol: any = {
-    xs: {span: 24},
-    sm: {span: 5},
+  roles: Array<acl.RoleInfo> = [];
+  labelCol: FormCol = {
+    xs: { span: 24 },
+    sm: { span: 5 },
   };
-  wrapperCol: any = {
-    xs: {span: 24},
-    sm: {span: 17},
+  wrapperCol: FormCol = {
+    xs: { span: 24 },
+    sm: { span: 17 },
   };
 
-  @Watch('allRoles')
-  watchAllActions() {
-    this.targetKeys = !this.allRoles
-      ? []
-      : this.allRoles.filter((item) => item.selected).map((item) => item.key);
+  @Watch("allRoles")
+  watchAllActions(): void {
+    this.targetKeys =
+      this.allRoles.length === 0
+        ? []
+        : this.allRoles
+            .filter((item) => item.selected)
+            .map((item) => item.key || "");
   }
 
-  get allRoles() {
+  get allRoles(): Partial<acl.RoleInfo>[] {
     if (!this.roles || !this.roles.length) return [];
     return this.roles.map((item) =>
-      Object.assign(item, {key: `${item.id}`, title: item.name})
+      Object.assign(item, { key: `${item.id}`, title: item.name })
     );
   }
 
-  created() {
+  created(): void {
     this.form = this.$form.createForm(this);
   }
 
-  filterOption(inputValue: any, option: any) {
+  transferRender(item: { title: string }): string {
+    return item.title;
+  }
+
+  filterOption(inputValue: string, option: { title: string }): boolean {
     return option.title.indexOf(inputValue) > -1;
   }
 
   handleSelectChange(
     sourceSelectedKeys: Array<string>,
     targetSelectedKeys: Array<string>
-  ) {
+  ): void {
     this.selectedKeys = [...sourceSelectedKeys, ...targetSelectedKeys];
   }
 
-  handleActionChange(nextTargetKeys: Array<string>) {
+  handleActionChange(nextTargetKeys: Array<string>): void {
     this.targetKeys = nextTargetKeys;
   }
 
-  public show(id: number) {
+  public show(id: number): void {
     this.form.resetFields();
     this.visible = true;
     this.userId = id;
     this.loadRoleInfos(id);
   }
 
-  public loadRoleInfos(userId: number) {
-    this.$api.user.roles(userId, ({data: roles}) => {
+  public loadRoleInfos(userId: number): void {
+    this.$api.aclApi.user.roles(userId, ({ data: roles }) => {
       this.roles = roles;
     });
   }
 
-  handleSubmit(e: any) {
+  handleSubmit(): void {
     this.confirmLoading = true;
-    this.form.validateFields((errors: any, values: any) => {
-      if (!errors) {
-        this.confirmLoading = true;
-        this.$api.user.grantRoles(this.userId, values.ids, (result) => {
-          this.confirmLoading = false;
-          this.$message.success('用户授权成功', 2, () => {
-            this.visible = false;
-            this.$emit('submited');
-          });
-        });
+    this.form.validateFields(
+      (errors: Array<Error>, values: { ids: Array<number> }) => {
+        if (!errors) {
+          this.confirmLoading = true;
+          this.$api.aclApi.user.grantRoles(
+            this.userId,
+            values.ids,
+            () => {
+              this.handleCancel();
+              this.$notification.success({
+                message: "操作提示",
+                description: "用户设置角色成功",
+                duration: 3,
+                onClose: () => {
+                  this.$emit("submited", { id: this.userId });
+                },
+              });
+            },
+            (error) => {
+              this.confirmLoading = false;
+              this.$notification.error({
+                message: "Error",
+                description: error,
+              });
+            }
+          );
+        }
       }
-    });
+    );
   }
-  handleCancel(e: any) {
+  handleCancel(): void {
+    this.confirmLoading = false;
     this.visible = false;
+    this.selectedKeys = [];
   }
 }
 </script>

@@ -1,348 +1,251 @@
 <template>
-  <div class="main">
-    <a-form
-      id="formLogin"
-      class="user-layout-login"
-      ref="formLogin"
-      :form="form"
-      @submit="handleSubmit"
-    >
-      <a-tabs
-        :active-key="customActiveKey"
-        :tab-bar-style="{textAlign: 'center', borderBottom: 'unset'}"
-        @change="handleTabClick"
-      >
-        <a-tab-pane key="tab1" tab="账号密码登录">
-          <a-form-item>
-            <a-input
-              size="large"
+  <div class="login-container">
+    <div class="layer">
+      <div class="some-space">
+        <div class="form">
+          <h2>{{ title }}</h2>
+          <div class="item">
+            <a-icon type="user" />
+            <input
+              autocomplete="off"
               type="text"
+              class="input"
+              v-model="user"
               placeholder="请输入用户名"
-              v-decorator="[
-                'name',
-                {
-                  rules: [
-                    {required: true, message: '请输入用户名'},
-                    {validator: handleUsernameOrEmail},
-                  ],
-                  validateTrigger: 'change',
-                },
-              ]"
-            >
-              <a-icon
-                slot="prefix"
-                type="user"
-                :style="{color: 'rgba(0,0,0,.25)'}"
-              />
-            </a-input>
-          </a-form-item>
-
-          <a-form-item>
-            <a-input
-              size="large"
+            />
+          </div>
+          <div class="item">
+            <a-icon type="lock" />
+            <input
+              autocomplete="off"
               type="password"
-              autocomplete="false"
+              class="input"
+              v-model="password"
+              maxlength="20"
+              @keyup.enter="login"
               placeholder="请输入密码"
-              v-decorator="[
-                'password',
-                {
-                  rules: [{required: true, message: '请输入密码'}],
-                  validateTrigger: 'blur',
-                },
-              ]"
-            >
-              <a-icon
-                slot="prefix"
-                type="lock"
-                :style="{color: 'rgba(0,0,0,.25)'}"
-              />
-            </a-input>
-          </a-form-item>
-
-          <a-form-item>
-            <a-input
-              size="large"
-              type="text"
-              autocomplete="false"
-              placeholder="请输入验证码"
-              v-decorator="[
-                'captcha',
-                {
-                  rules: [{required: true, message: '请输入验证码'}],
-                  validateTrigger: 'blur',
-                },
-              ]"
-            >
-              <a-icon
-                slot="prefix"
-                type="picture"
-                :style="{color: 'rgba(0,0,0,.25)'}"
-              />
-              <img
-                slot="suffix"
-                class="captcha"
-                title="点击刷新验证码"
-                :src="captcha || defaultCaptcha"
-                @click="loadCaptcha"
-              />
-            </a-input>
-          </a-form-item>
-        </a-tab-pane>
-
-        <a-tab-pane key="tab2" tab="手机号登录">
-          <a-form-item>
-            <a-input
-              size="large"
-              type="text"
-              placeholder="请输入手机号码"
-              v-decorator="[
-                'mobile',
-                {
-                  rules: [
-                    {
-                      required: true,
-                      pattern: /^1[3456789]\d{9}$/,
-                      message: '请输入正确的手机号',
-                    },
-                  ],
-                  validateTrigger: 'change',
-                },
-              ]"
-            >
-              <a-icon
-                slot="prefix"
-                type="mobile"
-                :style="{color: 'rgba(0,0,0,.25)'}"
-              />
-            </a-input>
-          </a-form-item>
-
-          <a-row :gutter="16">
-            <a-col class="gutter-row" :span="16">
-              <a-form-item>
-                <a-input
-                  size="large"
-                  type="text"
-                  placeholder="请输入验证码"
-                  v-decorator="[
-                    'captcha',
-                    {
-                      rules: [{required: true, message: '请输入验证码'}],
-                      validateTrigger: 'blur',
-                    },
-                  ]"
-                >
-                  <a-icon
-                    slot="prefix"
-                    type="mail"
-                    :style="{color: 'rgba(0,0,0,.25)'}"
-                  />
-                </a-input>
-              </a-form-item>
-            </a-col>
-            <a-col class="gutter-row" :span="8">
-              <a-button
-                class="getCaptcha"
-                tabindex="-1"
-                :disabled="state.smsSendBtn"
-                v-text="
-                  (!state.smsSendBtn && '获取验证码') || state.time + ' s'
-                "
-              ></a-button>
-            </a-col>
-          </a-row>
-        </a-tab-pane>
-      </a-tabs>
-      <a-form-item>
-        <a-checkbox checked v-decorator="['rememberMe']">自动登录</a-checkbox>
-      </a-form-item>
-
-      <a-form-item style="margin-top: 24px;">
-        <a-button
-          size="large"
-          type="primary"
-          html-type="submit"
-          class="login-button"
-          :loading="state.loginBtn"
-          :disabled="state.loginBtn"
-          >确定</a-button
-        >
-      </a-form-item>
-
-      <div class="user-login-other">
-        <span>其他登录方式</span>
-        <a>
-          <a-icon class="item-icon" type="alipay-circle"></a-icon>
-        </a>
-        <a>
-          <a-icon class="item-icon" type="taobao-circle"></a-icon>
-        </a>
-        <a>
-          <a-icon class="item-icon" type="weibo-circle"></a-icon>
-        </a>
+            />
+          </div>
+          <button class="loginBtn" :disabled="isLoginAble" @click.stop="login">
+            立即登录
+          </button>
+          <div class="tip" v-html="AppModule.copyright"></div>
+        </div>
       </div>
-    </a-form>
+    </div>
   </div>
 </template>
 <script lang="ts">
-import {Component, Prop, Vue, Mixins} from 'vue-property-decorator';
-import {Mutation} from 'vuex-class';
-import {Mixin} from '../../utils/mixin';
-import axios from 'axios';
-import defaultCaptcha from '@/assets/captcha.png';
+import { Component, Mixins } from "vue-property-decorator";
+import { Mixin } from "@/utils/mixin";
+import { State } from "vuex-class";
+
 @Component({
   components: {},
 })
 export default class Login extends Mixins(Mixin) {
-  public form: any;
-  public customActiveKey: string = 'tab1';
+  @State((state) => state.app.title) title?: string;
 
-  public captcha: string = '';
-
-  public uuid!: string;
-  public defaultCaptcha: any = defaultCaptcha;
-
-  public state: any = {
-    time: 60,
-    loginBtn: false,
-    loginType: 0,
-    smsSendBtn: false,
-  };
-
-  created() {
-    this.form = this.$form.createForm(this);
-    this.loadCaptcha();
+  public user = "kerbores";
+  public password = "G00dl^ck";
+  public visible = false;
+  get isLoginAble(): boolean {
+    return !(this.user && this.password);
   }
 
-  public loadCaptcha() {
-    this.$api.captcha.captcha({length: 4}, ({data: captcha, ext: {uuid}}) => {
-      this.captcha = captcha;
-      this.uuid = uuid;
-    });
-  }
-
-  handleSubmit(e: any) {
-    e.preventDefault();
-    const {
-      form: {validateFields},
-      state,
-      customActiveKey,
-    } = this;
-    state.loginBtn = true;
-    const validateFieldsKey = ['name', 'password', 'captcha'];
-    validateFields(
-      validateFieldsKey,
-      {force: true},
-      (err: string, values: any) => {
-        if (!err) {
-          this.doLogin(Object.assign(values, {uuid: this.uuid}));
-        } else {
-          setTimeout(() => {
-            state.loginBtn = false;
-          }, 600);
-        }
-      }
-    );
-  }
-  doLogin(values: any) {
-    this.$api.auth.login(
-      values,
-      ({data: user}) => {
-        var subject: defs.User =
-          user.extInfo != undefined
-            ? (user.extInfo.user as any)
-            : {userName: ''};
+  login(): void {
+    this.$api.loginApi.auth.login(
+      { user: this.user, password: this.password },
+      ({ data }) => {
         this.UserModule.login({
-          name: subject.userName,
-          welcome: '',
-          avatar: '',
-          token: user.token || '',
-          roles: user.roles || [],
-          permissions: user.permissions || [],
+          name: data.userName,
+          token: data.token,
+          roles: data.roles,
+          permissions: data.permissions,
         });
-        this.$router.push({path: '/index'});
-      },
-      (error: string) => {
-        this.$notification.error({
-          message: '登录失败',
-          description: error,
-        });
-        setTimeout(() => {
-          this.state.loginBtn = false;
-        }, 10000);
+        this.$router.push({ path: "/index" });
       }
     );
-  }
-  handleTabClick(key: string) {
-    if (key === 'tab1') this.customActiveKey = key;
-    this.customActiveKey = 'tab1';
-  }
-  handleUsernameOrEmail(rule: string, value: string, callback: () => any) {
-    const {state} = this;
-    const regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
-    if (regex.test(value)) {
-      state.loginType = 0;
-    } else {
-      state.loginType = 1;
-    }
-    callback();
   }
 }
 </script>
 <style lang="less" scoped>
-.ant-tabs,
-.ant-checkbox-wrapper,
-.ant-form {
-  color: #d9d9d9;
-}
-.user-layout-login {
-  label {
-    font-size: 14px;
-  }
-
-  .getCaptcha {
-    display: block;
-    width: 100%;
-    height: 40px;
-  }
-
-  .forge-password {
-    font-size: 14px;
-  }
-
-  button.login-button {
-    padding: 0 15px;
-    font-size: 16px;
-    height: 40px;
+.login-container {
+  .layer {
+    position: absolute;
+    height: 100%;
     width: 100%;
   }
+  #particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+  }
+  .some-space {
+    color: white;
+    font-weight: 100;
+    letter-spacing: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1001;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
 
-  .user-login-other {
-    text-align: left;
-    margin-top: 24px;
-    line-height: 22px;
+    -ms-animation: cloud 2s 3s ease-in infinite alternate;
+    -moz-animation: cloud 2s 3s ease-in infinite alternate;
+    -webkit-animation: cloud 2s 3s ease-in infinite alternate;
+    -o-animation: cloud 2s 3s ease-in infinite alternate;
+    -webkit-animation: cloud 2s 3s ease-in infinite alternate;
+    animation: cloud 2s 3s ease-in infinite alternate;
 
-    .item-icon {
-      font-size: 24px;
-      color: rgba(250, 250, 250, 0.836);
-      margin-left: 16px;
-      vertical-align: middle;
-      cursor: pointer;
-      transition: color 0.3s;
-
-      &:hover {
-        color: #1890ff;
+    .form {
+      width: 460px;
+      height: auto;
+      background: rgba(36, 36, 85, 0.5);
+      margin: 0 auto;
+      padding: 35px 30px 25px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      .item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        border-bottom: 1px solid #d3d7f7;
+        i {
+          color: #d3d7f7;
+          margin-right: 10px;
+        }
+      }
+      h2 {
+        text-align: center;
+        font-weight: normal;
+        font-size: 26px;
+        color: #d3d7f7;
+        padding-bottom: 35px;
+      }
+      .input {
+        font-size: 16px;
+        line-height: 30px;
+        width: 100%;
+        color: #d3d7f7;
+        outline: none;
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        padding: 10px 0;
+      }
+      .loginBtn {
+        width: 100%;
+        padding: 12px 0;
+        border: 1px solid #d3d7f7;
+        font-size: 16px;
+        color: #d3d7f7;
+        cursor: pointer;
+        background: transparent;
+        border-radius: 4px;
+        margin-top: 10px;
+        &:hover {
+          color: #fff;
+          background: #0090ff;
+          border-color: #0090ff;
+        }
+      }
+      .tip {
+        font-size: 12px;
+        padding-top: 20px;
+        text-align: center;
       }
     }
-
-    .register {
-      float: right;
-    }
   }
 }
-.captcha {
-  max-height: 38px;
-  margin-right: -20px;
-  cursor: pointer;
+
+input::-webkit-input-placeholder {
+  color: #d3d7f7;
+}
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #d3d7f7;
+}
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #d3d7f7;
+}
+input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #d3d7f7;
+}
+
+@-ms-keyframes cloud {
+  0% {
+    -ms-transform: translate(-50%, -50%);
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    -ms-transform: translate(-50%, -40%);
+  }
+}
+@-moz-keyframes cloud {
+  0% {
+    -moz-transform: translate(-50%, -50%);
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: translate(-50%, -40%);
+  }
+}
+@-o-keyframes cloud {
+  0% {
+    -o-transform: translate(-50%, -50%);
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    -o-transform: translate(-50%, -40%);
+  }
+}
+@-webkit-keyframes cloud {
+  0% {
+    -webkit-transform: translate(-50%, -50%);
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translate(-50%, -40%);
+  }
+}
+@keyframes cloud {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -40%);
+  }
 }
 </style>

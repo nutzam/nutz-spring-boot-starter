@@ -1,18 +1,39 @@
-import {Vue, Component} from 'vue-property-decorator';
-import {deviceEnquire, DEVICE_TYPE} from '@/utils/device';
-import {AppModule} from '@/store/modules/app';
-import {UserModule} from '../store/modules/user';
-import defaultImg from '@/assets/logo.png';
+import { Vue, Component } from "vue-property-decorator";
+import { AppModule } from "@/store/modules/app";
+import { UserModule } from "@/store/modules/user";
+import defaultImg from "@/assets/logo.png";
+import config from "@/core/config";
+import { i18nRender } from "../locales/index";
+import { TranslateResult } from "vue-i18n";
+
+@Component
+class I18nMixin extends Vue {
+  get currentLang(): string {
+    return AppModule.lang || config.language;
+  }
+
+  public setLang(lang: string): void {
+    this.$store.dispatch("setLang", lang);
+  }
+
+  public t(key: string): TranslateResult {
+    return i18nRender(key);
+  }
+}
 
 @Component
 class Mixin extends Vue {
   public AppModule = AppModule;
   public UserModule = UserModule;
-  public isTopMenu() {
-    return AppModule.layoutMode === 'topmenu';
+  public isTopMenu(): boolean {
+    return AppModule.layout === "topmenu";
   }
-  public isSideMenu() {
+  public isSideMenu(): boolean {
     return !this.isTopMenu();
+  }
+
+  public preventDefault(e: Event): void {
+    e.preventDefault();
   }
 }
 
@@ -20,42 +41,10 @@ class Mixin extends Vue {
 class DeviceMixin extends Vue {
   public AppModule = AppModule;
   public UserModule = UserModule;
-  public isMobile(): boolean {
-    return AppModule.device === DEVICE_TYPE.MOBILE;
-  }
-  public isDesktop(): boolean {
-    return AppModule.device === DEVICE_TYPE.DESKTOP;
-  }
-  public isTablet(): boolean {
-    return AppModule.device === DEVICE_TYPE.TABLET;
-  }
-  public toImgUrl(imgKey: string) {
+  public toImgUrl(imgKey: string): string {
     if (imgKey) return `http://image.kerbores.com/${imgKey}`;
     return defaultImg;
   }
 }
 
-@Component
-class AppDeviceEnquireMixin extends Vue {
-  mounted() {
-    deviceEnquire((deviceType: string) => {
-      switch (deviceType) {
-        case DEVICE_TYPE.DESKTOP:
-          AppModule.TOGGLE_DEVICE(DEVICE_TYPE.DESKTOP);
-          AppModule.SetSidebar(true);
-          break;
-        case DEVICE_TYPE.TABLET:
-          AppModule.TOGGLE_DEVICE(DEVICE_TYPE.TABLET);
-          AppModule.SetSidebar(false);
-          break;
-        case DEVICE_TYPE.MOBILE:
-        default:
-          AppModule.TOGGLE_DEVICE(DEVICE_TYPE.MOBILE);
-          AppModule.SetSidebar(true);
-          break;
-      }
-    });
-  }
-}
-
-export {Mixin, DeviceMixin, AppDeviceEnquireMixin};
+export { I18nMixin, Mixin, DeviceMixin };

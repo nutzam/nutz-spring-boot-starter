@@ -7,14 +7,13 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator';
-import {Getter, Action} from 'vuex-class';
+import { Vue, Component, Prop } from "vue-property-decorator";
 @Component({
-  name: 'SettingItem',
+  name: "SettingItem",
 })
 export default class SettingItem extends Vue {
-  @Prop({default: ''}) public title!: string;
-  @Prop({default: false}) public divider!: boolean;
+  @Prop({ default: "" }) public title!: string;
+  @Prop({ default: false }) public divider!: boolean;
 }
 </script>
 <style lang="less" scoped>

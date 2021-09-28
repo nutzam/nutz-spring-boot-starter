@@ -1,12 +1,12 @@
-import enquireJs from 'enquire.js';
+import enquireJs from "enquire.js";
 
 export enum DEVICE_TYPE {
-  DESKTOP = 'desktop',
-  TABLET = 'tablet',
-  MOBILE = 'mobile',
+  DESKTOP = "desktop",
+  TABLET = "tablet",
+  MOBILE = "mobile",
 }
 
-export const deviceEnquire = function (callback: (type: string) => any) {
+export const deviceEnquire = function (callback: (type: string) => void): void {
   const matchDesktop = {
     match: () => {
       callback && callback(DEVICE_TYPE.DESKTOP);
@@ -27,10 +27,10 @@ export const deviceEnquire = function (callback: (type: string) => any) {
 
   // screen and (max-width: 1087.99px)
   enquireJs
-    .register('screen and (max-width: 576px)', matchMobile)
+    .register("screen and (max-width: 576px)", matchMobile)
     .register(
-      'screen and (min-width: 576px) and (max-width: 1199px)',
+      "screen and (min-width: 576px) and (max-width: 1199px)",
       matchLablet
     )
-    .register('screen and (min-width: 1200px)', matchDesktop);
+    .register("screen and (min-width: 1200px)", matchDesktop);
 };
