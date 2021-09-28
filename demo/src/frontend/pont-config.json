@@ -1,5 +1,20 @@
 {
-  "originUrl": "http://127.0.0.1:8888/v2/api-docs",
+  "originUrl": "",
   "outDir": "./src/api",
-  "templatePath": "./serviceTemplate"
+  "templatePath": "./serviceTemplate",
+  "usingMultipleOrigins": true,
+  "origins": [
+    {
+      "name": "login",
+      "originUrl": "http://127.0.0.1:8888/v2/api-docs?group=auth"
+    },
+    {
+      "name": "acl",
+      "originUrl": "http://127.0.0.1:8888/v2/api-docs?group=acl"
+    },
+    {
+      "name": "dictionary",
+      "originUrl": "http://127.0.0.1:8888/v2/api-docs?group=dictionary"
+    }
+  ]
 }

@@ -1,6 +1,5 @@
-import Vue, {VueConstructor} from 'vue';
-import {AxiosInstance} from 'axios';
-import {Api} from './api/mods/index';
+import { AxiosInstance } from "axios";
+import { Api } from "./api/index";
 
 declare global {
   interface Window {
@@ -9,7 +8,7 @@ declare global {
   }
 }
 
-declare module 'vue/types/vue' {
+declare module "vue/types/vue" {
   interface Vue {
     $axios: AxiosInstance;
     $api: Api;

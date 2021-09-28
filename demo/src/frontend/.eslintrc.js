@@ -5,18 +5,19 @@ module.exports = {
     node: true,
   },
 
-  rules: {
-    'no-console': 'off',
-    'no-debugger': 'off',
-  },
+  extends: [
+    "plugin:vue/strongly-recommended",
+    "@vue/typescript/recommended",
+    "@vue/prettier",
+    "@vue/prettier/@typescript-eslint",
+  ],
 
   parserOptions: {
-    parser: '@typescript-eslint/parser',
+    ecmaVersion: 2020,
   },
 
-  extends: [
-    'plugin:vue/strongly-recommended',
-    '@vue/prettier',
-    '@vue/typescript',
-  ],
+  rules: {
+    "no-console": "off",
+    "no-debugger": "off",
+  },
 };

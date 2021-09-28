@@ -1,28 +1,29 @@
-import {PluginObject} from 'vue';
-import axios from 'axios';
-import settings from '@/config/defaultSettings';
-import store from '@/store';
-import {notification} from 'ant-design-vue';
-import enUS from '@/locale/enUS';
-import zhCN from '@/locale/zhCN';
-import {AppModule} from '../store/modules/app';
+import { PluginObject } from "vue";
+import axios, {
+  AxiosRequestConfig,
+  AxiosInstance,
+  AxiosResponse,
+  AxiosError,
+} from "axios";
+import settings from "@/core/config";
+import store from "@/store";
+import { notification } from "ant-design-vue";
+import { i18nRender } from "@/locales/index";
 
-const lan = AppModule.language;
-const errorTitle = lan === 'enUS' ? enUS.http.error : zhCN.http.error;
-const forbidden = lan === 'enUS' ? enUS.http.forbidden : zhCN.http.forbidden;
-const notFount = lan === 'enUS' ? enUS.http.notFount : zhCN.http.notFount;
-const configError =
-  lan === 'enUS' ? enUS.http.configError : zhCN.http.configError;
-export function defaultSuccess(data: any) {
+const errorTitle = i18nRender("global.http.error");
+const forbidden = i18nRender("global.http.forbidden");
+const notFount = i18nRender("global.http.notFount");
+const configError = i18nRender("global.http.configError");
+export function defaultSuccess(data: unknown): void {
   console.log(data);
 }
-export function defaultError(error: string) {
+export function defaultError(error: string): void {
   notification.error({
-    message: errorTitle,
+    message: errorTitle.toString(),
     description: error,
   });
 }
-export function msgAndLogout(msg: string) {
+export function msgAndLogout(msg: string): void {
   console.log(msg);
 }
 
@@ -30,28 +31,25 @@ const config = {
   baseURL: settings.http.prefix,
   timeout: settings.http.timeout,
 };
-
 const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
-  (cfg: any) => {
+  (cfg: AxiosRequestConfig) => {
     const token = store && store.getters.token;
     if (token) {
       cfg.headers.Authorization = token;
     }
     return cfg;
   },
-  (err: any) => {
+  (err: unknown) => {
     console.warn(err);
     return Promise.reject(configError);
   }
 );
-
 // Add a response interceptor
 _axios.interceptors.response.use(
-  (response: any) => {
-    console.log(response);
-    if (response.data.state == 'SUCCESS') {
+  (response: AxiosResponse) => {
+    if (response.data.state == "SUCCESS") {
       //数据成功
       return Promise.resolve(response.data);
     } else {
@@ -59,22 +57,25 @@ _axios.interceptors.response.use(
       return Promise.reject(response.data.errors[0]);
     }
   },
-  (error: any) => {
-    switch (error.response.status) {
+  (error: AxiosError<acl.Result<unknown>>) => {
+    switch (Number(error.response && error.response.status)) {
       case 403 | 401:
-        msgAndLogout(forbidden);
+        msgAndLogout(forbidden.toString());
         break;
       case 404:
         return Promise.reject(notFount);
       case 500:
-        return Promise.reject(error.response.data.errors[0]);
       default:
-        return Promise.reject(error.response.data.msg[0]);
+        return Promise.reject(
+          error.response &&
+            error.response.data.errors &&
+            error.response.data.errors[0]
+        );
     }
   }
 );
 
-const Plugin: PluginObject<any> = {
+const Plugin: PluginObject<AxiosInstance> = {
   install: (Vue) => {
     Object.defineProperties(Vue.prototype, {
       $axios: {
@@ -86,4 +87,4 @@ const Plugin: PluginObject<any> = {
   },
 };
 
-export {_axios as http, Plugin as axiosPlugin};
+export { _axios as http, Plugin as axiosPlugin };

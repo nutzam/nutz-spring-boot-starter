@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.3</version>
+		<version>2.5.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.nutz</groupId>
@@ -14,27 +14,36 @@
 	<name>demo</name>
 	<description>Demo project for Spring Boot with nutz</description>
 
+	<properties>
+		<java.version>1.8</java.version>
+		<nutz.version>[1.r.68.v20200309,)</nutz.version>
+	</properties>
 	<repositories>
 		<repository>
 			<id>nutz</id>
 			<url>https://jfrog.nutz.cn/artifactory/jcenter</url>
 		</repository>
 		<repository>
+			<id>nutz-release-local</id>
+			<url>http://jfrog.nutz.cn/artifactory/libs-release-local/</url>
+		</repository>
+		<repository>
 			<id>nutz-snapshots</id>
 			<url>https://jfrog.nutz.cn/artifactory/snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
 			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
+		</repository>
+		<repository>
+			<id>spring</id>
+			<url>https://jfrog.nutz.cn/artifactory/spring</url>
+		</repository>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
 		</repository>
 	</repositories>
-	<properties>
-		<java.version>1.8</java.version>
-		<nutz.version>[1.r.68.v20200309,)</nutz.version>
-	</properties>
 
 	<dependencies>
 		<dependency>
@@ -46,6 +55,10 @@
 					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -61,19 +74,21 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jetty</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.nutz</groupId>
 			<artifactId>nutz-spring-boot-starter</artifactId>
-			<version>2.5.3</version>
+			<version>2.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibeetl</groupId>
+			<artifactId>beetl</artifactId>
+			<version>3.7.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -81,50 +96,26 @@
 			<version>1.2.6</version>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.xerial</groupId>
-			<artifactId>sqlite-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.ibeetl</groupId>
-			<artifactId>beetl</artifactId>
-			<version>3.4.0.RELEASE</version>
-		</dependency>
-		<dependency>
 			<groupId>club.zhcs</groupId>
 			<artifactId>tiny</artifactId>
-			<version>2.5.3</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.nutz</groupId>
-					<artifactId>nutz</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.qiniu</groupId>
-			<artifactId>qiniu-java-sdk</artifactId>
-			<version>[7.2.0, 7.2.99]</version>
+			<version>2.5.5</version>
 		</dependency>
 		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-plugins-ngrok</artifactId>
-			<version>${nutz.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
-
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-generator</artifactId>
+			<version>3.5.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+			<version>3.4.3.4</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -138,8 +129,15 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-model</artifactId>
+			<version>3.8.2</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -152,6 +150,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>exec-npm-install</id>

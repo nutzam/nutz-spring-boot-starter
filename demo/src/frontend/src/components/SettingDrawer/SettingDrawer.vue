@@ -9,20 +9,20 @@
       :get-container="() => $refs.settingDrawer"
       @close="onClose"
     >
-      <template v-slot:handle>
+      <template #handle>
         <div class="setting-drawer-handle" @click="visible = !visible">
           <a-icon :type="visible ? 'close' : 'setting'" />
         </div>
       </template>
       <div class="setting-drawer-index-content">
-        <div style="margin-bottom: 24px;">
+        <div style="margin-bottom: 24px">
           <h3 class="setting-drawer-index-title">
-            {{ $t('settingDrawer.pageStyleTitle') }}
+            {{ i18nRender("global.settingDrawer.pageStyleTitle") }}
           </h3>
           <div class="setting-drawer-index-blockChecbox">
             <a-tooltip>
               <template slot="title">
-                {{ $t('settingDrawer.dartTooltipTitle') }}
+                {{ i18nRender("global.settingDrawer.dartTooltipTitle") }}
               </template>
               <div
                 class="setting-drawer-index-item"
@@ -42,7 +42,7 @@
             </a-tooltip>
             <a-tooltip>
               <template slot="title">
-                {{ $t('settingDrawer.lightTooltipTitle') }}
+                {{ i18nRender("global.settingDrawer.lightTooltipTitle") }}
               </template>
               <div
                 class="setting-drawer-index-item"
@@ -63,18 +63,18 @@
           </div>
         </div>
 
-        <div style="margin-bottom: '24px';">
+        <div style="margin-bottom: '24px'">
           <h3 class="setting-drawer-index-title">
-            {{ $t('settingDrawer.themeTitle') }}
+            {{ i18nRender("global.settingDrawer.themeTitle") }}
           </h3>
-          <div style="height: 20px;">
+          <div style="height: 20px">
             <a-tooltip
               class="setting-drawer-theme-color-colorBlock"
               v-for="(item, index) in colorList"
               :key="index"
             >
               <template slot="title">{{
-                $t(`settingDrawer.${item.key}`)
+                i18nRender(`global.settingDrawer.${item.key}`)
               }}</template>
               <a-tag :color="item.color" @click="handleChangeColor(item.color)">
                 <a-icon
@@ -86,14 +86,14 @@
           </div>
         </div>
         <a-divider />
-        <div style="margin-bottom: 24px;">
+        <div style="margin-bottom: 24px">
           <h3 class="setting-drawer-index-title">
-            {{ $t('settingDrawer.layoutTitle') }}
+            {{ i18nRender("global.settingDrawer.layoutTitle") }}
           </h3>
           <div class="setting-drawer-index-blockChecbox">
             <a-tooltip>
               <template slot="title">{{
-                $t('settingDrawer.sideMenuTitle')
+                i18nRender("global.settingDrawer.sideMenuTitle")
               }}</template>
               <div
                 class="setting-drawer-index-item"
@@ -113,7 +113,7 @@
             </a-tooltip>
             <a-tooltip>
               <template slot="title">{{
-                $t('settingDrawer.topMenuTitle')
+                i18nRender("global.settingDrawer.topMenuTitle")
               }}</template>
               <div
                 class="setting-drawer-index-item"
@@ -133,30 +133,32 @@
             </a-tooltip>
           </div>
 
-          <div :style="{marginTop: '24px'}">
+          <div :style="{ marginTop: '24px' }">
             <a-list :split="false">
               <a-list-item>
                 <a-tooltip slot="actions">
                   <a-select
                     size="small"
-                    style="width: 80px;"
+                    style="width: 80px"
                     :default-value="AppModule.contentWidth"
                     @change="handleContentWidthChange"
                   >
                     <a-select-option value="Fixed">{{
-                      $t('settingDrawer.fixed')
+                      i18nRender("global.settingDrawer.fixed")
                     }}</a-select-option>
 
                     <a-select-option
                       value="Fluid"
                       v-if="layoutMode !== 'sidemenu'"
-                      >{{ $t('settingDrawer.flux') }}</a-select-option
+                      >{{
+                        i18nRender("global.settingDrawer.flux")
+                      }}</a-select-option
                     >
                   </a-select>
                 </a-tooltip>
                 <a-list-item-meta>
                   <div slot="title">
-                    {{ $t('settingDrawer.contentWidth') }}
+                    {{ i18nRender("global.settingDrawer.contentWidth") }}
                   </div>
                 </a-list-item-meta>
               </a-list-item>
@@ -169,7 +171,9 @@
                   @change="handleFixedHeader"
                 />
                 <a-list-item-meta>
-                  <div slot="title">{{ $t('settingDrawer.fixHeader') }}</div>
+                  <div slot="title">
+                    {{ i18nRender("global.settingDrawer.fixHeader") }}
+                  </div>
                 </a-list-item-meta>
               </a-list-item>
               <a-list-item>
@@ -183,12 +187,14 @@
                 <a-list-item-meta>
                   <a-tooltip slot="title" placement="left">
                     <template slot="title">{{
-                      $t('settingDrawer.effectiveWhenFixHeader')
+                      i18nRender("global.settingDrawer.effectiveWhenFixHeader")
                     }}</template>
                     <div
-                      :style="{opacity: !AppModule.fixedHeader ? '0.5' : '1'}"
+                      :style="{ opacity: !AppModule.fixedHeader ? '0.5' : '1' }"
                     >
-                      {{ $t('settingDrawer.hideHeaderWhenSliding') }}
+                      {{
+                        i18nRender("global.settingDrawer.hideHeaderWhenSliding")
+                      }}
                     </div>
                   </a-tooltip>
                 </a-list-item-meta>
@@ -209,7 +215,7 @@
                         layoutMode === 'topmenu' ? 'line-through' : 'unset',
                     }"
                   >
-                    {{ $t('settingDrawer.fixedSideMenu') }}
+                    {{ i18nRender("global.settingDrawer.fixedSideMenu") }}
                   </div>
                 </a-list-item-meta>
               </a-list-item>
@@ -218,9 +224,9 @@
         </div>
         <a-divider />
 
-        <div :style="{marginBottom: '24px'}">
+        <div :style="{ marginBottom: '24px' }">
           <h3 class="setting-drawer-index-title">
-            {{ $t('settingDrawer.other') }}
+            {{ i18nRender("global.settingDrawer.other") }}
           </h3>
           <div>
             <a-list :split="false">
@@ -233,7 +239,7 @@
                 />
                 <a-list-item-meta>
                   <div slot="title">
-                    {{ $t('settingDrawer.colorWeakMode') }}
+                    {{ i18nRender("global.settingDrawer.colorWeakMode") }}
                   </div>
                 </a-list-item-meta>
               </a-list-item>
@@ -245,7 +251,9 @@
                   @change="onMultiTab"
                 />
                 <a-list-item-meta>
-                  <div slot="title">{{ $t('settingDrawer.multiTabMode') }}</div>
+                  <div slot="title">
+                    {{ i18nRender("global.settingDrawer.multiTabMode") }}
+                  </div>
                 </a-list-item-meta>
               </a-list-item>
             </a-list>
@@ -258,25 +266,30 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Watch, Mixins} from 'vue-property-decorator';
-import {Getter, Action} from 'vuex-class';
-import {updateTheme, colorList, updateColorWeak} from '@/core';
-import {Mixin} from '@/utils/mixin';
-interface IColorList {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { Component, Mixins } from "vue-property-decorator";
+import { Getter, Action } from "vuex-class";
+import { updateTheme } from "@ant-design-vue/pro-layout";
+import { colorList, updateColorWeak } from "@/core";
+import { Mixin } from "@/utils/mixin";
+import { i18nRender } from "@/locales";
+interface ColorList {
   key: string;
   color: string;
 }
 @Component
 export default class SettingDrawer extends Mixins(Mixin) {
-  private visible: boolean = false;
-  private colorList: Array<IColorList> = colorList;
+  private visible = false;
+  private colorList: Array<ColorList> = colorList;
   @Getter layoutMode: any;
   @Getter navTheme: any;
   @Getter primaryColor: any;
   @Getter colorWeak?: boolean;
-  @Action('ToggleLayoutMode') toggleLayoutMode: any;
-  @Action('ToggleNavTheme') toggleNavTheme: any;
-  @Action('TogglePrimaryColor') togglePrimaryColor: any;
+  i18nRender = i18nRender;
+  @Action("ToggleLayoutMode") toggleLayoutMode: any;
+  @Action("ToggleNavTheme") toggleNavTheme: any;
+  @Action("TogglePrimaryColor") togglePrimaryColor: any;
 
   private onClose(): void {
     this.visible = false;
@@ -287,41 +300,45 @@ export default class SettingDrawer extends Mixins(Mixin) {
   private handleChangeColor(color: string): void {
     if (this.primaryColor !== color) {
       this.togglePrimaryColor(color);
-      updateTheme(true, color, this.$t(`globalHeader.themeMessage`));
+      updateTheme(
+        true,
+        color,
+        this.i18nRender(`global.header.compilingTheme`).toString()
+      );
     }
   }
   private handleChangeLayout(layout: string): void {
     this.toggleLayoutMode(layout);
     this.handleFixSiderbar(false);
   }
-  handleContentWidthChange(type: string) {
-    this.$store.dispatch('ToggleContentWidth', type);
+  handleContentWidthChange(type: string): void {
+    this.$store.dispatch("ToggleContentWidth", type);
   }
-  changeColor(color: string) {
+  changeColor(color: string): void {
     if (this.primaryColor !== color) {
-      this.$store.dispatch('ToggleColor', color);
-      updateTheme(true, color);
+      this.$store.dispatch("ToggleColor", color);
+      updateTheme(color);
     }
   }
-  handleFixedHeader(fixed: boolean) {
-    this.$store.dispatch('ToggleFixedHeader', fixed);
+  handleFixedHeader(fixed: boolean): void {
+    this.$store.dispatch("ToggleFixedHeader", fixed);
   }
-  handleFixedHeaderHidden(autoHidden: boolean) {
-    this.$store.dispatch('ToggleFixedHeaderHidden', autoHidden);
+  handleFixedHeaderHidden(autoHidden: boolean): void {
+    this.$store.dispatch("ToggleFixedHeaderHidden", autoHidden);
   }
-  handleFixSiderbar(fixed: boolean) {
-    if (this.AppModule.layoutMode === 'topmenu') {
-      this.$store.dispatch('ToggleFixSiderbar', false);
+  handleFixSiderbar(fixed: boolean): void {
+    if (this.AppModule.layout === "topmenu") {
+      this.$store.dispatch("ToggleFixSiderbar", false);
       return;
     }
-    this.$store.dispatch('ToggleFixSiderbar', fixed);
+    this.$store.dispatch("ToggleFixSiderbar", fixed);
   }
-  onColorWeak(checked: boolean) {
-    this.$store.dispatch('ToggleColorWeak', checked);
+  onColorWeak(checked: boolean): void {
+    this.$store.dispatch("ToggleColorWeak", checked);
     updateColorWeak(checked);
   }
-  onMultiTab(checked: boolean) {
-    this.$store.dispatch('ToggleMultiTab', checked);
+  onMultiTab(checked: boolean): void {
+    this.$store.dispatch("ToggleMultiTab", checked);
   }
 }
 </script>

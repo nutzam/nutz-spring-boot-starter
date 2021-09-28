@@ -31,12 +31,12 @@
   </div>
 </template>
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
-import Breadcrumb from '@/components/tools';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import Breadcrumb from "@/components/tools";
 
 @Component({
   components: {
-    's-breadcrumb': Breadcrumb,
+    "s-breadcrumb": Breadcrumb,
   },
 })
 export default class PageHeader extends Vue {
@@ -47,10 +47,10 @@ export default class PageHeader extends Vue {
   })
   private title!: string | boolean;
 
-  @Prop({type: String, default: '', required: false})
+  @Prop({ type: String, default: "", required: false })
   private logo!: string;
 
-  @Prop({type: String, default: '', required: false})
+  @Prop({ type: String, default: "", required: false })
   private avatar!: string;
 }
 </script>

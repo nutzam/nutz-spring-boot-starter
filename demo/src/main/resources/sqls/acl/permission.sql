@@ -7,7 +7,7 @@ select
 	a.id as `actionId`,
 	m.m_name as `moduleName`,
 	up.up_module_key as `moduleKey`,
-	m.m_descr as `moduleDescription`,
+	m.m_description as `moduleDescription`,
 	m.id as `moduleId`
 from
 	t_user_permission up
@@ -26,7 +26,7 @@ select
 	a.id as `actionId`,
 	m.m_name as `moduleName`,
 	rp.rp_module_key as `moduleKey`,
-	m.m_descr as `moduleDescription`,
+	m.m_description as `moduleDescription`,
 	m.id as `moduleId`
 from
 	t_role_permission rp
@@ -47,7 +47,7 @@ select
 	a.id as `actionId`,
 	m.m_name as `moduleName`,
 	rp.rp_module_key as `moduleKey`,
-	m.m_descr as `moduleDescription`,
+	m.m_description as `moduleDescription`,
 	m.id as `moduleId`
 from
 	t_role_permission rp
@@ -72,7 +72,7 @@ from
 		a.id as `actionId`,
 		m.m_name as `moduleName`,
 		m.m_key as `moduleKey`,
-		m.m_descr as `moduleDescription`,
+		m.m_description as `moduleDescription`,
 		m.id as `moduleId`
 	from
 		t_action a
@@ -107,7 +107,7 @@ from
 		a.id as `actionId`,
 		m.m_name as `moduleName`,
 		m.m_key as `moduleKey`,
-		m.m_descr as `moduleDescription`,
+		m.m_description as `moduleDescription`,
 		m.id as `moduleId`
 	from
 		t_action a
