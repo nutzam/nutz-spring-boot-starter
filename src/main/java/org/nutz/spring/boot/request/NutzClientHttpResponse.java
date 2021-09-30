@@ -73,9 +73,7 @@ public class NutzClientHttpResponse extends AbstractClientHttpResponse {
         HttpHeaders headers = new HttpHeaders();
         response.getHeader().keys().stream().forEach(key -> {
             if (Strings.isNotBlank(key)) {
-                response.getHeader().getValues(key).stream().forEach(item -> {
-                    headers.add(key, item);
-                });
+                response.getHeader().getValues(key).stream().forEach(item -> headers.add(key, item));
             }
         });
         return headers;

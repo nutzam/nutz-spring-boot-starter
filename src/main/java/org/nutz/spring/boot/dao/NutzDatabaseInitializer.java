@@ -32,13 +32,11 @@ public class NutzDatabaseInitializer {
 
     @PostConstruct
     public void create() {
-
         Daos.CHECK_COLUMN_NAME_KEYWORD = properties.getGlobal().isCheckColumnNameKeyword();
         Daos.FORCE_HUMP_COLUMN_NAME = properties.getGlobal().isForceHumpColumnName();
         Daos.FORCE_UPPER_COLUMN_NAME = properties.getGlobal().isForceUpperColumnName();
         Daos.FORCE_WRAP_COLUMN_NAME = properties.getGlobal().isForceWrapColumnName();
         Daos.DEFAULT_VARCHAR_WIDTH = properties.getGlobal().getDefaultVarcharWidth();
-
         boolean create = properties.getRuntime().isCreate();
         boolean migration = properties.getRuntime().isMigration();
         Arrays.stream(properties.getRuntime().getBasepackage()).forEach(pkg -> {
