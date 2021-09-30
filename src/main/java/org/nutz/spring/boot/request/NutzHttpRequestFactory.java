@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 
 import org.nutz.http.ProxySwitcher;
+import org.nutz.log.Logs;
 import org.nutz.spring.boot.request.NutzHttpAutoConfigurationProperties.Http;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.http.HttpMethod;
@@ -30,15 +31,6 @@ public class NutzHttpRequestFactory implements ClientHttpRequestFactory, Disposa
     Http http;
 
     /**
-     * @throws Exception
-     * @see org.springframework.beans.factory.DisposableBean#destroy()
-     */
-    @Override
-    public void destroy() throws Exception {
-
-    }
-
-    /**
      * @param uri
      * @param httpMethod
      * @return
@@ -49,6 +41,14 @@ public class NutzHttpRequestFactory implements ClientHttpRequestFactory, Disposa
     @Override
     public ClientHttpRequest createRequest(URI uri, HttpMethod httpMethod) throws IOException {
         return new NutzHttpClientHttpRequest(uri, httpMethod, http, proxySwitcher);
+    }
+
+    /* (non-Javadoc)
+      * @see org.springframework.beans.factory.DisposableBean#destroy()
+      */
+    @Override
+    public void destroy() throws Exception {
+        Logs.get().debug("destroy");
     }
 
 }

@@ -24,6 +24,22 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
         return "spring";
     }
 
+    /* (non-Javadoc)
+          * @see org.nutz.resource.impl.ResourceLocation#equals(java.lang.Object)
+          */
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    /* (non-Javadoc)
+      * @see org.nutz.resource.impl.ResourceLocation#hashCode()
+      */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
     @Override
     public void scan(String base, Pattern pattern, List<NutResource> list) {
         base = pattern.matcher(base).find() ? "classpath*:" + base : "classpath*:" + base + "/**";
@@ -38,8 +54,7 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
                 sr.setSource("spring");
                 list.add(sr);
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -56,6 +71,22 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
         @Override
         public InputStream getInputStream() throws IOException {
             return resource.getInputStream();
+        }
+
+        /* (non-Javadoc)
+              * @see org.nutz.resource.NutResource#equals(java.lang.Object)
+              */
+        @Override
+        public boolean equals(Object obj) {
+            return super.equals(obj);
+        }
+
+        /* (non-Javadoc)
+          * @see org.nutz.resource.NutResource#hashCode()
+          */
+        @Override
+        public int hashCode() {
+            return super.hashCode();
         }
 
     }
