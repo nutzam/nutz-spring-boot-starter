@@ -59,7 +59,7 @@ spring:
   datasource:
 # 数据源
     druid:
-      url: jdbc:mysql://127.0.0.1:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://gitea.kerbores.com:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: developer
       password: G00dl^ck
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -83,8 +83,7 @@ spring:
       stat-view-servlet:
         enabled: true
         url-pattern: /druid/*
-        reset-enable: true
-# 日志配置
+        reset-enable: true# 日志配置
 logging:  
   file: 
     name: ${user.home}/logs/${spring.application.name}.log

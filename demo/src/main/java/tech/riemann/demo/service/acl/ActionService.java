@@ -1,8 +1,5 @@
 package tech.riemann.demo.service.acl;
 
-import javax.annotation.Resource;
-
-import org.nutz.dao.Dao;
 import org.nutz.spring.boot.service.IdNameBaseService;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +15,4 @@ import tech.riemann.demo.entity.acl.Action;
  */
 @Service
 public class ActionService extends IdNameBaseService<Action> {
-    /* (non-Javadoc)
-     * @see org.nutz.spring.boot.service.IdNameBaseService#init(org.nutz.dao.Dao)
-     */
-    @Override
-    @Resource(type = Dao.class, name = "2ndDao")
-    public void init(Dao dao) {
-        super.init(dao);
-    }
 }
