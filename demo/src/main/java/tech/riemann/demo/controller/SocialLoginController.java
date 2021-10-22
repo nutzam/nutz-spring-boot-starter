@@ -1,16 +1,12 @@
 package tech.riemann.demo.controller;
 
-import java.io.IOException;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-
 import org.nutz.dao.Cnd;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +22,11 @@ import io.swagger.annotations.ApiParam;
 import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
 import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.common.service.WxOAuth2Service;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.config.WxMpConfigStorage;
-import springfox.documentation.annotations.ApiIgnore;
 import tech.riemann.demo.config.wechat.WechatOauthConfigurationProperties;
 import tech.riemann.demo.dto.request.SocialLoginBindDTO;
+import tech.riemann.demo.dto.response.WxLogin;
 import tech.riemann.demo.entity.acl.LoginChannel;
 import tech.riemann.demo.entity.acl.LoginChannel.Channel;
 import tech.riemann.demo.entity.acl.User;
@@ -57,13 +52,7 @@ public class SocialLoginController {
     WxMaService wxMaService;
 
     @Autowired
-    WxOAuth2Service wxOAuth2Service;
-
-    @Autowired
     WechatOauthConfigurationProperties config;
-
-    @Autowired
-    HttpServletResponse response;
 
     @Autowired
     LoginChannelService loginChannelService;
@@ -77,41 +66,64 @@ public class SocialLoginController {
      * @param scope
      * @return
      */
-    @GetMapping("mp/auth-url")
-    @ApiOperation("获取网页授权地址(H5端,公众号)")
+    @GetMapping("auth-url")
+    @ApiOperation("获取网页授权地址(H5端,公众号),H5端通过此接口获取到授权地址,然后直接location跳转")
     public Result<String> authUrl(@RequestParam("state") String state,
         @RequestParam(required = false, value = "scope", defaultValue = "snsapi_base") @ApiParam(allowableValues = "snsapi_base,snsapi_userinfo") String scope) {
-
         if (!Strings.equals(scope, "snsapi_base") && !Strings.equals(scope, "snsapi_userinfo")) {
             throw Lang.makeThrow("参数异常,scope => %s ,allowableValues are 'snsapi_base' and 'snsapi_userinfo'", scope);
         }
-        return Result.success(wxMpService.getOAuth2Service().buildAuthorizationUrl(String.format("%s/social/login/%s", config.getServer().getUrl(), "mp/oauth"), scope, state));
+        return Result.success(wxMpService.getOAuth2Service().buildAuthorizationUrl(config.getMp().getUrl(), scope, state));
     }
 
-    /**
-     * 网页授权oauth入口
-     * 
-     * @param state
-     * @param code
-     * @throws WxErrorException
-     * @throws IOException
-     */
-    @GetMapping("mp/oauth")
-    @ApiIgnore
-    public void oauth(@RequestParam("state") String state, @RequestParam("code") String code) throws WxErrorException, IOException {
-        WxOAuth2AccessToken token = wxMpService.getOAuth2Service().getAccessToken(code);
-        WxOAuth2UserInfo userInfo = wxMpService.getOAuth2Service().getUserInfo(token, "zh_CN");
-        LoginChannel loginChannel = loginChannelService.fetch(Cnd.where(LoginChannel.Fields.openid, "=", userInfo.getOpenid()).and(LoginChannel.Fields.channel, "=", Channel.MP));
-        if (loginChannel == null) { // 用户没有绑定
-            response.addHeader("openid", userInfo.getOpenid());
-            response.addCookie(new Cookie("openid", userInfo.getOpenid()));
-        } else { // 已经绑定
-            User user = userService.fetch(loginChannel.getUserId());
-            response.addHeader("token", user.toUser().getToken());
-            response.addCookie(new Cookie("token", user.toUser().getToken()));
+    @GetMapping("qr-option")
+    @ApiOperation("获取扫码登录二维码选项信息,PC端调用此接口获取显示二维码参数,然后调用 "
+        + "var obj = new WxLogin({\r\n"
+        + " self_redirect:true,\r\n"
+        + " id:\"login_container\", \r\n"
+        + " appid: \"\", \r\n"
+        + " scope: \"\", \r\n"
+        + " redirect_uri: \"\",\r\n"
+        + "  state: \"\",\r\n"
+        + " style: \"\",\r\n"
+        + " href: \"\"\r\n"
+        + " });显示二维码")
+    public Result<WxLogin> qrOption(String id, String state, String href) {
+        return Result.success(WxLogin.builder()
+            .id(id)
+            .state(state)
+            .href(href)
+            .redirect_uri(config.getPc().getUrl())
+            .appid(configStorage.getAppId())
+            .build());
+    }
+
+    @GetMapping("{channel}/oauth")
+    @ApiOperation("用code进行oauth登录,各端根据前置操作获取到code调用此接口,如果已经绑定,返回token,如果没有绑定则返回openid")
+    public Result<String> oauth(@ApiParam(value = "授权码", required = true) String code,
+        @ApiParam(value = "授权渠道", required = true) @PathVariable("channel") Channel channel) throws WxErrorException {
+        if (channel == Channel.MINIAPP) {
+            WxMaJscode2SessionResult result = wxMaService.jsCode2SessionInfo(code);
+            LoginChannel loginChannel =
+                loginChannelService.fetch(Cnd.where(LoginChannel.Fields.openid, "=", result.getOpenid()).and(LoginChannel.Fields.channel, "=", channel));
+            if (loginChannel == null) { // 用户没有绑定
+                return Result.<String>builder().data(result.getOpenid()).state(OperationState.FAIL).build();
+            } else { // 已经绑定
+                User user = userService.fetch(loginChannel.getUserId());
+                return Result.success(user.toUser().getToken());
+            }
+        } else {
+            WxOAuth2AccessToken token = wxMpService.getOAuth2Service().getAccessToken(code);
+            WxOAuth2UserInfo result = wxMpService.getOAuth2Service().getUserInfo(token, "zh-CN");
+            LoginChannel loginChannel =
+                loginChannelService.fetch(Cnd.where(LoginChannel.Fields.openid, "=", result.getOpenid()).and(LoginChannel.Fields.channel, "=", channel));
+            if (loginChannel == null) { // 用户没有绑定
+                return Result.<String>builder().data(result.getOpenid()).state(OperationState.FAIL).build();
+            } else { // 已经绑定
+                User user = userService.fetch(loginChannel.getUserId());
+                return Result.success(user.toUser().getToken());
+            }
         }
-        // 跳回去
-        response.sendRedirect(config.getMp().getUrl(state));
     }
 
     @PostMapping("bind")
@@ -128,37 +140,6 @@ public class SocialLoginController {
             .build());
 
         return Result.success(user.toUser().getToken());
-    }
-
-    @GetMapping("miniapp/oauth")
-    @ApiOperation("用code进行oauth登录(miniapp 小程序)")
-    public Result<String> oauth(String code) throws WxErrorException {
-        WxMaJscode2SessionResult result = wxMaService.jsCode2SessionInfo(code);
-
-        LoginChannel loginChannel =
-            loginChannelService.fetch(Cnd.where(LoginChannel.Fields.openid, "=", result.getOpenid()).and(LoginChannel.Fields.channel, "=", Channel.MINIAPP));
-        if (loginChannel == null) { // 用户没有绑定
-            return Result.<String>builder().data(result.getOpenid()).state(OperationState.FAIL).build();
-        } else { // 已经绑定
-            User user = userService.fetch(loginChannel.getUserId());
-            return Result.success(user.toUser().getToken());
-        }
-    }
-
-    @GetMapping("pc/oauth")
-    @ApiOperation("用code进行oauth登录(pc 扫码登录)")
-    public Result<String> scanOauth(String code) throws WxErrorException {
-        // TODO 确认
-        WxMaJscode2SessionResult result = wxMaService.jsCode2SessionInfo(code);
-
-        LoginChannel loginChannel =
-            loginChannelService.fetch(Cnd.where(LoginChannel.Fields.openid, "=", result.getOpenid()).and(LoginChannel.Fields.channel, "=", Channel.MINIAPP));
-        if (loginChannel == null) { // 用户没有绑定
-            return Result.<String>builder().data(result.getOpenid()).state(OperationState.FAIL).build();
-        } else { // 已经绑定
-            User user = userService.fetch(loginChannel.getUserId());
-            return Result.success(user.toUser().getToken());
-        }
     }
 
 }

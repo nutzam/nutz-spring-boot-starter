@@ -133,8 +133,12 @@ axe:
     authorization:
       key-name: Authorization
 wx:  mp:    app-id: wx6e4f32b9bfd64693
+    aes-key: 
     secret: 7ec96826e905841e4912e8acdf5037ed
     token: Kerbores
+  miniapp:    appid: 
     aes-key: 
-wechat:  oauth:    server:      domain: poly.ngrok.kerbores.com
-    mp:      domain: poly.ngrok.kerbores.com
+    secret:     
+    token: 
+wechat:  oauth:    mp:      domain: m.poly.ngrok.kerbores.com
+    pc:      domain: poly.ngrok.kerbores.com
