@@ -2,12 +2,12 @@
 /**
  * @description 功能模块
  */
-import add from "./add";
-import edit from "./edit";
-import get from "./get";
-import remove from "./remove";
-import actions from "./actions";
-import search, { SearchParams } from "./search";
+import add from './add';
+import edit from './edit';
+import get from './get';
+import remove from './remove';
+import actions from './actions';
+import search, { SearchParams } from './search';
 
 export class ModuleApi {
   constructor(
@@ -22,10 +22,10 @@ export class ModuleApi {
       }: {
         data: acl.Module;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public edit: (
@@ -39,10 +39,10 @@ export class ModuleApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public get: (
@@ -56,10 +56,10 @@ export class ModuleApi {
       }: {
         data: acl.Module;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public remove: (
@@ -73,10 +73,10 @@ export class ModuleApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public actions: (
@@ -90,10 +90,10 @@ export class ModuleApi {
       }: {
         data: Array<acl.Action>;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public search: (
@@ -106,11 +106,11 @@ export class ModuleApi {
       }: {
         data: acl.Pagination<acl.Module>;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
-    ) => void
+      fail?: (error: string) => any,
+    ) => void,
   ) {}
 }
 

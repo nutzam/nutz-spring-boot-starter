@@ -2,18 +2,18 @@
 /**
  * @desc 分页加载字典分组
  */
-import { defaultSuccess, defaultError, http } from "@/plugins/axios";
+import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 
 export class SearchParams {
   constructor(
     public key?: string,
     public page?: number,
     public size?: number,
-    public state?: boolean
+    public state?: boolean,
   ) {}
 }
 
-export default async function (
+export default async function(
   params: SearchParams,
   success: ({
     data,
@@ -23,17 +23,17 @@ export default async function (
   }: {
     data: dictionary.Pagination<dictionary.Group>;
     ext: ObjectMap;
-    state: "SUCCESS" | "FAIL" | "EXCEPTION";
+    state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
     errors?: Array<string>;
   }) => void = defaultSuccess,
-  fail: (error: string) => void = defaultError
+  fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
-    method: "get",
+    method: 'get',
     url: `/groups`,
 
     params,
   })
-    .then((data) => success(data as any))
-    .catch((error) => fail(error));
+    .then(data => success(data as any))
+    .catch(error => fail(error));
 }

@@ -20,10 +20,10 @@ public class WechatOauthConfigurationProperties {
     public class Client {
         String domain;
         boolean ssl = false;
-        String router = "/wechat/oauth";
+        String router = "/user/login";
 
         public String getUrl() {
-            return String.format("%s://%s/index.html/#%s", ssl ? "https" : "http", domain, router);
+            return String.format("%s://%s/index.html#%s", ssl ? "https" : "http", domain, router);
         }
     }
 

@@ -1,24 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /**
- * @desc 根据id获取指定角色下指定模块下的授权情况
- */
+     * @desc 获取扫码登录二维码选项信息,PC端调用此接口获取显示二维码参数,然后调用 var obj = new WxLogin({
+ self_redirect:true,
+ id:"login_container", 
+ appid: "", 
+ scope: "", 
+ redirect_uri: "",
+  state: "",
+ style: "",
+ href: ""
+ });显示二维码
+     */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 
-export class GrantInfoParams {
-  constructor(public mids?: Array<number>) {}
+export class QrOptionParams {
+  constructor(
+    public href?: string,
+    public id?: string,
+    public state?: string,
+  ) {}
 }
 
 export default async function(
-  id: number,
-
-  params: GrantInfoParams,
+  params: QrOptionParams,
   success: ({
     data,
     ext,
     state,
     errors,
   }: {
-    data: Array<acl.ModuleInfo>;
+    data: wechat.WxLogin;
     ext: ObjectMap;
     state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
     errors?: Array<string>;
@@ -27,7 +38,7 @@ export default async function(
 ): Promise<void> {
   return http({
     method: 'get',
-    url: `/role/${id}/grant/info`,
+    url: `/social/login/qr-option`,
 
     params,
   })

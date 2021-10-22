@@ -1,28 +1,45 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-declare namespace login {
-  export class AuthUser {
-    /** 扩展信息 */
-    extInfo: ObjectMap<any, any>;
+declare namespace wechat {
+  export class TieSocialLoginUserDataObject {
+    /** 渠道 */
+    channel: 'MP' | 'MINIAPP' | 'WECHAT_SCAN' | 'WECHAT';
 
-    /** 密码 */
-    password: string;
+    /** 验证码 */
+    code: string;
 
-    /** 权限列表 */
-    permissions: Array<string>;
+    /** 手机号 */
+    mobile: string;
 
-    /** jwt refreshToken */
-    refreshToken: string;
+    /** openid */
+    openid: string;
+  }
 
-    /** 角色列表 */
-    roles: Array<string>;
+  export class WxLogin {
+    /** appid */
+    appid: string;
 
-    /** jwt Token */
-    token: string;
+    /** href */
+    href?: string;
 
-    /** 用户名 */
-    userName: string;
+    /** id */
+    id: string;
+
+    /** redirect_uri */
+    redirect_uri: string;
+
+    /** scope */
+    scope: string;
+
+    /** self_redirect */
+    self_redirect: boolean;
+
+    /** state */
+    state: string;
+
+    /** style */
+    style?: 'black' | 'white';
   }
 
   export class Pagination<T0 = any> {
