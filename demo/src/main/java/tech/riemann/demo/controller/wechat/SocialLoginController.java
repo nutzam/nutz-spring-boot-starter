@@ -1,4 +1,4 @@
-package tech.riemann.demo.controller;
+package tech.riemann.demo.controller.wechat;
 
 import org.nutz.dao.Cnd;
 import org.nutz.lang.Lang;
@@ -100,7 +100,7 @@ public class SocialLoginController {
 
     @GetMapping("{channel}/oauth")
     @ApiOperation("用code进行oauth登录,各端根据前置操作获取到code调用此接口,如果已经绑定,返回token,如果没有绑定则返回openid")
-    public Result<String> oauth(@ApiParam(value = "授权码", required = true) String code,
+    public Result<String> oauth(@ApiParam(value = "授权码", required = true) @RequestParam("code") String code,
         @ApiParam(value = "授权渠道", required = true) @PathVariable("channel") Channel channel) throws WxErrorException {
         if (channel == Channel.MINIAPP) {
             WxMaJscode2SessionResult result = wxMaService.jsCode2SessionInfo(code);
@@ -118,7 +118,7 @@ public class SocialLoginController {
             LoginChannel loginChannel =
                 loginChannelService.fetch(Cnd.where(LoginChannel.Fields.openid, "=", result.getOpenid()).and(LoginChannel.Fields.channel, "=", channel));
             if (loginChannel == null) { // 用户没有绑定
-                return Result.<String>builder().data(result.getOpenid()).state(OperationState.FAIL).build();
+                return Result.fail(result.getOpenid());
             } else { // 已经绑定
                 User user = userService.fetch(loginChannel.getUserId());
                 return Result.success(user.toUser().getToken());

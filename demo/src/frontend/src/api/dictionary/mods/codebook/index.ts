@@ -2,12 +2,12 @@
 /**
  * @description 码本数据模块
  */
-import add from "./add";
-import edit from "./edit";
-import vxeSave from "./vxeSave";
-import get from "./get";
-import remove from "./remove";
-import byGroup from "./byGroup";
+import add from './add';
+import edit from './edit';
+import vxeSave from './vxeSave';
+import get from './get';
+import remove from './remove';
+import byGroup from './byGroup';
 
 export class CodebookApi {
   constructor(
@@ -22,10 +22,10 @@ export class CodebookApi {
       }: {
         data: dictionary.Codebook;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public edit: (
@@ -39,10 +39,10 @@ export class CodebookApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public vxeSave: (
@@ -56,10 +56,10 @@ export class CodebookApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public get: (
@@ -73,10 +73,10 @@ export class CodebookApi {
       }: {
         data: dictionary.Codebook;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public remove: (
@@ -90,10 +90,10 @@ export class CodebookApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public byGroup: (
@@ -107,11 +107,11 @@ export class CodebookApi {
       }: {
         data: Array<dictionary.Codebook>;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
-    ) => void
+      fail?: (error: string) => any,
+    ) => void,
   ) {}
 }
 

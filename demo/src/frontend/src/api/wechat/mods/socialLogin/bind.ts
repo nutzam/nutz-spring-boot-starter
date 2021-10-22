@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /**
- * @desc 根据id更新系统功能
+ * @desc 绑定用户
  */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 
 export default async function(
-  module: acl.Module,
+  socialLoginBindDTO: wechat.TieSocialLoginUserDataObject,
 
   success: ({
     data,
@@ -13,7 +13,7 @@ export default async function(
     state,
     errors,
   }: {
-    data: void;
+    data: string;
     ext: ObjectMap;
     state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
     errors?: Array<string>;
@@ -21,9 +21,9 @@ export default async function(
   fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
-    method: 'put',
-    url: `/module`,
-    data: module,
+    method: 'post',
+    url: `/social/login/bind`,
+    data: socialLoginBindDTO,
   })
     .then(data => success(data as any))
     .catch(error => fail(error));

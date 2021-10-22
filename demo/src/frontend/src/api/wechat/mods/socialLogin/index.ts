@@ -1,24 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /**
- * @description 功能动作模块
+ * @description Social Login Controller
  */
-import add from './add';
-import edit from './edit';
-import get from './get';
-import remove from './remove';
+import authUrl, { AuthUrlParams } from './authUrl';
+import bind from './bind';
+import qrOption, { QrOptionParams } from './qrOption';
+import oauth, { OauthParams } from './oauth';
 
-export class ActionApi {
+export class SocialLoginApi {
   constructor(
-    public add: (
-      action: acl.Action,
-
+    public authUrl: (
+      params: AuthUrlParams,
       success?: ({
         data,
         ext,
         state,
         errors,
       }: {
-        data: acl.Action;
+        data: string;
         ext: ObjectMap;
         state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
@@ -26,8 +25,8 @@ export class ActionApi {
       fail?: (error: string) => any,
     ) => void,
 
-    public edit: (
-      action: acl.Action,
+    public bind: (
+      socialLoginBindDTO: wechat.TieSocialLoginUserDataObject,
 
       success?: ({
         data,
@@ -35,7 +34,7 @@ export class ActionApi {
         state,
         errors,
       }: {
-        data: void;
+        data: string;
         ext: ObjectMap;
         state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
@@ -43,16 +42,15 @@ export class ActionApi {
       fail?: (error: string) => any,
     ) => void,
 
-    public get: (
-      id: number,
-
+    public qrOption: (
+      params: QrOptionParams,
       success?: ({
         data,
         ext,
         state,
         errors,
       }: {
-        data: acl.Action;
+        data: wechat.WxLogin;
         ext: ObjectMap;
         state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
@@ -60,16 +58,17 @@ export class ActionApi {
       fail?: (error: string) => any,
     ) => void,
 
-    public remove: (
-      id: number,
+    public oauth: (
+      channel: 'MP' | 'MINIAPP' | 'WECHAT_SCAN' | 'WECHAT',
 
+      params: OauthParams,
       success?: ({
         data,
         ext,
         state,
         errors,
       }: {
-        data: void;
+        data: string;
         ext: ObjectMap;
         state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
@@ -80,8 +79,8 @@ export class ActionApi {
 }
 
 export default {
-  add,
-  edit,
-  get,
-  remove,
-} as ActionApi;
+  authUrl,
+  bind,
+  qrOption,
+  oauth,
+} as SocialLoginApi;

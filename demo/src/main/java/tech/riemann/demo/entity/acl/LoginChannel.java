@@ -64,7 +64,7 @@ public class LoginChannel extends DemoEntity {
          */
         WECHAT_SCAN,
         /**
-         * 微信社会化登录
+         * 微信社会化登录(APP登录)
          */
         WECHAT
     }

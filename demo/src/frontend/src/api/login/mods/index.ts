@@ -1,4 +1,4 @@
-import auth, { AuthApi } from "./auth";
+import auth, { AuthApi } from './auth';
 
 export class LoginApi {
   constructor(public auth: AuthApi) {}

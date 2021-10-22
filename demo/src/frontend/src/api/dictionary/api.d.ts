@@ -109,7 +109,7 @@ declare namespace dictionary {
     ext?: ObjectMap<any, any>;
 
     /** 响应状态 */
-    state: "SUCCESS" | "FAIL" | "EXCEPTION";
+    state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
 
     /** success */
     success?: boolean;
