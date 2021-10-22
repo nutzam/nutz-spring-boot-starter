@@ -24,6 +24,10 @@ server:
     direct-buffers: true
 # nutz
 nutz:
+  ngrok:
+    client:      token: NWZCsotPInP_MjJojBs-4-
+      server: ngrok.kerbores.com
+      server-port: 4443
   json:
     enabled: true
     mode: compact
@@ -128,3 +132,9 @@ axe:
       url: https://www.riemann.tech/
     authorization:
       key-name: Authorization
+wx:  mp:    app-id: wx6e4f32b9bfd64693
+    secret: 7ec96826e905841e4912e8acdf5037ed
+    token: Kerbores
+    aes-key: 
+wechat:  oauth:    server:      domain: poly.ngrok.kerbores.com
+    mp:      domain: poly.ngrok.kerbores.com
