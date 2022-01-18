@@ -11,6 +11,11 @@ import org.beetl.core.resource.StringTemplateResource;
  */
 public class ClasspathStringResourceLoader extends ClasspathResourceLoader {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     public ClasspathStringResourceLoader() {
         super();
     }

@@ -1,6 +1,6 @@
 package tech.riemann.demo.dto.response;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Builder.Default;
@@ -17,23 +17,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class WxLogin {
     @Default
-    @ApiModelProperty(required = true)
+    @Schema(required = true)
     boolean self_redirect = true;
 
-    @ApiModelProperty(required = true)
+    @Schema(required = true)
     String id;
 
-    @ApiModelProperty(required = true)
+    @Schema(required = true)
     String appid;
 
     @Default
-    @ApiModelProperty(required = true)
+    @Schema(required = true)
     String scope = "snsapi_login";
 
-    @ApiModelProperty(required = true)
+    @Schema(required = true)
     String redirect_uri;
 
-    @ApiModelProperty(required = true)
+    @Schema(required = true)
     String state;
 
     @Default

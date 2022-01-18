@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import me.chanjar.weixin.mp.api.WxMpService;
-import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @author wkipy
@@ -25,7 +25,7 @@ public class WechatController {
     HttpServletResponse response;
 
     @GetMapping("wechat")
-    @ApiIgnore
+    @Hidden
     public void check(String timestamp, String signature, String nonce, String echostr) throws IOException {
         if (wxMpService.checkSignature(timestamp, nonce, signature)) {
             response.getWriter().write(echostr);

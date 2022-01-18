@@ -29,6 +29,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author kerbores(kerbores@gmail.com)
@@ -39,49 +40,18 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnExpression("${nutz.dao.enabled:true}")
 @AutoConfigureAfter({DataSourceAutoConfiguration.class})
 @EnableConfigurationProperties(NutzDaoAutoConfigurationProperties.class)
+@Import(SpringResourceLoactionConfiguration.class)
 public class NutzDaoAutoConfiguration {
 
     @Autowired
     NutzDaoAutoConfigurationProperties properties;
 
-    @Bean
-    public Dao dao(DataSource dataSource, SqlManager sqlManager, DaoRunner daoRunner, ApplicationContext context) {
-        NutDao dao = new NutDao(dataSource, sqlManager);
-        dao.setRunner(daoRunner);
-
-        Map<String, DaoInterceptor> interceptors = context.getBeansOfType(DaoInterceptor.class);
-        interceptors.values().forEach(dao::addInterceptor);
-
-        if (properties.getInterceptor().isTime()) {
-            dao.addInterceptor("time");
-        }
-        return dao;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(DaoRunner.class)
-    public DaoRunner daoRunner() {
-        return new SpringDaoRunner();
-    }
-
-    @Bean
-    public SpringResourceLoaction springResourceLoaction() {
-        return new SpringResourceLoaction();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public SqlManager sqlManager() {
-        String[] paths = properties.getSqlManager().getPaths();
-        if (paths == null) {
-            paths = new String[]{"sqls"};
-        }
-        return properties.getSqlManager().getMode() == Mode.XML ? new XmlSqlManager(paths) : new FileSqlManager(paths);
-    }
+    @Autowired
+    SpringResourceLoaction springResourceLoaction;
 
     @PostConstruct
     public void initSqlTemplate() {
-        Scans.me().addResourceLocation(springResourceLoaction());
+        Scans.me().addResourceLocation(springResourceLoaction);
         if (properties.getSqlTemplate().isEnable()) {
             switch (properties.getSqlTemplate().getType()) {
             case BEETL:
@@ -98,6 +68,36 @@ public class NutzDaoAutoConfiguration {
                 break;
             }
         }
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(DaoRunner.class)
+    public DaoRunner daoRunner() {
+        return new SpringDaoRunner();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public SqlManager sqlManager() {
+        String[] paths = properties.getSqlManager().getPaths();
+        if (paths == null) {
+            paths = new String[]{"sqls"};
+        }
+        return properties.getSqlManager().getMode() == Mode.XML ? new XmlSqlManager(paths) : new FileSqlManager(paths);
+    }
+
+    @Bean
+    public Dao dao(DataSource dataSource, SqlManager sqlManager, DaoRunner daoRunner, ApplicationContext context) {
+        NutDao dao = new NutDao(dataSource, sqlManager);
+        dao.setRunner(daoRunner);
+
+        Map<String, DaoInterceptor> interceptors = context.getBeansOfType(DaoInterceptor.class);
+        interceptors.values().forEach(dao::addInterceptor);
+
+        if (properties.getInterceptor().isTime()) {
+            dao.addInterceptor("time");
+        }
+        return dao;
     }
 
 }

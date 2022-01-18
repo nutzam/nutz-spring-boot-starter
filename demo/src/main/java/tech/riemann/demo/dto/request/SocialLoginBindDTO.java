@@ -1,7 +1,6 @@
 package tech.riemann.demo.dto.request;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import tech.riemann.demo.entity.acl.LoginChannel.Channel;
 
@@ -10,15 +9,15 @@ import tech.riemann.demo.entity.acl.LoginChannel.Channel;
  *
  */
 @Data
-@ApiModel("社会化登录用户绑定数据对象")
+@Schema(description = "社会化登录用户绑定数据对象")
 public class SocialLoginBindDTO {
 
-    @ApiModelProperty(value = "手机号", required = true)
+    @Schema(description = "手机号", required = true)
     String mobile;
-    @ApiModelProperty(value = "验证码", required = true)
+    @Schema(description = "验证码", required = true)
     String code;
-    @ApiModelProperty(value = "openid", required = true)
+    @Schema(description = "openid", required = true)
     String openid;
-    @ApiModelProperty(value = "渠道", required = true)
+    @Schema(description = "渠道", required = true)
     Channel channel;
 }

@@ -5,8 +5,7 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,23 +32,23 @@ import tech.riemann.demo.entity.DemoEntity;
 @Accessors(chain = true)
 @Table("t_role")
 @Comment("角色")
-@ApiModel(value = "Role", description = "角色")
+@Schema(name = "Role", description = "角色")
 public class Role extends DemoEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "角色唯一键", required = true)
+    @Schema(description = "角色唯一键", required = true)
     @Column("r_key")
     @Comment("角色唯一键")
     @Name
     private String key;
 
-    @ApiModelProperty(value = "角色名称", required = true)
+    @Schema(description = "角色名称", required = true)
     @Column("r_name")
     @Comment("角色名称")
     private String name;
 
-    @ApiModelProperty(value = "角色描述")
+    @Schema(description = "角色描述")
     @Column("r_description")
     @Comment("角色描述")
     private String description;

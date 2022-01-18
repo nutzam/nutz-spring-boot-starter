@@ -4,8 +4,7 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,24 +27,24 @@ import tech.riemann.demo.entity.DemoEntity;
 @Accessors(chain = true)
 @Table("t_login_channel")
 @Comment("角色")
-@ApiModel(value = "LoginChannel", description = "社会化登录渠道")
+@Schema(name = "LoginChannel", description = "社会化登录渠道")
 public class LoginChannel extends DemoEntity {
     /**
     *
     */
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "openid", required = true)
+    @Schema(description = "openid", required = true)
     @Column("lc_openid")
     @Comment("openid")
     String openid;
 
-    @ApiModelProperty(value = "用户id", required = true)
+    @Schema(description = "用户id", required = true)
     @Column("lc_user_id")
     @Comment("用户id")
     long userId;
 
-    @ApiModelProperty(value = "渠道", required = true)
+    @Schema(description = "渠道", required = true)
     @Column("lc_channel")
     @Comment("渠道")
     Channel channel;
