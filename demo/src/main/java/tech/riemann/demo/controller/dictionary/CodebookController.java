@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import club.zhcs.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import tech.riemann.demo.dto.request.VXETableSaveDTO;
 import tech.riemann.demo.entity.dictionary.Codebook;
 import tech.riemann.demo.service.dictionary.CodebookService;
@@ -30,47 +30,47 @@ import tech.riemann.demo.service.dictionary.CodebookService;
  * @since 2021-08-12
  */
 @RestController
-@Api(value = "Codebook", tags = {"码本数据模块"})
+@Schema(name = "Codebook", description = "码本数据模块")
 public class CodebookController {
 
     @Autowired
     CodebookService codebookService;
 
     @GetMapping("group/{id}/codes")
-    @ApiOperation("获取指定分组下的全部字典")
+    @Operation(summary = "获取指定分组下的全部字典")
     public Result<List<Codebook>> byGroup(
-                                          @ApiParam("分组id") @PathVariable("id") Long groupId) {
+                                          @Parameter(name = "分组id") @PathVariable("id") Long groupId) {
         return Result.success(codebookService.query(Cnd.where("groupId", "=", groupId).asc("index").asc("id")));
     }
 
     @GetMapping("code/{id}")
-    @ApiOperation("获取指定字典项")
+    @Operation(summary = "获取指定字典项")
     public Result<Codebook> get(
-                                @ApiParam("字典项id") @PathVariable("id") long id) {
+                                @Parameter(name = "字典项id") @PathVariable("id") long id) {
 
         return Result.success(codebookService.fetch(id));
     }
 
     @PostMapping("code")
-    @ApiOperation("新增字典项")
+    @Operation(summary = "新增字典项")
     public Result<Codebook> add(
-                                @ApiParam("字典项数据") @RequestBody Codebook codebook) {
+                                @Parameter(name = "字典项数据") @RequestBody Codebook codebook) {
 
         return Result.success(codebookService.save(codebook));
     }
 
     @PutMapping("code")
-    @ApiOperation("根据id更新字典项")
+    @Operation(summary = "根据id更新字典项")
     public Result<Void> edit(
-                             @ApiParam("字典项数据") @RequestBody Codebook codebook) {
+                             @Parameter(name = "字典项数据") @RequestBody Codebook codebook) {
 
         return codebookService.update(codebook, "index", "name", "description") ? Result.success() : Result.fail("更新码本失败");
     }
 
     @DeleteMapping("code/{id}")
-    @ApiOperation("禁用指定字典项")
+    @Operation(summary = "禁用指定字典项")
     public Result<Void> delete(
-                               @ApiParam("字典项id") @PathVariable("id") long id) {
+                               @Parameter(name = "字典项id") @PathVariable("id") long id) {
 
         return codebookService.update(Chain.make("disabled", true), Cnd.where("id", "=", id)) == 1
                                                                                                    ? Result.success()
@@ -78,10 +78,9 @@ public class CodebookController {
     }
 
     @PostMapping("code/vxe/save")
-    @ApiOperation("保存指定分组下的字典项变更情况")
+    @Operation(summary = "保存指定分组下的字典项变更情况")
     public Result<Void> vxeSave(
-                                @ApiParam("VXETable字典项数据情况") @RequestBody VXETableSaveDTO<Codebook> vxeData) {
-
+                                @Parameter(name = "VXETable字典项数据情况") @RequestBody VXETableSaveDTO<Codebook> vxeData) {
         return codebookService.vxeSave(vxeData)
                                                 ? Result.success()
                                                 : Result.fail("保存失败!");

@@ -4,8 +4,7 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder.Default;
 import lombok.Data;
@@ -33,27 +32,27 @@ import tech.riemann.demo.entity.DemoEntity;
 @Accessors(chain = true)
 @Table("t_group")
 @Comment("码本分组")
-@ApiModel(value = "Group", description = "码本分组")
+@Schema(name = "Group", description = "码本分组")
 public class Group extends DemoEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "分组唯一键", required = true)
+    @Schema(description = "分组唯一键", required = true)
     @Column("g_key")
     @Comment("分组唯一键")
     private String key;
 
-    @ApiModelProperty(value = "分组名称", required = true)
+    @Schema(description = "分组名称", required = true)
     @Column("g_name")
     @Comment("分组名称")
     private String name;
 
-    @ApiModelProperty(value = "分组描述")
+    @Schema(description = "分组描述")
     @Column("g_description")
     @Comment("分组描述")
     private String description;
 
-    @ApiModelProperty(value = "禁用标识", required = true)
+    @Schema(description = "禁用标识", required = true)
     @Column("g_disabled")
     @Comment("禁用标识")
     @Default
