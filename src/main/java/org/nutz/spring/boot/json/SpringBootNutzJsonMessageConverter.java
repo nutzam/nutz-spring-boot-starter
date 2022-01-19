@@ -59,15 +59,11 @@ public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageC
     public boolean canWrite(Type type, Class<?> clazz, MediaType mediaType) {
 
         /**
-         * 放过swagger
+         * 放过swagger,spring
          */
-        if (Pattern.matches(".*springfox.*", clazz.getName()) || Pattern.matches(".*springfox.*", type.getTypeName())) {
-            return false;
-        }
-        /**
-         * 放过spring 本身的各种玩意儿
-         */
-        if (Pattern.matches("org.springframework.*", clazz.getName())
+        if (Pattern.matches(".*springfox.*", clazz.getName())
+            || Pattern.matches(".*springfox.*", type.getTypeName())
+            || Pattern.matches("org.springframework.*", clazz.getName())
             || Pattern.matches("org.springframework.*", type.getTypeName())) {
             return false;
         }
