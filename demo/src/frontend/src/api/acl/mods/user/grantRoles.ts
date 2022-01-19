@@ -2,9 +2,9 @@
 /**
  * @desc 为指定用户设置角色
  */
-import { defaultSuccess, defaultError, http } from "@/plugins/axios";
+import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 
-export default async function (
+export default async function(
   id: number,
   roles: Array<number>,
 
@@ -16,16 +16,16 @@ export default async function (
   }: {
     data: void;
     ext: ObjectMap;
-    state: "SUCCESS" | "FAIL" | "EXCEPTION";
+    state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
     errors?: Array<string>;
   }) => void = defaultSuccess,
-  fail: (error: string) => void = defaultError
+  fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
-    method: "post",
+    method: 'post',
     url: `/user/${id}/grant/role`,
     data: roles,
   })
-    .then((data) => success(data as any))
-    .catch((error) => fail(error));
+    .then(data => success(data as any))
+    .catch(error => fail(error));
 }

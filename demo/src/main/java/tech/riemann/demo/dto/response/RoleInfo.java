@@ -2,8 +2,7 @@ package tech.riemann.demo.dto.response;
 
 import org.nutz.dao.entity.annotation.Column;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import tech.riemann.demo.entity.acl.Role;
@@ -13,10 +12,10 @@ import tech.riemann.demo.entity.acl.Role;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "RoleInfo", description = "角色信息")
+@Schema(name = "RoleInfo", description = "角色信息")
 public class RoleInfo extends Role {
     private static final long serialVersionUID = 1L;
     @Column("selected")
-    @ApiModelProperty("是否选中标识")
+    @Schema(description = "是否选中标识")
     boolean selected;
 }

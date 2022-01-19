@@ -6,8 +6,7 @@ import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import club.zhcs.auth.AuthUser;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,23 +33,23 @@ import tech.riemann.demo.entity.DemoEntity;
 @Accessors(chain = true)
 @Table("t_user")
 @Comment("用户")
-@ApiModel(value = "User", description = "用户")
+@Schema(name = "User", description = "用户")
 public class User extends DemoEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户名", required = true)
+    @Schema(description = "用户名", required = true)
     @Column("u_name")
     @Comment("用户名")
     @Name
     private String name;
 
-    @ApiModelProperty(value = "密码", required = true)
+    @Schema(description = "密码", required = true)
     @Column("u_password")
     @Comment("密码")
     private String password;
 
-    @ApiModelProperty(value = "手机号", required = true)
+    @Schema(description = "手机号", required = true)
     @Column("u_mobile")
     @Comment("手机号")
     private String mobile;

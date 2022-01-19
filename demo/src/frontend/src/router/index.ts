@@ -8,6 +8,16 @@ NProgress.configure({ showSpinner: false });
 
 const routes: Array<RouteConfig> = [
   {
+    path: "/wechat/login/qr",
+    name: "QRLogin",
+    component: () => import("../views/user/QRLogin.vue"),
+  },
+  {
+    path: "/wechat/login",
+    name: "QRLogin",
+    component: () => import("../views/user/WechatLogin.vue"),
+  },
+  {
     path: "/",
     redirect: "/user",
   },
