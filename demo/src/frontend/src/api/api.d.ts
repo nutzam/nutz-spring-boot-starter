@@ -10,3 +10,4 @@ declare type ObjectMap<
 /// <reference path="./acl/api.d.ts" />
 /// <reference path="./dictionary/api.d.ts" />
 /// <reference path="./login/api.d.ts" />
+/// <reference path="./wechat/api.d.ts" />

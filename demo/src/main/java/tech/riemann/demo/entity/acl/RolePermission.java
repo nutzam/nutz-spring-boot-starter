@@ -4,8 +4,7 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,27 +31,27 @@ import tech.riemann.demo.entity.DemoEntity;
 @Accessors(chain = true)
 @Table("t_role_permission")
 @Comment("角色权限关系表")
-@ApiModel(value = "RolePermission", description = "角色权限关系表")
+@Schema(name = "RolePermission", description = "角色权限关系表")
 public class RolePermission extends DemoEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "动作key", required = true)
+    @Schema(description = "动作key", required = true)
     @Column("rp_action_key")
     @Comment("动作key")
     private String actionKey;
 
-    @ApiModelProperty(value = "模块id", required = true)
+    @Schema(description = "模块id", required = true)
     @Column("rp_module_id")
     @Comment("模块id")
     private Long moduleId;
 
-    @ApiModelProperty(value = "模块key", required = true)
+    @Schema(description = "模块key", required = true)
     @Column("rp_module_key")
     @Comment("模块key")
     private String moduleKey;
 
-    @ApiModelProperty(value = "角色id", required = true)
+    @Schema(description = "角色id", required = true)
     @Column("rp_role_id")
     @Comment("角色id")
     private Long roleId;

@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import club.zhcs.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import tech.riemann.demo.entity.dictionary.Group;
 import tech.riemann.demo.service.dictionary.GroupService;
 
@@ -31,19 +31,19 @@ import tech.riemann.demo.service.dictionary.GroupService;
  * @since 2021-08-12
  */
 @RestController
-@Api(value = "Group", tags = {"码本分组模块"})
+@Schema(name = "Group", description = "码本分组模块")
 public class GroupController {
 
     @Autowired
     GroupService groupService;
 
     @GetMapping("groups")
-    @ApiOperation("分页加载字典分组")
+    @Operation(summary = "分页加载字典分组")
     public Result<Pagination<Group>> search(
-                                            @ApiParam("页面") @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                            @ApiParam("分页大小") @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
-                                            @ApiParam("状态筛选 true(启用)/false(禁用)/null(不过滤)") @RequestParam(value = "state", required = false) Boolean state,
-                                            @ApiParam("搜索关键词") @RequestParam(value = "key", required = false) String key) {
+                                            @Parameter(name = "页面") @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                            @Parameter(name = "分页大小") @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
+                                            @Parameter(name = "状态筛选 true(启用)/false(禁用)/null(不过滤)") @RequestParam(value = "state", required = false) Boolean state,
+                                            @Parameter(name = "搜索关键词") @RequestParam(value = "key", required = false) String key) {
 
         return Result.success(groupService.searchByKeyAndPage(Optional.ofNullable(key)
                                                                       .orElse(""),
@@ -57,33 +57,33 @@ public class GroupController {
     }
 
     @GetMapping("group/{id}")
-    @ApiOperation("获取指定字典分组")
+    @Operation(summary = "获取指定字典分组")
     public Result<Group> get(
-                             @ApiParam("字典分组id") @PathVariable("id") long id) {
+                             @Parameter(name = "字典分组id") @PathVariable("id") long id) {
 
         return Result.success(groupService.fetch(id));
     }
 
     @PostMapping("group")
-    @ApiOperation("新增字典分组")
+    @Operation(summary = "新增字典分组")
     public Result<Group> add(
-                             @ApiParam("字典分组数据") @RequestBody Group group) {
+                             @Parameter(name = "字典分组数据") @RequestBody Group group) {
 
         return Result.success(groupService.save(group));
     }
 
     @PutMapping("group")
-    @ApiOperation("根据id更新字典分组")
+    @Operation(summary = "根据id更新字典分组")
     public Result<Void> edit(
-                             @ApiParam("字典分组数据") @RequestBody Group group) {
+                             @Parameter(name = "字典分组数据") @RequestBody Group group) {
 
         return groupService.update(group, "name", "description") ? Result.success() : Result.fail("更新分组失败");
     }
 
     @DeleteMapping("group/{id}")
-    @ApiOperation("删除字典分组")
+    @Operation(summary = "删除字典分组")
     public Result<Void> delete(
-                               @ApiParam("字典分组id") @PathVariable("id") long id) {
+                               @Parameter(name = "字典分组id") @PathVariable("id") long id) {
 
         return groupService.update(Chain.make(Group.Fields.disabled, true), Cnd.where("id", "=", id)) == 1 ? Result.success() : Result.fail("删除分组失败");
     }

@@ -5,8 +5,7 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder.Default;
 import lombok.Data;
@@ -34,29 +33,29 @@ import tech.riemann.demo.entity.DemoEntity;
 @Accessors(chain = true)
 @Table("t_action")
 @Comment("功能动作")
-@ApiModel(value = "Action", description = "功能动作")
+@Schema(name = "Action", description = "功能动作")
 public class Action extends DemoEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "动作key", required = true)
+    @Schema(description = "动作key", required = true)
     @Column("a_key")
     @Comment("动作key")
     @Name
     private String key;
 
-    @ApiModelProperty(value = "是否内置标识", required = true)
+    @Schema(description = "是否内置标识", required = true)
     @Column("a_installed")
     @Comment("是否内置标识")
     @Default
     private Boolean installed = false;
 
-    @ApiModelProperty(value = "归属的模块id", required = true)
+    @Schema(description = "归属的模块id", required = true)
     @Column("a_module_id")
     @Comment("归属的模块id")
     private Long moduleId;
 
-    @ApiModelProperty(value = "动作名称", required = true)
+    @Schema(description = "动作名称", required = true)
     @Column("a_name")
     @Comment("动作名称")
     private String name;

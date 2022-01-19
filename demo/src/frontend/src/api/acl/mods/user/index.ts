@@ -2,16 +2,16 @@
 /**
  * @description 用户模块
  */
-import add from "./add";
-import edit from "./edit";
-import get from "./get";
-import remove from "./remove";
-import grant from "./grant";
-import grantInfo, { GrantInfoParams } from "./grantInfo";
-import roles from "./roles";
-import grantRoles from "./grantRoles";
-import permissions from "./permissions";
-import search, { SearchParams } from "./search";
+import add from './add';
+import edit from './edit';
+import get from './get';
+import remove from './remove';
+import grant from './grant';
+import grantInfo, { GrantInfoParams } from './grantInfo';
+import roles from './roles';
+import grantRoles from './grantRoles';
+import permissions from './permissions';
+import search, { SearchParams } from './search';
 
 export class UserApi {
   constructor(
@@ -26,10 +26,10 @@ export class UserApi {
       }: {
         data: acl.User;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public edit: (
@@ -43,10 +43,10 @@ export class UserApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public get: (
@@ -60,10 +60,10 @@ export class UserApi {
       }: {
         data: acl.User;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public remove: (
@@ -77,10 +77,10 @@ export class UserApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public grant: (
@@ -95,10 +95,10 @@ export class UserApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public grantInfo: (
@@ -113,10 +113,10 @@ export class UserApi {
       }: {
         data: Array<acl.ModuleInfo>;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public roles: (
@@ -130,10 +130,10 @@ export class UserApi {
       }: {
         data: Array<acl.RoleInfo>;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public grantRoles: (
@@ -148,10 +148,10 @@ export class UserApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public permissions: (
@@ -165,10 +165,10 @@ export class UserApi {
       }: {
         data: acl.PermissionInfo;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public search: (
@@ -181,11 +181,11 @@ export class UserApi {
       }: {
         data: acl.Pagination<acl.User>;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
-    ) => void
+      fail?: (error: string) => any,
+    ) => void,
   ) {}
 }
 

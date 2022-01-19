@@ -2598,6 +2598,7 @@
     "mods": [
       {
         "description": "码本数据模块",
+        "name": "codebook",
         "interfaces": [
           {
             "consumes": [
@@ -2880,11 +2881,11 @@
               }
             ]
           }
-        ],
-        "name": "codebook"
+        ]
       },
       {
         "description": "码本分组模块",
+        "name": "group",
         "interfaces": [
           {
             "consumes": [
@@ -3157,8 +3158,7 @@
               }
             ]
           }
-        ],
-        "name": "group"
+        ]
       }
     ],
     "name": "dictionary",
@@ -3166,6 +3166,7 @@
       {
         "description": "码本数据",
         "name": "Codebook",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3330,12 +3331,12 @@
             "description": "value",
             "required": true
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "码本分组",
         "name": "Group",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3458,11 +3459,21 @@
             "name": "updater",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "Pagination",
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "Group",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ],
         "properties": [
           {
             "dataType": {
@@ -3610,21 +3621,21 @@
             "name": "recordCount",
             "required": false
           }
-        ],
+        ]
+      },
+      {
+        "name": "Result",
         "templateArgs": [
           {
             "typeArgs": [],
-            "typeName": "Group",
+            "typeName": "Codebook",
             "isDefsType": true,
             "templateIndex": -1,
             "compileTemplateKeyword": "#/definitions/",
             "enum": [],
             "typeProperties": []
           }
-        ]
-      },
-      {
-        "name": "Result",
+        ],
         "properties": [
           {
             "dataType": {
@@ -3728,7 +3739,10 @@
             "name": "success",
             "required": false
           }
-        ],
+        ]
+      },
+      {
+        "name": "VXETableSaveDTO",
         "templateArgs": [
           {
             "typeArgs": [],
@@ -3739,10 +3753,7 @@
             "enum": [],
             "typeProperties": []
           }
-        ]
-      },
-      {
-        "name": "VXETableSaveDTO",
+        ],
         "properties": [
           {
             "dataType": {
@@ -3815,17 +3826,6 @@
             "name": "updateRecords",
             "description": "更新记录数据",
             "required": true
-          }
-        ],
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "Codebook",
-            "isDefsType": true,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
           }
         ]
       }
@@ -4162,6 +4162,556 @@
             "required": false
           }
         ]
+      }
+    ]
+  },
+  {
+    "mods": [
+      {
+        "description": "Social Login Controller",
+        "interfaces": [
+          {
+            "description": "获取网页授权地址(H5端,公众号),H5端通过此接口获取到授权地址,然后直接location跳转",
+            "name": "authUrl",
+            "method": "get",
+            "path": "/social/login/auth-url",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "scope",
+                "name": "scope",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [
+                    "'snsapi_base'",
+                    "'snsapi_userinfo'"
+                  ],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "state",
+                "name": "state",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "绑定用户",
+            "name": "bind",
+            "method": "post",
+            "path": "/social/login/bind",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "socialLoginBindDTO",
+                "name": "socialLoginBindDTO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "TieSocialLoginUserDataObject",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "获取扫码登录二维码选项信息,PC端调用此接口获取显示二维码参数,然后调用 var obj = new WxLogin({\r\n self_redirect:true,\r\n id:\"login_container\", \r\n appid: \"\", \r\n scope: \"\", \r\n redirect_uri: \"\",\r\n  state: \"\",\r\n style: \"\",\r\n href: \"\"\r\n });显示二维码",
+            "name": "qrOption",
+            "method": "get",
+            "path": "/social/login/qr-option",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "WxLogin",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "href",
+                "name": "href",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "id",
+                "name": "id",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "state",
+                "name": "state",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "用code进行oauth登录,各端根据前置操作获取到code调用此接口,如果已经绑定,返回token,如果没有绑定则返回openid",
+            "name": "oauth",
+            "method": "get",
+            "path": "/social/login/{channel}/oauth",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Result",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "授权渠道",
+                "name": "channel",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [
+                    "'MP'",
+                    "'MINIAPP'",
+                    "'WECHAT_SCAN'",
+                    "'WECHAT'"
+                  ],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "授权码",
+                "name": "code",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "socialLogin"
+      }
+    ],
+    "name": "wechat",
+    "baseClasses": [
+      {
+        "name": "Result",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "WxLogin",
+              "isDefsType": true,
+              "templateIndex": 0,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "data",
+            "description": "响应数据",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errors",
+            "description": "错误信息列表",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                },
+                {
+                  "typeArgs": [],
+                  "typeName": "object",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ObjectMap",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "ext",
+            "description": "响应扩展数据",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [
+                "'SUCCESS'",
+                "'FAIL'",
+                "'EXCEPTION'"
+              ],
+              "typeProperties": []
+            },
+            "name": "state",
+            "description": "响应状态",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "success",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "WxLogin",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ]
+      },
+      {
+        "name": "TieSocialLoginUserDataObject",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [
+                "'MP'",
+                "'MINIAPP'",
+                "'WECHAT_SCAN'",
+                "'WECHAT'"
+              ],
+              "typeProperties": []
+            },
+            "name": "channel",
+            "description": "渠道",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "code",
+            "description": "验证码",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "mobile",
+            "description": "手机号",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "openid",
+            "description": "openid",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "WxLogin",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "appid",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "href",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "redirect_uri",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "scope",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "self_redirect",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "state",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [
+                "'black'",
+                "'white'"
+              ],
+              "typeProperties": []
+            },
+            "name": "style",
+            "required": false
+          }
+        ],
+        "templateArgs": []
       }
     ]
   }

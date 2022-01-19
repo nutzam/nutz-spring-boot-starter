@@ -2,11 +2,11 @@
 /**
  * @description 码本分组模块
  */
-import add from "./add";
-import edit from "./edit";
-import get from "./get";
-import remove from "./remove";
-import search, { SearchParams } from "./search";
+import add from './add';
+import edit from './edit';
+import get from './get';
+import remove from './remove';
+import search, { SearchParams } from './search';
 
 export class GroupApi {
   constructor(
@@ -21,10 +21,10 @@ export class GroupApi {
       }: {
         data: dictionary.Group;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public edit: (
@@ -38,10 +38,10 @@ export class GroupApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public get: (
@@ -55,10 +55,10 @@ export class GroupApi {
       }: {
         data: dictionary.Group;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public remove: (
@@ -72,10 +72,10 @@ export class GroupApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public search: (
@@ -88,11 +88,11 @@ export class GroupApi {
       }: {
         data: dictionary.Pagination<dictionary.Group>;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
-    ) => void
+      fail?: (error: string) => any,
+    ) => void,
   ) {}
 }
 

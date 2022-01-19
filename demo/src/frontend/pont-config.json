@@ -15,6 +15,10 @@
     {
       "name": "dictionary",
       "originUrl": "http://127.0.0.1:8888/v2/api-docs?group=dictionary"
+    },
+    {
+      "name": "wechat",
+      "originUrl": "http://127.0.0.1:8888/v2/api-docs?group=wechat"
     }
   ]
 }

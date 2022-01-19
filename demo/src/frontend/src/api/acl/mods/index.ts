@@ -1,17 +1,17 @@
-import action, { ActionApi } from "./action";
+import action, { ActionApi } from './action';
 
-import module, { ModuleApi } from "./module";
+import module, { ModuleApi } from './module';
 
-import role, { RoleApi } from "./role";
+import role, { RoleApi } from './role';
 
-import user, { UserApi } from "./user";
+import user, { UserApi } from './user';
 
 export class AclApi {
   constructor(
     public action: ActionApi,
     public module: ModuleApi,
     public role: RoleApi,
-    public user: UserApi
+    public user: UserApi,
   ) {}
 }
 

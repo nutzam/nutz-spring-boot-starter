@@ -2,10 +2,10 @@
 /**
  * @description 功能动作模块
  */
-import add from "./add";
-import edit from "./edit";
-import get from "./get";
-import remove from "./remove";
+import add from './add';
+import edit from './edit';
+import get from './get';
+import remove from './remove';
 
 export class ActionApi {
   constructor(
@@ -20,10 +20,10 @@ export class ActionApi {
       }: {
         data: acl.Action;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public edit: (
@@ -37,10 +37,10 @@ export class ActionApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public get: (
@@ -54,10 +54,10 @@ export class ActionApi {
       }: {
         data: acl.Action;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
+      fail?: (error: string) => any,
     ) => void,
 
     public remove: (
@@ -71,11 +71,11 @@ export class ActionApi {
       }: {
         data: void;
         ext: ObjectMap;
-        state: "SUCCESS" | "FAIL" | "EXCEPTION";
+        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
         errors?: Array<string>;
       }) => any,
-      fail?: (error: string) => any
-    ) => void
+      fail?: (error: string) => any,
+    ) => void,
   ) {}
 }
 
