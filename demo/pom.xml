@@ -21,27 +21,7 @@
 	<repositories>
 		<repository>
 			<id>nutz</id>
-			<url>https://jfrog.nutz.cn/artifactory/jcenter</url>
-		</repository>
-		<repository>
-			<id>nutz-release-local</id>
-			<url>http://jfrog.nutz.cn/artifactory/libs-release-local/</url>
-		</repository>
-		<repository>
-			<id>nutz-snapshots</id>
-			<url>https://jfrog.nutz.cn/artifactory/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring</id>
-			<url>https://jfrog.nutz.cn/artifactory/spring</url>
-		</repository>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
+			<url>https://jfrog.nutz.cn/artifactory/public</url>
 		</repository>
 	</repositories>
 
