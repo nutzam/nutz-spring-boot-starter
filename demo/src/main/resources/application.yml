@@ -24,14 +24,10 @@ server:
     direct-buffers: true
 # nutz
 nutz:
-  ngrok:
-    client:      token: NWZCsotPInP_MjJojBs-4-
-      server: ngrok.kerbores.com
-      server-port: 4443
-      port: 8080
   json:
     enabled: true
     mode: compact
+    ignore-type: .*String.*
   dao:
     sql-template:
       enable: true
@@ -104,43 +100,40 @@ axe:
   global:
     exception:
       enabled: true
-  swagger:
-    docket:      auth: 
-        base-package: tech.riemann.demo.controller.auth
-        description: 登录认证模块
-        title: Auth
-      acl: 
-        base-package: tech.riemann.demo.controller.acl
-        description: Access Control Label 访问控制模块
-        title: ACL
-      dictionary: 
-        base-package: tech.riemann.demo.controller.dictionary
-        description: 统一数据字典管理模块
-        title: 数据字典
-      wechat: 
-        base-package: tech.riemann.demo.controller.wechat
-        description: 微信社会化登录
-        title: 社会化登录
-      all: 
-        base-package: tech.riemann.demo.controller
-    customer:
-      logo: http://image.kerbores.com/xsj/icon.png
-      title: NUTZ项目示例
-      url: https://www.riemann.tech/
-    title: ${spring.application.name}
-    description: 基于nutz的项目示例
-    
-    version: 1.0
+springdoc:
+  customer:
+    theme: feeling-blue
+    title: nutz-spring-boot-starter-demo
+    url: https://www.riemann.tech
+    config-url: /v3/api-docs/swagger-config
+  server:
+    url: http://localhost:8888
+    description: nutz-spring-boot-starter-demo
+  info:
+    title: nutz-spring-boot-starter-demo
+    description: nutz-spring-boot-starter-demo API接口文档
+    version: 1.0.0
+    terms-of-service: https://github.com/nutzam/nutz-spring-boot-starter
+    license:
+      name: Apache 2.0
+      url: http://www.apache.org/licenses/LICENSE-2.0
     contact:
-      email: kerbores@gmail.com
-      name: Kerbores
-      url: https://www.riemann.tech/
-    authorization:
-      key-name: Authorization
-wx:  mp:    app-id: wx6e4f32b9bfd64693
+      email: product@ipmt.online
+      name: nutz-spring-boot-starter-demo
+      url: https://www.riemann.tech
+  swagger-ui:
+    enabled: true
+  group-configs:
+  - group: default
+    packages-to-scan:
+    - tech.riemann.demo.controller
+  api-docs:
+    enabled: true
+    groups:
+      enabled: true
+wx:  miniapp:    appid: wxdd12f1e5067bb20b
+    secret: 526c34f3a2842082abfd36509639335c  mp:    app-id: wx6e4f32b9bfd64693
     secret: 7ec96826e905841e4912e8acdf5037ed
-  miniapp:    appid: wxdd12f1e5067bb20b
-    secret: 526c34f3a2842082abfd36509639335c
 wechat:  oauth:    mp:      domain: poly.ngrok.kerbores.com
       router: /wechat/login
     pc:      domain: poly.ngrok.kerbores.com
