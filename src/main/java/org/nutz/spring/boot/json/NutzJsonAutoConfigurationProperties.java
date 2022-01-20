@@ -1,5 +1,7 @@
 package org.nutz.spring.boot.json;
 
+import java.util.List;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import lombok.Data;
@@ -125,7 +127,18 @@ public class NutzJsonAutoConfigurationProperties {
     /**
      * 不使用nutzjson解析的类的全限定名正则表达式,比如 .*springfox.*
      */
+    @Deprecated(since = "2.6.3", forRemoval = true)
     private String ignoreType;
+
+    /**
+     * 不使用nutzjson解析的类的全限定名正则表达式,比如 .*springfox.*
+     */
+    private List<String> ignoreTypes;
+
+    /**
+     * 不使用nutzjson解析的uri正则表达式,比如 比如 .*api-docs.*
+     */
+    private List<String> ignoreUris;
 
     /**
      * 时区配置

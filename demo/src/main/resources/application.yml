@@ -27,7 +27,6 @@ nutz:
   json:
     enabled: true
     mode: compact
-    ignore-type: .*String.*
   dao:
     sql-template:
       enable: true

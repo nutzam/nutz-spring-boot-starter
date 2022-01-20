@@ -17,51 +17,55 @@ import org.springframework.http.converter.HttpMessageConverter;
  *
  */
 @Configuration
-@ConditionalOnClass({ Json.class })
+@ConditionalOnClass({Json.class})
 @EnableConfigurationProperties(NutzJsonAutoConfigurationProperties.class)
 public class NutzJsonMessageConverterAutoConfiguration {
 
-	@Bean
-	@ConditionalOnExpression("${nutz.json.enabled:true}")
-	public HttpMessageConverter<Object> springBootNutzJsonHttpMessageConverter(
-			NutzJsonAutoConfigurationProperties properties) {
-		JsonFormat format = null;
-		if (properties.getMode() != null) {// 直接模式设置
-			switch (properties.getMode()) {
-			case COMPACT:
-				format = JsonFormat.compact();
-				break;
-			case FORLOOK:
-				format = JsonFormat.forLook();
-				break;
-			case FULL:
-				format = JsonFormat.full();
-				break;
-			case NICE:
-				format = JsonFormat.nice();
-				break;
-			case TIDY:
-				format = JsonFormat.tidy();
-				break;
-			default:
-				format = JsonFormat.compact();
-				break;
-			}
-		} else {
-			format = Json.fromJson(JsonFormat.class, Json.toJson(properties));
-		}
-		if (Strings.isNotBlank(properties.getActived())) {
-			format.setActived(properties.getActived());
-		}
-		if (Strings.isNotBlank(properties.getLocked())) {
-			format.setLocked(properties.getLocked());
-		}
-		if (Strings.isNotBlank(properties.getDateFormat())) {
-			format.setDateFormat(properties.getDateFormat());
-		}
-		if (Strings.isNotBlank(properties.getTimeZone())) {
-			format.setTimeZone(TimeZone.getTimeZone(properties.getTimeZone()));
-		}
-		return new SpringBootNutzJsonMessageConverter().setFormat(format).setIgnoreType(properties.getIgnoreType());
-	}
+    @SuppressWarnings("deprecation")
+    @Bean
+    @ConditionalOnExpression("${nutz.json.enabled:true}")
+    public HttpMessageConverter<Object> springBootNutzJsonHttpMessageConverter(
+                                                                               NutzJsonAutoConfigurationProperties properties) {
+        JsonFormat format = null;
+        if (properties.getMode() != null) {// 直接模式设置
+            switch (properties.getMode()) {
+            case COMPACT:
+                format = JsonFormat.compact();
+                break;
+            case FORLOOK:
+                format = JsonFormat.forLook();
+                break;
+            case FULL:
+                format = JsonFormat.full();
+                break;
+            case NICE:
+                format = JsonFormat.nice();
+                break;
+            case TIDY:
+                format = JsonFormat.tidy();
+                break;
+            default:
+                format = JsonFormat.compact();
+                break;
+            }
+        } else {
+            format = Json.fromJson(JsonFormat.class, Json.toJson(properties));
+        }
+        if (Strings.isNotBlank(properties.getActived())) {
+            format.setActived(properties.getActived());
+        }
+        if (Strings.isNotBlank(properties.getLocked())) {
+            format.setLocked(properties.getLocked());
+        }
+        if (Strings.isNotBlank(properties.getDateFormat())) {
+            format.setDateFormat(properties.getDateFormat());
+        }
+        if (Strings.isNotBlank(properties.getTimeZone())) {
+            format.setTimeZone(TimeZone.getTimeZone(properties.getTimeZone()));
+        }
+        return new SpringBootNutzJsonMessageConverter().setFormat(format)
+                                                       .setIgnoreType(properties.getIgnoreType())
+                                                       .setIgnoreTypes(properties.getIgnoreTypes())
+                                                       .setignoreUris(properties.getIgnoreUris());
+    }
 }
