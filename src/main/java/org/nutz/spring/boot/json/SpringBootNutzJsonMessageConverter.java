@@ -3,12 +3,14 @@ package org.nutz.spring.boot.json;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
+import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,7 +25,9 @@ public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageC
 
     JsonFormat format = JsonFormat.compact();
 
-    Pattern ignoreType;
+    List<String> ignoreTypes = Lang.list(".*springfox.*", "org.springframework.*");
+
+    List<String> ignoreUris = Lang.list(".*/v3/api-docs.*");
 
     /**
      * 
@@ -35,7 +39,23 @@ public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageC
         if (Strings.isBlank(ignoreType)) {
             return this;
         }
-        this.ignoreType = Pattern.compile(ignoreType);
+        this.ignoreTypes.add(ignoreType);
+        return this;
+    }
+
+    public SpringBootNutzJsonMessageConverter setIgnoreTypes(List<String> ignoreTypes) {
+        if (Lang.isEmpty(ignoreTypes)) {
+            return this;
+        }
+        this.ignoreTypes.addAll(ignoreTypes);
+        return this;
+    }
+
+    public SpringBootNutzJsonMessageConverter setignoreUris(List<String> ignoreUris) {
+        if (Lang.isEmpty(ignoreUris)) {
+            return this;
+        }
+        this.ignoreUris.addAll(ignoreUris);
         return this;
     }
 
@@ -57,17 +77,10 @@ public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageC
 
     @Override
     public boolean canWrite(Type type, Class<?> clazz, MediaType mediaType) {
-
-        /**
-         * 放过swagger,spring
-         */
-        if (Pattern.matches(".*springfox.*", clazz.getName())
-            || Pattern.matches(".*springfox.*", type.getTypeName())
-            || Pattern.matches("org.springframework.*", clazz.getName())
-            || Pattern.matches("org.springframework.*", type.getTypeName())) {
+        if (ignoreTypes.stream().anyMatch(ignoreType -> Pattern.matches(ignoreType, clazz.getName()) || Pattern.matches(ignoreType, type.getTypeName()))) {
             return false;
         }
-        return ignoreType == null || !ignoreType.matcher(clazz.getName()).matches();
+        return ignoreUris.stream().allMatch(ignoreURI -> !Pattern.matches(ignoreURI, request.getRequestURI()));
     }
 
     /*
