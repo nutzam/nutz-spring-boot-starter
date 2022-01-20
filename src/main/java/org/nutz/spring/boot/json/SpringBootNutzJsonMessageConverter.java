@@ -4,6 +4,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +26,9 @@ public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageC
 
     JsonFormat format = JsonFormat.compact();
 
-    List<String> ignoreTypes = Lang.list(".*springfox.*", "org.springframework.*");
+    Set<String> ignoreTypes = Lang.set(".*springfox.*", "org.springframework.*");
 
-    List<String> ignoreUris = Lang.list(".*/v3/api-docs.*");
+    Set<String> ignoreUris = Lang.set(".*/v3/api-docs.*");
 
     /**
      * 
