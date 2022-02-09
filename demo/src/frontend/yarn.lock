@@ -9948,15 +9948,15 @@ vxe-table-plugin-antd@^1.11.3:
   resolved "https://registry.npmmirror.com/vxe-table-plugin-antd/download/vxe-table-plugin-antd-1.11.3.tgz#e31c09d1e060b1f4b61af9d061f373a6413ec547"
   integrity sha1-4xwJ0eBgsfS2GvnQYfNzpkE+xUc=
 
-vxe-table-plugin-export-xlsx@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.nlark.com/vxe-table-plugin-export-xlsx/download/vxe-table-plugin-export-xlsx-2.2.1.tgz#7eba669bd71b7e469b3c9e4d368d98626b837894"
-  integrity sha1-frpmm9cbfkabPJ5NNo2YYmuDeJQ=
+vxe-table-plugin-export-xlsx@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.npmmirror.com/vxe-table-plugin-export-xlsx/-/vxe-table-plugin-export-xlsx-2.2.2.tgz#d3cb80193973095db9ac758dd9902c81792a9ae7"
+  integrity sha512-b6Z7LI8q7rXe7ZMuH9gr9JQimZ4a9QUqyh7/HPHm6NEtyEhYiNjd0FH9JorhXRaQEfOyuAUu0tiK6rOAEFvYXg==
 
-vxe-table@^3.3.15:
-  version "3.3.15"
-  resolved "https://registry.npmmirror.com/vxe-table/download/vxe-table-3.3.15.tgz?cache=0&sync_timestamp=1634745501988&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fvxe-table%2Fdownload%2Fvxe-table-3.3.15.tgz#be86b45fcc7eecddce38859fd57d04796b273959"
-  integrity sha1-voa0X8x+7N3OOIWf1X0EeWsnOVk=
+vxe-table@^3.4.15:
+  version "3.4.15"
+  resolved "https://registry.npmmirror.com/vxe-table/-/vxe-table-3.4.15.tgz#001a9084c155ae1c6c29b24c64a53b9595cc5301"
+  integrity sha512-F1ioMlpGWsW8gRXFk5R0JH3iDaOZgJY4SCfRU18Dp8hTT8I++h7TdqmbZ0yibmxUs3rOCf2xdJGA7EGIjZMtEA==
 
 warning@^4.0.0:
   version "4.0.3"
@@ -10235,10 +10235,10 @@ ws@^6.0.0, ws@^6.2.1:
   dependencies:
     async-limiter "~1.0.0"
 
-xe-utils@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.npmmirror.com/xe-utils/download/xe-utils-3.4.0.tgz#b5b52990858298e815763c46bada5741ebab15ed"
-  integrity sha1-tbUpkIWCmOgVdjxGutpXQeurFe0=
+xe-utils@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.npmmirror.com/xe-utils/-/xe-utils-3.5.4.tgz#d4335633fede280c68c1c0c9a4c8f3a533cfd831"
+  integrity sha512-oH7VOgvHv34pn198dhKPVKnuEHV22Q06YpCTVnAS3JuutylmZj/rtJGvn0BxxWQ37w2LgCknoebLA4uIGXwFtw==
 
 xmlchars@^2.2.0:
   version "2.2.0"

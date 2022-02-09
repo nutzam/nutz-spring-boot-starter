@@ -69,7 +69,7 @@ public class SocialLoginController {
     @GetMapping("auth-url")
     @Operation(summary = "获取网页授权地址(H5端,公众号),H5端通过此接口获取到授权地址,然后直接location跳转")
     public Result<String> authUrl(@RequestParam("state") String state,
-                                  @RequestParam(required = false, value = "scope", defaultValue = "snsapi_base") @Parameter(name = "scope") String scope) {
+                                  @RequestParam(required = false, value = "scope", defaultValue = "snsapi_base") @Parameter(description = "scope") String scope) {
         if (!Strings.equals(scope, "snsapi_base") && !Strings.equals(scope, "snsapi_userinfo")) {
             throw Lang.makeThrow("参数异常,scope => %s ,allowableValues are 'snsapi_base' and 'snsapi_userinfo'", scope);
         }
@@ -100,8 +100,8 @@ public class SocialLoginController {
 
     @GetMapping("{channel}/oauth")
     @Operation(summary = "用code进行oauth登录,各端根据前置操作获取到code调用此接口,如果已经绑定,返回token,如果没有绑定则返回openid")
-    public Result<String> oauth(@Parameter(name = "授权码", required = true) @RequestParam("code") String code,
-                                @Parameter(name = "授权渠道", required = true) @PathVariable("channel") Channel channel)
+    public Result<String> oauth(@Parameter(description = "授权码", required = true) @RequestParam("code") String code,
+                                @Parameter(description = "授权渠道", required = true) @PathVariable("channel") Channel channel)
             throws WxErrorException {
         if (channel == Channel.MINIAPP) {
             WxMaJscode2SessionResult result = wxMaService.jsCode2SessionInfo(code);
