@@ -19,7 +19,7 @@ import club.zhcs.Result;
 import club.zhcs.auth.PasswordUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import tech.riemann.demo.dto.response.ModuleInfo;
 import tech.riemann.demo.dto.response.PermissionInfo;
 import tech.riemann.demo.dto.response.RoleInfo;
@@ -30,7 +30,7 @@ import tech.riemann.demo.service.acl.UserService;
  * @author Kerbores(kerbores@gmail.com)
  */
 @RestController
-@Schema(name = "User", description = "用户模块")
+@Tag(name = "User", description = "用户模块")
 public class UserController {
 
     @Autowired
@@ -39,9 +39,9 @@ public class UserController {
     @GetMapping("users")
     @Operation(summary = "分页查询用户")
     public Result<Pagination<User>> search(
-                                           @Parameter(name = "页面") @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                           @Parameter(name = "分页大小") @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
-                                           @Parameter(name = "搜索关键词") @RequestParam(value = "key", required = false) String key) {
+                                           @Parameter(description = "页面") @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                           @Parameter(description = "分页大小") @RequestParam(value = "size", required = false, defaultValue = "15") int pageSize,
+                                           @Parameter(description = "搜索关键词") @RequestParam(value = "key", required = false) String key) {
 
         return Result.success(userService.searchByKeyAndPage(
                                                              Optional.ofNullable(key).orElse(""),
@@ -55,8 +55,8 @@ public class UserController {
     @GetMapping("user/{id}/grant/info")
     @Operation(summary = "根据id获取指定用户在指定模块下的授权情况")
     public Result<List<ModuleInfo>> grantInfo(
-                                              @Parameter(name = "用户id") @PathVariable("id") long id,
-                                              @Parameter(name = "系统功能id数组") @RequestParam(value = "mids", required = false, defaultValue = "-1") Long[] moduleIds) {
+                                              @Parameter(description = "用户id") @PathVariable("id") long id,
+                                              @Parameter(description = "系统功能id数组") @RequestParam(value = "mids", required = false, defaultValue = "-1") Long[] moduleIds) {
 
         return Result.success(userService.actionInfo(id, moduleIds).getModules());
     }
@@ -64,7 +64,7 @@ public class UserController {
     @GetMapping("user/{id}/grant/role")
     @Operation(summary = "获取指定用户的角色授权")
     public Result<List<RoleInfo>> roles(
-                                        @Parameter(name = "用户id") @PathVariable("id") long userId) {
+                                        @Parameter(description = "用户id") @PathVariable("id") long userId) {
 
         return Result.success(userService.rolePoweredInfoByUserId(userId));
     }
@@ -72,8 +72,8 @@ public class UserController {
     @PostMapping("user/{id}/grant/role")
     @Operation(summary = "为指定用户设置角色")
     public Result<Void> grantRoles(
-                                   @Parameter(name = "用户id") @PathVariable("id") long id,
-                                   @Parameter(name = "角色列表") @RequestBody List<Long> roles) {
+                                   @Parameter(description = "用户id") @PathVariable("id") long id,
+                                   @Parameter(description = "角色列表") @RequestBody List<Long> roles) {
 
         return userService.grantRole(id, roles) ? Result.success() : Result.fail("设置角色失败");
     }
@@ -81,8 +81,8 @@ public class UserController {
     @PostMapping("user/{id}/grant")
     @Operation(summary = "为指定用户授权")
     public Result<Void> grant(
-                              @Parameter(name = "用户id") @PathVariable("id") long id,
-                              @Parameter(name = "待授权信息(moduleKey.actionKey)") @RequestBody List<String> actionInfos) {
+                              @Parameter(description = "用户id") @PathVariable("id") long id,
+                              @Parameter(description = "待授权信息(moduleKey.actionKey)") @RequestBody List<String> actionInfos) {
 
         return userService.grant(id, actionInfos) ? Result.success() : Result.fail("授权失败");
     }
@@ -90,7 +90,7 @@ public class UserController {
     @GetMapping("user/{id}/permissions")
     @Operation(summary = "获取指定用户的授权情况")
     public Result<PermissionInfo> permissions(
-                                              @Parameter(name = "用户id") @PathVariable("id") long id) {
+                                              @Parameter(description = "用户id") @PathVariable("id") long id) {
 
         return Result.success(userService.permissionInfo(id));
     }
@@ -98,7 +98,7 @@ public class UserController {
     @GetMapping("user/{id}")
     @Operation(summary = "获取用户详情")
     public Result<User> get(
-                            @Parameter(name = "用户id") @PathVariable("id") long id) {
+                            @Parameter(description = "用户id") @PathVariable("id") long id) {
 
         return Result.success(userService.fetch(id));
     }
@@ -106,7 +106,7 @@ public class UserController {
     @PostMapping("user")
     @Operation(summary = "创建用户")
     public Result<User> add(
-                            @Parameter(name = "用户数据") @Validated @RequestBody User user) {
+                            @Parameter(description = "用户数据") @Validated @RequestBody User user) {
         user.setPassword(PasswordUtils.randomSaltEncode(user.getPassword()));
         return Result.success(userService.save(user));
     }
@@ -114,13 +114,13 @@ public class UserController {
     @PutMapping("user")
     @Operation(summary = "根据id更新用户")
     public Result<Void> edit(
-                             @Parameter(name = "用户数据") @Validated @RequestBody User user) {
+                             @Parameter(description = "用户数据") @Validated @RequestBody User user) {
         return userService.update(user, "name", "mobile") ? Result.success() : Result.fail("更新用户失败");
     }
 
     @DeleteMapping("user/{id}")
     @Operation(summary = "删除用户")
-    public Result<Void> delete(@Parameter(name = "用户id") @PathVariable("id") long id) {
+    public Result<Void> delete(@Parameter(description = "用户id") @PathVariable("id") long id) {
         return userService.delete(id) == 1 ? Result.success() : Result.fail("删除用户失败");
     }
 

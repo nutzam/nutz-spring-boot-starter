@@ -13,7 +13,7 @@ management:
           - '*'
 # server
 server:
-  port: 8888
+  port: 7777
   http2:
     enabled: true
   undertow:

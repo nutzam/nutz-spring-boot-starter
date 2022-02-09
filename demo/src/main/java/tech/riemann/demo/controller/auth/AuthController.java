@@ -12,14 +12,14 @@ import club.zhcs.auth.AuthService.LoginDto;
 import club.zhcs.auth.AuthUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
  * @author kerbores
  *
  */
 @RestController
-@Schema(name = "Login", description = "登录认证模块")
+@Tag(name = "Login", description = "登录认证模块")
 @RequestMapping("auth")
 public class AuthController {
 
@@ -29,8 +29,8 @@ public class AuthController {
     @PostMapping("login")
     @Operation(summary = "用户登录")
     public Result<AuthUser> login(
-                                  @Parameter(name = "用户名", required = true) @RequestParam(value = "user", required = true) String user,
-                                  @Parameter(name = "密码", required = true) @RequestParam(value = "password", required = true) String password) {
+                                  @Parameter(description = "用户名", required = true) @RequestParam(value = "user", required = true) String user,
+                                  @Parameter(description = "密码", required = true) @RequestParam(value = "password", required = true) String password) {
 
         return Result.success(authService.login(new LoginDto(user, password)));
     }
