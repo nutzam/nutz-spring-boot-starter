@@ -69,7 +69,7 @@ public class GroupController {
     public Result<Group> add(
                              @Parameter(description = "字典分组数据") @RequestBody Group group) {
 
-        return Result.success(groupService.save(group));
+        return Result.success(groupService.insert(group));
     }
 
     @PutMapping("group")

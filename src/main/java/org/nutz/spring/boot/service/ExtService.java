@@ -54,7 +54,7 @@ public interface ExtService<T extends Serializable> {
      * 
      * @return 泛型class
      */
-    Class<T> getEntityClass();
+    Class<T> getEntityType();
 
     /**
      * 根据条件删除
@@ -108,7 +108,7 @@ public interface ExtService<T extends Serializable> {
      *            待保存实体
      * @return 保存后的实体, 根据配置可能将产生 id 等其他属性
      */
-    default T save(T t) {
+    default T insert(T t) {
         return dao().insert(t);
     }
 
@@ -120,7 +120,7 @@ public interface ExtService<T extends Serializable> {
      * @return 存入后的数据列表,结果返回 @see {@link Dao#fastInsert(Object)}
      * 
      */
-    default List<T> save(List<T> ts) {
+    default List<T> insert(List<T> ts) {
         return dao().fastInsert(ts);
     }
 
@@ -249,7 +249,7 @@ public interface ExtService<T extends Serializable> {
      * @return 对象列表
      */
     default List<T> list(Condition condition, int currentPage, int pageSize) {
-        return dao().query(getEntityClass(), condition, dao().createPager(currentPage, pageSize));
+        return dao().query(getEntityType(), condition, dao().createPager(currentPage, pageSize));
     }
 
     /**
@@ -273,7 +273,7 @@ public interface ExtService<T extends Serializable> {
      * @return 对象列表
      */
     default List<T> list(Sql sql) {
-        return list(sql, getEntityClass());
+        return list(sql, getEntityType());
     }
 
     /**
@@ -330,7 +330,7 @@ public interface ExtService<T extends Serializable> {
      * @return 单个对象
      */
     default T fetchByField(String field, Object value) {
-        return dao().fetch(getEntityClass(), Cnd.where(field, "=", value));
+        return dao().fetch(getEntityType(), Cnd.where(field, "=", value));
     }
 
     /**
@@ -354,7 +354,7 @@ public interface ExtService<T extends Serializable> {
      * @return 数据对象
      */
     default T fetch(Sql sql) {
-        return fetch(sql, getEntityClass());
+        return fetch(sql, getEntityType());
     }
 
     /**
@@ -743,79 +743,101 @@ public interface ExtService<T extends Serializable> {
     default Sql excute(Sql sql) {
         return dao().execute(sql);
     }
-    
+
     /**
      * 最大值
-     * @param field 字段
-     * @param condition 条件
+     * 
+     * @param field
+     *            字段
+     * @param condition
+     *            条件
      * @return 满足条件的字段最大值
      */
-    default int max(String field,Cnd condition) {
-    	return dao().func(getEntityClass(), "max", field,condition);
+    default int max(String field, Cnd condition) {
+        return dao().func(getEntityType(), "max", field, condition);
     }
-    
+
     /**
      * 最小值
-     * @param field 字段
-     * @param condition 条件
+     * 
+     * @param field
+     *            字段
+     * @param condition
+     *            条件
      * @return 满足条件的字段最小值
      */
-    default int min(String field,Cnd condition) {
-    	return dao().func(getEntityClass(), "min", field,condition);
+    default int min(String field, Cnd condition) {
+        return dao().func(getEntityType(), "min", field, condition);
     }
-    
+
     /**
      * 平均值
-     * @param field 字段
-     * @param condition 条件
+     * 
+     * @param field
+     *            字段
+     * @param condition
+     *            条件
      * @return 满足条件的字段平均值
      */
-    default int avg(String field,Cnd condition) {
-    	return dao().func(getEntityClass(), "avg", field,condition);
+    default int avg(String field, Cnd condition) {
+        return dao().func(getEntityType(), "avg", field, condition);
     }
-    
+
     /**
      * 求和
-     * @param field 字段
-     * @param condition 条件
+     * 
+     * @param field
+     *            字段
+     * @param condition
+     *            条件
      * @return 满足条件的字段求和值
      */
-    default int sum(String field,Cnd condition) {
-    	return dao().func(getEntityClass(), "sum", field,condition);
+    default int sum(String field, Cnd condition) {
+        return dao().func(getEntityType(), "sum", field, condition);
     }
-    
+
     /**
      * 最大值
-     * @param field 字段
+     * 
+     * @param field
+     *            字段
      * @return 字段最大值
      */
     default int max(String field) {
-    	return max(field, null);
+        return max(field, null);
     }
+
     /**
      * 最小值
-     * @param field 字段
+     * 
+     * @param field
+     *            字段
      * @return 字段最小值
      */
     default int min(String field) {
-    	return min(field, null);
+        return min(field, null);
     }
-    
+
     /**
      * 平均值
-     * @param field 字段
+     * 
+     * @param field
+     *            字段
      * @return 字段平均值
      */
     default int avg(String field) {
-    	return avg(field, null);
+        return avg(field, null);
     }
-    
+
     /**
      * 求和
-     * @param field 字段
+     * 
+     * @param field
+     *            字段
      * @return 字段求和值
      */
     default int sum(String field) {
-    	return sum(field, null);
+        return sum(field, null);
     }
+
 }

@@ -21,4 +21,13 @@ public class NameBaseService<T extends Entity> extends NameEntityService<T> impl
         super.setDao(dao);
     }
 
+    /**
+     * @return
+     * @see org.nutz.spring.boot.service.ExtService#getEntityType()
+     */
+    @Override
+    public Class<T> getEntityType() {
+        return getEntityClass();
+    }
+
 }

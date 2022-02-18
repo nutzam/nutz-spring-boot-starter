@@ -21,4 +21,13 @@ public class IdBaseService<T extends IdEntity> extends IdEntityService<T> implem
         super.setDao(dao);
     }
 
+    /**
+     * @return
+     * @see org.nutz.spring.boot.service.ExtService#getEntityType()
+     */
+    @Override
+    public Class<T> getEntityType() {
+        return getEntityClass();
+    }
+
 }
