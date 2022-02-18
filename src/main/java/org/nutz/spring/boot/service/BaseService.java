@@ -33,4 +33,13 @@ public class BaseService<T extends Entity> extends EntityService<T> implements E
         super.setDao(dao);
     }
 
+    /**
+     * @return
+     * @see org.nutz.spring.boot.service.ExtService#getEntityType()
+     */
+    @Override
+    public Class<T> getEntityType() {
+        return getEntityClass();
+    }
+
 }
