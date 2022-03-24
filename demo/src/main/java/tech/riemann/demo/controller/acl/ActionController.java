@@ -35,7 +35,7 @@ public class ActionController {
     @PostMapping("action")
     @Operation(summary = "新增功能动作")
     public Result<Action> add(@Parameter(description = "功能动作数据") @RequestBody Action action) {
-        return Result.success(actionService.insert(action));
+        return Result.success(actionService.save(action));
     }
 
     @PutMapping("action")

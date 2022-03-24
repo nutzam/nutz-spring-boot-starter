@@ -108,7 +108,7 @@ public class UserController {
     public Result<User> add(
                             @Parameter(description = "用户数据") @Validated @RequestBody User user) {
         user.setPassword(PasswordUtils.randomSaltEncode(user.getPassword()));
-        return Result.success(userService.insert(user));
+        return Result.success(userService.save(user));
     }
 
     @PutMapping("user")
