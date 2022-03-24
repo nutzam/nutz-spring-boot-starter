@@ -132,11 +132,11 @@ public class SocialLoginController {
         User user = userService.fetch(Cnd.where(User.Fields.mobile, "=", socialLoginBindDTO.getMobile()));
 
         // 绑定
-        loginChannelService.insert(LoginChannel.builder()
-                                               .userId(user.getId())
-                                               .channel(socialLoginBindDTO.getChannel())
-                                               .openid(socialLoginBindDTO.getOpenid())
-                                               .build());
+        loginChannelService.save(LoginChannel.builder()
+                                             .userId(user.getId())
+                                             .channel(socialLoginBindDTO.getChannel())
+                                             .openid(socialLoginBindDTO.getOpenid())
+                                             .build());
 
         return Result.success(user.toUser().getToken());
     }

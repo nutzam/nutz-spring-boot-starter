@@ -224,30 +224,30 @@ public class UserService extends IdNameBaseService<User> {
         User suUser = fetch(su);
         // 用户
         if (suUser == null) {
-            suUser = insert(User.builder()
-                                .name(su)
-                                .mobile(configurationProperties.getMobile())
-                                .password(PasswordUtils.randomSaltEncode(configurationProperties.getCypher()))
-                                .build());
+            suUser = save(User.builder()
+                              .name(su)
+                              .mobile(configurationProperties.getMobile())
+                              .password(PasswordUtils.randomSaltEncode(configurationProperties.getCypher()))
+                              .build());
         }
         // 角色
         Role adminRole = roleService.fetch(admin);
         if (adminRole == null) {
-            adminRole = roleService.insert(Role.builder()
-                                               .key(admin)
-                                               .name(configurationProperties.getAdmin().getName())
-                                               .description(configurationProperties.getAdmin().getDescription())
-                                               .build());
+            adminRole = roleService.save(Role.builder()
+                                             .key(admin)
+                                             .name(configurationProperties.getAdmin().getName())
+                                             .description(configurationProperties.getAdmin().getDescription())
+                                             .build());
         }
         final long adminRoleId = adminRole.getId();
         Lang.list(InstalledModule.values()).stream().forEach(module -> {
             if (moduleService.fetch(module.getKey()) == null) {
-                moduleService.insert(module.toModule());
+                moduleService.save(module.toModule());
             }
         });
         Lang.list(InstalledAction.values()).stream().forEach(action -> {
             if (actionService.fetch(action.getKey()) == null) {
-                actionService.insert(action.toAction());
+                actionService.save(action.toAction());
             }
         });
 
@@ -256,20 +256,20 @@ public class UserService extends IdNameBaseService<User> {
             if (rolePermissionService.fetch(Cnd.where("actionKey", "=", action.getKey())
                                                .and("roleId", "=", adminRoleId)
                                                .and("moduleId", "=", module.getId())) == null) {
-                rolePermissionService.insert(RolePermission.builder()
-                                                           .actionKey(action.getKey())
-                                                           .moduleId(module.getId())
-                                                           .moduleKey(module.getKey())
-                                                           .roleId(adminRoleId)
-                                                           .build());
+                rolePermissionService.save(RolePermission.builder()
+                                                         .actionKey(action.getKey())
+                                                         .moduleId(module.getId())
+                                                         .moduleKey(module.getKey())
+                                                         .roleId(adminRoleId)
+                                                         .build());
             }
         }));
         // 角色用户关系
         if (userRoleService.fetch(Cnd.where("roleId", "=", adminRole.getId()).and(USER_ID, "=", suUser.getId())) == null) {
-            userRoleService.insert(UserRole.builder()
-                                           .userId(suUser.getId())
-                                           .roleId(adminRoleId)
-                                           .build());
+            userRoleService.save(UserRole.builder()
+                                         .userId(suUser.getId())
+                                         .roleId(adminRoleId)
+                                         .build());
         }
 
     }

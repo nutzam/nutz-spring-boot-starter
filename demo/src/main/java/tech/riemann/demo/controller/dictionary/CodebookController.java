@@ -56,7 +56,7 @@ public class CodebookController {
     public Result<Codebook> add(
                                 @Parameter(description = "字典项数据") @RequestBody Codebook codebook) {
 
-        return Result.success(codebookService.insert(codebook));
+        return Result.success(codebookService.save(codebook));
     }
 
     @PutMapping("code")
