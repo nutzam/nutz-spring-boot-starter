@@ -34,7 +34,7 @@ public interface EntityService<T extends Serializable> extends ExtService<T> {
 
     @Override
     public default Class<T> getEntityType() {
-        Class<T> entryClass = (Class<T>) Mirror.getTypeParam(getClass(), 1);
+        Class<T> entryClass = Mirror.getTypeParam(getClass(), 1);
         Mirror<T> mirror = Mirror.me(entryClass);
         return mirror.getType();
     }
