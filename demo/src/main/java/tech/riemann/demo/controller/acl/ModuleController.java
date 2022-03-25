@@ -63,7 +63,7 @@ public class ModuleController {
     @PostMapping("module")
     @Operation(summary = "创建系统功能")
     public Result<Module> add(@Parameter(description = "系统功能数据") @RequestBody Module module) {
-        return Result.success(moduleService.save(module));
+        return Result.success(moduleService.insert(module));
     }
 
     @PutMapping("module")
