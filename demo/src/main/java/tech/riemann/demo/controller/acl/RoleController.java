@@ -89,7 +89,7 @@ public class RoleController {
     public Result<Role> add(
                             @Parameter(description = "角色数据") @RequestBody Role role) {
 
-        return Result.success(roleService.save(role));
+        return Result.success(roleService.insert(role));
     }
 
     @PutMapping("role")
