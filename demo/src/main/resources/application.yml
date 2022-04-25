@@ -59,9 +59,9 @@ spring:
   datasource:
 # 数据源
     druid:
-      url: jdbc:mysql://10.100.100.180:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://10.100.110.247:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: thunder
-      password: PBFDDPZHSeCeDBM3
+      password: XPBtRah4YxTKfadA
       driver-class-name: com.mysql.cj.jdbc.Driver
       filters: stat,wall,log4j2
       initial-size: 10
