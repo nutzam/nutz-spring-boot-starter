@@ -2,24 +2,32 @@ package org.nutz.spring.boot.json;
 
 import java.util.TimeZone;
 
+import javax.annotation.PostConstruct;
+
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
+import org.nutz.json.handler.JsonLocalDateLikeHandler;
 import org.nutz.lang.Strings;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 
 /**
  * @author kerbores(kerbores@gmail.com)
  *
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass({Json.class})
 @EnableConfigurationProperties(NutzJsonAutoConfigurationProperties.class)
 public class NutzJsonMessageConverterAutoConfiguration {
+
+    @PostConstruct
+    public void init() {
+        Json.addTypeHandler(new JsonLocalDateLikeHandler());
+    }
 
     @SuppressWarnings("deprecation")
     @Bean

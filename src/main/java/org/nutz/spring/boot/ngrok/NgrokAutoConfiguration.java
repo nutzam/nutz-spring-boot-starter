@@ -3,18 +3,18 @@ package org.nutz.spring.boot.ngrok;
 import org.nutz.plugins.ngrok.client.NgrokClient;
 import org.nutz.plugins.ngrok.server.NgrokServer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author kerbores(kerbores@gmail.com)
  *
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(NgrokClient.class)
 @EnableConfigurationProperties(NgrokAutoConfigurationProperties.class)
 public class NgrokAutoConfiguration {

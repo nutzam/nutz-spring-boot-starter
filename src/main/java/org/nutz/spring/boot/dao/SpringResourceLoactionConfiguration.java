@@ -1,13 +1,13 @@
 package org.nutz.spring.boot.dao;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author wkipy
  *
  */
-@Configuration
+@AutoConfiguration
 public class SpringResourceLoactionConfiguration {
 
     @Bean

@@ -11,14 +11,14 @@ import org.nutz.log.impl.SystemLogAdapter;
 import org.nutz.plugin.SimplePluginManager;
 import org.nutz.spring.boot.log.NutzLogConfigurationProperties.Type;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author kerbores
  *
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties(NutzLogConfigurationProperties.class)
 public class NutzLogAutoConfiguration {
 
