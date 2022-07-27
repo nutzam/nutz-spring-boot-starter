@@ -99,6 +99,9 @@ axe:
   global:
     exception:
       enabled: true
+      listener:
+        wechat:
+          webhook: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8ca09128-8613-4436-9367-e0dc03a17003
 springdoc:
   customer:
     theme: feeling-blue

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import club.zhcs.Result;
+import club.zhcs.apm.APM;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,6 +22,7 @@ import tech.riemann.demo.service.acl.ActionService;
  */
 @RestController
 @Tag(name = "Action", description = "功能动作模块")
+@APM
 public class ActionController {
 
     @Autowired
