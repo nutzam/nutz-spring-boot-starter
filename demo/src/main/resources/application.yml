@@ -34,6 +34,7 @@ nutz:
       add-column: true
       basepackage:
       - tech.riemann.demo.entity
+      - BOOT-INF.classes.tech.riemann.demo.entity
       check-index: true
       create: true
       delete-column: false
@@ -58,9 +59,9 @@ spring:
   datasource:
 # 数据源
     druid:
-      url: jdbc:mysql://10.100.130.99:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://10.100.130.91:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: thunder
-      password: AcxZ2THacrx6zRmH
+      password: ZhaXcYaabZRKx5zw
       driver-class-name: com.mysql.cj.jdbc.Driver
       filters: stat,wall,log4j2
       initial-size: 10
