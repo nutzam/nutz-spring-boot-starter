@@ -40,7 +40,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<nutz.version>1.r.69.20210929</nutz.version>
+		<nutz.version>1.r.69.v20220703</nutz.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -95,7 +95,7 @@
 		<dependency>
 			<groupId>org.nutz</groupId>
 			<artifactId>nutz-plugins-ngrok</artifactId>
-			<version>1.r.68.v20201205</version>
+			<version>1.r.69.v20220215</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
