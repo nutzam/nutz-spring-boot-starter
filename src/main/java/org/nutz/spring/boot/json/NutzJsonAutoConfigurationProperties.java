@@ -129,12 +129,6 @@ public class NutzJsonAutoConfigurationProperties {
     /**
      * 不使用nutzjson解析的类的全限定名正则表达式,比如 .*springfox.*
      */
-    @Deprecated
-    private String ignoreType;
-
-    /**
-     * 不使用nutzjson解析的类的全限定名正则表达式,比如 .*springfox.*
-     */
     private List<String> ignoreTypes;
 
     /**

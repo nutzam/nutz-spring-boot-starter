@@ -12,40 +12,40 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "nutz.ngrok")
 public class NgrokAutoConfigurationProperties {
 
-	Server server = new Server();
+    Server server = new Server();
 
-	Client client = new Client();
+    Client client = new Client();
 
-	@Data
-	public class Server {
-		boolean enabled = false;
-		String sslJksPassword = "123456";
-		String sslJksPath;
-		int port = 4443;
-		String host = "wendal.cn";
-		int httpPort = 9080;
-		boolean redis;
-		String redisHost = "127.0.0.1";
-		int redisPort = 6379;
-		String redisKey = "ngrok";
-		boolean debug;
-	}
+    @Data
+    public class Server {
+        boolean enabled = false;
+        String sslJksPassword = "";
+        String sslJksPath;
+        int port = 4443;
+        String host = "wendal.cn";
+        int httpPort = 9080;
+        boolean redis;
+        String redisHost = "127.0.0.1";
+        int redisPort = 6379;
+        String redisKey = "ngrok";
+        boolean debug;
+    }
 
-	@Data
-	public class Client {
-		/**
-		 * token
-		 */
-		String token;
+    @Data
+    public class Client {
+        /**
+         * token
+         */
+        String token;
 
-		/**
-		 * 代理端口，默认会使用server.port
-		 */
-		int port;
+        /**
+         * 代理端口，默认会使用server.port
+         */
+        int port;
 
-		String server = "wendal.cn";
+        String server = "wendal.cn";
 
-		int serverPort = 4443;
-	}
+        int serverPort = 4443;
+    }
 
 }

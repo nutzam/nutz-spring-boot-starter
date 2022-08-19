@@ -30,20 +30,6 @@ public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageC
 
     Set<String> ignoreUris = Lang.set(".*/v3/api-docs.*");
 
-    /**
-     * 
-     * @param ignoreType
-     *            忽略包
-     * @return SpringBootNutzJsonMessageConverter
-     */
-    public SpringBootNutzJsonMessageConverter setIgnoreType(String ignoreType) {
-        if (Strings.isBlank(ignoreType)) {
-            return this;
-        }
-        this.ignoreTypes.add(ignoreType);
-        return this;
-    }
-
     public SpringBootNutzJsonMessageConverter setIgnoreTypes(List<String> ignoreTypes) {
         if (Lang.isEmpty(ignoreTypes)) {
             return this;

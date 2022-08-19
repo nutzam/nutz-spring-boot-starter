@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.nutz.lang.Lang;
 import org.nutz.resource.NutResource;
 import org.nutz.resource.impl.ResourceLocation;
 import org.springframework.context.ApplicationContext;
@@ -24,17 +25,21 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
         return "spring";
     }
 
-    /* (non-Javadoc)
-          * @see org.nutz.resource.impl.ResourceLocation#equals(java.lang.Object)
-          */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.nutz.resource.impl.ResourceLocation#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
 
-    /* (non-Javadoc)
-      * @see org.nutz.resource.impl.ResourceLocation#hashCode()
-      */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.nutz.resource.impl.ResourceLocation#hashCode()
+     */
     @Override
     public int hashCode() {
         return super.hashCode();
@@ -54,8 +59,9 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
                 sr.setSource("spring");
                 list.add(sr);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException e) {
+            throw Lang.wrapThrow(e);
         }
     }
 
@@ -73,17 +79,21 @@ public class SpringResourceLoaction extends ResourceLocation implements Applicat
             return resource.getInputStream();
         }
 
-        /* (non-Javadoc)
-              * @see org.nutz.resource.NutResource#equals(java.lang.Object)
-              */
+        /*
+         * (non-Javadoc)
+         * 
+         * @see org.nutz.resource.NutResource#equals(java.lang.Object)
+         */
         @Override
         public boolean equals(Object obj) {
             return super.equals(obj);
         }
 
-        /* (non-Javadoc)
-          * @see org.nutz.resource.NutResource#hashCode()
-          */
+        /*
+         * (non-Javadoc)
+         * 
+         * @see org.nutz.resource.NutResource#hashCode()
+         */
         @Override
         public int hashCode() {
             return super.hashCode();

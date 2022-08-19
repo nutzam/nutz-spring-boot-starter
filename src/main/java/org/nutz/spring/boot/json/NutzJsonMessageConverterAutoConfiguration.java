@@ -29,7 +29,6 @@ public class NutzJsonMessageConverterAutoConfiguration {
         Json.addTypeHandler(new JsonLocalDateLikeHandler());
     }
 
-    @SuppressWarnings("deprecation")
     @Bean
     @ConditionalOnExpression("${nutz.json.enabled:true}")
     public HttpMessageConverter<Object> springBootNutzJsonHttpMessageConverter(
@@ -72,7 +71,6 @@ public class NutzJsonMessageConverterAutoConfiguration {
             format.setTimeZone(TimeZone.getTimeZone(properties.getTimeZone()));
         }
         return new SpringBootNutzJsonMessageConverter().setFormat(format)
-                                                       .setIgnoreType(properties.getIgnoreType())
                                                        .setIgnoreTypes(properties.getIgnoreTypes())
                                                        .setignoreUris(properties.getIgnoreUris());
     }

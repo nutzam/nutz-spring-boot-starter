@@ -13,7 +13,7 @@ public abstract class NutSqlTpl extends NutSql {
 
     protected boolean renderComplete;
 
-    public NutSqlTpl(String source) {
+    protected NutSqlTpl(String source) {
         super(source);
     }
 
