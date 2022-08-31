@@ -59,9 +59,9 @@ spring:
   datasource:
 # 数据源
     druid:
-      url: jdbc:mysql://10.100.110.247:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://mysql.riemann.tech:13306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: thunder
-      password: XPBtRah4YxTKfadA
+      password: ZhaXcYaabZRKx5zw
       driver-class-name: com.mysql.cj.jdbc.Driver
       filters: stat,wall,log4j2
       initial-size: 10
@@ -130,10 +130,18 @@ springdoc:
     enabled: true
     groups:
       enabled: true
-wx:  miniapp:    appid: wxdd12f1e5067bb20b
-    secret: 526c34f3a2842082abfd36509639335c  mp:    app-id: wx6e4f32b9bfd64693
+wx:
+  miniapp:
+    appid: wxdd12f1e5067bb20b
+    secret: 526c34f3a2842082abfd36509639335c
+  mp:
+    app-id: wx6e4f32b9bfd64693
     secret: 7ec96826e905841e4912e8acdf5037ed
-wechat:  oauth:    mp:      domain: poly.ngrok.kerbores.com
+wechat:
+  oauth:
+    mp:
+      domain: poly.ngrok.kerbores.com
       router: /wechat/login
-    pc:      domain: poly.ngrok.kerbores.com
-      router: /wechat/login/qr
+    pc:
+      domain: poly.ngrok.kerbores.com
+      router: /wechat/login/qr      

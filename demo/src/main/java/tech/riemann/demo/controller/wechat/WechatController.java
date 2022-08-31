@@ -18,18 +18,18 @@ import me.chanjar.weixin.mp.api.WxMpService;
 @RestController
 public class WechatController {
 
-    @Autowired
-    WxMpService wxMpService;
+	@Autowired
+	WxMpService wxMpService;
 
-    @Autowired
-    HttpServletResponse response;
+	@Autowired
+	HttpServletResponse response;
 
-    @GetMapping("wechat")
-    @Hidden
-    public void check(String timestamp, String signature, String nonce, String echostr) throws IOException {
-        if (wxMpService.checkSignature(timestamp, nonce, signature)) {
-            response.getWriter().write(echostr);
-        }
-    }
+	@GetMapping("wechat")
+	@Hidden
+	public void check(String timestamp, String signature, String nonce, String echostr) throws IOException {
+		if (wxMpService.checkSignature(timestamp, nonce, signature)) {
+			response.getWriter().write(echostr);
+		}
+	}
 
 }
