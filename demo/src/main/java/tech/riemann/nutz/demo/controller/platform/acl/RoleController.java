@@ -2,6 +2,7 @@ package tech.riemann.nutz.demo.controller.platform.acl;
 
 import org.nutz.lang.Lang;
 import org.nutz.spring.boot.service.entity.Pagination;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +26,7 @@ import tech.riemann.nutz.demo.service.acl.RoleService;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-09 23:34:35
  */
 @RestController
 @RequiredArgsConstructor
@@ -78,7 +80,7 @@ public class RoleController {
      */
     @PutMapping("role")
     @Operation(summary = "增加/编辑角色")
-      public Role saveOrUpdateRole(@Validated @Parameter(description ="角色")@RequestBody Role role) {
+    public Role saveOrUpdateRole(@Validated @Parameter(description ="角色")@RequestBody Role role) {
         if (role.getId() != null && role.getId() > 0) {
             if (roleService.update(role) == 1) {
                 return role;
@@ -98,7 +100,8 @@ public class RoleController {
      */
     @DeleteMapping("role/{id}")
     @Operation(summary = "删除角色")
-      public void deleteRole(@Parameter(description = "角色id", required = true)@PathVariable("id") long id) {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteRole(@Parameter(description = "角色id", required = true)@PathVariable("id") long id) {
          if(roleService.delete(id) != 1){
          		throw Lang.makeThrow("删除角色失败!");
          }

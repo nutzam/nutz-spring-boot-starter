@@ -11,11 +11,12 @@ import tech.riemann.nutz.demo.entity.acl.Role;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-09 23:38:21
  */
 @Service
 @RequiredArgsConstructor
 public class RoleService implements IdNameEntityService<Role> {
+
     private final Dao dao;
 
     /**

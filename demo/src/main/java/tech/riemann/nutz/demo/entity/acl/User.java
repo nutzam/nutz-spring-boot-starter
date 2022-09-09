@@ -1,26 +1,33 @@
 package tech.riemann.nutz.demo.entity.acl;
 
+import java.util.Optional;
+
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
+import org.nutz.json.JsonField;
 
-import club.zhcs.auth.AuthUser;
+import club.zhcs.enums.Codebook;
+import club.zhcs.enums.ICodeBook;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
-import tech.riemann.nutz.demo.entity.BaseEntity;
+import tech.riemann.nutz.demo.entity.IdBaseEntity;
 
 /**
  * 用户
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-09 23:50:51
  */
 @Data
 @SuperBuilder
@@ -32,55 +39,66 @@ import tech.riemann.nutz.demo.entity.BaseEntity;
 @Table("t_acl_user")
 @Comment("用户")
 @Schema(name = "User", description = "用户")
-public class User extends BaseEntity {
+public class User extends IdBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "用户名", required = false)
+    @Schema(description = "用户名", required = true)
+    @Name
     @Column("u_name")
     @Comment("用户名")
     private String name;
 
-    @Schema(description = "密码", required = false)
+    @Schema(description = "密码", required = true)
     @Column("u_password")
     @Comment("密码")
     private String password;
 
-    @Schema(description = "手机号", required = false)
+    @Schema(description = "手机号", required = true)
     @Column("u_mobile")
     @Comment("手机号")
     private String mobile;
 
-    @Schema(description = "性别", required = false)
+    @Schema(description = "性别", required = true)
     @Column("u_sex")
     @Comment("性别")
-    private String sex;
+    @Default
+    private Sex sex = Sex.FEMALE;
 
-    @Schema(description = "邮箱", required = false)
+    @Schema(description = "邮箱", required = true)
     @Column("u_email")
     @Comment("邮箱")
     private String email;
 
-    @Schema(description = "真实姓名", required = false)
+    @Schema(description = "真实姓名", required = true)
     @Column("u_full_name")
     @Comment("真实姓名")
     private String fullName;
 
-    @Schema(description = "创建人", required = false)
-    @Column("created_by")
-    @Comment("创建人")
-    private String createdBy;
+    @Getter
+    @AllArgsConstructor
+    public enum Sex implements ICodeBook {
+        /**
+         * 
+         */
+        MALE("male", "男"),
+        /**
+         * 
+         */
+        FEMALE("female", "女");
 
-    @Schema(description = "更新人", required = false)
-    @Column("updated_by")
-    @Comment("更新人")
-    private String updatedBy;
+        String code;
+        String description;
 
-    /**
-     * @return
-     */
-    public AuthUser toUser() {
-        // TODO Auto-generated method stub
-        return null;
     }
+
+    @JsonField
+    public Codebook getSexInfo() {
+        return Optional.of(getSex()).orElse(Sex.FEMALE).build();
+    }
+
+    public void setSexInfo(Codebook sexInfo) {
+        setSex(Sex.valueOf(sexInfo.getName()));
+    }
+
 }

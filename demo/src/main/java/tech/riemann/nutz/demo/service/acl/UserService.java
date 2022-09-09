@@ -14,11 +14,12 @@ import tech.riemann.nutz.demo.entity.acl.User;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-09 23:38:21
  */
 @Service
 @RequiredArgsConstructor
 public class UserService implements IdNameEntityService<User> {
+
     private final Dao dao;
 
     /**

@@ -17,6 +17,10 @@ public class AdministratorConfigurationProperties {
 
     String userName = "kerbores";
 
+    String fullName = "Kerbores";
+
+    String email = "kerbores@gmail.com";
+
     String cypher = "G00dl^ck";
 
     String mobile = "18996359755";

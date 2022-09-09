@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
-import tech.riemann.nutz.demo.entity.BaseEntity;
+import tech.riemann.nutz.demo.entity.IdBaseEntity;
 
 /**
  * 操作按钮
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-10 00:29:19
  */
 @Data
 @SuperBuilder
@@ -32,12 +32,13 @@ import tech.riemann.nutz.demo.entity.BaseEntity;
 @Table("t_acl_button")
 @Comment("操作按钮")
 @Schema(name = "Button", description = "操作按钮")
-public class Button extends BaseEntity{
+public class Button extends IdBaseEntity{
 
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "操作key,英文,用来做业务", required = true)
     @Name
+    //@Prev(els=@EL("uuid(32)")) 这样就可以生成主键
     @Column("b_key")
     @Comment("操作key,英文,用来做业务")
     private String key;
@@ -61,14 +62,4 @@ public class Button extends BaseEntity{
     @Column("b_installed")
     @Comment("是否内置,内置的没有资源归属")
     private Boolean installed;
-
-    @Schema(description = "创建人", required = false)
-    @Column("created_by")
-    @Comment("创建人")
-    private String createdBy;
-
-    @Schema(description = "更新人", required = false)
-    @Column("updated_by")
-    @Comment("更新人")
-    private String updatedBy;
 }

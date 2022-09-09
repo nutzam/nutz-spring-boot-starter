@@ -40,13 +40,18 @@ public class AuthService extends AbstractAuthService {
 
                                                            @Override
                                                            public AuthUser load(String key) throws Exception {
-                                                               AuthUser user = Optional.ofNullable(userService.fetch(key))
-                                                                                       .orElseThrow(AuthException::new)
-                                                                                       .toUser();
 
-                                                               user.setPermissions(userService.permissions(key));
-                                                               user.setRoles(userService.roles(key));
-                                                               return user;
+                                                               User user = Optional.ofNullable(userService.fetch(key))
+                                                                                   .orElseThrow(AuthException::new);
+
+                                                               return AuthUser.builder()
+                                                                              .userName(user.getName())
+                                                                              .permissions(userService.permissions(key))
+                                                                              .roles(userService.roles(key))
+                                                                              .password("nutz")
+                                                                              .build()
+                                                                              .addExt("user", user)
+                                                                              .token();
                                                            }
                                                        });
 

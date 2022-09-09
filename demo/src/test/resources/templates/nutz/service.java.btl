@@ -1,8 +1,18 @@
+<% var hasKey = false; 
+%>
+<% for(field in table.fields){ %>
+    <%
+    if(field.keyFlag && field.propertyType == 'String'){
+        hasKey = true;
+    }
+    %>
+<% } %>  
 package ${package.Service};
 
 import ${package.Entity}.${entity};
 import ${superServiceClassPackage};
 import org.nutz.spring.boot.service.interfaces.IdNameEntityService;
+import org.nutz.spring.boot.service.interfaces.IdEntityService;
 import lombok.RequiredArgsConstructor;
 
 import org.nutz.dao.Dao;
@@ -19,7 +29,8 @@ class ${table.serviceName} : ${superServiceClass}<${entity}>
 <% }else{ %>
 @Service
 @RequiredArgsConstructor
-public class ${table.serviceName} implements IdNameEntityService<${entity}> {
+public class ${table.serviceName} implements ${hasKey?'IdName':'Id'}EntityService<${entity}> {
+
     private final Dao dao;
 
     /**

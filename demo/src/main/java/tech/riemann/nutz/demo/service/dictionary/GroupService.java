@@ -11,11 +11,12 @@ import tech.riemann.nutz.demo.entity.dictionary.Group;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-09 23:34:36
  */
 @Service
 @RequiredArgsConstructor
 public class GroupService implements IdNameEntityService<Group> {
+
     private final Dao dao;
 
     /**

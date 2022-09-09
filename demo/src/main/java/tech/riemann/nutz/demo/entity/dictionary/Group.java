@@ -2,6 +2,7 @@ package tech.riemann.nutz.demo.entity.dictionary;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,14 +13,14 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
-import tech.riemann.nutz.demo.entity.BaseEntity;
+import tech.riemann.nutz.demo.entity.IdBaseEntity;
 
 /**
  * 码本分组
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-10 00:29:21
  */
 @Data
 @SuperBuilder
@@ -31,16 +32,18 @@ import tech.riemann.nutz.demo.entity.BaseEntity;
 @Table("t_dictionary_group")
 @Comment("码本分组")
 @Schema(name = "Group", description = "码本分组")
-public class Group extends BaseEntity{
+public class Group extends IdBaseEntity{
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "分组唯一键", required = false)
+    @Schema(description = "分组唯一键", required = true)
+    @Name
+    //@Prev(els=@EL("uuid(32)")) 这样就可以生成主键
     @Column("g_key")
     @Comment("分组唯一键")
     private String key;
 
-    @Schema(description = "分组名称", required = false)
+    @Schema(description = "分组名称", required = true)
     @Column("g_name")
     @Comment("分组名称")
     private String name;
@@ -50,18 +53,8 @@ public class Group extends BaseEntity{
     @Comment("分组描述")
     private String description;
 
-    @Schema(description = "禁用标识", required = false)
+    @Schema(description = "禁用标识", required = true)
     @Column("g_disabled")
     @Comment("禁用标识")
     private Boolean disabled;
-
-    @Schema(description = "创建人", required = false)
-    @Column("created_by")
-    @Comment("创建人")
-    private String createdBy;
-
-    @Schema(description = "更新人", required = false)
-    @Column("updated_by")
-    @Comment("更新人")
-    private String updatedBy;
 }

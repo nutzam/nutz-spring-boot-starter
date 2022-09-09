@@ -1,11 +1,15 @@
 package tech.riemann.nutz.demo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.nutz.lang.Lang;
+import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -16,13 +20,12 @@ import com.baomidou.mybatisplus.generator.config.TemplateType;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.BeetlTemplateEngine;
-import com.baomidou.mybatisplus.generator.function.ConverterFileName;
 
-import tech.riemann.nutz.demo.entity.BaseEntity;
+import tech.riemann.nutz.demo.entity.IdBaseEntity;
 
 public class MysqlGenerator {
 
-    static String jdbcUrl = "jdbc:mysql://10.100.130.91:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true";
+    static String jdbcUrl = "jdbc:mysql://mysql.riemann.tech:13306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true";
     static String user = "thunder";
     static String password = "ZhaXcYaabZRKx5zw";
     static String packageName = "tech.riemann.nutz";
@@ -61,23 +64,27 @@ public class MysqlGenerator {
      * RUN THIS TO GEN CODE
      */
     public static void main(String[] args) {
+
         String projectPath = System.getProperty("user.dir");
+        List<String> relationTables = Lang.list("t_acl_role_permission", "t_acl_user_permission", "t_acl_user_role");
         NutMap.NEW()
               .addv("acl", Lang.array("t_acl_button", "t_acl_menu", "t_acl_role", "t_acl_role_permission", "t_acl_user", "t_acl_user_permission", "t_acl_user_role"))
               .addv("dictionary", Lang.array("t_dictionary_dictionary", "t_dictionary_group"))
               .entrySet()
               .stream()
               .forEach(e -> {
+
                   FastAutoGenerator.create(jdbcUrl, user, password)
                                    .globalConfig(builder -> {
                                        builder
                                               .author("Kerbores(kerbores@gmail.com)")
                                               .enableSpringdoc()
+                                              .commentDate(() -> LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.CHINESE)))
                                               .disableOpenDir()
                                               .dateType(DateType.TIME_PACK)
                                               .outputDir(projectPath + "/src/main/java");
                                    })
-                                   .injectionConfig(builder -> builder.customMap(Collections.singletonMap("mybatis", false)))
+                                   .injectionConfig(builder -> builder.customMap(Collections.singletonMap("mode", mode)))
                                    .packageConfig(builder -> {
                                        builder.parent(packageName)
                                               .moduleName(module)
@@ -97,7 +104,7 @@ public class MysqlGenerator {
                                                                      .controller(String.format("templates/%s/controller.java", mode.name().toLowerCase()))
                                                                      .serviceImpl(String.format("templates/%s/serviceImpl.java", mode.name().toLowerCase()))
                                                                      .service(String.format("templates/%s/service.java", mode.name().toLowerCase()))
-                                                                     .xml(String.format("templates/%s/mapper.xml.java", mode.name().toLowerCase()))
+                                                                     .xml(String.format("templates/%s/mapper.xml", mode.name().toLowerCase()))
                                                                      .mapper(String.format("templates/%s/mapper.java", mode.name().toLowerCase()))
                                                                      .entity(String.format("templates/%s/entity.java", mode.name().toLowerCase())))
                                    .strategyConfig(builder -> {
@@ -108,12 +115,14 @@ public class MysqlGenerator {
                                               .enableLombok()
                                               .enableChainModel()
                                               .enableRemoveIsPrefix()
+                                              .enableFileOverride()
                                               .enableTableFieldAnnotation()
-                                              .superClass(BaseEntity.class)
-                                              .addSuperEntityColumns("id",
-                                                                     "created_user",
+                                              .superClass(IdBaseEntity.class)
+                                              .addSuperEntityColumns(
+                                                                     "id",
+                                                                     "created_by",
                                                                      "created_time",
-                                                                     "updated_user",
+                                                                     "updated_by",
                                                                      "updated_time")
                                               .naming(NamingStrategy.underline_to_camel)
 
@@ -121,21 +130,22 @@ public class MysqlGenerator {
                                               .enableRestStyle()
                                               .enableHyphenStyle()
                                               .convertFileName(entityName -> {
-                                                  // TODO 关系表不生成 controller
-                                                  return entityName + ConstVal.CONTROLLER;
+                                                  boolean isRelation = relationTables.stream().anyMatch(item -> {
+                                                      String name = NamingStrategy.capitalFirst(
+                                                                                                NamingStrategy.underlineToCamel(
+                                                                                                                                item.replace(String.format("t_%s_", e.getKey()),
+                                                                                                                                             "")));
+                                                      return Strings.equals(entityName, name);
+                                                  });
+                                                  return isRelation ? null : entityName + ConstVal.CONTROLLER;
                                               })
                                               .mapperBuilder()
+                                              .enableFileOverride()
                                               .convertMapperFileName(entityName -> mode == Mode.NUTZ ? null : entityName + ConstVal.MAPPER)
+                                              .convertXmlFileName(entityName -> mode == Mode.NUTZ ? null : entityName + ConstVal.MAPPER)
                                               .superClass(BaseMapper.class)
                                               .enableBaseResultMap()
                                               .enableBaseColumnList()
-                                              .convertXmlFileName(new ConverterFileName() {
-
-                                                  @Override
-                                                  public String convert(String entityName) {
-                                                      return entityName;
-                                                  }
-                                              })
                                               .serviceBuilder()
                                               .convertServiceFileName(entityName -> (mode == Mode.NUTZ ? "" : "I") + entityName + ConstVal.SERVICE)
                                               .convertServiceImplFileName(entityName -> mode == Mode.NUTZ ? null : entityName + ConstVal.SERVICE_IMPL);

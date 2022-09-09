@@ -26,6 +26,7 @@ nutz:
   json:
     enabled: true
     mode: compact
+    date-format: yyyy-MM-dd HH:mm:ss
   dao:
     sql-template:
       enable: true
@@ -59,7 +60,7 @@ spring:
   datasource:
 # 数据源
     druid:
-      url: jdbc:mysql://10.100.130.91:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://mysql.riemann.tech:13306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: thunder
       password: ZhaXcYaabZRKx5zw
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -103,16 +104,6 @@ axe:
       listener:
         wechat:
           webhook: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8ca09128-8613-4436-9367-e0dc03a17003
-mybatis-plus:
-  configuration:
-    auto-mapping-behavior: full
-    auto-mapping-unknown-column-behavior: none
-  global-config:
-    banner: false
-    db-config:
-      update-strategy: NOT_NULL
-      id-type: auto
-      property-format: "`%s`"
 springdoc:
   customer:
     theme: feeling-blue

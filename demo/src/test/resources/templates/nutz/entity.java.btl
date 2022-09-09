@@ -5,7 +5,9 @@ import ${pkg};
 <% } %>
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.EL;
 import org.nutz.dao.entity.annotation.Name;
+import org.nutz.dao.entity.annotation.Prev;
 import org.nutz.dao.entity.annotation.Table;
 <% if(springdoc){ %>
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -90,6 +92,7 @@ public class ${entity} {
     /*主键*/
     %>
     @Name
+    //@Prev(els=@EL("uuid(32)")) 这样就可以生成主键
     @Column("${field.annotationColumnName}")
     @Comment("${field.comment!''}")
     <%

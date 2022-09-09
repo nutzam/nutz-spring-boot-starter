@@ -1,7 +1,7 @@
 package tech.riemann.nutz.demo.service.acl;
 
 import org.nutz.dao.Dao;
-import org.nutz.spring.boot.service.interfaces.IdNameEntityService;
+import org.nutz.spring.boot.service.interfaces.IdEntityService;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -11,11 +11,12 @@ import tech.riemann.nutz.demo.entity.acl.UserPermission;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-09 23:38:21
  */
 @Service
 @RequiredArgsConstructor
-public class UserPermissionService implements IdNameEntityService<UserPermission> {
+public class UserPermissionService implements IdEntityService<UserPermission> {
+
     private final Dao dao;
 
     /**

@@ -2,6 +2,7 @@ package tech.riemann.nutz.demo.controller.platform.acl;
 
 import org.nutz.lang.Lang;
 import org.nutz.spring.boot.service.entity.Pagination;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +26,7 @@ import tech.riemann.nutz.demo.service.acl.ButtonService;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-09 23:34:34
  */
 @RestController
 @RequiredArgsConstructor
@@ -78,7 +80,7 @@ public class ButtonController {
      */
     @PutMapping("button")
     @Operation(summary = "增加/编辑操作按钮")
-      public Button saveOrUpdateButton(@Validated @Parameter(description ="操作按钮")@RequestBody Button button) {
+    public Button saveOrUpdateButton(@Validated @Parameter(description ="操作按钮")@RequestBody Button button) {
         if (button.getId() != null && button.getId() > 0) {
             if (buttonService.update(button) == 1) {
                 return button;
@@ -98,7 +100,8 @@ public class ButtonController {
      */
     @DeleteMapping("button/{id}")
     @Operation(summary = "删除操作按钮")
-      public void deleteButton(@Parameter(description = "操作按钮id", required = true)@PathVariable("id") long id) {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteButton(@Parameter(description = "操作按钮id", required = true)@PathVariable("id") long id) {
          if(buttonService.delete(id) != 1){
          		throw Lang.makeThrow("删除操作按钮失败!");
          }

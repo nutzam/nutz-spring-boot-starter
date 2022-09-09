@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldNameConstants;
 import lombok.experimental.SuperBuilder;
-import tech.riemann.nutz.demo.entity.BaseEntity;
+import tech.riemann.nutz.demo.entity.IdBaseEntity;
 
 /**
  * 码本数据
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09
+ * @since 2022-09-10 00:29:21
  */
 @Data
 @SuperBuilder
@@ -31,11 +31,11 @@ import tech.riemann.nutz.demo.entity.BaseEntity;
 @Table("t_dictionary_dictionary")
 @Comment("码本数据")
 @Schema(name = "Dictionary", description = "码本数据")
-public class Dictionary extends BaseEntity{
+public class Dictionary extends IdBaseEntity{
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "分组Key", required = false)
+    @Schema(description = "分组Key", required = true)
     @Column("d_group_key")
     @Comment("分组Key")
     private String groupKey;
@@ -45,17 +45,17 @@ public class Dictionary extends BaseEntity{
     @Comment("上级Key")
     private String parentKey;
 
-    @Schema(description = "序号", required = false)
+    @Schema(description = "序号", required = true)
     @Column("d_index")
     @Comment("序号")
     private Long index;
 
-    @Schema(description = "key", required = false)
+    @Schema(description = "key", required = true)
     @Column("d_key")
     @Comment("key")
     private String key;
 
-    @Schema(description = "value", required = false)
+    @Schema(description = "value", required = true)
     @Column("d_value")
     @Comment("value")
     private String value;
@@ -65,18 +65,8 @@ public class Dictionary extends BaseEntity{
     @Comment("描述")
     private String description;
 
-    @Schema(description = "禁用标识", required = false)
+    @Schema(description = "禁用标识", required = true)
     @Column("d_disabled")
     @Comment("禁用标识")
     private Boolean disabled;
-
-    @Schema(description = "创建人", required = false)
-    @Column("created_by")
-    @Comment("创建人")
-    private String createdBy;
-
-    @Schema(description = "更新人", required = false)
-    @Column("updated_by")
-    @Comment("更新人")
-    private String updatedBy;
 }
