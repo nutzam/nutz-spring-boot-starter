@@ -28,13 +28,4 @@ public class ButtonService implements IdNameEntityService<Button> {
     public Dao dao() {
         return dao;
     }
-
-    /**
-     * @return
-     * @see org.nutz.spring.boot.service.interfaces.EntityService#getEntityType()
-     */
-    @Override
-    public Class<Button> getEntityType() {
-        return Button.class;
-    }
 }

@@ -32,7 +32,7 @@ import tech.riemann.nutz.demo.entity.BaseEntity;
 @Table("t_acl_button")
 @Comment("操作按钮")
 @Schema(name = "Button", description = "操作按钮")
-public class Button extends BaseEntity {
+public class Button extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
 
