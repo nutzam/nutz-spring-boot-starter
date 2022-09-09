@@ -139,7 +139,7 @@ springdoc:
   group-configs:
   - group: default
     packages-to-scan:
-    - tech.riemann.demo.controller
+    - tech.riemann.nutz.demo.controller
   api-docs:
     enabled: true
     groups:

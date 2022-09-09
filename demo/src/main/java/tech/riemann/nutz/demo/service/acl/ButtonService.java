@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import tech.riemann.nutz.demo.entity.acl.Button;
+
 /**
  * 操作按钮 服务类
  *
@@ -16,6 +17,7 @@ import tech.riemann.nutz.demo.entity.acl.Button;
 @Service
 @RequiredArgsConstructor
 public class ButtonService implements IdNameEntityService<Button> {
+
     private final Dao dao;
 
     /**
@@ -25,5 +27,14 @@ public class ButtonService implements IdNameEntityService<Button> {
     @Override
     public Dao dao() {
         return dao;
+    }
+
+    /**
+     * @return
+     * @see org.nutz.spring.boot.service.interfaces.EntityService#getEntityType()
+     */
+    @Override
+    public Class<Button> getEntityType() {
+        return Button.class;
     }
 }

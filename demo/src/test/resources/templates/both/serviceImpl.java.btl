@@ -38,5 +38,14 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     public Dao dao() {
         return dao;
     }
+    
+    /**
+     * @return
+     * @see org.nutz.spring.boot.service.interfaces.EntityService#getEntityType()
+     */
+    @Override
+    public Class<${entity}> getEntityType() {
+        return ${entity}.class;
+    }
 }
 <% } %>
