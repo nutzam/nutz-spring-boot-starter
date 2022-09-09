@@ -1,0 +1,185 @@
+package ${package.Controller};
+
+import org.nutz.lang.Lang;
+import org.nutz.lang.Strings;
+import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+<% if(restControllerStyle){ %>
+import org.springframework.web.bind.annotation.RestController;
+<% }else{ %>
+import org.springframework.stereotype.Controller;
+<% } %>
+<% if(isNotEmpty(superControllerClassPackage)){ %>
+import ${superControllerClassPackage};
+<% } %>
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+
+<% if(swagger){ %>
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+<% } %>
+/**
+ * <p>
+ * ${table.comment!} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ *
+ * @since ${date}
+ */
+<% if(restControllerStyle){ %>
+@RestController
+<% }else{ %>
+@Controller
+<% } %>
+<% if(kotlin){ %>
+class ${table.controllerName}<% if(isNotEmpty(superControllerClass)){ %> : ${superControllerClass}()<% } %>
+<% }else{ %>
+    <% if(isNotEmpty(superControllerClass)){ %>
+public class ${table.controllerName} extends ${superControllerClass} {
+    <% }else{ %>
+ <% if(swagger){ %>
+@Tag(name = "${entity}", description = "${table.comment!''}")
+ <% } %> 
+@RequiredArgsConstructor
+public class ${table.controllerName} {
+    <% } %>
+	
+	<%
+		var entityNameFirst = strutil.subStringTo(entity,0,1);
+		var entityNameFirstLower = strutil.toLowerCase(entityNameFirst);
+		var entityName  = strutil.replace(entity,entityNameFirst,entityNameFirstLower);
+	%>
+    private final ${table.serviceName} ${entityName}Service;
+
+    /**
+     * 分页查询${table.comment!}
+     * 
+     * @param page
+     *            页码
+     * @param size
+     *            分页大小
+     * @param key
+     *            关键词
+     * @return ${table.comment!}分页数据
+     */
+    @GetMapping("${controllerMappingHyphen}s")
+     <% if(swagger){ %>
+    @Operation(summary = "分页查询${table.comment!''}")
+      public IPage<${entity}> ${entityName}s(
+      								 @Parameter(description = "页码") @RequestParam(value = "page", required = false, defaultValue = "1") long page,
+                                     @Parameter(description = "页面大小") @RequestParam(value = "size", required = false, defaultValue = "10") long size,
+                                     @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false, defaultValue = "") String key) {
+      <% }else{ %> 
+       public IPage<${entity}> ${entityName}s(@RequestParam("page") long page,
+                                           @RequestParam("size") long size,
+                                           @RequestParam(name = "key", required = false, defaultValue = "") String key) {
+      <% } %> 
+       boolean hasLike = Strings.isNotBlank(key);
+        key = String.format("%%%s%%", key);
+       /**
+         * TODO 处理搜索条件
+         * 
+         * <pre>
+                                              Wrappers.<${entity}> lambdaQuery()
+                                                         .like(hasLike, ${entity}::getName, key)
+                                                         .or()
+                                                         .like(hasLike, ${entity}::getMobile, key)
+         * </pre>
+         */
+      	return ${entityName}Service.page(Page.<${entity}> of(page, size),
+      										Wrappers.<${entity}> lambdaQuery()
+                                                       .like(hasLike, ${entity}::getName, key));
+    }
+
+    /**
+     * ${table.comment!}详情
+     * 
+     * @param id
+     *            ${table.comment!}id
+     * @return ${table.comment!}
+     */
+    @GetMapping("${controllerMappingHyphen}/{id}")
+    <% if(swagger){ %>
+    	@Operation(summary ="${table.comment!''}详情")
+		public ${entity} ${entityName}Detail(@Parameter(description = "${table.comment!''}id", required = true) @PathVariable("id") long id) {
+      <% }else{ %> 
+       public ${entity} ${entityName}Detail(@PathVariable("id") long id) {
+      <% } %> 
+        return ${entityName}Service.getById(id);
+    }
+
+    /**
+     * 添加或者更新${table.comment!}
+     * 
+     * @param ${entityName}
+     *            ${table.comment!}数据
+     * @return ${table.comment!}
+     */
+    @PutMapping("${controllerMappingHyphen}")
+    <% if(swagger){ %>
+    @Operation(summary = "增加/编辑${table.comment!''}")
+      public ${entity} saveOrUpdate${entity}(@Validated @Parameter(description ="${table.comment!''}")@RequestBody ${entity} ${entityName}) {
+      <% }else{ %> 
+       public ${entity} saveOrUpdate${entity}(@Validated @RequestBody ${entity} ${entityName}) {
+      <% } %> 
+        if (${entityName}.getId() > 0) {
+          /**
+             * XXX 根据情况处理是否需要根据指定条件更新指定字段<br>
+             * 
+             * <pre>
+             * ${entityName}Service.update(Wrappers.<${entity}> lambdaUpdate().set(${entity}::getName, ${entityName}.getName()).eq(${entity}::getId, ${entityName}.getId()));
+             * </pre>
+             */
+            if (${entityName}Service.update(${entityName}, Wrappers.<${entity}>lambdaUpdate().eq(${entity}::getId, ${entityName}.getId()))) {
+                return ${entityName};
+            } else {
+                throw Lang.makeThrow("更新${table.comment!}失败!");
+            }
+        }
+        if (${entityName}Service.save(${entityName})) {
+              return ${entityName};
+        } else {
+              throw Lang.makeThrow("保存${table.comment!}失败!");
+        }
+    }
+
+    /**
+     * 删除${table.comment!}
+     * 
+     * @param id
+     *            ${table.comment!}id
+     * @return 是否删除成功
+     */
+    @DeleteMapping("${controllerMappingHyphen}/{id}")
+    <% if(swagger){ %>
+    @Operation(summary = "删除${table.comment!''}")
+      public void delete${entity}(@Parameter(description = "${table.comment!''}id", required = true)@PathVariable("id") long id) {
+      <% }else{ %> 
+       public void delete${entity}(@PathVariable("id") long id) {
+      <% } %>
+       /**
+         * XXX 根据情况判断是否处理逻辑删除<br>
+         * 
+         * <pre>
+         * ${entityName}Service.update(Wrappers.<${entity}> lambdaUpdate().set(${entity}::getStatus, false).eq(${entity}::getId, id));
+         * </pre>
+         */ 
+         if(! ${entityName}Service.removeById(id)){
+         		throw Lang.makeThrow("删除${table.comment!}失败!");
+         }
+    }
+
+}
+<% } %>

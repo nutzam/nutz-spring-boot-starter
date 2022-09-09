@@ -4,7 +4,8 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 /**
- * @author wkipy
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 @AutoConfiguration

@@ -6,12 +6,13 @@ import javax.annotation.PostConstruct;
 
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author kerbores(kerbores@gmail.com)
@@ -22,13 +23,12 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @ConditionalOnExpression("${nutz.dao.enabled:true}")
 @EnableConfigurationProperties(NutzDaoAutoConfigurationProperties.class)
 @AutoConfigureAfter({NutzDaoAutoConfiguration.class})
+@RequiredArgsConstructor
 public class NutzDatabaseInitializer {
 
-    @Autowired
-    private Dao dao;
+    private final Dao dao;
 
-    @Autowired
-    NutzDaoAutoConfigurationProperties properties;
+    private final NutzDaoAutoConfigurationProperties properties;
 
     @PostConstruct
     public void create() {

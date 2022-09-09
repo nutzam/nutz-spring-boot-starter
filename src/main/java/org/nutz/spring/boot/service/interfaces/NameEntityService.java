@@ -6,8 +6,11 @@ import org.nutz.dao.Cnd;
 import org.nutz.dao.entity.EntityField;
 
 /**
- * @author wkipy
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
+ * @param <T>
+ *            实体类型
  */
 public interface NameEntityService<T extends Serializable> extends EntityService<T> {
     /**

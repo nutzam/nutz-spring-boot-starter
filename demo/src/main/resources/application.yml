@@ -33,8 +33,8 @@ nutz:
     runtime:
       add-column: true
       basepackage:
-      - tech.riemann.demo.entity
-      - BOOT-INF.classes.tech.riemann.demo.entity
+      - tech.riemann.nutz.demo.entity
+      - BOOT-INF.classes.tech.riemann.nutz.demo.entity
       check-index: true
       create: true
       delete-column: false
@@ -103,6 +103,16 @@ axe:
       listener:
         wechat:
           webhook: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=8ca09128-8613-4436-9367-e0dc03a17003
+mybatis-plus:
+  configuration:
+    auto-mapping-behavior: full
+    auto-mapping-unknown-column-behavior: none
+  global-config:
+    banner: false
+    db-config:
+      update-strategy: NOT_NULL
+      id-type: auto
+      property-format: "`%s`"
 springdoc:
   customer:
     theme: feeling-blue

@@ -13,7 +13,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.io.Resource;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 public class SpringResourceLoaction extends ResourceLocation implements ApplicationContextAware {

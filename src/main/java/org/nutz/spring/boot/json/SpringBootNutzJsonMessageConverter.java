@@ -13,14 +13,20 @@ import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.AbstractJsonHttpMessageConverter;
 
+import lombok.RequiredArgsConstructor;
+
+/**
+ * 
+ * @author Kerbores(kerbores@gmail.com)
+ *
+ */
+@RequiredArgsConstructor
 public class SpringBootNutzJsonMessageConverter extends AbstractJsonHttpMessageConverter {
 
-    @Autowired
-    HttpServletRequest request;
+    private final HttpServletRequest request;
 
     static final String IGNORE_JSON_SHAP_HEADER_KEY = "json_shap_ignore";
 

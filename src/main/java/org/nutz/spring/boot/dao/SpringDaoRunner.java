@@ -10,7 +10,8 @@ import org.nutz.lang.Lang;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 public class SpringDaoRunner extends NutDaoRunner {

@@ -19,7 +19,6 @@ import org.nutz.spring.boot.dao.sqltpl.impl.beetl.BeetlSqlTpl;
 import org.nutz.spring.boot.dao.sqltpl.impl.freemarker.FreeMarkerSqlTpl;
 import org.nutz.spring.boot.dao.sqltpl.impl.jetbrick.JetbrickSqlTpl;
 import org.nutz.spring.boot.dao.sqltpl.impl.velocity.VelocitySqlTpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -31,11 +30,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
+import lombok.RequiredArgsConstructor;
+
 /**
- * @author kerbores(kerbores@gmail.com)
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 @AutoConfiguration
+@RequiredArgsConstructor
 @ConditionalOnClass({Dao.class})
 @ConditionalOnExpression("${nutz.dao.enabled:true}")
 @AutoConfigureAfter({DataSourceAutoConfiguration.class})
@@ -43,11 +46,9 @@ import org.springframework.context.annotation.Import;
 @Import(SpringResourceLoactionConfiguration.class)
 public class NutzDaoAutoConfiguration {
 
-    @Autowired
-    NutzDaoAutoConfigurationProperties properties;
+    private final NutzDaoAutoConfigurationProperties properties;
 
-    @Autowired
-    SpringResourceLoaction springResourceLoaction;
+    private final SpringResourceLoaction springResourceLoaction;
 
     @PostConstruct
     public void initSqlTemplate() {

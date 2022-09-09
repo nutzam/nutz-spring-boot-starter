@@ -2,8 +2,6 @@ package org.nutz.spring.boot.json;
 
 import java.util.List;
 
-import org.nutz.json.Json;
-import org.nutz.json.handler.JsonLocalDateLikeHandler;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import lombok.Data;
@@ -140,10 +138,5 @@ public class NutzJsonAutoConfigurationProperties {
      * 时区配置
      */
     private String timeZone;
-
-    public static void main(String[] args) {
-        Json.addTypeHandler(new JsonLocalDateLikeHandler());
-        Json.toJson(null);
-    }
 
 }

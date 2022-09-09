@@ -10,20 +10,22 @@ import org.nutz.log.impl.Slf4jLogAdapter;
 import org.nutz.log.impl.SystemLogAdapter;
 import org.nutz.plugin.SimplePluginManager;
 import org.nutz.spring.boot.log.NutzLogConfigurationProperties.Type;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+import lombok.RequiredArgsConstructor;
+
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 @AutoConfiguration
 @EnableConfigurationProperties(NutzLogConfigurationProperties.class)
+@RequiredArgsConstructor
 public class NutzLogAutoConfiguration {
 
-    @Autowired
-    NutzLogConfigurationProperties config;
+    private final NutzLogConfigurationProperties config;
 
     @PostConstruct
     public void init() {

@@ -11,7 +11,8 @@ import org.nutz.spring.boot.dao.sqltpl.NutSqlTpl;
 import org.nutz.spring.boot.dao.sqltpl.VarSetMap;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 public class BeetlSqlTpl extends NutSqlTpl {

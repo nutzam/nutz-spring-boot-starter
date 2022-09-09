@@ -28,7 +28,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 @Data

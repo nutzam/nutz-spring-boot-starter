@@ -9,6 +9,11 @@ import org.nutz.log.Logs;
 import org.nutz.log.impl.AbstractLog;
 import org.nutz.plugin.Plugin;
 
+/**
+ * 
+ * @author Kerbores(kerbores@gmail.com)
+ *
+ */
 public class Log4j2Adapter implements LogAdapter, Plugin {
     @Override
     public Log getLogger(String className) {

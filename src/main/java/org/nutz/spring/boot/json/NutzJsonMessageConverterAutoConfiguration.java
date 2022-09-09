@@ -3,6 +3,7 @@ package org.nutz.spring.boot.json;
 import java.util.TimeZone;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
@@ -32,7 +33,8 @@ public class NutzJsonMessageConverterAutoConfiguration {
     @Bean
     @ConditionalOnExpression("${nutz.json.enabled:true}")
     public HttpMessageConverter<Object> springBootNutzJsonHttpMessageConverter(
-                                                                               NutzJsonAutoConfigurationProperties properties) {
+                                                                               NutzJsonAutoConfigurationProperties properties,
+                                                                               HttpServletRequest request) {
         JsonFormat format = null;
         if (properties.getMode() != null) {// 直接模式设置
             switch (properties.getMode()) {
@@ -70,8 +72,8 @@ public class NutzJsonMessageConverterAutoConfiguration {
         if (Strings.isNotBlank(properties.getTimeZone())) {
             format.setTimeZone(TimeZone.getTimeZone(properties.getTimeZone()));
         }
-        return new SpringBootNutzJsonMessageConverter().setFormat(format)
-                                                       .setIgnoreTypes(properties.getIgnoreTypes())
-                                                       .setignoreUris(properties.getIgnoreUris());
+        return new SpringBootNutzJsonMessageConverter(request).setFormat(format)
+                                                              .setIgnoreTypes(properties.getIgnoreTypes())
+                                                              .setignoreUris(properties.getIgnoreUris());
     }
 }

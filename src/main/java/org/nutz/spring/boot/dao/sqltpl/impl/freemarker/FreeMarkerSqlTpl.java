@@ -16,7 +16,8 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 public class FreeMarkerSqlTpl extends NutSqlTpl {

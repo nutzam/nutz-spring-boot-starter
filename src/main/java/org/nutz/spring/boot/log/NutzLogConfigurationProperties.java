@@ -12,7 +12,8 @@ import lombok.Data;
 import lombok.Getter;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 @Data

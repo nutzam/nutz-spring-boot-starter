@@ -15,8 +15,11 @@ import org.nutz.lang.Mirror;
 import org.nutz.spring.boot.service.ExtService;
 
 /**
- * @author wkipy
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
+ * @param <T>
+ *            实体类型
  */
 public interface EntityService<T extends Serializable> extends ExtService<T> {
 
@@ -202,7 +205,8 @@ public interface EntityService<T extends Serializable> extends ExtService<T> {
     }
 
     /**
-     * 与 insert(String tableName, Chain chain) 一样，不过，数据表名，将取自 POJO 的数据表声明，请参看 '@Table' 注解的详细说明
+     * 与 insert(String tableName, Chain chain) 一样，不过，数据表名，将取自 POJO 的数据表声明，请参看
+     * '@Table' 注解的详细说明
      * 
      * @param chain
      *            数据名值链

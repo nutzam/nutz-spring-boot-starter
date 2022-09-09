@@ -16,8 +16,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * @author kerbores(kerbores@gmail.com)
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
+ * @param <T>
+ *            实体类型
  */
 @Data
 @Builder

@@ -7,7 +7,8 @@ import org.nutz.dao.sql.Sql;
 import org.nutz.dao.sql.VarSet;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 public class VarSetMap {

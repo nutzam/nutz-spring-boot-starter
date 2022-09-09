@@ -8,7 +8,6 @@ import java.net.URL;
 import org.nutz.http.ProxySwitcher;
 import org.nutz.http.Request;
 import org.nutz.lang.Lang;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -18,20 +17,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
+import lombok.RequiredArgsConstructor;
+
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 @AutoConfiguration
+@RequiredArgsConstructor
 @EnableConfigurationProperties(NutzHttpAutoConfigurationProperties.class)
 @ConditionalOnExpression("${nutz.http.enabled:true}")
 public class NutzHttpAutoConfiguration {
 
-    @Autowired
-    NutzHttpAutoConfigurationProperties config;
+    private final NutzHttpAutoConfigurationProperties config;
 
-    @Autowired
-    ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
 
     public boolean hasBean(Class<? extends Object> clazz) {
         try {

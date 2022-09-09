@@ -4,7 +4,8 @@ import org.nutz.dao.impl.sql.NutSql;
 import org.nutz.dao.jdbc.ValueAdaptor;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 public abstract class NutSqlTpl extends NutSql {

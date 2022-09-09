@@ -1,0 +1,34 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+import org.nutz.spring.boot.service.interfaces.IdNameEntityService;
+import lombok.RequiredArgsConstructor;
+
+import org.nutz.dao.Dao;
+import org.springframework.stereotype.Service;
+/**
+ * ${table.comment!} 服务类
+ *
+ * @author ${author}
+ *
+ * @since ${date}
+ */
+<% if(kotlin){ %>
+class ${table.serviceName} : ${superServiceClass}<${entity}>
+<% }else{ %>
+@Service
+@RequiredArgsConstructor
+public class ${table.serviceName} implements IdNameEntityService<${entity}> {
+    private final Dao dao;
+
+    /**
+     * @return
+     * @see org.nutz.spring.boot.service.ExtService#dao()
+     */
+    @Override
+    public Dao dao() {
+        return dao;
+    }
+}
+<% } %>

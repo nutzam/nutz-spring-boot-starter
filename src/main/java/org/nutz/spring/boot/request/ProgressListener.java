@@ -3,7 +3,8 @@ package org.nutz.spring.boot.request;
 import org.nutz.lang.util.Callback;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 public abstract class ProgressListener implements Callback<Integer> {

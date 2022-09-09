@@ -10,7 +10,8 @@ import jetbrick.template.JetEngine;
 import jetbrick.template.JetTemplate;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 public class JetbrickSqlTpl extends NutSqlTpl {

@@ -6,7 +6,8 @@ import org.beetl.core.resource.FileResource;
 import org.beetl.core.resource.StringTemplateResource;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 public class ClasspathStringResourceLoader extends ClasspathResourceLoader {

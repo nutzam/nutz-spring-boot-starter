@@ -17,7 +17,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * @author kerbores
+ * 
+ * @author Kerbores(kerbores@gmail.com)
  *
  */
 @Data
@@ -43,9 +44,11 @@ public class NutzHttpRequestFactory implements ClientHttpRequestFactory, Disposa
         return new NutzHttpClientHttpRequest(uri, httpMethod, http, proxySwitcher);
     }
 
-    /* (non-Javadoc)
-      * @see org.springframework.beans.factory.DisposableBean#destroy()
-      */
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.springframework.beans.factory.DisposableBean#destroy()
+     */
     @Override
     public void destroy() throws Exception {
         Logs.get().debug("destroy");
