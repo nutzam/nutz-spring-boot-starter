@@ -20,13 +20,11 @@ import lombok.RequiredArgsConstructor;
 import tech.riemann.nutz.demo.entity.acl.User;
 import tech.riemann.nutz.demo.service.acl.UserService;
 /**
- * <p>
  * 用户 前端控制器
- * </p>
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09 23:34:35
+ * @since 2022-09-13 09:49:03
  */
 @RestController
 @RequiredArgsConstructor

@@ -25,7 +25,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
 
 public class MysqlGenerator {
 
-    static String jdbcUrl = "jdbc:mysql://mysql.riemann.tech:13306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true";
+    static String jdbcUrl = "jdbc:mysql://10.100.130.91:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true";
     static String user = "thunder";
     static String password = "ZhaXcYaabZRKx5zw";
     static String packageName = "tech.riemann.nutz";

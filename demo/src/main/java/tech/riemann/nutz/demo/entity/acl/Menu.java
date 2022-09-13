@@ -2,7 +2,6 @@ package tech.riemann.nutz.demo.entity.acl;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
-import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,7 +19,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-10 00:29:20
+ * @since 2022-09-13 09:49:03
  */
 @Data
 @SuperBuilder
@@ -37,13 +36,11 @@ public class Menu extends IdBaseEntity{
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "资源key,英文,用来做业务", required = true)
-    @Name
-    //@Prev(els=@EL("uuid(32)")) 这样就可以生成主键
     @Column("m_key")
     @Comment("资源key,英文,用来做业务")
     private String key;
 
-    @Schema(description = "资源名称,中文用来做标识", required = true)
+    @Schema(description = "资源名称,中文用来做标识", required = false)
     @Column("m_name")
     @Comment("资源名称,中文用来做标识")
     private String name;

@@ -28,7 +28,7 @@
         {{ useAppStore().enableI8n ? $t(route.breadcrumbName) : route.breadcrumbName }}
       </span>
       <router-link v-else-if="routes.indexOf(route) === 0" :to="{ path: route.path, params }">
-        <icon-font type="icon-home" />
+        <icon-font type="nutz-home" />
         {{ useAppStore().enableI8n ? $t(route.breadcrumbName) : route.breadcrumbName }}
       </router-link>
       <router-link v-else :to="{ path: route.path, params }">

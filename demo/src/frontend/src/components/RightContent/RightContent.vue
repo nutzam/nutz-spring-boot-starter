@@ -1,59 +1,46 @@
 <template>
   <div style="margin-right: 12px">
     <a-space>
-      <a style="padding: 0 12px; display: inline-block; user-select: none" @click="handleClick">
-        <a-avatar shape="square" size="small">
-          <template #icon>
-            <icon-font type="icon-palette" />
-          </template>
-        </a-avatar>
+      <a style="padding: 0 4px; display: inline-block; user-select: none" @click="handleClick">
+        <icon-font type="nutz-palette" />
       </a>
       <a-dropdown>
         <template #overlay>
           <a-menu v-model:selectedKeys="currentLanguage" @click="switchLanguage">
             <a-menu-item key="zh_CN">
               <template #icon>
-                <icon-font type="icon-chinese" />
+                <icon-font type="nutz-chinese" />
               </template>
               <span>中文-简体</span>
             </a-menu-item>
             <a-menu-item key="en_US">
               <template #icon>
-                <icon-font type="icon-english" />
+                <icon-font type="nutz-english" />
               </template>
               <span>English</span>
             </a-menu-item>
           </a-menu>
         </template>
-        <a-avatar shape="square" size="small">
-          <template #icon>
-            <icon-font type="icon-language" />
-          </template>
-        </a-avatar>
+        <icon-font type="nutz-language" />
       </a-dropdown>
       <a-dropdown>
         <template #overlay>
           <a-menu>
             <a-menu-item>
               <template #icon>
-                <icon-font type="icon-settings" />
+                <icon-font type="nutz-settings" />
               </template>
               <span>个人设置</span>
             </a-menu-item>
             <a-menu-item>
               <template #icon>
-                <icon-font type="icon-logout" />
+                <icon-font type="nutz-logout" />
               </template>
               <span>退出登录</span>
             </a-menu-item>
           </a-menu>
         </template>
-        <a-avatar shape="square" size="small">
-          <template #icon>
-            <icon-font type="icon-default-user" />
-          </template>
-          {{ currentUser.nickname }}
-        </a-avatar>
+        <icon-font :title="currentUser.nickname" type="nutz-user" />
       </a-dropdown>
     </a-space>
   </div>

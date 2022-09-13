@@ -20,13 +20,11 @@ import lombok.RequiredArgsConstructor;
 import tech.riemann.nutz.demo.entity.dictionary.Group;
 import tech.riemann.nutz.demo.service.dictionary.GroupService;
 /**
- * <p>
  * 码本分组 前端控制器
- * </p>
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09 23:34:36
+ * @since 2022-09-13 09:49:04
  */
 @RestController
 @RequiredArgsConstructor

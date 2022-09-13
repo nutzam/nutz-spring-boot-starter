@@ -2,7 +2,6 @@ package tech.riemann.nutz.demo.entity.dictionary;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
-import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,7 +19,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-10 00:29:21
+ * @since 2022-09-13 09:49:04
  */
 @Data
 @SuperBuilder
@@ -37,13 +36,11 @@ public class Group extends IdBaseEntity{
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "分组唯一键", required = true)
-    @Name
-    //@Prev(els=@EL("uuid(32)")) 这样就可以生成主键
     @Column("g_key")
     @Comment("分组唯一键")
     private String key;
 
-    @Schema(description = "分组名称", required = true)
+    @Schema(description = "分组名称", required = false)
     @Column("g_name")
     @Comment("分组名称")
     private String name;
@@ -53,7 +50,7 @@ public class Group extends IdBaseEntity{
     @Comment("分组描述")
     private String description;
 
-    @Schema(description = "禁用标识", required = true)
+    @Schema(description = "禁用标识", required = false)
     @Column("g_disabled")
     @Comment("禁用标识")
     private Boolean disabled;

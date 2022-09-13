@@ -33,9 +33,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 <% } %>
 /**
- * <p>
  * ${table.comment!} 前端控制器
- * </p>
  *
  * @author ${author}
  *

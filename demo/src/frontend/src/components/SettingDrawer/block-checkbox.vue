@@ -4,7 +4,7 @@
       <div :class="`${baseClassName}-item`" :style="item.disable ? disableStyle : {}" @click="handleChange(item)">
         <img :src="item.url" :alt="item.key" />
         <div :class="`${baseClassName}-selectIcon`" :style="{ display: value === item.key ? 'block' : 'none' }">
-          <icon-font type="icon-checked" />
+          <icon-font type="nutz-checked" />
         </div>
       </div>
     </a-tooltip>

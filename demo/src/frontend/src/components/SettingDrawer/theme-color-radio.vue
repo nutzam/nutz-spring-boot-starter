@@ -6,8 +6,8 @@
       </template>
       <a-tag class="setting-drawer-theme-color-colorBlock" :color="option.color" @click="changeColor(option.color)">
         <template #icon>
-          <icon-font v-if="checked" type="icon-checked" />
-          <icon-font v-else type="icon-blank"></icon-font>
+          <icon-font v-if="checked" type="nutz-checked" />
+          <icon-font v-else type="nutz-blank"></icon-font>
         </template>
       </a-tag>
     </a-tooltip>

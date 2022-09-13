@@ -21,13 +21,11 @@ import tech.riemann.nutz.demo.entity.dictionary.Dictionary;
 import tech.riemann.nutz.demo.service.dictionary.DictionaryService;
 
 /**
- * <p>
  * 码本数据 前端控制器
- * </p>
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09 23:34:36
+ * @since 2022-09-13 09:49:04
  */
 @RestController
 @RequiredArgsConstructor

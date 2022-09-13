@@ -2,8 +2,8 @@
   <a-drawer v-model:visible="visible" :width="300" placement="right" :closable="false">
     <template #handle>
       <div class="ant-pro-setting-drawer-handle" @click="handleShowDrawer">
-        <icon-font v-if="!visible" type="icon-cogs" />
-        <icon-font v-else type="icon-close" />
+        <icon-font v-if="!visible" type="nutz-cogs" />
+        <icon-font v-else type="nutz-close" />
       </div>
     </template>
     <div class="margin-bottom: 24px">

@@ -20,13 +20,11 @@ import lombok.RequiredArgsConstructor;
 import tech.riemann.nutz.demo.entity.acl.Button;
 import tech.riemann.nutz.demo.service.acl.ButtonService;
 /**
- * <p>
  * 操作按钮 前端控制器
- * </p>
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-09 23:34:34
+ * @since 2022-09-13 09:49:03
  */
 @RestController
 @RequiredArgsConstructor
