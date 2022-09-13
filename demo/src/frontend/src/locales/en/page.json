@@ -1,0 +1,12 @@
+{
+  "demos": {
+    "print": "Print Table",
+    "columns": {
+      "name": "Name",
+      "members": "Members",
+      "repositories": "Repositories",
+      "description": "Description",
+      "id": "ID"
+    }
+  }
+}

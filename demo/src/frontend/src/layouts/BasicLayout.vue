@@ -1,174 +1,138 @@
 <template>
   <pro-layout
-    :menus="menus"
-    :collapsed="collapsed"
-    :media-query="query"
-    :is-mobile="isMobile"
-    :handle-media-query="handleMediaQuery"
-    :handle-collapse="handleCollapse"
-    :i18n-render="i18nRender"
-    v-bind="settings"
+    v-model:collapsed="state.collapsed"
+    v-model:selectedKeys="state.selectedKeys"
+    v-model:openKeys="state.openKeys"
+    v-model:locale="translate"
+    :loading="loading"
+    :menu-data="menuData"
+    :breadcrumb="{ routes: breadcrumb }"
+    disable-content-margin
+    style="min-height: 100vh"
+    :iconfont-url="config.layout.iconfontUrl"
+    v-bind="proConfig"
+    @collapse="onCollapse"
   >
-    <setting-drawer
-      :settings="settings"
-      @change="handleSettingChange"
-      :lang="AppModule.lang"
-      v-if="AppModule.showDrawer"
-    />
     <template #menuHeaderRender>
-      <span>
-        <logo-svg />
-        <h1>{{ AppModule.title.substr(0, 12) }}</h1>
-      </span>
+      <router-link :to="{ path: '/' }">
+        <img :src="logo" />
+        <h1>{{ useAppStore().title }}</h1>
+      </router-link>
     </template>
     <template #rightContentRender>
-      <right-content
-        :top-menu="settings.layout === 'topmenu'"
-        :is-mobile="isMobile"
-        :theme="settings.theme"
-      />
+      <RightContent :current-user="currentUser" />
     </template>
+    <!-- custom breadcrumb itemRender  -->
+    <template #breadcrumbRender="{ route, params, routes }">
+      <span v-if="routes.indexOf(route) === routes.length - 1">
+        {{ useAppStore().enableI8n ? $t(route.breadcrumbName) : route.breadcrumbName }}
+      </span>
+      <router-link v-else-if="routes.indexOf(route) === 0" :to="{ path: route.path, params }">
+        <icon-font type="icon-home" />
+        {{ useAppStore().enableI8n ? $t(route.breadcrumbName) : route.breadcrumbName }}
+      </router-link>
+      <router-link v-else :to="{ path: route.path, params }">
+        {{ useAppStore().enableI8n ? $t(route.breadcrumbName) : route.breadcrumbName }}
+      </router-link>
+    </template>
+    <SettingDrawer v-model="proConfig" />
+    <WaterMark :content="useAppStore().title">
+      <RouterView v-slot="{ Component, route }">
+        <transition name="slide-left" mode="out-in">
+          <component :is="Component" :key="route.path" />
+        </transition>
+      </RouterView>
+    </WaterMark>
     <template #footerRender>
-      <global-footer />
+      <GlobalFooter :links="[]" :copyright="useAppStore().copyright"></GlobalFooter>
     </template>
-    <router-view />
-    <div class="uuid_no_show">{{ AppModule.uuid }}</div>
   </pro-layout>
 </template>
-<script lang="ts">
-import { Component, Mixins } from "vue-property-decorator";
-import { SettingDrawer } from "@ant-design-vue/pro-layout";
-import { i18nRender } from "@/locales";
 
-import RightContent from "@/components/GlobalHeader/RightContent.vue";
-import GlobalFooter from "@/components/GlobalFooter/index.vue";
-import LogoSvg from "@/assets/logo.svg?inline";
-import { Mixin } from "@/utils/mixin";
-import { AppModule } from "../store/modules/app";
-import { CONTENT_WIDTH_TYPE } from "@/store/mutation-types";
-import { dynamicFilteredMenus } from "@/utils/auth";
-import { RouteConfig } from "vue-router";
+<script setup lang="ts">
+import { useRouter, RouterView, RouterLink } from 'vue-router';
+import { translate as translateFN } from '@/locales';
 
-@Component({
-  components: { SettingDrawer, RightContent, GlobalFooter, LogoSvg },
-})
-export default class BasicLayout extends Mixins(Mixin) {
-  menus: Array<unknown> | undefined = undefined;
-  collapsed = true;
-  settings = {
-    layout: AppModule.layout,
-    contentWidth:
-      AppModule.layout === "sidemenu"
-        ? CONTENT_WIDTH_TYPE.Fluid
-        : AppModule.contentWidth,
-    theme: AppModule.theme,
-    primaryColor: AppModule.color,
-    fixedHeader: AppModule.fixedHeader,
-    fixSiderbar: AppModule.fixedSidebar,
-    colorWeak: AppModule.weak,
-    hideHintAlert: true,
-    hideCopyButton: true,
-  };
-  query = {};
-  isMobile = false;
-  i18nRender = i18nRender;
-  created(): void {
-    const routers = this.$router.options && this.$router.options.routes;
-    const menu =
-      routers == undefined
-        ? undefined
-        : routers.find((route) => route.path === "/index");
-    this.menus = this.getMenuData(menu == undefined ? [] : menu.children);
-    this.$watch("collapsed", () => {
-      AppModule.SIDEBAR_TYPE(this.collapsed);
-    });
-    this.$watch("isMobile", () => {
-      AppModule.TOGGLE_MOBILE_TYPE(this.isMobile);
-    });
-  }
+import {
+  getMenuData,
+  clearMenuItem,
+  type RouteContextProps,
+  WaterMark,
+  GlobalFooter,
+} from '@ant-design-vue/pro-layout';
+import { IconFont } from '@/components/IconFont/IconFont';
+import logo from '@/assets/logo.png';
+import { config } from '@/core/settings';
+import { useAppStore } from '@/store/app';
 
-  getMenuData(routes: Array<RouteConfig> = []): Array<unknown> | undefined {
-    return dynamicFilteredMenus(routes);
-  }
+const translate = config.enableI8n ? translateFN : (s: string) => s;
 
-  mounted(): void {
-    const userAgent = navigator.userAgent;
-    if (userAgent.indexOf("Edge") > -1) {
-      this.$nextTick(() => {
-        this.collapsed = !this.collapsed;
-        setTimeout(() => {
-          this.collapsed = !this.collapsed;
-        }, 16);
-      });
+const router = useRouter();
+const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
+const state = reactive<Omit<RouteContextProps, 'menuData'>>({
+  collapsed: useAppStore().layout.collapsed, // default collapsed
+  openKeys: [], // default openKeys
+  selectedKeys: [], // default selectedKeys
+});
+const loading = ref(false);
+const proConfig = ref({
+  collapsedWidth: useAppStore().layout.collapsedWidth,
+  contentWidth: useAppStore().layout.contentWidth,
+  disableContentMargin: useAppStore().layout.disableContentMargin,
+  disableMobile: useAppStore().layout.disableMobile,
+  fixSiderbar: useAppStore().layout.fixSiderbar,
+  fixedHeader: useAppStore().layout.fixedHeader,
+  headerHeight: useAppStore().layout.headerHeight,
+  headerTheme: useAppStore().layout.headerTheme,
+  layout: useAppStore().layout.layout,
+  navTheme: useAppStore().layout.navTheme,
+  title: useAppStore().title,
+  splitMenus: useAppStore().layout.splitMenus,
+  menuHeaderRender: undefined,
+  footerRender: undefined,
+  headerRender: undefined,
+});
+const breadcrumb = computed(() => {
+  const currentRouteValue = router.currentRoute.value;
+  const params = currentRouteValue.params;
+  return currentRouteValue.matched.concat().map(item => {
+    let path = item.path;
+    if (/:/.test(path)) {
+      // 在面包屑的 url 中加上正确的路径参数
+      const matchedPathParams = path.match(/:[^/]*/g);
+      if (matchedPathParams) {
+        matchedPathParams.forEach(matchedPathParam => {
+          path = path.replace(
+            matchedPathParam,
+            String(params[matchedPathParam.replace(':', '').replace('?', '')] || ''),
+          );
+        });
+      }
     }
-  }
+    return {
+      path,
+      breadcrumbName: item.meta.title || '',
+    };
+  });
+});
+const currentUser = reactive({
+  nickname: 'Admin',
+  avatar: 'A',
+});
 
-  handleMediaQuery(val: { "screen-xs"?: string }): void {
-    this.query = val;
-    if (this.isMobile && !val["screen-xs"]) {
-      this.isMobile = false;
-      return;
-    }
-    if (!this.isMobile && val["screen-xs"]) {
-      this.isMobile = true;
-      this.collapsed = false;
-      this.settings.contentWidth = CONTENT_WIDTH_TYPE.Fluid;
-    }
-  }
+const onCollapse = (collapsed: boolean): void => {
+  useAppStore().collapsedChange(collapsed);
+};
 
-  handleCollapse(val: boolean): void {
-    this.collapsed = val;
-  }
-
-  handleSettingChange({
-    type,
-    value,
-  }: {
-    type: string;
-    value: boolean | string;
-  }): void {
-    switch (type) {
-      case "theme":
-        AppModule.ToggleNavTheme(String(value));
-        this.settings.theme = String(value);
-        break;
-      case "primaryColor":
-        AppModule.TogglePrimaryColor(String(value));
-        this.settings.primaryColor = String(value);
-        break;
-      case "contentWidth":
-        AppModule.ToggleContentWidth(String(value));
-        this.settings[type] = value;
-        break;
-      case "fixedHeader":
-        AppModule.ToggleFixedHeader(Boolean(value));
-        this.settings[type] = value;
-        break;
-      case "fixSiderbar":
-        AppModule.ToggleFixSiderbar(Boolean(value));
-        this.settings[type] = value;
-        break;
-      case "colorWeak":
-        AppModule.ToggleColorWeak(Boolean(value));
-        this.settings[type] = value;
-        break;
-      case "layout":
-        AppModule.ToggleLayoutMode(String(value));
-        this.settings.layout = String(value);
-        if (value === "sidemenu") {
-          this.settings.contentWidth = CONTENT_WIDTH_TYPE.Fluid;
-        } else {
-          this.settings.fixSiderbar = false;
-          this.settings.contentWidth = CONTENT_WIDTH_TYPE.Fixed;
-        }
-        break;
-      default:
-        break;
-    }
-    AppModule.refresh();
-  }
-}
+watch(
+  router.currentRoute,
+  () => {
+    const matched = router.currentRoute.value.matched.concat();
+    state.selectedKeys = matched.filter(r => r.name !== 'index').map(r => r.path);
+    state.openKeys = matched.filter(r => r.path !== router.currentRoute.value.path).map(r => r.path);
+  },
+  {
+    immediate: true,
+  },
+);
 </script>
-<style lang="less">
-@import "./BasicLayout.less";
-</style>

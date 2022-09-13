@@ -1,0 +1,27 @@
+{
+  "setting": {
+    "navMode": "Mavigation Mode",
+    "layout": "Layout",
+    "fixedHeader": "Fixd Header",
+    "on": "ON",
+    "off": "OFF",
+    "fixSiderbar": "Fixed Siderbar",
+    "splitMenus": "Auto Split Menu",
+    "content": "Content Area",
+    "showHeader": "Show Header",
+    "showFooter": "Show Footer",
+    "showMenu": "Show Menu",
+    "showLogo": "Show Logo",
+    "themeColor": "Theme Color",
+    "theme": {
+      "dust": "Dust",
+      "volcano": "Volcano",
+      "sunset": "Sunset",
+      "cyan": "Cyan",
+      "polar": "Polar",
+      "daybreak": "Daybreak",
+      "geek": "Geek",
+      "purple": "Purple"
+    }
+  }
+}

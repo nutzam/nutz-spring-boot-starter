@@ -1,0 +1,15 @@
+{
+  "home": "首页",
+  "dashboard": "控制台",
+  "management": "管理页",
+  "version": "组件版本",
+  "p1": "一级页面",
+  "p2": "二级页面",
+  "dynamic": "动态参数",
+  "demos": "组件演示",
+  "table": "表格组件",
+  "form": "表单组件",
+  "organization": "组织机构",
+  "department": "部门管理",
+  "user": "用户管理"
+}

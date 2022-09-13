@@ -1,203 +1,56 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
- * @description 用户模块
+ * @description 用户
+ *
  */
-import add from './add';
-import edit from './edit';
-import get from './get';
-import remove from './remove';
-import grant from './grant';
-import grantInfo, { GrantInfoParams } from './grantInfo';
-import roles from './roles';
-import grantRoles from './grantRoles';
-import permissions from './permissions';
-import search, { SearchParams } from './search';
+import saveOrUpdateUser from './saveOrUpdateUser';
+import userDetail from './userDetail';
+import deleteUser from './deleteUser';
+import users from './users';
+import type { Pagination } from '@/api/api';
 
-export class UserApi {
-  constructor(
-    public add: (
-      user: acl.User,
-
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: acl.User;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-
-    public edit: (
-      user: acl.User,
-
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: void;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-
-    public get: (
-      id: number,
-
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: acl.User;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-
-    public remove: (
-      id: number,
-
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: void;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-
-    public grant: (
-      id: number,
-      actionInfos: Array<string>,
-
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: void;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-
-    public grantInfo: (
-      id: number,
-
-      params: GrantInfoParams,
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: Array<acl.ModuleInfo>;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-
-    public roles: (
-      id: number,
-
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: Array<acl.RoleInfo>;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-
-    public grantRoles: (
-      id: number,
-      roles: Array<number>,
-
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: void;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-
-    public permissions: (
-      id: number,
-
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: acl.PermissionInfo;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-
-    public search: (
-      params: SearchParams,
-      success?: ({
-        data,
-        ext,
-        state,
-        errors,
-      }: {
-        data: acl.Pagination<acl.User>;
-        ext: ObjectMap;
-        state: 'SUCCESS' | 'FAIL' | 'EXCEPTION';
-        errors?: Array<string>;
-      }) => any,
-      fail?: (error: string) => any,
-    ) => void,
-  ) {}
+export interface UsersParams {
+  /** 页码 */
+  page?: number;
+  /** 页面大小 */
+  size?: number;
+  /** 搜索关键词 */
+  key?: string;
 }
 
+export interface UserApi {
+  /** 增加/编辑用户 */
+  saveOrUpdateUser: (
+    /** 请求体 */
+    requestBody: acl.User,
+
+    success?: (data: acl.User) => void,
+    fail?: (error: string) => void,
+  ) => void;
+
+  /** 用户详情 */
+  userDetail: (
+    /** 用户id */
+    id: number,
+
+    success?: (data: acl.User) => void,
+    fail?: (error: string) => void,
+  ) => void;
+
+  /** 删除用户 */
+  deleteUser: (
+    /** 用户id */
+    id: number,
+
+    success?: (data: void) => void,
+    fail?: (error: string) => void,
+  ) => void;
+
+  /** 分页查询用户 */
+  users: (params: UsersParams, success?: (data: Pagination<acl.User>) => void, fail?: (error: string) => void) => void;
+}
 export default {
-  add,
-  edit,
-  get,
-  remove,
-  grant,
-  grantInfo,
-  roles,
-  grantRoles,
-  permissions,
-  search,
+  saveOrUpdateUser,
+  userDetail,
+  deleteUser,
+  users,
 } as UserApi;

@@ -1,0 +1,35 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "mock/**/*",
+    "src/**/*.json",
+    "src/**/*.vue"
+, "src/store/.ts"  ],
+  "exclude": [
+    "src/**/__tests__/*",
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "vue-types": [
+        "../../node_modules/vue-types"
+      ],
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "types": [
+      "vite/client"
+    ]
+  }
+}

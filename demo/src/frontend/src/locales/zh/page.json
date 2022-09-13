@@ -1,0 +1,12 @@
+{
+  "demos": {
+    "print": "打印表格",
+    "columns": {
+      "name": "名称",
+      "members": "成员数",
+      "repositories": "仓库数",
+      "description": "描述",
+      "id": "编号"
+    }
+  }
+}

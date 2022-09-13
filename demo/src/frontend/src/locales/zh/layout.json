@@ -1,0 +1,27 @@
+{
+  "setting": {
+    "navMode": "导航模式",
+    "layout": "布局设置",
+    "fixedHeader": "固定顶栏",
+    "on": "开",
+    "off": "关",
+    "fixSiderbar": "固定左侧菜单",
+    "splitMenus": "自动分割菜单",
+    "content": "内容区域",
+    "showHeader": "显示顶栏",
+    "showFooter": "显示页脚",
+    "showMenu": "显示菜单",
+    "showLogo": "显示Logo",
+    "themeColor": "主题颜色",
+    "theme": {
+      "dust": "薄暮",
+      "volcano": "火山",
+      "sunset": "日暮",
+      "cyan": "明青",
+      "polar": "极光绿",
+      "daybreak": "拂晓",
+      "geek": "极客蓝",
+      "purple": "酱紫"
+    }
+  }
+}

@@ -1,33 +1,21 @@
-import { PluginObject } from "vue";
+import type { App } from 'vue';
+import { default as aclApi, type AclApi } from './acl/mods';
 
-import { default as aclApi, AclApi } from "./acl/mods";
+import { default as authApi, type AuthApi } from './auth/mods';
 
-import { default as dictionaryApi, DictionaryApi } from "./dictionary/mods";
-
-import { default as loginApi, LoginApi } from "./login/mods";
-
-import { default as wechatApi, WechatApi } from "./wechat/mods";
+import { default as codeApi, type CodeApi } from './code/mods';
 
 export interface Api {
   aclApi: AclApi;
-  dictionaryApi: DictionaryApi;
-  loginApi: LoginApi;
-  wechatApi: WechatApi;
+  authApi: AuthApi;
+  codeApi: CodeApi;
+  install: (app: App) => void;
 }
-
-export const ApiPlugin: PluginObject<Api> = {
-  install: (Vue) => {
-    Object.defineProperties(Vue.prototype, {
-      $api: {
-        get() {
-          return {
-            aclApi,
-            dictionaryApi,
-            loginApi,
-            wechatApi,
-          };
-        },
-      },
-    });
+export const api: Api = {
+  aclApi,
+  authApi,
+  codeApi,
+  install: (app: App) => {
+    app.config.globalProperties.$api = api;
   },
 };

@@ -1,0 +1,15 @@
+{
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "management": "Management",
+  "version": "Version",
+  "p1": "Level 1",
+  "p2": "Level 2",
+  "dynamic": "Dynamic",
+  "demos": "Demo",
+  "table": "Table",
+  "form": "Form",
+  "organization": "Organization",
+  "department": "Department",
+  "user": "User"
+}

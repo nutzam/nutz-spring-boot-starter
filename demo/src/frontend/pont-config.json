@@ -1,12 +1,25 @@
 {
-  "originUrl": "",
   "outDir": "./src/api",
-  "templatePath": "./serviceTemplate",
+  "templatePath": "./pontTemplate",
   "usingMultipleOrigins": true,
   "origins": [
     {
-      "name": "login",
-      "originUrl": "http://localhost:8080/v2/api-docs?group=acl"
+      "name": "acl",
+      "originUrl": "http://127.0.0.1:7777/v3/api-docs/acl",
+      "originType": "SwaggerV3",
+      "usingOperationId": true
+    },
+    {
+      "name": "auth",
+      "originUrl": "http://127.0.0.1:7777/v3/api-docs/auth",
+      "originType": "SwaggerV3",
+      "usingOperationId": true
+    },
+    {
+      "name": "code",
+      "originUrl": "http://127.0.0.1:7777/v3/api-docs/dictionary",
+      "originType": "SwaggerV3",
+      "usingOperationId": true
     }
   ]
 }

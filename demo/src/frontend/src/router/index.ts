@@ -1,147 +1,101 @@
-import Vue from "vue";
-import VueRouter, { RawLocation, Route, RouteConfig } from "vue-router";
-import "@/components/NProgress/nprogress.less"; // progress bar custom style
-import NProgress from "nprogress";
+import { createRouter, createWebHashHistory } from 'vue-router';
+import BasicLayout from '../layouts/BasicLayout.vue';
+import BlankLayout from '../layouts/BlankLayout.vue';
+import WelcomePage from '../views/Page1.vue';
 
-Vue.use(VueRouter);
-NProgress.configure({ showSpinner: false });
-
-const routes: Array<RouteConfig> = [
-  {
-    path: "/wechat/login/qr",
-    name: "QRLogin",
-    component: () => import("../views/user/QRLogin.vue"),
-  },
-  {
-    path: "/wechat/login",
-    name: "QRLogin",
-    component: () => import("../views/user/WechatLogin.vue"),
-  },
-  {
-    path: "/",
-    redirect: "/user",
-  },
-  {
-    path: "/user",
-    redirect: "/user/login",
-    component: () => import("@/layouts/UserLayout.vue"),
-    children: [
-      {
-        path: "/user/login",
-        name: "Login",
-        component: () => import("../views/user/Login.vue"),
-      },
-    ],
-  },
-  {
-    path: "/index",
-    name: "index",
-    component: () => import("@/layouts/BasicLayout.vue"),
-    meta: {
-      title: "index",
-      icon: "home",
+export default createRouter({
+  history: createWebHashHistory(),
+  routes: [
+    {
+      path: '/',
+      name: 'index',
+      meta: { title: 'menus.home' },
+      component: BasicLayout,
+      redirect: '/welcome',
+      children: [
+        {
+          path: '/welcome',
+          name: 'welcome',
+          meta: { title: 'menus.dashboard', icon: 'icon-dashboard' },
+          component: WelcomePage,
+        },
+        {
+          path: '/organization',
+          name: 'organization',
+          meta: { title: 'menus.organization', icon: 'icon-organization', flat: true },
+          component: BlankLayout,
+          redirect: () => ({ name: 'department' }),
+          children: [
+            {
+              path: 'department',
+              name: 'department',
+              meta: { title: 'menus.department', icon: 'icon-department' },
+              component: () => import('../views/department/department-table.vue'),
+            },
+            {
+              path: 'user',
+              name: 'user',
+              meta: { title: 'menus.user', icon: 'icon-user' },
+              component: () => import('../views/admins/PageTypography.vue'),
+            },
+          ],
+        },
+        {
+          path: '/admins',
+          name: 'admins',
+          meta: { title: 'menus.management', icon: 'icon-management', flat: true },
+          component: BlankLayout,
+          redirect: () => ({ name: 'page1' }),
+          children: [
+            {
+              path: 'page-1',
+              name: 'page1',
+              meta: { title: 'menus.p1', icon: 'icon-list' },
+              component: () => import('../views/admins/PageInfo.vue'),
+            },
+            {
+              path: 'page-2',
+              name: 'page2',
+              meta: { title: 'menus.p2', icon: 'icon-list' },
+              component: () => import('../views/admins/PageTypography.vue'),
+            },
+            {
+              path: 'dynamic-match/:id(\\d+)',
+              name: 'dynamic-match',
+              // 路由 path 默认参数再 meta.params 里
+              meta: { title: 'menus.dynamic', params: { id: 1 }, icon: 'icon-list' },
+              component: () => import('../views/admins/DynamicMatch.vue'),
+            },
+          ],
+        },
+        {
+          path: '/demos',
+          name: 'demos',
+          meta: { title: 'menus.demos', icon: 'icon-demo', flat: true },
+          component: BlankLayout,
+          redirect: () => ({ name: 'table' }),
+          children: [
+            {
+              path: 'table',
+              name: 'table',
+              meta: { title: 'menus.table', icon: 'icon-table' },
+              component: () => import('../views/demos/demo-table.vue'),
+            },
+            {
+              path: 'form',
+              name: 'form',
+              meta: { title: 'menus.form', icon: 'icon-form' },
+              component: () => import('../views/demos/demo-form.vue'),
+            },
+          ],
+        },
+        {
+          path: '/version',
+          name: 'version',
+          meta: { title: 'menus.version', icon: 'icon-version' },
+          component: () => import('../views/Detail.vue'),
+        },
+      ],
     },
-    redirect: "/dashboard",
-    children: [
-      {
-        path: "/dashboard",
-        name: "dashboard",
-        component: () => import("@/views/About.vue"),
-        meta: {
-          title: "dashboard",
-          keepAlive: true,
-          icon: "dashboard",
-        },
-      },
-      {
-        path: "/acl",
-        name: "acl",
-        redirect: "/acl/user",
-        component: () => import("@/layouts/PageView.vue"),
-        meta: {
-          title: "acl",
-          keepAlive: true,
-          icon: "eye",
-        },
-        children: [
-          {
-            path: "/acl/user",
-            name: "user",
-            component: () => import("@/views/acl/user/UserList.vue"),
-            meta: {
-              title: "acl.user",
-              keepAlive: true,
-              icon: "user",
-            },
-          },
-          {
-            path: "/acl/role",
-            name: "role",
-            component: () => import("@/views/acl/role/RoleList.vue"),
-            meta: {
-              title: "acl.role",
-              keepAlive: true,
-              icon: "lock",
-            },
-          },
-          {
-            path: "/acl/permission",
-            name: "permission",
-            component: () => import("@/views/acl/module/ModuleList.vue"),
-            meta: {
-              title: "acl.permission",
-              keepAlive: true,
-              icon: "flag",
-            },
-          },
-        ],
-      },
-      {
-        path: "/dictionary",
-        name: "dictionary",
-        component: () => import("@/layouts/PageView.vue"),
-        redirect: "/dictionary/tree",
-        meta: {
-          title: "dictionary",
-          keepAlive: true,
-          icon: "book",
-        },
-        children: [
-          {
-            path: "/dictionary/tree",
-            name: "DictionaryTree",
-            component: () => import("@/views/dictionary/Dictionary.vue"),
-            meta: {
-              title: "dictionary",
-              icon: "book",
-              keepAlive: false,
-            },
-          },
-        ],
-      },
-    ],
-  },
-  {
-    path: "/about",
-    name: "About",
-    component: () => import("../views/About.vue"),
-  },
-];
-
-const router = new VueRouter({
-  routes,
+  ],
 });
-router.beforeEach(
-  (to: Route, from: Route, next: (to?: RawLocation | false | void) => void) => {
-    if (to.path !== from.path) {
-      NProgress.start();
-    }
-    next();
-  }
-);
-
-router.afterEach(() => {
-  NProgress.done();
-});
-
-export default router;

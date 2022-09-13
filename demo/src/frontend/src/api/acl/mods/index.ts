@@ -1,23 +1,21 @@
-import action, { ActionApi } from './action';
+import button, { type ButtonApi } from './button';
 
-import module, { ModuleApi } from './module';
+import menu, { type MenuApi } from './menu';
 
-import role, { RoleApi } from './role';
+import role, { type RoleApi } from './role';
 
-import user, { UserApi } from './user';
+import user, { type UserApi } from './user';
 
-export class AclApi {
-  constructor(
-    public action: ActionApi,
-    public module: ModuleApi,
-    public role: RoleApi,
-    public user: UserApi,
-  ) {}
+export interface AclApi {
+  button: ButtonApi;
+  menu: MenuApi;
+  role: RoleApi;
+  user: UserApi;
 }
 
 export default {
-  action,
-  module,
+  button,
+  menu,
   role,
   user,
 } as AclApi;
