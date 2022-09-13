@@ -3,6 +3,7 @@
     "mods": [
       {
         "description": "操作按钮",
+        "name": "button",
         "interfaces": [
           {
             "description": "增加/编辑操作按钮",
@@ -161,11 +162,11 @@
               }
             ]
           }
-        ],
-        "name": "button"
+        ]
       },
       {
         "description": "菜单",
+        "name": "menu",
         "interfaces": [
           {
             "description": "增加/编辑菜单",
@@ -324,11 +325,11 @@
               }
             ]
           }
-        ],
-        "name": "menu"
+        ]
       },
       {
         "description": "角色",
+        "name": "role",
         "interfaces": [
           {
             "description": "增加/编辑角色",
@@ -487,8 +488,7 @@
               }
             ]
           }
-        ],
-        "name": "role"
+        ]
       },
       {
         "description": "用户",
@@ -523,6 +523,32 @@
                 }
               }
             ]
+          },
+          {
+            "description": "用户性别",
+            "name": "sexes",
+            "method": "get",
+            "path": "/user/sexes",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Codebook",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
           },
           {
             "description": "用户详情",
@@ -589,6 +615,38 @@
             ]
           },
           {
+            "description": "重置密码",
+            "name": "resetPassword",
+            "method": "patch",
+            "path": "/user/{name}/password",
+            "response": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "description": "用户名",
+                "required": true,
+                "in": "path",
+                "name": "name",
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
             "description": "分页查询用户",
             "name": "users",
             "method": "get",
@@ -634,6 +692,24 @@
                 }
               },
               {
+                "description": "性别",
+                "required": false,
+                "in": "query",
+                "name": "sex",
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [
+                    "'MALE'",
+                    "'FEMALE'"
+                  ],
+                  "typeProperties": []
+                }
+              },
+              {
                 "description": "搜索关键词",
                 "required": false,
                 "in": "query",
@@ -659,6 +735,7 @@
       {
         "description": "操作按钮",
         "name": "Button",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -712,7 +789,7 @@
             },
             "name": "installed",
             "description": "是否内置,内置的没有资源归属",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -740,7 +817,7 @@
             },
             "name": "menuKey",
             "description": "归属资源key,如果内置为空",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -754,7 +831,7 @@
             },
             "name": "name",
             "description": "操作名称,中文用来做标识",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -769,12 +846,61 @@
             "name": "updatedTime",
             "required": false
           }
+        ]
+      },
+      {
+        "description": "枚举码本",
+        "name": "Codebook",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "code",
+            "description": "码本编码",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "description",
+            "description": "码本名称",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "name",
+            "description": "码本值",
+            "required": true
+          }
         ],
         "templateArgs": []
       },
       {
         "description": "菜单",
         "name": "Menu",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -842,7 +968,7 @@
             },
             "name": "name",
             "description": "资源名称,中文用来做标识",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -871,11 +997,11 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "NutMap",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -922,11 +1048,11 @@
             "name": "empty",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PaginationButton",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1074,11 +1200,11 @@
             "name": "recordCount",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PaginationMenu",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1226,11 +1352,11 @@
             "name": "recordCount",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PaginationRole",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1378,8 +1504,7 @@
             "name": "recordCount",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PaginationUser",
@@ -1535,6 +1660,7 @@
       },
       {
         "name": "ResultObject",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1618,12 +1744,12 @@
             "name": "success",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "角色",
         "name": "Role",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1691,7 +1817,7 @@
             },
             "name": "name",
             "description": "角色名称,中文用来做标识",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -1706,8 +1832,7 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "用户",
@@ -1738,7 +1863,7 @@
             },
             "name": "email",
             "description": "邮箱",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -1779,7 +1904,7 @@
             },
             "name": "mobile",
             "description": "手机号",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -1807,20 +1932,36 @@
             },
             "name": "password",
             "description": "密码",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "",
               "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [
+                "'MALE'",
+                "'FEMALE'"
+              ],
+              "typeProperties": []
+            },
+            "name": "sex",
+            "description": "性别",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "Codebook",
+              "isDefsType": true,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
               "enum": [],
               "typeProperties": []
             },
-            "name": "sex",
-            "description": "性别",
+            "name": "sexInfo",
             "required": false
           },
           {
@@ -1845,6 +1986,7 @@
     "mods": [
       {
         "description": "登录",
+        "name": "login",
         "interfaces": [
           {
             "description": "登录",
@@ -1876,14 +2018,14 @@
               }
             ]
           }
-        ],
-        "name": "login"
+        ]
       }
     ],
     "name": "auth",
     "baseClasses": [
       {
         "name": "AuthUser",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2002,11 +2144,11 @@
             "description": "用户名",
             "required": true
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "LoginDto",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2050,11 +2192,11 @@
             "description": "是否记住我",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "NutMap",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2101,11 +2243,11 @@
             "name": "empty",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ResultObject",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2189,8 +2331,7 @@
             "name": "success",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       }
     ]
   },
@@ -2198,6 +2339,7 @@
     "mods": [
       {
         "description": "码本数据",
+        "name": "dictionary",
         "interfaces": [
           {
             "description": "增加/编辑码本数据",
@@ -2356,11 +2498,11 @@
               }
             ]
           }
-        ],
-        "name": "dictionary"
+        ]
       },
       {
         "description": "码本分组",
+        "name": "group",
         "interfaces": [
           {
             "description": "增加/编辑码本分组",
@@ -2519,8 +2661,7 @@
               }
             ]
           }
-        ],
-        "name": "group"
+        ]
       }
     ],
     "name": "code",
@@ -2528,6 +2669,7 @@
       {
         "description": "码本数据",
         "name": "Dictionary",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2582,7 +2724,7 @@
             },
             "name": "groupKey",
             "description": "分组Key",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -2609,7 +2751,7 @@
             },
             "name": "index",
             "description": "序号",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -2623,7 +2765,7 @@
             },
             "name": "key",
             "description": "key",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -2664,14 +2806,14 @@
             },
             "name": "value",
             "description": "value",
-            "required": false
+            "required": true
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "码本分组",
         "name": "Group",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2712,7 +2854,7 @@
             },
             "name": "disabled",
             "description": "禁用标识",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -2753,7 +2895,7 @@
             },
             "name": "name",
             "description": "分组名称",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -2768,11 +2910,11 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "NutMap",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2819,11 +2961,11 @@
             "name": "empty",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PaginationDictionary",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2971,11 +3113,11 @@
             "name": "recordCount",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PaginationGroup",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3123,11 +3265,11 @@
             "name": "recordCount",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ResultObject",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3211,8 +3353,7 @@
             "name": "success",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       }
     ]
   }

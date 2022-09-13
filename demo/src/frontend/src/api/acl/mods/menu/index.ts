@@ -46,7 +46,11 @@ export interface MenuApi {
   ) => void;
 
   /** 分页查询菜单 */
-  menus: (params: MenusParams, success?: (data: Pagination<acl.Menu>) => void, fail?: (error: string) => void) => void;
+  menus: (
+    params: MenusParams,
+    success?: (data: Pagination<acl.Menu>) => void,
+    fail?: (error: string) => void,
+  ) => void;
 }
 export default {
   saveOrUpdateMenu,

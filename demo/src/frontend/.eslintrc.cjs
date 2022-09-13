@@ -20,5 +20,6 @@ module.exports = {
   },
   globals: {
     // 在这里可以添加各种命名空间和全局函数
+    acl: true,
   },
 };

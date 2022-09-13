@@ -8,5 +8,72 @@
       "description": "描述",
       "id": "编号"
     }
+  },
+  "users": {
+    "search": {
+      "placeholder": "请输入用户信息"
+    },
+    "add": "添加用户",
+    "sex": {
+      "placeholder": "性别"
+    },
+    "edit": "编辑用户",
+    "delete": "删除",
+    "reset": "重置密码",
+    "subTitle": "提供对用户信息的维护和权限操作",
+    "confirm": {
+      "reset": {
+        "description": "重置密码后用户需使用新密码进行登录",
+        "title": "确定要重置用户 {name} 的密码?"
+      },
+      "delete": {
+        "title": "确定要删除用户 {name} ?"
+      }
+    },
+    "notification": {
+      "success": "操作成功",
+      "delete": {
+        "description": "删除用户成功,用户列表将自动刷新"
+      },
+      "addOrEdit": {
+        "description": "用户添加/编辑成功,列表将自动刷新!"
+      }
+    },
+    "form": {
+      "add": {
+        "filed": {
+          "name": "用户名",
+          "password": "密码",
+          "fullName": "姓名"
+        },
+        "placeholder": {
+          "name": "请输入用户名",
+          "password": "请输入密码",
+          "fullName": "请输入真实姓名"
+        }
+      }
+    },
+    "modal": {
+      "reset": {
+        "title": "重置密码成功",
+        "description": "账号密码重置成功,请复制下方密码登录系统后自行修改密码."
+      }
+    }
+  },
+  "departmentUser": {
+    "form": {
+      "add": {
+        "filed": {
+          "mobile": "手机号",
+          "email": "邮箱",
+          "sex": "性别"
+        },
+        "placeholder": {
+          "mobile": "请输入手机号码",
+          "email": "请输入电子邮箱地址",
+          "sex": "请选择用户性别"
+        }
+      }
+    }
   }
 }

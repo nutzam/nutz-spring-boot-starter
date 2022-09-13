@@ -17,6 +17,11 @@ export const useAppStore = defineStore('app', {
       this.language = lang;
     },
   },
+  getters: {
+    isCN(state) {
+      return state.language === 'zh_CN';
+    },
+  },
   persist: {
     enabled: true,
     strategies: [

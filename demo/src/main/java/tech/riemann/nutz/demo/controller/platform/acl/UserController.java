@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,6 +76,12 @@ public class UserController {
     @Operation(summary = "用户性别")
     public List<Codebook> sexes() {
         return Arrays.stream(Sex.values()).map(ICodeBook::build).collect(Collectors.toList());
+    }
+
+    @PatchMapping("user/{name}/password")
+    @Operation(summary = "重置密码")
+    public String resetPassword(@Parameter(description = "用户名", required = true) @PathVariable("name") String name) {
+        return userService.resetPassword(name);
     }
 
     /**

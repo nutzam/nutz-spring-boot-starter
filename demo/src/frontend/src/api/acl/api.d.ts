@@ -13,16 +13,16 @@ declare namespace acl {
     id?: number;
 
     /** 是否内置,内置的没有资源归属 */
-    installed?: boolean;
+    installed: boolean;
 
     /** 操作key,英文,用来做业务 */
     key: string;
 
     /** 归属资源key,如果内置为空 */
-    menuKey?: string;
+    menuKey: string;
 
     /** 操作名称,中文用来做标识 */
-    name?: string;
+    name: string;
 
     /** updatedTime */
     updatedTime?: string;
@@ -45,7 +45,7 @@ declare namespace acl {
     key: string;
 
     /** 资源名称,中文用来做标识 */
-    name?: string;
+    name: string;
 
     /** 上级菜单key */
     parentKey?: string;
@@ -71,7 +71,7 @@ declare namespace acl {
     key: string;
 
     /** 角色名称,中文用来做标识 */
-    name?: string;
+    name: string;
 
     /** updatedTime */
     updatedTime?: string;
@@ -85,7 +85,7 @@ declare namespace acl {
     createdTime?: string;
 
     /** 邮箱 */
-    email?: string;
+    email: string;
 
     /** 真实姓名 */
     fullName?: string;
@@ -94,16 +94,19 @@ declare namespace acl {
     id?: number;
 
     /** 手机号 */
-    mobile?: string;
+    mobile: string;
 
     /** 用户名 */
     name: string;
 
     /** 密码 */
-    password?: string;
+    password: string;
 
     /** 性别 */
-    sex?: string;
+    sex: 'MALE' | 'FEMALE';
+
+    /** sexInfo */
+    sexInfo?: acl.Codebook;
 
     /** updatedTime */
     updatedTime?: string;

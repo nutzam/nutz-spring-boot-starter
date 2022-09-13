@@ -8,5 +8,22 @@
       "description": "Description",
       "id": "ID"
     }
+  },
+  "users": {
+    "search": {},
+    "form": {
+      "add": {
+        "filed": {},
+        "placeholder": {}
+      }
+    }
+  },
+  "departmentUser": {
+    "form": {
+      "add": {
+        "filed": {},
+        "placeholder": {}
+      }
+    }
   }
 }

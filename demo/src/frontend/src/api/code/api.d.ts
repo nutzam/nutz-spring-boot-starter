@@ -13,16 +13,16 @@ declare namespace code {
     disabled?: boolean;
 
     /** 分组Key */
-    groupKey?: string;
+    groupKey: string;
 
     /** id */
     id?: number;
 
     /** 序号 */
-    index?: number;
+    index: number;
 
     /** key */
-    key?: string;
+    key: string;
 
     /** 上级Key */
     parentKey?: string;
@@ -31,7 +31,7 @@ declare namespace code {
     updatedTime?: string;
 
     /** value */
-    value?: string;
+    value: string;
   }
 
   /**
@@ -45,7 +45,7 @@ declare namespace code {
     description?: string;
 
     /** 禁用标识 */
-    disabled?: boolean;
+    disabled: boolean;
 
     /** id */
     id?: number;
@@ -54,7 +54,7 @@ declare namespace code {
     key: string;
 
     /** 分组名称 */
-    name?: string;
+    name: string;
 
     /** updatedTime */
     updatedTime?: string;
