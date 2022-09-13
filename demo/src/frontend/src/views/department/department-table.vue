@@ -2,7 +2,7 @@
   <page-container :title="$t(String($route.meta.title))">
     <template #extra>
       <a-button key="3">
-        <template #icon><icon-font type="nutz-print" /></template>
+        <template #icon><icon-font type="icon-print" /></template>
         {{ $t('page.demos.print') }}
       </a-button>
       <a-button key="2">操作</a-button>

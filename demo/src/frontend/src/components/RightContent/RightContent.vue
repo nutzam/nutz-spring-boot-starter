@@ -2,45 +2,45 @@
   <div style="margin-right: 12px">
     <a-space>
       <a style="padding: 0 4px; display: inline-block; user-select: none" @click="handleClick">
-        <icon-font type="nutz-palette" />
+        <icon-font type="icon-palette" />
       </a>
       <a-dropdown>
         <template #overlay>
           <a-menu v-model:selectedKeys="currentLanguage" @click="switchLanguage">
             <a-menu-item key="zh_CN">
               <template #icon>
-                <icon-font type="nutz-chinese" />
+                <icon-font type="icon-chinese" />
               </template>
               <span>中文-简体</span>
             </a-menu-item>
             <a-menu-item key="en_US">
               <template #icon>
-                <icon-font type="nutz-english" />
+                <icon-font type="icon-english" />
               </template>
               <span>English</span>
             </a-menu-item>
           </a-menu>
         </template>
-        <icon-font type="nutz-language" />
+        <icon-font type="icon-language" />
       </a-dropdown>
       <a-dropdown>
         <template #overlay>
           <a-menu>
             <a-menu-item>
               <template #icon>
-                <icon-font type="nutz-settings" />
+                <icon-font type="icon-settings" />
               </template>
               <span>个人设置</span>
             </a-menu-item>
             <a-menu-item>
               <template #icon>
-                <icon-font type="nutz-logout" />
+                <icon-font type="icon-logout" />
               </template>
               <span>退出登录</span>
             </a-menu-item>
           </a-menu>
         </template>
-        <icon-font :title="currentUser.nickname" type="nutz-user" />
+        <icon-font :title="currentUser.nickname" type="icon-user" />
       </a-dropdown>
     </a-space>
   </div>

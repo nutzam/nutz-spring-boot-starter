@@ -1,7 +1,13 @@
 package tech.riemann.nutz.demo.controller.platform.acl;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.nutz.dao.Cnd;
 import org.nutz.lang.Lang;
 import org.nutz.spring.boot.service.entity.Pagination;
+import org.nutz.spring.boot.service.interfaces.EntityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,12 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import club.zhcs.enums.Codebook;
+import club.zhcs.enums.ICodeBook;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import tech.riemann.nutz.demo.entity.acl.User;
+import tech.riemann.nutz.demo.entity.acl.User.Sex;
 import tech.riemann.nutz.demo.service.acl.UserService;
+
 /**
  * 用户 前端控制器
  *
@@ -30,7 +40,7 @@ import tech.riemann.nutz.demo.service.acl.UserService;
 @RequiredArgsConstructor
 @Tag(name = "User", description = "用户")
 public class UserController {
-	
+
     private final UserService userService;
 
     /**
@@ -46,14 +56,25 @@ public class UserController {
      */
     @GetMapping("users")
     @Operation(summary = "分页查询用户")
-      public Pagination<User> users(
-      								 @Parameter(description = "页码") @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                     @Parameter(description = "页面大小") @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                     @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false, defaultValue = "") String key) {
+    public Pagination<User> users(
+                                  @Parameter(description = "页码") @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                  @Parameter(description = "页面大小") @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+                                  @Parameter(description = "性别") @RequestParam(value = "sex", required = false, defaultValue = "") Sex sex,
+                                  @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false, defaultValue = "") String key) {
         return userService.searchByKeyAndPage(key,
-                                                page,
-                                                size,
-                                                User.Fields.name); 
+                                              page,
+                                              size,
+                                              Cnd.NEW().andEX(User::getSex, EntityService.EQ, sex),
+                                              User.Fields.name,
+                                              User.Fields.fullName,
+                                              User.Fields.mobile,
+                                              User.Fields.email);
+    }
+
+    @GetMapping("user/sexes")
+    @Operation(summary = "用户性别")
+    public List<Codebook> sexes() {
+        return Arrays.stream(Sex.values()).map(ICodeBook::build).collect(Collectors.toList());
     }
 
     /**
@@ -64,8 +85,8 @@ public class UserController {
      * @return 用户
      */
     @GetMapping("user/{id}")
-    	@Operation(summary ="用户详情")
-		public User userDetail(@Parameter(description = "用户id", required = true) @PathVariable("id") long id) {
+    @Operation(summary = "用户详情")
+    public User userDetail(@Parameter(description = "用户id", required = true) @PathVariable("id") long id) {
         return userService.fetch(id);
     }
 
@@ -78,7 +99,7 @@ public class UserController {
      */
     @PutMapping("user")
     @Operation(summary = "增加/编辑用户")
-    public User saveOrUpdateUser(@Validated @Parameter(description ="用户")@RequestBody User user) {
+    public User saveOrUpdateUser(@Validated @Parameter(description = "用户") @RequestBody User user) {
         if (user.getId() != null && user.getId() > 0) {
             if (userService.update(user) == 1) {
                 return user;
@@ -99,10 +120,10 @@ public class UserController {
     @DeleteMapping("user/{id}")
     @Operation(summary = "删除用户")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteUser(@Parameter(description = "用户id", required = true)@PathVariable("id") long id) {
-         if(userService.delete(id) != 1){
-         		throw Lang.makeThrow("删除用户失败!");
-         }
+    public void deleteUser(@Parameter(description = "用户id", required = true) @PathVariable("id") long id) {
+        if (userService.delete(id) != 1) {
+            throw Lang.makeThrow("删除用户失败!");
+        }
     }
 
 }

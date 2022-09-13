@@ -19,7 +19,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-13 09:49:04
+ * @since 2022-09-13 12:25:23
  */
 @Data
 @SuperBuilder
@@ -40,7 +40,7 @@ public class Group extends IdBaseEntity{
     @Comment("分组唯一键")
     private String key;
 
-    @Schema(description = "分组名称", required = false)
+    @Schema(description = "分组名称", required = true)
     @Column("g_name")
     @Comment("分组名称")
     private String name;
@@ -50,7 +50,7 @@ public class Group extends IdBaseEntity{
     @Comment("分组描述")
     private String description;
 
-    @Schema(description = "禁用标识", required = false)
+    @Schema(description = "禁用标识", required = true)
     @Column("g_disabled")
     @Comment("禁用标识")
     private Boolean disabled;

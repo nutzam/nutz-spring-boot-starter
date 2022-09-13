@@ -19,7 +19,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-13 09:49:03
+ * @since 2022-09-13 12:25:22
  */
 @Data
 @SuperBuilder
@@ -40,7 +40,7 @@ public class Button extends IdBaseEntity{
     @Comment("操作key,英文,用来做业务")
     private String key;
 
-    @Schema(description = "操作名称,中文用来做标识", required = false)
+    @Schema(description = "操作名称,中文用来做标识", required = true)
     @Column("b_name")
     @Comment("操作名称,中文用来做标识")
     private String name;
@@ -50,12 +50,12 @@ public class Button extends IdBaseEntity{
     @Comment("资源描述")
     private String description;
 
-    @Schema(description = "归属资源key,如果内置为空", required = false)
+    @Schema(description = "归属资源key,如果内置为空", required = true)
     @Column("b_menu_key")
     @Comment("归属资源key,如果内置为空")
     private String menuKey;
 
-    @Schema(description = "是否内置,内置的没有资源归属", required = false)
+    @Schema(description = "是否内置,内置的没有资源归属", required = true)
     @Column("b_installed")
     @Comment("是否内置,内置的没有资源归属")
     private Boolean installed;

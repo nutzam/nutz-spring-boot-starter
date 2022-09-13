@@ -19,7 +19,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-13 09:49:03
+ * @since 2022-09-13 12:25:23
  */
 @Data
 @SuperBuilder
@@ -35,12 +35,12 @@ public class UserRole extends IdBaseEntity{
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "用户名", required = false)
+    @Schema(description = "用户名", required = true)
     @Column("ur_user_name")
     @Comment("用户名")
     private String userName;
 
-    @Schema(description = "角色Key", required = false)
+    @Schema(description = "角色Key", required = true)
     @Column("ur_role_key")
     @Comment("角色Key")
     private String roleKey;

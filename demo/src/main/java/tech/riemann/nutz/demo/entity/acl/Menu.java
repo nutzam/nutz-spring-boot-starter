@@ -19,7 +19,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-13 09:49:03
+ * @since 2022-09-13 12:25:23
  */
 @Data
 @SuperBuilder
@@ -40,7 +40,7 @@ public class Menu extends IdBaseEntity{
     @Comment("资源key,英文,用来做业务")
     private String key;
 
-    @Schema(description = "资源名称,中文用来做标识", required = false)
+    @Schema(description = "资源名称,中文用来做标识", required = true)
     @Column("m_name")
     @Comment("资源名称,中文用来做标识")
     private String name;

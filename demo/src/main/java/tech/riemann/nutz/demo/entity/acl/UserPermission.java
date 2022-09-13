@@ -19,7 +19,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-13 09:49:03
+ * @since 2022-09-13 12:25:23
  */
 @Data
 @SuperBuilder
@@ -35,17 +35,17 @@ public class UserPermission extends IdBaseEntity{
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "用户名", required = false)
+    @Schema(description = "用户名", required = true)
     @Column("up_user_name")
     @Comment("用户名")
     private String userName;
 
-    @Schema(description = "菜单key", required = false)
+    @Schema(description = "菜单key", required = true)
     @Column("up_menu_key")
     @Comment("菜单key")
     private String menuKey;
 
-    @Schema(description = "操作按钮key", required = false)
+    @Schema(description = "操作按钮key", required = true)
     @Column("up_button_key")
     @Comment("操作按钮key")
     private String buttonKey;

@@ -23,9 +23,11 @@ import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Mirror;
+import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
 import org.nutz.log.Logs;
 import org.nutz.spring.boot.service.entity.Pagination;
+import org.nutz.spring.boot.service.interfaces.EntityService;
 
 /**
  * 
@@ -478,16 +480,18 @@ public interface ExtService<T extends Serializable> {
         if (cnd == null) {
             cnd = Cnd.NEW();
         }
-        String searchKey = String.format("%%%s%%", key);
         SqlExpressionGroup expressionGroup = Exps.begin();
-        int index = 0;
-        for (String field : fields) {
-            if (index == 0) {
-                expressionGroup.and(field, "like", searchKey);
-            } else {
-                expressionGroup.or(field, "like", searchKey);
+        if (Strings.isNotBlank(key)) {
+            String searchKey = String.format("%%%s%%", key);
+            int index = 0;
+            for (String field : fields) {
+                if (index == 0) {
+                    expressionGroup.and(field, EntityService.LIKE, searchKey);
+                } else {
+                    expressionGroup.or(field, EntityService.LIKE, searchKey);
+                }
+                index++;
             }
-            index++;
         }
         return searchByPage(page,
                             pageSize,

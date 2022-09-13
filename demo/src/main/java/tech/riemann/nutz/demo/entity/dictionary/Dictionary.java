@@ -19,7 +19,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
  *
  * @author Kerbores(kerbores@gmail.com)
  *
- * @since 2022-09-13 09:49:04
+ * @since 2022-09-13 12:25:23
  */
 @Data
 @SuperBuilder
@@ -35,7 +35,7 @@ public class Dictionary extends IdBaseEntity{
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "分组Key", required = false)
+    @Schema(description = "分组Key", required = true)
     @Column("d_group_key")
     @Comment("分组Key")
     private String groupKey;
@@ -45,17 +45,17 @@ public class Dictionary extends IdBaseEntity{
     @Comment("上级Key")
     private String parentKey;
 
-    @Schema(description = "序号", required = false)
+    @Schema(description = "序号", required = true)
     @Column("d_index")
     @Comment("序号")
     private Long index;
 
-    @Schema(description = "key", required = false)
+    @Schema(description = "key", required = true)
     @Column("d_key")
     @Comment("key")
     private String key;
 
-    @Schema(description = "value", required = false)
+    @Schema(description = "value", required = true)
     @Column("d_value")
     @Comment("value")
     private String value;
