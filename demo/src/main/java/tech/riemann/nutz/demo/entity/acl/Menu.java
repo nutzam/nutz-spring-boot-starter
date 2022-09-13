@@ -2,6 +2,7 @@ package tech.riemann.nutz.demo.entity.acl;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,12 +32,13 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
 @Table("t_acl_menu")
 @Comment("菜单")
 @Schema(name = "Menu", description = "菜单")
-public class Menu extends IdBaseEntity{
+public class Menu extends IdBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "资源key,英文,用来做业务", required = true)
     @Column("m_key")
+    @Name
     @Comment("资源key,英文,用来做业务")
     private String key;
 

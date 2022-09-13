@@ -39,24 +39,26 @@ left join t_module m on
 where
 	ur.ur_user_id = @userId
 /*
-list.permissions.by.role.id
+list.permissions.by.role.key
 */
-select
-	rp.rp_action_key as `actionKey`,
-	a.a_name as `actionName`,
-	a.id as `actionId`,
-	m.m_name as `moduleName`,
-	rp.rp_module_key as `moduleKey`,
-	m.m_description as `moduleDescription`,
-	m.id as `moduleId`
-from
-	t_role_permission rp
-left join t_action a on
-	a.a_key = rp.rp_action_key
-left join t_module m on
-	m.id = rp.rp_module_id
-where
-	rp.rp_role_id = @roleId
+SELECT
+	p.*,
+	rp.id IS NOT NULL AS `selected` 
+FROM
+	(
+	SELECT
+		b.*,
+		m.m_key,
+		m.m_name,
+		m.m_description,
+		m.m_parent_key 
+	FROM
+		t_acl_menu m
+		RIGHT JOIN t_acl_button b ON m.m_key = b.b_menu_key 
+		OR b.b_menu_key = NULL 
+	) p
+	LEFT JOIN ( SELECT * FROM t_acl_role_permission WHERE rp_role_key = @roleKey ) rp ON rp.rp_menu_key = p.m_key 
+	AND rp.rp_button_key = p.b_key
 /*
 list.permissions.info.by.role.id.and.module.ids
 */

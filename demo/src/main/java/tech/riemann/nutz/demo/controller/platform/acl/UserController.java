@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.nutz.dao.Cnd;
-import org.nutz.lang.Lang;
 import org.nutz.spring.boot.service.entity.Pagination;
 import org.nutz.spring.boot.service.interfaces.EntityService;
 import org.springframework.http.HttpStatus;
@@ -28,6 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import tech.riemann.nutz.demo.entity.acl.User;
 import tech.riemann.nutz.demo.entity.acl.User.Sex;
+import tech.riemann.nutz.demo.exception.BizException;
 import tech.riemann.nutz.demo.service.acl.UserService;
 
 /**
@@ -111,7 +111,7 @@ public class UserController {
             if (userService.update(user) == 1) {
                 return user;
             } else {
-                throw Lang.makeThrow("更新用户失败!");
+                throw BizException.create("更新用户失败!");
             }
         }
         return userService.insert(user);
@@ -129,7 +129,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@Parameter(description = "用户id", required = true) @PathVariable("id") long id) {
         if (userService.delete(id) != 1) {
-            throw Lang.makeThrow("删除用户失败!");
+            throw BizException.create("删除用户失败!");
         }
     }
 
