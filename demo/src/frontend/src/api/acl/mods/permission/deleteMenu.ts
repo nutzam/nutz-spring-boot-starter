@@ -4,15 +4,15 @@
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
-  /** 菜单id */
-  id: number,
+  /** 菜单key */
+  key: string,
 
   success: (data: void) => void = defaultSuccess,
   fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'delete',
-    url: `/menu/${id}`,
+    url: `/menu/${key}`,
   })
     .then((data: AxiosResponse<void, unknown>) => {
       success(data.data);

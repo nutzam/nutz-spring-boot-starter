@@ -1,18 +1,20 @@
 /**
- * @desc 删除操作按钮
+ * @desc 为指定应用角色授权
  */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
-  /** 操作按钮id */
-  id: number,
+  key: string,
+  /** 请求体 */
+  requestBody: Array<string>,
 
   success: (data: void) => void = defaultSuccess,
   fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
-    method: 'delete',
-    url: `/button/${id}`,
+    method: 'post',
+    url: `/role/${key}/permissions`,
+    data: requestBody,
   })
     .then((data: AxiosResponse<void, unknown>) => {
       success(data.data);

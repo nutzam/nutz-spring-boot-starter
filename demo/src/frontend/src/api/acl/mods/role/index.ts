@@ -5,6 +5,9 @@
 import saveOrUpdateRole from './saveOrUpdateRole';
 import roleDetail from './roleDetail';
 import deleteRole from './deleteRole';
+import permissionInfos from './permissionInfos';
+import permissions from './permissions';
+import grant from './grant';
 import roles from './roles';
 import type { Pagination } from '@/api/api';
 
@@ -38,8 +41,36 @@ export interface RoleApi {
 
   /** 删除角色 */
   deleteRole: (
-    /** 角色id */
-    id: number,
+    /** 角色名称 */
+    key: string,
+
+    success?: (data: void) => void,
+    fail?: (error: string) => void,
+  ) => void;
+
+  /** 查询用于授权的权限信息 */
+  permissionInfos: (
+    /** 角色key */
+    key: string,
+
+    success?: (data: Array<acl.PermissionInfo>) => void,
+    fail?: (error: string) => void,
+  ) => void;
+
+  /** 查询角色权限 */
+  permissions: (
+    /** 角色key */
+    key: string,
+
+    success?: (data: Array<acl.MenuInfo>) => void,
+    fail?: (error: string) => void,
+  ) => void;
+
+  /** 为指定应用角色授权 */
+  grant: (
+    key: string,
+    /** 请求体 */
+    requestBody: Array<string>,
 
     success?: (data: void) => void,
     fail?: (error: string) => void,
@@ -56,5 +87,8 @@ export default {
   saveOrUpdateRole,
   roleDetail,
   deleteRole,
+  permissionInfos,
+  permissions,
+  grant,
   roles,
 } as RoleApi;

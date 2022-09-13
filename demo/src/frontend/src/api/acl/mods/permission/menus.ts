@@ -1,14 +1,13 @@
 /**
- * @desc 分页查询菜单
+ * @desc 查询全部菜单
  */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
-import type { Pagination } from '@/api/api';
 import type { MenusParams } from './index';
 
 export default async function (
   params: MenusParams,
-  success: (data: Pagination<acl.Menu>) => void = defaultSuccess,
+  success: (data: Array<acl.Menu>) => void = defaultSuccess,
   fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
@@ -17,7 +16,7 @@ export default async function (
 
     params,
   })
-    .then((data: AxiosResponse<Pagination<acl.Menu>, unknown>) => {
+    .then((data: AxiosResponse<Array<acl.Menu>, unknown>) => {
       success(data.data);
     })
     .catch((error: string) => fail(error));

@@ -25,5 +25,16 @@
         "placeholder": {}
       }
     }
+  },
+  "role": {
+    "notification": {}
+  },
+  "permission": {
+    "button": {
+      "notification": {
+        "success": ""
+      },
+      "alter": {}
+    }
   }
 }

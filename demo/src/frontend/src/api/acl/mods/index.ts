@@ -1,21 +1,17 @@
-import button, { type ButtonApi } from './button';
-
-import menu, { type MenuApi } from './menu';
+import permission, { type PermissionApi } from './permission';
 
 import role, { type RoleApi } from './role';
 
 import user, { type UserApi } from './user';
 
 export interface AclApi {
-  button: ButtonApi;
-  menu: MenuApi;
+  permission: PermissionApi;
   role: RoleApi;
   user: UserApi;
 }
 
 export default {
-  button,
-  menu,
+  permission,
   role,
   user,
 } as AclApi;

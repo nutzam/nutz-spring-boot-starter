@@ -55,6 +55,70 @@ declare namespace acl {
   }
 
   /**
+   * 菜单信息
+   */
+  export class MenuInfo {
+    /** buttons */
+    buttons?: Array<acl.Button>;
+
+    /** createdTime */
+    createdTime?: string;
+
+    /** 资源描述 */
+    description?: string;
+
+    /** id */
+    id?: number;
+
+    /** 资源key,英文,用来做业务 */
+    key: string;
+
+    /** 资源名称,中文用来做标识 */
+    name: string;
+
+    /** 上级菜单key */
+    parentKey?: string;
+
+    /** updatedTime */
+    updatedTime?: string;
+  }
+
+  /**
+   * 权限信息
+   */
+  export class PermissionInfo {
+    /** 客户端(应用)id */
+    clientId: string;
+
+    /** 按钮描述 */
+    description?: string;
+
+    /** 是否内置,内置的没有菜单归属 */
+    installed?: boolean;
+
+    /** 按钮key,英文,用来做业务 */
+    key: string;
+
+    /** 菜单描述 */
+    menuDescription?: string;
+
+    /** 菜单key,英文,用来做业务 */
+    menuKey: string;
+
+    /** 菜单名称,中文用来做标识 */
+    menuName: string;
+
+    /** 按钮名称,中文用来做标识 */
+    name: string;
+
+    /** 父菜单key */
+    parentKey?: string;
+
+    /** 权限是否选中标识 */
+    selected: boolean;
+  }
+
+  /**
    * 角色
    */
   export class Role {

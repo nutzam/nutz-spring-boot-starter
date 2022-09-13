@@ -2,8 +2,7 @@
   {
     "mods": [
       {
-        "description": "操作按钮",
-        "name": "button",
+        "description": "权限",
         "interfaces": [
           {
             "description": "增加/编辑操作按钮",
@@ -37,138 +36,6 @@
             ]
           },
           {
-            "description": "操作按钮详情",
-            "name": "buttonDetail",
-            "method": "get",
-            "path": "/button/{id}",
-            "response": {
-              "typeArgs": [],
-              "typeName": "Button",
-              "isDefsType": true,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "description": "操作按钮id",
-                "required": true,
-                "in": "path",
-                "name": "id",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
-            "description": "删除操作按钮",
-            "name": "deleteButton",
-            "method": "delete",
-            "path": "/button/{id}",
-            "response": {
-              "typeArgs": [],
-              "typeName": "",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "description": "操作按钮id",
-                "required": true,
-                "in": "path",
-                "name": "id",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
-            "description": "分页查询操作按钮",
-            "name": "buttons",
-            "method": "get",
-            "path": "/buttons",
-            "response": {
-              "typeArgs": [],
-              "typeName": "PaginationButton",
-              "isDefsType": true,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "description": "页码",
-                "required": false,
-                "in": "query",
-                "name": "page",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "description": "页面大小",
-                "required": false,
-                "in": "query",
-                "name": "size",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "description": "搜索关键词",
-                "required": false,
-                "in": "query",
-                "name": "key",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "description": "菜单",
-        "name": "menu",
-        "interfaces": [
-          {
             "description": "增加/编辑菜单",
             "name": "saveOrUpdateMenu",
             "method": "put",
@@ -200,42 +67,10 @@
             ]
           },
           {
-            "description": "菜单详情",
-            "name": "menuDetail",
-            "method": "get",
-            "path": "/menu/{id}",
-            "response": {
-              "typeArgs": [],
-              "typeName": "Menu",
-              "isDefsType": true,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "description": "菜单id",
-                "required": true,
-                "in": "path",
-                "name": "id",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
             "description": "删除菜单",
             "name": "deleteMenu",
             "method": "delete",
-            "path": "/menu/{id}",
+            "path": "/menu/{key}",
             "response": {
               "typeArgs": [],
               "typeName": "",
@@ -247,13 +82,13 @@
             },
             "parameters": [
               {
-                "description": "菜单id",
+                "description": "菜单key",
                 "required": true,
                 "in": "path",
-                "name": "id",
+                "name": "key",
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "number",
+                  "typeName": "string",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -264,14 +99,24 @@
             ]
           },
           {
-            "description": "分页查询菜单",
-            "name": "menus",
+            "description": "菜单下的操作按钮列表",
+            "name": "buttons",
             "method": "get",
-            "path": "/menus",
+            "path": "/menu/{key}/buttons",
             "response": {
-              "typeArgs": [],
-              "typeName": "PaginationMenu",
-              "isDefsType": true,
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Button",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
               "enum": [],
@@ -279,13 +124,45 @@
             },
             "parameters": [
               {
-                "description": "页码",
-                "required": false,
-                "in": "query",
-                "name": "page",
+                "description": "菜单key",
+                "required": true,
+                "in": "path",
+                "name": "key",
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "number",
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "删除操作按钮",
+            "name": "deleteButton",
+            "method": "delete",
+            "path": "/menu/{key}button/{buttonKey}",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "description": "菜单key",
+                "required": true,
+                "in": "path",
+                "name": "key",
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -294,20 +171,47 @@
                 }
               },
               {
-                "description": "页面大小",
-                "required": false,
-                "in": "query",
-                "name": "size",
+                "description": "操作按钮buttonKey",
+                "required": true,
+                "in": "path",
+                "name": "buttonKey",
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "number",
+                  "typeName": "string",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
                   "typeProperties": []
                 }
-              },
+              }
+            ]
+          },
+          {
+            "description": "查询全部菜单",
+            "name": "menus",
+            "method": "get",
+            "path": "/menus",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Menu",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
               {
                 "description": "搜索关键词",
                 "required": false,
@@ -325,11 +229,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "permission"
       },
       {
         "description": "角色",
-        "name": "role",
         "interfaces": [
           {
             "description": "增加/编辑角色",
@@ -398,7 +302,7 @@
             "description": "删除角色",
             "name": "deleteRole",
             "method": "delete",
-            "path": "/role/{id}",
+            "path": "/role/{key}",
             "response": {
               "typeArgs": [],
               "typeName": "",
@@ -410,13 +314,138 @@
             },
             "parameters": [
               {
-                "description": "角色id",
+                "description": "角色名称",
                 "required": true,
                 "in": "path",
-                "name": "id",
+                "name": "key",
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "number",
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "查询用于授权的权限信息",
+            "name": "permissionInfos",
+            "method": "get",
+            "path": "/role/{key}/permission-infos",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "PermissionInfo",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "description": "角色key",
+                "required": true,
+                "in": "path",
+                "name": "key",
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "查询角色权限",
+            "name": "permissions",
+            "method": "get",
+            "path": "/role/{key}/permissions",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "MenuInfo",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "description": "角色key",
+                "required": true,
+                "in": "path",
+                "name": "key",
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "为指定应用角色授权",
+            "name": "grant",
+            "method": "post",
+            "path": "/role/{key}/permissions",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "required": true,
+                "in": "body",
+                "name": "requestBody",
+                "dataType": {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "string",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -488,7 +517,8 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "role"
       },
       {
         "description": "用户",
@@ -735,7 +765,6 @@
       {
         "description": "操作按钮",
         "name": "Button",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -846,7 +875,8 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "枚举码本",
@@ -900,7 +930,6 @@
       {
         "description": "菜单",
         "name": "Menu",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -997,11 +1026,136 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
+      },
+      {
+        "description": "菜单信息",
+        "name": "MenuInfo",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Button",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "buttons",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "createdTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "description",
+            "description": "资源描述",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "key",
+            "description": "资源key,英文,用来做业务",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "name",
+            "description": "资源名称,中文用来做标识",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "parentKey",
+            "description": "上级菜单key",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "updatedTime",
+            "required": false
+          }
+        ],
+        "templateArgs": []
       },
       {
         "name": "NutMap",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1048,315 +1202,11 @@
             "name": "empty",
             "required": false
           }
-        ]
-      },
-      {
-        "name": "PaginationButton",
-        "templateArgs": [],
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [
-                {
-                  "typeArgs": [],
-                  "typeName": "Button",
-                  "isDefsType": true,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "Array",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "dataList",
-            "required": true
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "boolean",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "first",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "boolean",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "last",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "offset",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "pageCount",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "pageNumber",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "pageSize",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [
-                {
-                  "typeArgs": [],
-                  "typeName": "",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                },
-                {
-                  "typeArgs": [],
-                  "typeName": "object",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "ObjectMap",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "paras",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "recordCount",
-            "required": false
-          }
-        ]
-      },
-      {
-        "name": "PaginationMenu",
-        "templateArgs": [],
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [
-                {
-                  "typeArgs": [],
-                  "typeName": "Menu",
-                  "isDefsType": true,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "Array",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "dataList",
-            "required": true
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "boolean",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "first",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "boolean",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "last",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "offset",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "pageCount",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "pageNumber",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "pageSize",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [
-                {
-                  "typeArgs": [],
-                  "typeName": "",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                },
-                {
-                  "typeArgs": [],
-                  "typeName": "object",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "ObjectMap",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "paras",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "recordCount",
-            "required": false
-          }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "PaginationRole",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1504,7 +1354,8 @@
             "name": "recordCount",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "PaginationUser",
@@ -1659,8 +1510,154 @@
         "templateArgs": []
       },
       {
+        "description": "权限信息",
+        "name": "PermissionInfo",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "clientId",
+            "description": "客户端(应用)id",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "description",
+            "description": "按钮描述",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "installed",
+            "description": "是否内置,内置的没有菜单归属",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "key",
+            "description": "按钮key,英文,用来做业务",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "menuDescription",
+            "description": "菜单描述",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "menuKey",
+            "description": "菜单key,英文,用来做业务",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "menuName",
+            "description": "菜单名称,中文用来做标识",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "name",
+            "description": "按钮名称,中文用来做标识",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "parentKey",
+            "description": "父菜单key",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "selected",
+            "description": "权限是否选中标识",
+            "required": true
+          }
+        ],
+        "templateArgs": []
+      },
+      {
         "name": "ResultObject",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1744,12 +1741,12 @@
             "name": "success",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "角色",
         "name": "Role",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1832,7 +1829,8 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "用户",

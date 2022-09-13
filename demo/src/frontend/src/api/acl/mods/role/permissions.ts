@@ -1,23 +1,20 @@
 /**
- * @desc 分页查询操作按钮
+ * @desc 查询角色权限
  */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
-import type { Pagination } from '@/api/api';
-import type { ButtonsParams } from './index';
-
 export default async function (
-  params: ButtonsParams,
-  success: (data: Pagination<acl.Button>) => void = defaultSuccess,
+  /** 角色key */
+  key: string,
+
+  success: (data: Array<acl.MenuInfo>) => void = defaultSuccess,
   fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'get',
-    url: `/buttons`,
-
-    params,
+    url: `/role/${key}/permissions`,
   })
-    .then((data: AxiosResponse<Pagination<acl.Button>, unknown>) => {
+    .then((data: AxiosResponse<Array<acl.MenuInfo>, unknown>) => {
       success(data.data);
     })
     .catch((error: string) => fail(error));

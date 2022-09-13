@@ -1,20 +1,22 @@
 /**
- * @desc 操作按钮详情
+ * @desc 删除操作按钮
  */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
-  /** 操作按钮id */
-  id: number,
+  /** 菜单key */
+  key: string,
+  /** 操作按钮buttonKey */
+  buttonKey: string,
 
-  success: (data: acl.Button) => void = defaultSuccess,
+  success: (data: void) => void = defaultSuccess,
   fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
-    method: 'get',
-    url: `/button/${id}`,
+    method: 'delete',
+    url: `/menu/${key}button/${buttonKey}`,
   })
-    .then((data: AxiosResponse<acl.Button, unknown>) => {
+    .then((data: AxiosResponse<void, unknown>) => {
       success(data.data);
     })
     .catch((error: string) => fail(error));

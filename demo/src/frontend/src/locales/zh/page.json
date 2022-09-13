@@ -75,5 +75,82 @@
         }
       }
     }
+  },
+  "role": {
+    "subTitle": "提供角色信息管理及角色授权功能",
+    "search": {
+      "placeholder": "请输入角色名称/描述"
+    },
+    "add": "添加角色",
+    "notification": {
+      "success": "操作成功",
+      "delete": {
+        "description": "删除角色成功,页面将自动刷新!"
+      },
+      "addOrEdit": {
+        "description": "添加/编辑角色成功,页面将自动刷新!"
+      },
+      "grant": {
+        "description": "角色授权成功,页面将自动刷新!"
+      }
+    },
+    "edit": "编辑角色",
+    "delete": "删除",
+    "confirm": {
+      "delete": {
+        "title": "确定要删除用角色 {name} ?"
+      }
+    }
+  },
+  "modal": {
+    "permission": {
+      "title": "设置权限",
+      "target": "已选权限",
+      "source": "待选权限"
+    }
+  },
+  "permission": {
+    "subTitle": "提供菜单和按钮的管理",
+    "menu": {
+      "title": "菜单树(右键点击进行操作)",
+      "search": {
+        "placeholder": "请输入关键词"
+      },
+      "add": "添加菜单",
+      "edit": "编辑菜单",
+      "addChild": "添加子菜单",
+      "delete": "删除菜单",
+      "notification": {
+        "success": "操作成功",
+        "addOrEdit": {
+          "description": "添加/编辑菜单成功,页面将自动刷新!"
+        },
+        "delete": {
+          "description": "删除菜单成功,页面将自动刷新!"
+        }
+      }
+    },
+    "button": {
+      "title": "菜单 {name} 按钮表格",
+      "add": "添加按钮",
+      "notification": {
+        "success": "操作成功",
+        "addOrEdit": {
+          "description": "添加/编辑按钮成功,页面将自动刷新!"
+        },
+        "delete": {
+          "description": "删除按钮成功,页面将自动刷新!"
+        }
+      },
+      "alter": {
+        "title": "操作提示",
+        "description": "请在左侧选择菜单之后进行操作."
+      },
+      "edit": "编辑按钮",
+      "delete": "删除",
+      "confirm": {
+        "title": "确定要删除菜单 {name} ?"
+      }
+    }
   }
 }
