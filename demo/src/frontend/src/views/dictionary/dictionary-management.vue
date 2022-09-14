@@ -1,14 +1,22 @@
 <template>
   <page-container :title="$t(String($route.meta.title))" :sub-title="$t('page.dictionary.subTitle')">
     <div style="min-height: calc(100vh - 218px)">
-      <a-row :gutter="[32, 32]">
-        <a-col :span="8">
-          <group-panel @changed="groupChanged"></group-panel>
-        </a-col>
-        <a-col :span="16">
-          <code-table :group="group"></code-table>
-        </a-col>
-      </a-row>
+      <a-space direction="vertical" style="width: 100%">
+        <a-alert
+          :message="$t('page.dictionary.alter.title')"
+          :description="$t('page.dictionary.alter.description')"
+          type="warning"
+          show-icon
+        />
+        <a-row :gutter="[12, 12]">
+          <a-col :span="6">
+            <group-panel @changed="groupChanged"></group-panel>
+          </a-col>
+          <a-col :span="18">
+            <code-table :group="group"></code-table>
+          </a-col>
+        </a-row>
+      </a-space>
     </div>
   </page-container>
 </template>

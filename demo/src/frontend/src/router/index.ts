@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import BasicLayout from '../layouts/BasicLayout.vue';
 import BlankLayout from '../layouts/BlankLayout.vue';
-import WelcomePage from '../views/Page1.vue';
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -11,13 +10,13 @@ export default createRouter({
       name: 'index',
       meta: { title: 'menus.home' },
       component: BasicLayout,
-      redirect: '/welcome',
+      redirect: '/dashboard',
       children: [
         {
-          path: '/welcome',
-          name: 'welcome',
+          path: '/dashboard',
+          name: 'Dashboard',
           meta: { title: 'menus.dashboard', icon: 'icon-dashboard' },
-          component: WelcomePage,
+          component: () => import('../views/dashboard/dashboard-panel.vue'),
         },
         {
           path: '/acl',
@@ -56,7 +55,7 @@ export default createRouter({
           path: '/version',
           name: 'version',
           meta: { title: 'menus.version', icon: 'icon-version' },
-          component: () => import('../views/Detail.vue'),
+          component: () => import('../views/version/version-info.vue'),
         },
       ],
     },
