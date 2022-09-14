@@ -52,8 +52,8 @@ public class RoleService implements IdNameEntityService<Role> {
      * @return
      */
     public List<PermissionInfo> permissionInfosByKey(String key) {
-        return list(createSql("list.permissions.by.role.key")
-                                                             .setParam("roleKey", key),
+        return list(sql("list.permissions.by.role.key")
+                                                       .setParam("roleKey", key),
                     PermissionInfo.class);
     }
 

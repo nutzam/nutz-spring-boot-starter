@@ -28,7 +28,16 @@
         :pagination="pagination"
         :loading="loading"
         row-key="key"
+        @expand="tryLoadPermissions"
       >
+        <template #expandedRowRender="{ record }">
+          <permission-info-panel
+            type="role"
+            :ref-key="record.key"
+            :name="record.name"
+            :menus="record.menus"
+          ></permission-info-panel>
+        </template>
         <template #bodyCell="{ column, record }">
           <template v-if="column.dataIndex === 'operation'">
             <a-button size="small" type="primary" @click="addOrEditRole(record)">
@@ -36,12 +45,6 @@
                 <icon-font type="icon-edit" />
               </template>
               {{ $t('page.role.edit') }}
-            </a-button>
-            <a-button size="small" type="primary" style="margin-left: 10px" @click="showPermissionForm(record.key)">
-              <template #icon>
-                <icon-font type="icon-grant" />
-              </template>
-              授权
             </a-button>
             <a-popconfirm
               :title="$t('page.role.confirm.delete.title', { name: record.name })"
@@ -66,19 +69,13 @@
       :disabled-fields="disabledFields"
       @submit="doAOrEditRole"
     ></modal-form>
-    <permission-select-modal
-      ref="permissionForm"
-      :permissions="permissionInfos"
-      @ok="doGrantPermission"
-    ></permission-select-modal>
   </page-container>
 </template>
 <script lang="ts" setup>
 import { api } from '@/api';
 import type { Pagination } from '@/api/api';
 import ModalForm from '@/components/custom-form/modal-form.vue';
-import PermissionSelectModal from './permission-select-modal.vue';
-
+import PermissionInfoPanel from '../components/permission-info-panel.vue';
 import { IconFont } from '@/components/IconFont/IconFont';
 import { notification } from 'ant-design-vue';
 import { useI18n } from 'vue-i18n';
@@ -167,31 +164,6 @@ const doAOrEditRole = (role: acl.Role) => {
   });
 };
 
-const permissionForm = ref<typeof PermissionSelectModal>();
-const permissionInfos = ref<acl.PermissionInfo[]>([]);
-const currentRoleKey = ref('');
-const showPermissionForm = (key: string) => {
-  currentRoleKey.value = key;
-  api.aclApi.role.permissionInfos(key, data => {
-    permissionInfos.value = data;
-    permissionForm.value && permissionForm.value.open();
-  });
-};
-
-const doGrantPermission = (permissions: string[]) => {
-  api.aclApi.role.grant(currentRoleKey.value, permissions, () => {
-    permissionForm.value && permissionForm.value.close();
-    notification.success({
-      message: t('page.role.notification.success'),
-      description: t('page.role.notification.grant.description'),
-      onClose: () => {
-        loadRoles(1);
-      },
-    });
-  });
-  console.log('doGrantPermission');
-};
-
 const deleteRole = (key: string) => {
   api.aclApi.role.deleteRole(key, () => {
     notification.success({
@@ -202,6 +174,14 @@ const deleteRole = (key: string) => {
       },
     });
   });
+};
+
+const tryLoadPermissions = (expanded: boolean, record: acl.Role & { menus?: acl.MenuInfo[] }) => {
+  if (expanded && !record.menus) {
+    api.aclApi.role.permissions(record.key, data => {
+      record.menus = data;
+    });
+  }
 };
 </script>
 <style lang="less" scoped></style>

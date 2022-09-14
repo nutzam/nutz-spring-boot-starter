@@ -1,5 +1,7 @@
 package tech.riemann.nutz.demo.dto.response;
 
+import org.nutz.dao.entity.annotation.Column;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +32,7 @@ public class RoleInfo extends Role {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "角色是否选中标识", required = true)
+    @Column("selected")
     boolean selected;
 
 }

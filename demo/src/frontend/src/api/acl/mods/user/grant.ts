@@ -1,10 +1,10 @@
 /**
- * @desc 为指定角色授权
+ * @desc 为指定用户授权
  */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
-  key: string,
+  name: string,
   /** 请求体 */
   requestBody: Array<string>,
 
@@ -13,7 +13,7 @@ export default async function (
 ): Promise<void> {
   return http({
     method: 'post',
-    url: `/role/${key}/permissions`,
+    url: `/user/${name}/permissions`,
     data: requestBody,
   })
     .then((data: AxiosResponse<void, unknown>) => {

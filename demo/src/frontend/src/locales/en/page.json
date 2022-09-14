@@ -27,7 +27,8 @@
     }
   },
   "role": {
-    "notification": {}
+    "notification": {},
+    "permission": {}
   },
   "permission": {
     "button": {
@@ -36,5 +37,8 @@
       },
       "alter": {}
     }
+  },
+  "modal": {
+    "role": {}
   }
 }

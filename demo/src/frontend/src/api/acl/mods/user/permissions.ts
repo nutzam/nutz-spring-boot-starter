@@ -1,22 +1,20 @@
 /**
- * @desc 为指定角色授权
+ * @desc 查询用户权限
  */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
-  key: string,
-  /** 请求体 */
-  requestBody: Array<string>,
+  /** 用户名 */
+  name: string,
 
-  success: (data: void) => void = defaultSuccess,
+  success: (data: Array<acl.MenuInfo>) => void = defaultSuccess,
   fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
-    method: 'post',
-    url: `/role/${key}/permissions`,
-    data: requestBody,
+    method: 'get',
+    url: `/user/${name}/permissions`,
   })
-    .then((data: AxiosResponse<void, unknown>) => {
+    .then((data: AxiosResponse<Array<acl.MenuInfo>, unknown>) => {
       success(data.data);
     })
     .catch((error: string) => fail(error));

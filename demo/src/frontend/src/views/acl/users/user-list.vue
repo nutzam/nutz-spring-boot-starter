@@ -42,7 +42,16 @@
         :pagination="pagination"
         :loading="loading"
         row-key="name"
+        @expand="tryLoadPermissions"
       >
+        <template #expandedRowRender="{ record }">
+          <permission-info-panel
+            type="user"
+            :ref-key="record.name"
+            :name="record.fullName"
+            :menus="record.menus"
+          ></permission-info-panel>
+        </template>
         <template #bodyCell="{ column, record }">
           <template v-if="column.dataIndex === 'sex'">
             <icon-font v-if="record.sex === 'MALE'" type="icon-male" :title="record.sexInfo.description"></icon-font>
@@ -116,7 +125,7 @@ import { api } from '@/api';
 import type { Codebook, Pagination } from '@/api/api';
 import { IconFont } from '@/components/IconFont/IconFont';
 import ModalForm from '@/components/custom-form/modal-form.vue';
-
+import PermissionInfoPanel from '../components/permission-info-panel.vue';
 import { useAppStore } from '@/store/app';
 import { notification } from 'ant-design-vue';
 import { useI18n } from 'vue-i18n';
@@ -254,6 +263,13 @@ const deleteUser = (id: number) => {
       },
     });
   });
+};
+const tryLoadPermissions = (expanded: boolean, record: acl.User & { menus?: acl.MenuInfo[] }) => {
+  if (expanded && !record.menus) {
+    api.aclApi.user.permissions(record.name, data => {
+      record.menus = data;
+    });
+  }
 };
 </script>
 <style lang="less" scoped></style>

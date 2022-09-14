@@ -72,7 +72,8 @@ export function buttonFormRule() {
     },
     {
       type: 'hidden',
-      field: 'clientId',
+      field: 'installed',
+      value: false,
     },
   ];
 }

@@ -100,6 +100,11 @@
       "delete": {
         "title": "确定要删除用角色 {name} ?"
       }
+    },
+    "permission": {
+      "title": "{type} {name} 权限信息",
+      "role": "设置角色",
+      "grant": "授权"
     }
   },
   "modal": {
@@ -107,6 +112,11 @@
       "title": "设置权限",
       "target": "已选权限",
       "source": "待选权限"
+    },
+    "role": {
+      "source": "待选角色",
+      "target": "已选角色",
+      "title": "设置角色"
     }
   },
   "permission": {
@@ -150,6 +160,28 @@
       "delete": "删除",
       "confirm": {
         "title": "确定要删除菜单 {name} ?"
+      }
+    }
+  },
+  "component": {
+    "permission": {
+      "info": {
+        "panel": {
+          "title": "{type} {name} 权限信息",
+          "grantRole": "设置角色",
+          "grant": "授权",
+          "user": "用户",
+          "role": "角色",
+          "notification": {
+            "success": "操作成功",
+            "grant": {
+              "description": "{type} {name} 授权成功"
+            },
+            "grantRole": {
+              "description": "用户 {name} 设置角色成功"
+            }
+          }
+        }
       }
     }
   }

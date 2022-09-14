@@ -130,7 +130,7 @@ public class RoleController {
     }
 
     @PostMapping("role/{key}/permissions")
-    @Operation(summary = "为指定应用角色授权")
+    @Operation(summary = "为指定角色授权")
     @ResponseStatus(HttpStatus.OK)
     public void grant(
                       @Parameter(description = "角色key") @PathVariable("key") String key,

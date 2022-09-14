@@ -12,6 +12,10 @@
       show-search
       :titles="titles"
       :render="itemRender"
+      :list-style="{
+        width: '215px',
+        height: '300px',
+      }"
     />
   </a-modal>
 </template>

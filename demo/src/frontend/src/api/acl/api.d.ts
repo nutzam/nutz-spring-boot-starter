@@ -87,9 +87,6 @@ declare namespace acl {
    * 权限信息
    */
   export class PermissionInfo {
-    /** 客户端(应用)id */
-    clientId: string;
-
     /** 按钮描述 */
     description?: string;
 
@@ -136,6 +133,32 @@ declare namespace acl {
 
     /** 角色名称,中文用来做标识 */
     name: string;
+
+    /** updatedTime */
+    updatedTime?: string;
+  }
+
+  /**
+   * 角色信息,包含是否选中标识
+   */
+  export class RoleInfo {
+    /** createdTime */
+    createdTime?: string;
+
+    /** 角色描述 */
+    description?: string;
+
+    /** id */
+    id?: number;
+
+    /** 角色key,英文,用来做业务 */
+    key: string;
+
+    /** 角色名称,中文用来做标识 */
+    name: string;
+
+    /** 角色是否选中标识 */
+    selected: boolean;
 
     /** updatedTime */
     updatedTime?: string;

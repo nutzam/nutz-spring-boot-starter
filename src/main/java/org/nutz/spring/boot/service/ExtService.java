@@ -710,7 +710,7 @@ public interface ExtService<T extends Serializable> {
      * @return Sql 对象
      */
     default Sql createSql(String key) {
-        return dao().sqls().create(key);
+        return dao().sqls().create(Strings.trim(key));
     }
 
     /**
@@ -721,7 +721,7 @@ public interface ExtService<T extends Serializable> {
      * @return Sql 对象
      */
     default Sql sql(String key) {
-        return dao().sqls().create(key);
+        return dao().sqls().create(Strings.trim(key));
     }
 
     /**

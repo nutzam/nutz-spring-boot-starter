@@ -66,7 +66,7 @@ export interface RoleApi {
     fail?: (error: string) => void,
   ) => void;
 
-  /** 为指定应用角色授权 */
+  /** 为指定角色授权 */
   grant: (
     key: string,
     /** 请求体 */
@@ -77,11 +77,7 @@ export interface RoleApi {
   ) => void;
 
   /** 分页查询角色 */
-  roles: (
-    params: RolesParams,
-    success?: (data: Pagination<acl.Role>) => void,
-    fail?: (error: string) => void,
-  ) => void;
+  roles: (params: RolesParams, success?: (data: Pagination<acl.Role>) => void, fail?: (error: string) => void) => void;
 }
 export default {
   saveOrUpdateRole,

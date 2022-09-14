@@ -68,7 +68,7 @@ export function menuFormRule() {
     },
     {
       type: 'hidden',
-      field: 'parentMenuKey',
+      field: 'parentKey',
     },
   ];
 }

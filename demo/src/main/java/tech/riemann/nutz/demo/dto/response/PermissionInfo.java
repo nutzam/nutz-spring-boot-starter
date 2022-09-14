@@ -81,11 +81,6 @@ public class PermissionInfo implements Serializable {
     @Comment("是否内置,内置的没有菜单归属")
     private Boolean installed;
 
-    @Schema(description = "客户端(应用)id", required = true)
-    @Column("b_client_id")
-    @Comment("客户端(应用)id")
-    private String clientId;
-
     public MenuInfo toMenuInfo() {
         return MenuInfo.builder()
                        .name(getMenuName())

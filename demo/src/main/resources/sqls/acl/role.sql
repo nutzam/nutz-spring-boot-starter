@@ -1,27 +1,9 @@
 /*
-list.all.roles.by.user.id 
+list.role.infos.by.user.name
 */
-select
-	r.*
-from
-	t_role r
-left join t_user_role ur on
-	r.id = ur.ur_role_id
-where
-	ur.ur_user_id = @userId
-/*
-get.role.infos.by.user.id 
-*/
-select
+SELECT
 	r.*,
-	ur.id is not null as `selected`
-from
-	t_role r
-left join (
-	select
-		*
-	from
-		t_user_role
-	where
-		ur_user_id = @userId ) ur on
-	r.id = ur.ur_role_id
+	ur.id IS NOT NULL AS selected 
+FROM
+	t_acl_role r
+	LEFT JOIN ( SELECT * FROM t_acl_user_role WHERE ur_user_name = @userName ) ur ON r.r_key = ur.ur_role_key
