@@ -62,7 +62,11 @@ export interface PermissionApi {
   ) => void;
 
   /** 查询全部菜单 */
-  menus: (params: MenusParams, success?: (data: Array<acl.Menu>) => void, fail?: (error: string) => void) => void;
+  menus: (
+    params: MenusParams,
+    success?: (data: Array<acl.Menu>) => void,
+    fail?: (error: string) => void,
+  ) => void;
 }
 export default {
   saveOrUpdateButton,

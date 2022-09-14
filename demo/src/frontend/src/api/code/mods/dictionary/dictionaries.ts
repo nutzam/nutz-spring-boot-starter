@@ -1,20 +1,20 @@
 /**
- * @desc 码本数据详情
+ * @desc 分组下的数据字典列表
  */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
-  /** 码本数据id */
-  id: number,
+  /** 码本分组key */
+  group: string,
 
-  success: (data: code.Dictionary) => void = defaultSuccess,
+  success: (data: Array<code.Dictionary>) => void = defaultSuccess,
   fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'get',
-    url: `/dictionary/${id}`,
+    url: `/group/${group}/dictionaries`,
   })
-    .then((data: AxiosResponse<code.Dictionary, unknown>) => {
+    .then((data: AxiosResponse<Array<code.Dictionary>, unknown>) => {
       success(data.data);
     })
     .catch((error: string) => fail(error));

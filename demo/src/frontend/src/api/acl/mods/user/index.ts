@@ -37,7 +37,10 @@ export interface UserApi {
   ) => void;
 
   /** 用户性别 */
-  sexes: (success?: (data: Array<Codebook>) => void, fail?: (error: string) => void) => void;
+  sexes: (
+    success?: (data: Array<Codebook>) => void,
+    fail?: (error: string) => void,
+  ) => void;
 
   /** 用户详情 */
   userDetail: (
@@ -114,7 +117,11 @@ export interface UserApi {
   ) => void;
 
   /** 分页查询用户 */
-  users: (params: UsersParams, success?: (data: Pagination<acl.User>) => void, fail?: (error: string) => void) => void;
+  users: (
+    params: UsersParams,
+    success?: (data: Pagination<acl.User>) => void,
+    fail?: (error: string) => void,
+  ) => void;
 }
 export default {
   saveOrUpdateUser,

@@ -31,7 +31,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
 @Table("t_dictionary_dictionary")
 @Comment("码本数据")
 @Schema(name = "Dictionary", description = "码本数据")
-public class Dictionary extends IdBaseEntity{
+public class Dictionary extends IdBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -68,5 +68,5 @@ public class Dictionary extends IdBaseEntity{
     @Schema(description = "禁用标识", required = false)
     @Column("d_disabled")
     @Comment("禁用标识")
-    private Boolean disabled;
+    private boolean disabled;
 }

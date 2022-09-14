@@ -3,6 +3,7 @@
     "mods": [
       {
         "description": "权限",
+        "name": "permission",
         "interfaces": [
           {
             "description": "增加/编辑操作按钮",
@@ -229,11 +230,11 @@
               }
             ]
           }
-        ],
-        "name": "permission"
+        ]
       },
       {
         "description": "角色",
+        "name": "role",
         "interfaces": [
           {
             "description": "增加/编辑角色",
@@ -517,11 +518,11 @@
               }
             ]
           }
-        ],
-        "name": "role"
+        ]
       },
       {
         "description": "用户",
+        "name": "user",
         "interfaces": [
           {
             "description": "增加/编辑用户",
@@ -964,8 +965,7 @@
               }
             ]
           }
-        ],
-        "name": "user"
+        ]
       }
     ],
     "name": "acl",
@@ -973,6 +973,7 @@
       {
         "description": "操作按钮",
         "name": "Button",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1083,12 +1084,12 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "枚举码本",
         "name": "Codebook",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1132,12 +1133,12 @@
             "description": "码本值",
             "required": true
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "菜单",
         "name": "Menu",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1234,12 +1235,12 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "菜单信息",
         "name": "MenuInfo",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1359,11 +1360,11 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "NutMap",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1410,11 +1411,11 @@
             "name": "empty",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PaginationRole",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1562,11 +1563,11 @@
             "name": "recordCount",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PaginationUser",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1714,12 +1715,12 @@
             "name": "recordCount",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "权限信息",
         "name": "PermissionInfo",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1847,11 +1848,11 @@
             "description": "权限是否选中标识",
             "required": true
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ResultObject",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1935,12 +1936,12 @@
             "name": "success",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "角色",
         "name": "Role",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2023,12 +2024,12 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "角色信息,包含是否选中标识",
         "name": "RoleInfo",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2125,12 +2126,12 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "用户",
         "name": "User",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2271,8 +2272,7 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       }
     ]
   },
@@ -2632,14 +2632,86 @@
   {
     "mods": [
       {
-        "description": "码本数据",
-        "name": "dictionary",
+        "description": "数据字典",
         "interfaces": [
+          {
+            "description": "增加/编辑码本分组",
+            "name": "saveOrUpdateGroup",
+            "method": "put",
+            "path": "/group",
+            "response": {
+              "typeArgs": [],
+              "typeName": "Group",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "required": true,
+                "in": "body",
+                "name": "requestBody",
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "Group",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "分组下的数据字典列表",
+            "name": "dictionaries",
+            "method": "get",
+            "path": "/group/{group}/dictionaries",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "Dictionary",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "description": "码本分组key",
+                "required": true,
+                "in": "path",
+                "name": "group",
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
           {
             "description": "增加/编辑码本数据",
             "name": "saveOrUpdateDictionary",
             "method": "put",
-            "path": "/dictionary",
+            "path": "/group/{group}/dictionary",
             "response": {
               "typeArgs": [],
               "typeName": "Dictionary",
@@ -2667,42 +2739,10 @@
             ]
           },
           {
-            "description": "码本数据详情",
-            "name": "dictionaryDetail",
-            "method": "get",
-            "path": "/dictionary/{id}",
-            "response": {
-              "typeArgs": [],
-              "typeName": "Dictionary",
-              "isDefsType": true,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "description": "码本数据id",
-                "required": true,
-                "in": "path",
-                "name": "id",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
             "description": "删除码本数据",
             "name": "deleteDictionary",
             "method": "delete",
-            "path": "/dictionary/{id}",
+            "path": "/group/{group}/dictionary/{key}",
             "response": {
               "typeArgs": [],
               "typeName": "",
@@ -2714,72 +2754,10 @@
             },
             "parameters": [
               {
-                "description": "码本数据id",
+                "description": "码本分组key",
                 "required": true,
                 "in": "path",
-                "name": "id",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
-            "description": "分页查询码本数据",
-            "name": "dictionarys",
-            "method": "get",
-            "path": "/dictionarys",
-            "response": {
-              "typeArgs": [],
-              "typeName": "PaginationDictionary",
-              "isDefsType": true,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "description": "页码",
-                "required": false,
-                "in": "query",
-                "name": "page",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "description": "页面大小",
-                "required": false,
-                "in": "query",
-                "name": "size",
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "description": "搜索关键词",
-                "required": false,
-                "in": "query",
-                "name": "key",
+                "name": "group",
                 "dataType": {
                   "typeArgs": [],
                   "typeName": "string",
@@ -2789,38 +2767,16 @@
                   "enum": [],
                   "typeProperties": []
                 }
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "description": "码本分组",
-        "name": "group",
-        "interfaces": [
-          {
-            "description": "增加/编辑码本分组",
-            "name": "saveOrUpdateGroup",
-            "method": "put",
-            "path": "/group",
-            "response": {
-              "typeArgs": [],
-              "typeName": "Group",
-              "isDefsType": true,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
+              },
               {
+                "description": "码本数据key",
                 "required": true,
-                "in": "body",
-                "name": "requestBody",
+                "in": "path",
+                "name": "key",
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "Group",
-                  "isDefsType": true,
+                  "typeName": "string",
+                  "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -2865,7 +2821,7 @@
             "description": "删除码本分组",
             "name": "deleteGroup",
             "method": "delete",
-            "path": "/group/{id}",
+            "path": "/group/{key}",
             "response": {
               "typeArgs": [],
               "typeName": "",
@@ -2877,13 +2833,13 @@
             },
             "parameters": [
               {
-                "description": "码本分组id",
+                "description": "码本分组key",
                 "required": true,
                 "in": "path",
-                "name": "id",
+                "name": "key",
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "number",
+                  "typeName": "string",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -2955,7 +2911,8 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "dictionary"
       }
     ],
     "name": "code",
@@ -2963,7 +2920,6 @@
       {
         "description": "码本数据",
         "name": "Dictionary",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3102,12 +3058,12 @@
             "description": "value",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "码本分组",
         "name": "Group",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3204,11 +3160,11 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "NutMap",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3255,163 +3211,11 @@
             "name": "empty",
             "required": false
           }
-        ]
-      },
-      {
-        "name": "PaginationDictionary",
-        "templateArgs": [],
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [
-                {
-                  "typeArgs": [],
-                  "typeName": "Dictionary",
-                  "isDefsType": true,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "Array",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "dataList",
-            "required": true
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "boolean",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "first",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "boolean",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "last",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "offset",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "pageCount",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "pageNumber",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "pageSize",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [
-                {
-                  "typeArgs": [],
-                  "typeName": "",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                },
-                {
-                  "typeArgs": [],
-                  "typeName": "object",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "ObjectMap",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "paras",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "recordCount",
-            "required": false
-          }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "PaginationGroup",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3559,11 +3363,11 @@
             "name": "recordCount",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "ResultObject",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3647,7 +3451,8 @@
             "name": "success",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       }
     ]
   }

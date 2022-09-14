@@ -2,10 +2,13 @@ package tech.riemann.nutz.demo.entity.dictionary;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
+import org.nutz.lang.random.R;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,14 +34,16 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
 @Table("t_dictionary_group")
 @Comment("码本分组")
 @Schema(name = "Group", description = "码本分组")
-public class Group extends IdBaseEntity{
+public class Group extends IdBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "分组唯一键", required = true)
     @Column("g_key")
+    @Name
     @Comment("分组唯一键")
-    private String key;
+    @Default
+    private String key = R.UU32();
 
     @Schema(description = "分组名称", required = true)
     @Column("g_name")
@@ -53,5 +58,5 @@ public class Group extends IdBaseEntity{
     @Schema(description = "禁用标识", required = true)
     @Column("g_disabled")
     @Comment("禁用标识")
-    private Boolean disabled;
+    private boolean disabled;
 }

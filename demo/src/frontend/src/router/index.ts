@@ -50,7 +50,7 @@ export default createRouter({
           path: '/dictionary',
           name: 'Dictionary',
           meta: { title: 'menus.dictionary', icon: 'icon-dictionary', flat: true },
-          component: () => import('../views/admins/PageInfo.vue'),
+          component: () => import('../views/dictionary/dictionary-management.vue'),
         },
         {
           path: '/version',

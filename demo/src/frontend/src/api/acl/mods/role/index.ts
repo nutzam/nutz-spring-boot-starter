@@ -77,7 +77,11 @@ export interface RoleApi {
   ) => void;
 
   /** 分页查询角色 */
-  roles: (params: RolesParams, success?: (data: Pagination<acl.Role>) => void, fail?: (error: string) => void) => void;
+  roles: (
+    params: RolesParams,
+    success?: (data: Pagination<acl.Role>) => void,
+    fail?: (error: string) => void,
+  ) => void;
 }
 export default {
   saveOrUpdateRole,

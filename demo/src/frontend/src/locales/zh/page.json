@@ -184,5 +184,54 @@
         }
       }
     }
+  },
+  "dictionary": {
+    "subTitle": "项目码本管理,提供码本分组和数据管理",
+    "group": {
+      "title": "码本分组",
+      "search": {
+        "placeholder": "请输入分组关键词"
+      },
+      "add": "添加分组",
+      "notification": {
+        "success": "操作成功",
+        "addOrEdit": {
+          "description": "添加/编辑分组成功,页面将自动刷新"
+        },
+        "delete": {
+          "description": "删除分组成功,页面将自动刷新"
+        }
+      },
+      "edit": "编辑分组",
+      "delete": "删除",
+      "confirm": {
+        "delete": {
+          "title": "确定要删除分组 {name} ?"
+        }
+      }
+    },
+    "code": {
+      "title": "分组 {group} 数据字典",
+      "alter": {
+        "title": "操作提示",
+        "description": "请选择左侧分组后进行数据字典操作"
+      },
+      "notification": {
+        "success": "操作成功",
+        "addOrEdit": {
+          "description": "添加/编辑数据字典成功,页面将自动刷新"
+        },
+        "delete": {
+          "description": "删除数据成功,页面将自动刷新"
+        }
+      },
+      "add": "添加数据",
+      "edit": "编辑数据",
+      "delete": "删除",
+      "confirm": {
+        "title": "确定删除数据 {name} ?"
+      },
+      "addChild": "添加下级"
+    }
   }
 }

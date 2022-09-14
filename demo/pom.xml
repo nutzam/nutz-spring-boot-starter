@@ -164,7 +164,7 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>yarn</executable>
+							<executable>pnpm</executable>
 							<arguments>
 								<argument>install</argument>
 							</arguments>
@@ -179,7 +179,7 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>yarn</executable>
+							<executable>pnpm</executable>
 							<arguments>
 								<argument>build</argument>
 							</arguments>

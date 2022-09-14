@@ -40,5 +40,15 @@
   },
   "modal": {
     "role": {}
+  },
+  "group": {
+    "notification": {}
+  },
+  "dictionary": {
+    "code": {
+      "notification": {
+        "delete": {}
+      }
+    }
   }
 }

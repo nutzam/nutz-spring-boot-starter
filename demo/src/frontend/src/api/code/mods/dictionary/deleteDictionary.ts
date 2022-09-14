@@ -4,15 +4,17 @@
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
-  /** 码本数据id */
-  id: number,
+  /** 码本分组key */
+  group: string,
+  /** 码本数据key */
+  key: string,
 
   success: (data: void) => void = defaultSuccess,
   fail: (error: string) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'delete',
-    url: `/dictionary/${id}`,
+    url: `/group/${group}/dictionary/${key}`,
   })
     .then((data: AxiosResponse<void, unknown>) => {
       success(data.data);

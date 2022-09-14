@@ -4,6 +4,7 @@
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
+  group: string,
   /** 请求体 */
   requestBody: code.Dictionary,
 
@@ -12,7 +13,7 @@ export default async function (
 ): Promise<void> {
   return http({
     method: 'put',
-    url: `/dictionary`,
+    url: `/group/${group}/dictionary`,
     data: requestBody,
   })
     .then((data: AxiosResponse<code.Dictionary, unknown>) => {

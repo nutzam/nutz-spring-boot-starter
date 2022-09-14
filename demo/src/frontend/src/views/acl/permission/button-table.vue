@@ -12,7 +12,7 @@
       v-if="!menuKey"
       :message="$t('page.permission.button.alter.title')"
       :description="$t('page.permission.button.alter.description')"
-      type="warning"
+      type="info"
       show-icon
     />
     <a-table v-else :columns="columns" :data-source="buttons" :loading="loading">

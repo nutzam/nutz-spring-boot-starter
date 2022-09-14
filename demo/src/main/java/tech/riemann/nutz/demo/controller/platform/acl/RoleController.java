@@ -58,6 +58,7 @@ public class RoleController {
                                   @Parameter(description = "页码") @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                   @Parameter(description = "页面大小") @RequestParam(value = "size", required = false, defaultValue = "10") int size,
                                   @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false, defaultValue = "") String key) {
+
         return roleService.searchByKeyAndPage(key,
                                               page,
                                               size,
