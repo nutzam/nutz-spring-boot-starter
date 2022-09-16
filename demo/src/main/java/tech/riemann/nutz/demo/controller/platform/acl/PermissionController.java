@@ -70,7 +70,7 @@ public class PermissionController {
     @PutMapping("menu")
     @Operation(summary = "增加/编辑菜单")
     public Menu saveOrUpdateMenu(@Validated @Parameter(description = "菜单") @RequestBody Menu menu) {
-        if (menu.getId() != null && menu.getId() > 0) {
+        if (menu.getId() > 0) {
             if (menuService.update(menu) == 1) {
                 return menu;
             } else {
@@ -108,7 +108,7 @@ public class PermissionController {
     @PutMapping("button")
     @Operation(summary = "增加/编辑操作按钮")
     public Button saveOrUpdateButton(@Validated @Parameter(description = "操作按钮") @RequestBody Button button) {
-        if (button.getId() != null && button.getId() > 0) {
+        if (button.getId() > 0) {
             if (buttonService.update(button) == 1) {
                 return button;
             } else {

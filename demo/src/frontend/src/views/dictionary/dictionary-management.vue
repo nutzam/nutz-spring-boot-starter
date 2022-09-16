@@ -7,6 +7,7 @@
           :description="$t('page.dictionary.alter.description')"
           type="warning"
           show-icon
+          closable
         />
         <a-row :gutter="[12, 12]">
           <a-col :span="6">

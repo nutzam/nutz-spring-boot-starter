@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 import org.nutz.json.JsonField;
 
@@ -43,6 +44,7 @@ public class User extends IdBaseEntity {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "用户名", required = true)
+    @Name
     @Column("u_name")
     @Comment("用户名")
     private String name;

@@ -1,3 +1,4 @@
+import { useUserStore } from './../store/user';
 import { notification } from 'ant-design-vue';
 // import { messages } from '@/locales';
 import axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios';
@@ -23,13 +24,11 @@ export function defaultSuccess(data: unknown): void {
   console.log(data);
 }
 export function defaultError(error: string): void {
+  console.log(error);
   notification.error({
     message: t('notification.message.error'),
     description: error,
   });
-}
-export function msgAndLogout(msg: string): void {
-  console.log(msg);
 }
 const config = {
   baseURL: http.prefix,
@@ -38,7 +37,7 @@ const config = {
 const _axios = axios.create(config);
 _axios.interceptors.request.use(
   (cfg: AxiosRequestConfig) => {
-    const token = ''; //TODO token
+    const token = useUserStore().token;
     if (token) {
       cfg.headers && (cfg.headers.Authorization = token);
     }
@@ -58,8 +57,7 @@ _axios.interceptors.response.use(
   (error: AxiosError<GlobalError>) => {
     switch (Number(error.response && error.response.status)) {
       case 403 | 401:
-        msgAndLogout(t('error.forbidden'));
-        break;
+        return Promise.reject(t('error.forbidden'));
       case 404: {
         return Promise.reject(t('error.notFount'));
       }

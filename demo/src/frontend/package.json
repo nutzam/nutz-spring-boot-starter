@@ -5,12 +5,13 @@
   "scripts": {
     "dev": "vite --host",
     "dev:force": "vite --force",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit && vite build --mode=production",
+    "build:sit": "vue-tsc --noEmit && vite build --mode=sit",
     "report": "vite build",
     "preview": "vite preview --port 5050",
     "test:unit": "vitest --environment jsdom",
     "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix"
   },
   "dependencies": {
     "@ant-design-vue/pro-layout": "^3.2.3",
@@ -32,7 +33,7 @@
     "xe-utils": "^3.5.6"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.1.4",
+    "@rushstack/eslint-patch": "^1.2.0",
     "@types/mockjs": "^1.0.6",
     "@types/node": "^18.7.18",
     "@vitejs/plugin-vue": "^3.1.0",

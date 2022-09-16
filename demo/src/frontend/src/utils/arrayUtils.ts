@@ -4,7 +4,7 @@
  * @param array 数组
  * @returns 数组是否为空
  */
-const isEmpty = (array?: Array<any>): boolean => {
+const isEmpty = (array?: Array<unknown>): boolean => {
   return !array || array.length < 1;
 };
 

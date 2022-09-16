@@ -20,7 +20,7 @@
       </router-link>
     </template>
     <template #rightContentRender>
-      <RightContent :current-user="currentUser" />
+      <right-content :user-name="currentUser" />
     </template>
     <!-- custom breadcrumb itemRender  -->
     <template #breadcrumbRender="{ route, params, routes }">
@@ -64,9 +64,11 @@ import { IconFont } from '@/components/IconFont/IconFont';
 import logo from '@/assets/logo.png';
 import { config } from '@/core/settings';
 import { useAppStore } from '@/store/app';
+import { useUserStore } from '@/store/user';
+import { api } from '@/api';
 
 const translate = config.enableI8n ? translateFN : (s: string) => s;
-
+const user = useUserStore();
 const router = useRouter();
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()));
 const state = reactive<Omit<RouteContextProps, 'menuData'>>({
@@ -115,9 +117,8 @@ const breadcrumb = computed(() => {
     };
   });
 });
-const currentUser = reactive({
-  nickname: 'Admin',
-  avatar: 'A',
+const currentUser = computed(() => {
+  return user.fullName || user.name;
 });
 
 const onCollapse = (collapsed: boolean): void => {
@@ -135,4 +136,19 @@ watch(
     immediate: true,
   },
 );
+
+if (user.token) {
+  api.authApi.login.currentUser(
+    data => {
+      user.userLogin(data); //更新一下token状态,自动续杯
+    },
+    () => {
+      user.logout();
+      router.push({ path: '/user' });
+    },
+  );
+} else {
+  //没有token还混啥
+  router.push({ path: '/user' });
+}
 </script>

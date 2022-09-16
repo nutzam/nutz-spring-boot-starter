@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import BasicLayout from '../layouts/BasicLayout.vue';
 import BlankLayout from '../layouts/BlankLayout.vue';
+import UserLayout from '@/layouts/user-layout.vue';
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -56,6 +57,19 @@ export default createRouter({
           name: 'version',
           meta: { title: 'menus.version', icon: 'icon-version' },
           component: () => import('../views/version/version-info.vue'),
+        },
+      ],
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: UserLayout,
+      redirect: '/user/login',
+      children: [
+        {
+          path: '/user/login',
+          name: 'Login',
+          component: () => import('../views/auth/user-login.vue'),
         },
       ],
     },

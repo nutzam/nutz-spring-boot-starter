@@ -50,5 +50,12 @@
         "delete": {}
       }
     }
+  },
+  "login": {
+    "tab": {},
+    "user": {
+      "placement": {}
+    },
+    "button": {}
   }
 }

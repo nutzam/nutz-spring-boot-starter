@@ -90,7 +90,7 @@ public class RoleController {
     @PutMapping("role")
     @Operation(summary = "增加/编辑角色")
     public Role saveOrUpdateRole(@Validated @Parameter(description = "角色") @RequestBody Role role) {
-        if (role.getId() != null && role.getId() > 0) {
+        if (role.getId() > 0) {
             if (roleService.update(role) == 1) {
                 return role;
             } else {

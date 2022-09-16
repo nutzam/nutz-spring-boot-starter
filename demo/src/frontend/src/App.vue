@@ -11,11 +11,12 @@ import { useUserTheme } from './hooks/useTheme';
 import { useTitle } from '@vueuse/core';
 import { messages } from './locales';
 import { useAppStore } from './store/app';
+import type { Locale } from 'ant-design-vue/lib/locale-provider';
 useI18n().locale.value = useAppStore().language;
 useUserTheme();
 useTitle(useAppStore().title); //TODO title 可以设置每页的路由meta信息
 const locale = computed(() => {
-  return (messages as any)[useAppStore().language];
+  return messages[useAppStore().language] as unknown as Locale;
 });
 </script>
 

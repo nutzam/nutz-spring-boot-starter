@@ -2283,13 +2283,29 @@
         "name": "login",
         "interfaces": [
           {
+            "description": "当前用户",
+            "name": "currentUser",
+            "method": "get",
+            "path": "/auth/current-user",
+            "response": {
+              "typeArgs": [],
+              "typeName": "LoginUser",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          },
+          {
             "description": "登录",
             "name": "login",
             "method": "post",
-            "path": "/login",
+            "path": "/auth/login",
             "response": {
               "typeArgs": [],
-              "typeName": "AuthUser",
+              "typeName": "LoginUser",
               "isDefsType": true,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2311,6 +2327,22 @@
                 }
               }
             ]
+          },
+          {
+            "description": "登出",
+            "name": "logout",
+            "method": "post",
+            "path": "/auth/logout",
+            "response": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
           }
         ]
       }
@@ -2318,20 +2350,187 @@
     "name": "auth",
     "baseClasses": [
       {
-        "name": "AuthUser",
+        "description": "枚举码本",
+        "name": "Codebook",
         "templateArgs": [],
         "properties": [
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "NutMap",
-              "isDefsType": true,
+              "typeName": "string",
+              "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
               "enum": [],
               "typeProperties": []
             },
-            "name": "extInfo",
+            "name": "code",
+            "description": "码本编码",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "description",
+            "description": "码本名称",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "name",
+            "description": "码本值",
+            "required": true
+          }
+        ]
+      },
+      {
+        "name": "LoginDto",
+        "templateArgs": [],
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "name",
+            "description": "用户名",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "password",
+            "description": "密码",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "rememberMe",
+            "description": "是否记住我",
+            "required": false
+          }
+        ]
+      },
+      {
+        "description": "已登录用户",
+        "name": "LoginUser",
+        "templateArgs": [],
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "createdTime",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "email",
+            "description": "邮箱",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "fullName",
+            "description": "真实姓名",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "mobile",
+            "description": "手机号",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "name",
+            "description": "用户名",
             "required": true
           },
           {
@@ -2383,7 +2582,7 @@
               "typeProperties": []
             },
             "name": "refreshToken",
-            "description": "jwt refreshToken",
+            "description": "refreshToken",
             "required": true
           },
           {
@@ -2413,6 +2612,36 @@
           {
             "dataType": {
               "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [
+                "'MALE'",
+                "'FEMALE'"
+              ],
+              "typeProperties": []
+            },
+            "name": "sex",
+            "description": "性别",
+            "required": true
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "Codebook",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "sexInfo",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
               "typeName": "string",
               "isDefsType": false,
               "templateIndex": -1,
@@ -2421,7 +2650,7 @@
               "typeProperties": []
             },
             "name": "token",
-            "description": "jwt Token",
+            "description": "token",
             "required": true
           },
           {
@@ -2434,56 +2663,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "userName",
-            "description": "用户名",
-            "required": true
-          }
-        ]
-      },
-      {
-        "name": "LoginDto",
-        "templateArgs": [],
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "name",
-            "description": "用户名",
-            "required": true
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "password",
-            "description": "密码",
-            "required": true
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "boolean",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "rememberMe",
-            "description": "是否记住我",
+            "name": "updatedTime",
             "required": false
           }
         ]
@@ -2633,6 +2813,7 @@
     "mods": [
       {
         "description": "数据字典",
+        "name": "dictionary",
         "interfaces": [
           {
             "description": "增加/编辑码本分组",
@@ -2911,8 +3092,7 @@
               }
             ]
           }
-        ],
-        "name": "dictionary"
+        ]
       }
     ],
     "name": "code",
@@ -2920,6 +3100,7 @@
       {
         "description": "码本数据",
         "name": "Dictionary",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3058,12 +3239,12 @@
             "description": "value",
             "required": true
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "description": "码本分组",
         "name": "Group",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3160,11 +3341,11 @@
             "name": "updatedTime",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "NutMap",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3211,11 +3392,11 @@
             "name": "empty",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "PaginationGroup",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3363,11 +3544,11 @@
             "name": "recordCount",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "ResultObject",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3451,8 +3632,7 @@
             "name": "success",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       }
     ]
   }

@@ -111,7 +111,7 @@ public class UserController {
     @PutMapping("user")
     @Operation(summary = "增加/编辑用户")
     public User saveOrUpdateUser(@Validated @Parameter(description = "用户") @RequestBody User user) {
-        if (user.getId() != null && user.getId() > 0) {
+        if (user.getId() > 0) {
             if (userService.update(user) == 1) {
                 return user;
             } else {

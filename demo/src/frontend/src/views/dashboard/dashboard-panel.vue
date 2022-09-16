@@ -1,82 +1,67 @@
 <template>
   <page-container :title="$t(String($route.meta.title))" sub-title="系统控制台">
     <div style="min-height: calc(100vh - 218px)">
-      <a-card>
-        <a-row :gutter="[12, 32]">
-          <a-col :span="4">
-            <a-statistic title="Active Users" :value="112893" style="margin-right: 50px" />
-          </a-col>
-          <a-col :span="4">
-            <a-statistic
-              title="Feedback"
-              :value="11.28"
-              :precision="2"
-              suffix="%"
-              :value-style="{ color: '#3f8600' }"
-              style="margin-right: 50px"
-            >
-              <template #prefix>
-                <arrow-up-outlined />
-              </template>
-            </a-statistic>
-          </a-col>
-          <a-col :span="4">
-            <a-statistic title="Account Balance (CNY)" :precision="2" :value="112893" />
-          </a-col>
-          <a-col :span="4">
-            <a-statistic
-              title="Idle"
-              :value="9.3"
-              :precision="2"
-              suffix="%"
-              class="demo-class"
-              :value-style="{ color: '#cf1322' }"
-            >
-              <template #prefix>
-                <arrow-down-outlined />
-              </template>
-            </a-statistic>
-          </a-col>
-          <a-col :span="4">
-            <a-statistic-countdown
-              title="Million Seconds"
-              :value="deadline"
-              format="HH:mm:ss:SSS"
-              style="margin-right: 50px"
-            />
-          </a-col>
-          <a-col :span="4">
-            <a-statistic-countdown :value="deadline" style="margin-right: 50px">
-              <template #title>
-                <span>Countdown</span>
-                <a-tooltip placement="right">
-                  <template #title>
-                    <span>hurry up!</span>
-                  </template>
-                  <question-circle-two-tone style="margin-left: 5px" />
-                </a-tooltip>
-              </template>
-            </a-statistic-countdown>
-          </a-col>
-          <a-col :span="12">
-            <v-chart class="chart" :option="option" />
-          </a-col>
-          <a-col :span="12">
-            <v-chart class="chart" :option="option" />
-          </a-col>
-          <a-col :span="12">
-            <v-chart class="chart" :option="option" />
-          </a-col>
-          <a-col :span="12">
-            <v-chart class="chart" :option="option" />
-          </a-col>
-        </a-row>
-      </a-card>
+      <a-row :gutter="[12, 12]">
+        <a-col :span="4">
+          <a-statistic title="Active Users" :value="112893" />
+        </a-col>
+        <a-col :span="4">
+          <a-statistic title="Feedback" :value="11.28" :precision="2" suffix="%" :value-style="{ color: '#3f8600' }">
+            <template #prefix>
+              <arrow-up-outlined />
+            </template>
+          </a-statistic>
+        </a-col>
+        <a-col :span="4">
+          <a-statistic title="Account Balance (CNY)" :precision="2" :value="112893" />
+        </a-col>
+        <a-col :span="4">
+          <a-statistic
+            title="Idle"
+            :value="9.3"
+            :precision="2"
+            suffix="%"
+            class="demo-class"
+            :value-style="{ color: '#cf1322' }"
+          >
+            <template #prefix>
+              <arrow-down-outlined />
+            </template>
+          </a-statistic>
+        </a-col>
+        <a-col :span="4">
+          <a-statistic-countdown title="Million Seconds" :value="deadline" format="HH:mm:ss:SSS" />
+        </a-col>
+        <a-col :span="4">
+          <a-statistic-countdown :value="deadline">
+            <template #title>
+              <span>Countdown</span>
+              <a-tooltip placement="right">
+                <template #title>
+                  <span>hurry up!</span>
+                </template>
+                <question-circle-two-tone style="margin-left: 5px" />
+              </a-tooltip>
+            </template>
+          </a-statistic-countdown>
+        </a-col>
+        <a-col :span="12">
+          <v-chart class="chart" :option="option" />
+        </a-col>
+        <a-col :span="12">
+          <v-chart class="chart" :option="scatterData" autoresize />
+        </a-col>
+        <a-col :span="12"><v-chart class="chart" :option="option" /></a-col>
+        <a-col :span="12">
+          <v-chart class="chart" :option="option" />
+        </a-col>
+      </a-row>
     </div>
   </page-container>
 </template>
 <script lang="ts" setup>
-import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons-vue';
+import { ArrowUpOutlined, ArrowDownOutlined, QuestionCircleTwoTone } from '@ant-design/icons-vue';
+import { scatterData } from './scatter';
 const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30;
 const option = ref({
   title: {
@@ -118,6 +103,11 @@ const option = ref({
 </script>
 <style lang="less" scoped>
 .chart {
-  height: 30vh;
+  height: 35vh;
+  background-color: #fff;
+}
+.ant-statistic {
+  background-color: #fff;
+  padding-left: 10px;
 }
 </style>

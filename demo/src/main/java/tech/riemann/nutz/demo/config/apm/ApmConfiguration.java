@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import club.zhcs.apm.URLProvider;
 import club.zhcs.apm.UserCollector;
-import club.zhcs.auth.AuthService;
+import tech.riemann.nutz.demo.config.auth.AuthService;
 
 /**
  * 
@@ -18,7 +18,7 @@ public class ApmConfiguration {
 
     @Bean
     public UserCollector userCollector(AuthService authService) {
-        return authService::userName;
+        return authService::currentUserName;
     }
 
     @Bean

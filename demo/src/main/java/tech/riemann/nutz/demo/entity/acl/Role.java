@@ -2,6 +2,7 @@ package tech.riemann.nutz.demo.entity.acl;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -31,11 +32,12 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
 @Table("t_acl_role")
 @Comment("角色")
 @Schema(name = "Role", description = "角色")
-public class Role extends IdBaseEntity{
+public class Role extends IdBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "角色key,英文,用来做业务", required = true)
+    @Name
     @Column("r_key")
     @Comment("角色key,英文,用来做业务")
     private String key;

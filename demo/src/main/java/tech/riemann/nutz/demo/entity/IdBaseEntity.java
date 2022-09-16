@@ -1,11 +1,10 @@
 package tech.riemann.nutz.demo.entity;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
-import org.nutz.dao.entity.annotation.Id;
+import org.nutz.spring.boot.service.entity.IdEntity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,16 +27,13 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-@EqualsAndHashCode(of = "id")
-public class IdBaseEntity implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class IdBaseEntity extends IdEntity {
 
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
-
-    @Id
-    protected Long id;
 
     @Column("created_time")
     @Comment("创建时间")

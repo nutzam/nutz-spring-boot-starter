@@ -94,7 +94,7 @@ public class DictionaryController {
     @PutMapping("group")
     @Operation(summary = "增加/编辑码本分组")
     public Group saveOrUpdateGroup(@Validated @Parameter(description = "码本分组") @RequestBody Group group) {
-        if (group.getId() != null && group.getId() > 0) {
+        if (group.getId() > 0) {
             if (groupService.update(group) == 1) {
                 return group;
             } else {
@@ -134,7 +134,7 @@ public class DictionaryController {
                                              @Parameter(description = "码本分组key", required = true) @PathVariable("group") String group,
                                              @Validated @Parameter(description = "码本数据") @RequestBody Dictionary dictionary) {
         dictionary.setGroupKey(group);
-        if (dictionary.getId() != null && dictionary.getId() > 0) {
+        if (dictionary.getId() > 0) {
             if (dictionaryService.update(dictionary) == 1) {
                 return dictionary;
             } else {

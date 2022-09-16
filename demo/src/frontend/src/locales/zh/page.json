@@ -237,5 +237,21 @@
       "title": "操作提示",
       "description": "数据字典操作可能引起系统功能错乱,请谨慎操作!"
     }
+  },
+  "login": {
+    "tab": {
+      "user": "账号登录",
+      "scan": "扫码登录"
+    },
+    "user": {
+      "placement": {
+        "name": "请输入用户名",
+        "password": "请输入密码"
+      }
+    },
+    "button": {
+      "login": "登录",
+      "social": "社会化登录"
+    }
   }
 }

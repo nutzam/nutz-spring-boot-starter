@@ -39,8 +39,8 @@ public class Group extends IdBaseEntity {
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "分组唯一键", required = true)
-    @Column("g_key")
     @Name
+    @Column("g_key")
     @Comment("分组唯一键")
     @Default
     private String key = R.UU32();
