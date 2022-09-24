@@ -1,6 +1,7 @@
 /**
  * @desc 增加/编辑操作按钮
  */
+import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
@@ -8,7 +9,7 @@ export default async function (
   requestBody: acl.Button,
 
   success: (data: acl.Button) => void = defaultSuccess,
-  fail: (error: string) => void = defaultError,
+  fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'put',
@@ -18,5 +19,5 @@ export default async function (
     .then((data: AxiosResponse<acl.Button, unknown>) => {
       success(data.data);
     })
-    .catch((error: string) => fail(error));
+    .catch((error: GlobalError) => fail(error));
 }

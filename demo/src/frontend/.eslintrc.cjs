@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     // all rules docs https://eslint.org/docs/rules/
     'prettier/prettier': ['error', { semi: true, singleQuote: true, printWidth: 120 }],
+    'vue/no-v-html': 'off',
   },
   globals: {
     // 在这里可以添加各种命名空间和全局函数

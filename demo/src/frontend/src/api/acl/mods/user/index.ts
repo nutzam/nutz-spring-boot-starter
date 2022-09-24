@@ -2,6 +2,7 @@
  * @description 用户
  *
  */
+import type { GlobalError } from '@/api/api';
 import saveOrUpdateUser from './saveOrUpdateUser';
 import sexes from './sexes';
 import userDetail from './userDetail';
@@ -33,14 +34,11 @@ export interface UserApi {
     requestBody: acl.User,
 
     success?: (data: acl.User) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 用户性别 */
-  sexes: (
-    success?: (data: Array<Codebook>) => void,
-    fail?: (error: string) => void,
-  ) => void;
+  sexes: (success?: (data: Array<Codebook>) => void, fail?: (error: GlobalError) => void) => void;
 
   /** 用户详情 */
   userDetail: (
@@ -48,7 +46,7 @@ export interface UserApi {
     id: number,
 
     success?: (data: acl.User) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 删除用户 */
@@ -57,7 +55,7 @@ export interface UserApi {
     id: number,
 
     success?: (data: void) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 重置密码 */
@@ -66,7 +64,7 @@ export interface UserApi {
     name: string,
 
     success?: (data: string) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 查询用于授权的权限信息 */
@@ -75,7 +73,7 @@ export interface UserApi {
     name: string,
 
     success?: (data: Array<acl.PermissionInfo>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 查询用户权限 */
@@ -84,7 +82,7 @@ export interface UserApi {
     name: string,
 
     success?: (data: Array<acl.MenuInfo>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 为指定用户授权 */
@@ -94,7 +92,7 @@ export interface UserApi {
     requestBody: Array<string>,
 
     success?: (data: void) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 查询用户权限 */
@@ -103,7 +101,7 @@ export interface UserApi {
     name: string,
 
     success?: (data: Array<acl.RoleInfo>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 为指定用户设置角色 */
@@ -113,14 +111,14 @@ export interface UserApi {
     requestBody: Array<string>,
 
     success?: (data: void) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 分页查询用户 */
   users: (
     params: UsersParams,
     success?: (data: Pagination<acl.User>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 }
 export default {

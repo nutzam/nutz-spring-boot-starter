@@ -60,7 +60,7 @@ spring:
   datasource:
 # 数据源
     druid:
-      url: jdbc:mysql://10.100.130.91:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://mysql.riemann.tech:13306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       username: thunder
       password: ZhaXcYaabZRKx5zw
       driver-class-name: com.mysql.cj.jdbc.Driver

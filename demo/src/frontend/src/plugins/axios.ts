@@ -5,14 +5,8 @@ import axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse } f
 import type { App } from 'vue';
 import { http } from '@/core/http';
 import i18n from '@/locales';
+import type { GlobalError } from '@/api/api';
 const { t } = i18n.global;
-
-export interface GlobalError {
-  /** 错误码 */
-  code: number;
-  /** 错误信息 */
-  message: string;
-}
 
 notification.config({
   placement: 'bottomRight',
@@ -23,11 +17,11 @@ notification.config({
 export function defaultSuccess(data: unknown): void {
   console.log(data);
 }
-export function defaultError(error: string): void {
+export function defaultError(error: GlobalError): void {
   console.log(error);
   notification.error({
     message: t('notification.message.error'),
-    description: error,
+    description: error.message,
   });
 }
 const config = {
@@ -55,15 +49,19 @@ _axios.interceptors.response.use(
     return Promise.resolve(response);
   },
   (error: AxiosError<GlobalError>) => {
-    switch (Number(error.response && error.response.status)) {
-      case 403 | 401:
-        return Promise.reject(t('error.forbidden'));
-      case 404: {
-        return Promise.reject(t('error.notFount'));
-      }
+    const code = Number(error.response && error.response.status);
+    switch (code) {
+      case 403 | 401 | 404:
+        return Promise.reject({
+          code: code,
+          messages: t('error.forbidden'),
+        });
       case 500:
       default:
-        return Promise.reject(error.response && error.response.data.message);
+        return Promise.reject({
+          code: code,
+          messages: error.response && error.response.data.message,
+        });
     }
   },
 );

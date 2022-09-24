@@ -3,7 +3,6 @@
     "mods": [
       {
         "description": "权限",
-        "name": "permission",
         "interfaces": [
           {
             "description": "增加/编辑操作按钮",
@@ -230,11 +229,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "permission"
       },
       {
         "description": "角色",
-        "name": "role",
         "interfaces": [
           {
             "description": "增加/编辑角色",
@@ -518,11 +517,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "role"
       },
       {
         "description": "用户",
-        "name": "user",
         "interfaces": [
           {
             "description": "增加/编辑用户",
@@ -965,7 +964,8 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "user"
       }
     ],
     "name": "acl",
@@ -973,7 +973,6 @@
       {
         "description": "操作按钮",
         "name": "Button",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1084,12 +1083,12 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "枚举码本",
         "name": "Codebook",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1133,12 +1132,12 @@
             "description": "码本值",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "菜单",
         "name": "Menu",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1235,12 +1234,12 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "菜单信息",
         "name": "MenuInfo",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1360,11 +1359,11 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "NutMap",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1411,11 +1410,11 @@
             "name": "empty",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "PaginationRole",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1563,11 +1562,11 @@
             "name": "recordCount",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "PaginationUser",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1715,12 +1714,12 @@
             "name": "recordCount",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "权限信息",
         "name": "PermissionInfo",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1848,11 +1847,11 @@
             "description": "权限是否选中标识",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "ResultObject",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1936,12 +1935,12 @@
             "name": "success",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "角色",
         "name": "Role",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2024,12 +2023,12 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "角色信息,包含是否选中标识",
         "name": "RoleInfo",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2126,12 +2125,12 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "用户",
         "name": "User",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2272,7 +2271,8 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       }
     ]
   },
@@ -2280,7 +2280,6 @@
     "mods": [
       {
         "description": "登录",
-        "name": "login",
         "interfaces": [
           {
             "description": "当前用户",
@@ -2344,7 +2343,8 @@
             },
             "parameters": []
           }
-        ]
+        ],
+        "name": "login"
       }
     ],
     "name": "auth",
@@ -2352,7 +2352,6 @@
       {
         "description": "枚举码本",
         "name": "Codebook",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2396,11 +2395,11 @@
             "description": "码本值",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "LoginDto",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2444,12 +2443,12 @@
             "description": "是否记住我",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "已登录用户",
         "name": "LoginUser",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2666,11 +2665,11 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "NutMap",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2717,11 +2716,11 @@
             "name": "empty",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "ResultObject",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2805,7 +2804,8 @@
             "name": "success",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       }
     ]
   },
@@ -2813,7 +2813,6 @@
     "mods": [
       {
         "description": "数据字典",
-        "name": "dictionary",
         "interfaces": [
           {
             "description": "增加/编辑码本分组",
@@ -3092,7 +3091,8 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "dictionary"
       }
     ],
     "name": "code",
@@ -3100,7 +3100,6 @@
       {
         "description": "码本数据",
         "name": "Dictionary",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3239,12 +3238,12 @@
             "description": "value",
             "required": true
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "description": "码本分组",
         "name": "Group",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3341,11 +3340,11 @@
             "name": "updatedTime",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "NutMap",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3392,11 +3391,11 @@
             "name": "empty",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "PaginationGroup",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3544,11 +3543,11 @@
             "name": "recordCount",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "ResultObject",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3632,7 +3631,8 @@
             "name": "success",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       }
     ]
   }

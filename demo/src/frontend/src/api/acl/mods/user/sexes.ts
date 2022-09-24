@@ -1,13 +1,14 @@
 /**
  * @desc 用户性别
  */
+import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 import type { Codebook } from '@/api/api';
 
 export default async function (
   success: (data: Array<Codebook>) => void = defaultSuccess,
-  fail: (error: string) => void = defaultError,
+  fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'get',
@@ -16,5 +17,5 @@ export default async function (
     .then((data: AxiosResponse<Array<Codebook>, unknown>) => {
       success(data.data);
     })
-    .catch((error: string) => fail(error));
+    .catch((error: GlobalError) => fail(error));
 }

@@ -2,6 +2,7 @@
  * @description 角色
  *
  */
+import type { GlobalError } from '@/api/api';
 import saveOrUpdateRole from './saveOrUpdateRole';
 import roleDetail from './roleDetail';
 import deleteRole from './deleteRole';
@@ -27,7 +28,7 @@ export interface RoleApi {
     requestBody: acl.Role,
 
     success?: (data: acl.Role) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 角色详情 */
@@ -36,7 +37,7 @@ export interface RoleApi {
     id: number,
 
     success?: (data: acl.Role) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 删除角色 */
@@ -45,7 +46,7 @@ export interface RoleApi {
     key: string,
 
     success?: (data: void) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 查询用于授权的权限信息 */
@@ -54,7 +55,7 @@ export interface RoleApi {
     key: string,
 
     success?: (data: Array<acl.PermissionInfo>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 查询角色权限 */
@@ -63,7 +64,7 @@ export interface RoleApi {
     key: string,
 
     success?: (data: Array<acl.MenuInfo>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 为指定角色授权 */
@@ -73,14 +74,14 @@ export interface RoleApi {
     requestBody: Array<string>,
 
     success?: (data: void) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 分页查询角色 */
   roles: (
     params: RolesParams,
     success?: (data: Pagination<acl.Role>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 }
 export default {

@@ -1,6 +1,7 @@
 /**
  * @desc 分组下的数据字典列表
  */
+import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
@@ -8,7 +9,7 @@ export default async function (
   group: string,
 
   success: (data: Array<code.Dictionary>) => void = defaultSuccess,
-  fail: (error: string) => void = defaultError,
+  fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'get',
@@ -17,5 +18,5 @@ export default async function (
     .then((data: AxiosResponse<Array<code.Dictionary>, unknown>) => {
       success(data.data);
     })
-    .catch((error: string) => fail(error));
+    .catch((error: GlobalError) => fail(error));
 }

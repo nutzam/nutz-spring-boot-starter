@@ -2,6 +2,7 @@
  * @description 数据字典
  *
  */
+import type { GlobalError } from '@/api/api';
 import saveOrUpdateGroup from './saveOrUpdateGroup';
 import dictionaries from './dictionaries';
 import saveOrUpdateDictionary from './saveOrUpdateDictionary';
@@ -27,7 +28,7 @@ export interface DictionaryApi {
     requestBody: code.Group,
 
     success?: (data: code.Group) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 分组下的数据字典列表 */
@@ -36,7 +37,7 @@ export interface DictionaryApi {
     group: string,
 
     success?: (data: Array<code.Dictionary>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 增加/编辑码本数据 */
@@ -46,7 +47,7 @@ export interface DictionaryApi {
     requestBody: code.Dictionary,
 
     success?: (data: code.Dictionary) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 删除码本数据 */
@@ -57,7 +58,7 @@ export interface DictionaryApi {
     key: string,
 
     success?: (data: void) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 码本分组详情 */
@@ -66,7 +67,7 @@ export interface DictionaryApi {
     id: number,
 
     success?: (data: code.Group) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 删除码本分组 */
@@ -75,14 +76,14 @@ export interface DictionaryApi {
     key: string,
 
     success?: (data: void) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 分页查询码本分组 */
   groups: (
     params: GroupsParams,
     success?: (data: Pagination<code.Group>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 }
 export default {

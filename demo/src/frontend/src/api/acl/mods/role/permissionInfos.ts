@@ -1,6 +1,7 @@
 /**
  * @desc 查询用于授权的权限信息
  */
+import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 export default async function (
@@ -8,7 +9,7 @@ export default async function (
   key: string,
 
   success: (data: Array<acl.PermissionInfo>) => void = defaultSuccess,
-  fail: (error: string) => void = defaultError,
+  fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'get',
@@ -17,5 +18,5 @@ export default async function (
     .then((data: AxiosResponse<Array<acl.PermissionInfo>, unknown>) => {
       success(data.data);
     })
-    .catch((error: string) => fail(error));
+    .catch((error: GlobalError) => fail(error));
 }

@@ -2,6 +2,7 @@
  * @description 权限
  *
  */
+import type { GlobalError } from '@/api/api';
 import saveOrUpdateButton from './saveOrUpdateButton';
 import saveOrUpdateMenu from './saveOrUpdateMenu';
 import deleteMenu from './deleteMenu';
@@ -20,7 +21,7 @@ export interface PermissionApi {
     requestBody: acl.Button,
 
     success?: (data: acl.Button) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 增加/编辑菜单 */
@@ -29,7 +30,7 @@ export interface PermissionApi {
     requestBody: acl.Menu,
 
     success?: (data: acl.Menu) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 删除菜单 */
@@ -38,7 +39,7 @@ export interface PermissionApi {
     key: string,
 
     success?: (data: void) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 菜单下的操作按钮列表 */
@@ -47,7 +48,7 @@ export interface PermissionApi {
     key: string,
 
     success?: (data: Array<acl.Button>) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 删除操作按钮 */
@@ -58,15 +59,11 @@ export interface PermissionApi {
     buttonKey: string,
 
     success?: (data: void) => void,
-    fail?: (error: string) => void,
+    fail?: (error: GlobalError) => void,
   ) => void;
 
   /** 查询全部菜单 */
-  menus: (
-    params: MenusParams,
-    success?: (data: Array<acl.Menu>) => void,
-    fail?: (error: string) => void,
-  ) => void;
+  menus: (params: MenusParams, success?: (data: Array<acl.Menu>) => void, fail?: (error: GlobalError) => void) => void;
 }
 export default {
   saveOrUpdateButton,

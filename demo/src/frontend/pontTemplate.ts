@@ -467,6 +467,7 @@ export default class MyGenerator extends CodeGenerator {
     /**
      * @desc ${inter.description}
      */
+    import type { GlobalError } from '@/api/api';
     import {defaultSuccess, defaultError, http} from '@/plugins/axios';
     import type { AxiosResponse } from 'axios';
     ${imports.length ? `import type { ${imports.join(',')} } from '@/api/api';` : ''};
@@ -475,7 +476,7 @@ export default class MyGenerator extends CodeGenerator {
     export default async function(
       ${this.getParamsDec(inter)}
       success: (data: ${this.genDataType(inter.getDsName(), inter)}) => void = defaultSuccess,
-      fail: (error: string) => void = defaultError
+      fail: (error: GlobalError) => void = defaultError
     ) :Promise<void>{
       return http({
           method: '${inter.method}',
@@ -485,7 +486,7 @@ export default class MyGenerator extends CodeGenerator {
         }).then((data: AxiosResponse<${this.genDataType(inter.getDsName(), inter)}, unknown>) => {
           success(data.data);
         })
-        .catch((error: string) => fail(error));
+        .catch((error: GlobalError) => fail(error));
     }
    `;
   }
@@ -514,6 +515,7 @@ export default class MyGenerator extends CodeGenerator {
        * @description ${mod.description}
        *
        */
+      import type { GlobalError } from '@/api/api';
       ${mod.interfaces
         .map(inter => {
           return `import  ${fixInterfaceName(inter.name)} from './${fixInterfaceName(inter.name)}';`;
@@ -536,7 +538,7 @@ export default class MyGenerator extends CodeGenerator {
               ${fixInterfaceName(inter.name)}: (
               ${this.getParamsDec(inter)}
               success?: (data: ${this.genDataType(inter.getDsName(), inter)}) => void,
-              fail?: (error: string) => void
+              fail?: (error: GlobalError) => void
             ) => void,`;
            })
            .join('\n')}

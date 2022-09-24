@@ -1,6 +1,7 @@
 /**
  * @desc 分页查询用户
  */
+import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 import type { Pagination } from '@/api/api';
@@ -9,7 +10,7 @@ import type { UsersParams } from './index';
 export default async function (
   params: UsersParams,
   success: (data: Pagination<acl.User>) => void = defaultSuccess,
-  fail: (error: string) => void = defaultError,
+  fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'get',
@@ -20,5 +21,5 @@ export default async function (
     .then((data: AxiosResponse<Pagination<acl.User>, unknown>) => {
       success(data.data);
     })
-    .catch((error: string) => fail(error));
+    .catch((error: GlobalError) => fail(error));
 }
