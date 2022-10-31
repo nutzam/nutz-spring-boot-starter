@@ -1,9 +1,10 @@
 /**
  * @desc 分组下的数据字典列表
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
+import type { GlobalError } from '@/api/api';
+
 export default async function (
   /** 码本分组key */
   group: string,

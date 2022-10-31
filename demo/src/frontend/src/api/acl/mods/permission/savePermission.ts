@@ -1,22 +1,23 @@
 /**
- * @desc 增加/编辑操作按钮
+ * @desc 增加权限
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
+import type { GlobalError } from '@/api/api';
+
 export default async function (
   /** 请求体 */
-  requestBody: acl.Button,
+  requestBody: acl.Permission,
 
-  success: (data: acl.Button) => void = defaultSuccess,
+  success: (data: acl.Permission) => void = defaultSuccess,
   fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'put',
-    url: `/button`,
+    url: `/permission`,
     data: requestBody,
   })
-    .then((data: AxiosResponse<acl.Button, unknown>) => {
+    .then((data: AxiosResponse<acl.Permission, unknown>) => {
       success(data.data);
     })
     .catch((error: GlobalError) => fail(error));

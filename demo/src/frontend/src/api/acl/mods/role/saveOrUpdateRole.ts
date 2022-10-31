@@ -1,9 +1,10 @@
 /**
  * @desc 增加/编辑角色
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
+import type { GlobalError } from '@/api/api';
+
 export default async function (
   /** 请求体 */
   requestBody: acl.Role,

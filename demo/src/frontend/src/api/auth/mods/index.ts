@@ -1,9 +1,5 @@
-import login, { type LoginApi } from './login';
-
-export interface AuthApi {
-  login: LoginApi;
-}
+import login from './login';
 
 export default {
   login,
-} as AuthApi;
+};

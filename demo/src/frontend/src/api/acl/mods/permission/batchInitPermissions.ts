@@ -1,24 +1,23 @@
 /**
- * @desc 增加/编辑码本数据
+ * @desc 批量新增权限
  */
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
 import type { GlobalError } from '@/api/api';
 
 export default async function (
-  group: string,
   /** 请求体 */
-  requestBody: code.Dictionary,
+  requestBody: Array<acl.Permission>,
 
-  success: (data: code.Dictionary) => void = defaultSuccess,
+  success: (data: void) => void = defaultSuccess,
   fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
-    method: 'put',
-    url: `/group/${group}/dictionary`,
+    method: 'post',
+    url: `/batch-init-permissions`,
     data: requestBody,
   })
-    .then((data: AxiosResponse<code.Dictionary, unknown>) => {
+    .then((data: AxiosResponse<void, unknown>) => {
       success(data.data);
     })
     .catch((error: GlobalError) => fail(error));

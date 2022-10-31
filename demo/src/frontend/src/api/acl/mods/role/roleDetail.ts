@@ -1,9 +1,10 @@
 /**
  * @desc 角色详情
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
+import type { GlobalError } from '@/api/api';
+
 export default async function (
   /** 角色id */
   id: number,

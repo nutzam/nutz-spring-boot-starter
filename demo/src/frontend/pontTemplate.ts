@@ -23,6 +23,7 @@ export const dsUrlMapping = {
   org: '',
 };
 export function getUrl(ds: string): string {
+  console.log(ds);
   return '';
 }
 export function fixInterfaceName(name: string) {
@@ -110,24 +111,17 @@ export class FileStructures extends Pont.FileStructures {
       import type { App } from 'vue';
       ${dsNames
         .map(name => {
-          return `import { default as ${name}Api, type ${upperFirst(name)}Api } from './${name}/mods';
+          return `import ${name}Api from './${name}/mods';
           `;
         })
         .join('\n')}
-      export interface Api {
-        ${dsNames
-          .map(name => {
-            return `${name}Api: ${upperFirst(name)}Api;`;
-          })
-          .join('\n')}
-          install: (app: App) => void;
-      }
-      export const api: Api = {
+      export const api = {
         ${apis},
         install: (app: App) => {
           app.config.globalProperties.$api = api;
         },
       };
+      export default api;
     `;
   }
   /**
@@ -223,7 +217,7 @@ export class FileStructures extends Pont.FileStructures {
     /**
      * 枚举码本
      */
-    export class Codebook {
+    export interface Codebook {
       /** 码本编码 */
       code: string;
 
@@ -237,7 +231,7 @@ export class FileStructures extends Pont.FileStructures {
     /**
      * 全局错误
      */
-    export class GlobalError {
+    export interface GlobalError {
       /** 错误码 */
       code?: number;
 
@@ -349,7 +343,7 @@ export default class MyGenerator extends CodeGenerator {
       /**
        * ${base.description || base.name}
        */
-      export class ${base.name}<${base.templateArgs.map((_, index) => `T${index} = any`).join(', ')}> {
+      export interface ${base.name}<${base.templateArgs.map((_, index) => `T${index} = any`).join(', ')}> {
         ${base.properties.map(prop => prop.toPropertyCode(Pont.Surrounding.typeScript, true)).join('\n')}
       }
       `;
@@ -358,7 +352,7 @@ export default class MyGenerator extends CodeGenerator {
     /**
     * ${base.description || base.name}
     */
-    export class ${base.name} {
+    export interface ${base.name} {
       ${base.properties.map(prop => prop.toPropertyCode(Pont.Surrounding.typeScript, true)).join('\n')}
     }
     `;
@@ -368,7 +362,7 @@ export default class MyGenerator extends CodeGenerator {
     if (!inter.parameters.filter(p => p.in === 'query').length) {
       return '';
     }
-    return `export interface ${upperFirst(inter.name)}Params {
+    return `export interface Params {
                ${inter.parameters
                  .filter(param => param.in === 'query')
                  .sort((a, b) => {
@@ -411,7 +405,7 @@ export default class MyGenerator extends CodeGenerator {
                   ${p.name}:${p.dataType.generateCode(p.getDsName()).replace(/defs./g, '')},`,
               )
               .join('\n')}
-            ${hasQueryParams ? `params: ${upperFirst(inter.name)}Params,` : ``}`;
+            ${hasQueryParams ? `params: Params,` : ``}`;
   }
   genDataType(dsName: string, inter: Interface) {
     const typeName = inter.response.typeName;
@@ -461,17 +455,17 @@ export default class MyGenerator extends CodeGenerator {
       hasPagination ? 'Pagination' : null,
       hasVxe ? 'VXETableSaveDTO' : null,
       hasCodebook ? 'Codebook' : null,
+      'GlobalError',
     ].filter(item => item !== null);
     //url: \`/${getUrl(inter.getDsName())}${inter.path.replace(/{/g, '${')}\`,
     return `
     /**
      * @desc ${inter.description}
      */
-    import type { GlobalError } from '@/api/api';
     import {defaultSuccess, defaultError, http} from '@/plugins/axios';
     import type { AxiosResponse } from 'axios';
     ${imports.length ? `import type { ${imports.join(',')} } from '@/api/api';` : ''};
-    ${hasQueryParams ? `import type { ${upperFirst(inter.name)}Params } from './index';` : ''}
+    ${hasQueryParams ? `${this.getParamsTypeDec(inter)}` : ''}
 
     export default async function(
       ${this.getParamsDec(inter)}
@@ -515,57 +509,29 @@ export default class MyGenerator extends CodeGenerator {
        * @description ${mod.description}
        *
        */
-      import type { GlobalError } from '@/api/api';
       ${mod.interfaces
         .map(inter => {
           return `import  ${fixInterfaceName(inter.name)} from './${fixInterfaceName(inter.name)}';`;
         })
         .join('\n')}
-      ${imports.length ? `import type { ${imports.join(',')} } from '@/api/api';` : ''};
 
-      ${mod.interfaces
-        .filter(inter => inter.parameters.filter(p => p.in === 'query').length > 0)
-        .map(inter => {
-          return this.getParamsTypeDec(inter);
-        })
-        .join('\n')}
-
-      export interface ${name}Api {
-         ${mod.interfaces
-           .map(inter => {
-             return `
-             /** ${inter.description || inter.name} */
-              ${fixInterfaceName(inter.name)}: (
-              ${this.getParamsDec(inter)}
-              success?: (data: ${this.genDataType(inter.getDsName(), inter)}) => void,
-              fail?: (error: GlobalError) => void
-            ) => void,`;
-           })
-           .join('\n')}
-      }
       export default {
         ${mod.interfaces.map(inter => fixInterfaceName(inter.name)).join(', \n')}
-      } as ${name}Api
+      }
     `;
   }
   getModsIndex(): string {
-    const apiseg = `
-      export interface ${upperFirst(this.dataSource.name)}Api {
-          ${this.dataSource.mods.map(mod => `${mod.name}:  ${upperFirst(mod.name)}Api`).join(', \n')}
-      }
-    `;
     const exportseg = `export default {
       ${this.dataSource.mods.map(mod => mod.name).join(', \n')}
-    } as ${upperFirst(this.dataSource.name)}Api;`;
+    };`;
     return `
       ${this.dataSource.mods
         .map(mod => {
           return `
-          import ${mod.name}, {type ${upperFirst(mod.name)}Api} from './${mod.name}';
+          import ${mod.name} from './${mod.name}';
           `;
         })
         .join('\n')}
-      ${apiseg}
       ${exportseg}
     `;
   }

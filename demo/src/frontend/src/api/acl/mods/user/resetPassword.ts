@@ -1,9 +1,10 @@
 /**
  * @desc 重置密码
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
+import type { GlobalError } from '@/api/api';
+
 export default async function (
   /** 用户名 */
   name: string,

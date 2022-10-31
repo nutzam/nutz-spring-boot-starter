@@ -58,6 +58,12 @@ export default createRouter({
           meta: { title: 'menus.version', icon: 'icon-version' },
           component: () => import('../views/version/version-info.vue'),
         },
+        {
+          path: '/menu-sync',
+          name: 'MenuSync',
+          meta: { title: 'menus.menuSync', icon: 'icon-menu' },
+          component: () => import('../views/menu-sync.vue'),
+        },
       ],
     },
     {

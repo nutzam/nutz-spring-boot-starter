@@ -2,7 +2,7 @@ declare namespace auth {
   /**
    * LoginDto
    */
-  export class LoginDto {
+  export interface LoginDto {
     /** 用户名 */
     name: string;
 
@@ -16,7 +16,7 @@ declare namespace auth {
   /**
    * 已登录用户
    */
-  export class LoginUser {
+  export interface LoginUser {
     /** createdTime */
     createdTime?: string;
 

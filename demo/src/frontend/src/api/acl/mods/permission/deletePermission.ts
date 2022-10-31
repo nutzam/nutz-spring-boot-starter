@@ -1,21 +1,22 @@
 /**
- * @desc 菜单下的操作按钮列表
+ * @desc 删除权限
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
+import type { GlobalError } from '@/api/api';
+
 export default async function (
-  /** 菜单key */
+  /** 权限key */
   key: string,
 
-  success: (data: Array<acl.Button>) => void = defaultSuccess,
+  success: (data: void) => void = defaultSuccess,
   fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
-    method: 'get',
-    url: `/menu/${key}/buttons`,
+    method: 'delete',
+    url: `/permission/${key}`,
   })
-    .then((data: AxiosResponse<Array<acl.Button>, unknown>) => {
+    .then((data: AxiosResponse<void, unknown>) => {
       success(data.data);
     })
     .catch((error: GlobalError) => fail(error));

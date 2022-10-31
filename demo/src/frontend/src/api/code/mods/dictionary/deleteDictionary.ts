@@ -1,9 +1,10 @@
 /**
  * @desc 删除码本数据
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
+import type { GlobalError } from '@/api/api';
+
 export default async function (
   /** 码本分组key */
   group: string,

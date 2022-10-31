@@ -1,10 +1,9 @@
 /**
  * @desc 用户性别
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
-import type { Codebook } from '@/api/api';
+import type { Codebook, GlobalError } from '@/api/api';
 
 export default async function (
   success: (data: Array<Codebook>) => void = defaultSuccess,

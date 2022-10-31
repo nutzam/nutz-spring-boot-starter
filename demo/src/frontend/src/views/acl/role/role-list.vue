@@ -35,7 +35,7 @@
             type="role"
             :ref-key="record.key"
             :name="record.name"
-            :menus="record.menus"
+            :permissions="record.permissions"
           ></permission-info-panel>
         </template>
         <template #bodyCell="{ column, record }">
@@ -176,10 +176,10 @@ const deleteRole = (key: string) => {
   });
 };
 
-const tryLoadPermissions = (expanded: boolean, record: acl.Role & { menus?: acl.MenuInfo[] }) => {
-  if (expanded && !record.menus) {
+const tryLoadPermissions = (expanded: boolean, record: acl.Role & { permissions?: acl.Permission[] }) => {
+  if (expanded && !record.permissions) {
     api.aclApi.role.permissions(record.key, data => {
-      record.menus = data;
+      record.permissions = data;
     });
   }
 };

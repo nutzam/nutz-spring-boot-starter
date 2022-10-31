@@ -6,5 +6,6 @@
   "role": "角色管理",
   "permission": "权限管理",
   "dictionary": "数据字典",
-  "version": "组件版本"
+  "version": "组件版本",
+  "menuSync": "菜单同步"
 }

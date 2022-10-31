@@ -50,7 +50,7 @@ export const config: GlobalConfig = {
     fixedHeader: true,
     headerHeight: 48,
     headerTheme: 'dark',
-    iconfontUrl: '//at.alicdn.com/t/c/font_3644733_mrstfnf0dyn.js',
+    iconfontUrl: '//at.alicdn.com/t/c/font_3644733_lz2opv3o2sc.js',
     uuid: '',
     layout: 'mix',
     navTheme: 'dark',

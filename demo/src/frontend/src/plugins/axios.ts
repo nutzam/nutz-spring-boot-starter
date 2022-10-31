@@ -18,7 +18,6 @@ export function defaultSuccess(data: unknown): void {
   console.log(data);
 }
 export function defaultError(error: GlobalError): void {
-  console.log(error);
   notification.error({
     message: t('notification.message.error'),
     description: error.message,

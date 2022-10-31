@@ -1,14 +1,20 @@
 /**
  * @desc 分页查询码本分组
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
-import type { Pagination } from '@/api/api';
-import type { GroupsParams } from './index';
+import type { Pagination, GlobalError } from '@/api/api';
+export interface Params {
+  /** 页码 */
+  page?: number;
+  /** 页面大小 */
+  size?: number;
+  /** 搜索关键词 */
+  key?: string;
+}
 
 export default async function (
-  params: GroupsParams,
+  params: Params,
   success: (data: Pagination<code.Group>) => void = defaultSuccess,
   fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {

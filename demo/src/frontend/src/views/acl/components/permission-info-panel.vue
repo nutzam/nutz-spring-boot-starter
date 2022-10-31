@@ -1,12 +1,5 @@
 <template>
   <a-card :title="$t('page.component.permission.info.panel.title', { name: name, type: typeName })">
-    <a-collapse v-model:activeKey="activeKey">
-      <a-collapse-panel v-for="(menu, index) in menus" :key="index" :header="menu.name" :show-arrow="false">
-        <a-tag v-for="(button, i) in menu.buttons" :key="i" color="#2db7f5" :title="button.description">
-          {{ button.name }}
-        </a-tag>
-      </a-collapse-panel>
-    </a-collapse>
     <template #extra>
       <a-space>
         <a-button v-if="type === 'user'" type="primary" size="small" @click="showRoleForm">
@@ -23,6 +16,12 @@
         </a-button>
       </a-space>
     </template>
+    <a-tree
+      :default-expand-all="treeData.length > 0"
+      :height="233"
+      :tree-data="treeData"
+      :field-names="{ title: 'name', key: 'keyPath' }"
+    ></a-tree>
     <permission-select-modal
       ref="permissionForm"
       :permissions="permissionInfos"
@@ -39,11 +38,12 @@ import type { PropType } from 'vue';
 import { api } from '@/api';
 import { notification } from 'ant-design-vue';
 import { useI18n } from 'vue-i18n';
+import XEUtils from 'xe-utils';
 
 const { t } = useI18n();
 const props = defineProps({
-  menus: {
-    type: Array as PropType<Array<acl.MenuInfo>>,
+  permissions: {
+    type: Array as PropType<Array<acl.Permission>>,
     required: false,
     default: () => [],
   },
@@ -61,18 +61,16 @@ const props = defineProps({
     required: true,
   },
 });
-const { menus, name, type, refKey } = toRefs(props);
-
-const activeKey = computed(() => {
-  return new Array(menus.value?.length).fill(1).map((value, index) => {
-    return `${index}`;
-  });
-});
+const { permissions, name, type, refKey } = toRefs(props);
 
 const typeName = computed(() => {
   return type.value == 'user'
     ? t('page.component.permission.info.panel.user')
     : t('page.component.permission.info.panel.role');
+});
+
+const treeData = computed(() => {
+  return XEUtils.toArrayTree(permissions.value, { key: 'key', parentKey: 'parentKey' });
 });
 
 const permissionForm = ref<typeof PermissionSelectModal>();

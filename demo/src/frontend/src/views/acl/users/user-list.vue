@@ -49,7 +49,7 @@
             type="user"
             :ref-key="record.name"
             :name="record.fullName"
-            :menus="record.menus"
+            :permissions="record.permissions"
           ></permission-info-panel>
         </template>
         <template #bodyCell="{ column, record }">
@@ -264,10 +264,10 @@ const deleteUser = (id: number) => {
     });
   });
 };
-const tryLoadPermissions = (expanded: boolean, record: acl.User & { menus?: acl.MenuInfo[] }) => {
-  if (expanded && !record.menus) {
+const tryLoadPermissions = (expanded: boolean, record: acl.User & { permissions?: acl.Permission[] }) => {
+  if (expanded && !record.permissions) {
     api.aclApi.user.permissions(record.name, data => {
-      record.menus = data;
+      record.permissions = data;
     });
   }
 };

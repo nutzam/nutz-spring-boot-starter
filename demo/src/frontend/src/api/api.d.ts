@@ -84,7 +84,7 @@ export interface VXETableSaveDTO<T> {
 /**
  * 枚举码本
  */
-export class Codebook {
+export interface Codebook {
   /** 码本编码 */
   code: string;
 
@@ -98,7 +98,7 @@ export class Codebook {
 /**
  * 全局错误
  */
-export class GlobalError {
+export interface GlobalError {
   /** 错误码 */
   code?: number;
 

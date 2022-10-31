@@ -1,9 +1,5 @@
-import dictionary, { type DictionaryApi } from './dictionary';
-
-export interface CodeApi {
-  dictionary: DictionaryApi;
-}
+import dictionary from './dictionary';
 
 export default {
   dictionary,
-} as CodeApi;
+};

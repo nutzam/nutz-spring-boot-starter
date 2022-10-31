@@ -1,22 +1,23 @@
 /**
- * @desc 增加/编辑菜单
+ * @desc 编辑权限
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
+import type { GlobalError } from '@/api/api';
+
 export default async function (
   /** 请求体 */
-  requestBody: acl.Menu,
+  requestBody: acl.Permission,
 
-  success: (data: acl.Menu) => void = defaultSuccess,
+  success: (data: void) => void = defaultSuccess,
   fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
-    method: 'put',
-    url: `/menu`,
+    method: 'patch',
+    url: `/permission`,
     data: requestBody,
   })
-    .then((data: AxiosResponse<acl.Menu, unknown>) => {
+    .then((data: AxiosResponse<void, unknown>) => {
       success(data.data);
     })
     .catch((error: GlobalError) => fail(error));

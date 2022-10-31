@@ -2,7 +2,7 @@ declare namespace code {
   /**
    * 码本数据
    */
-  export class Dictionary {
+  export interface Dictionary {
     /** createdTime */
     createdTime?: string;
 
@@ -37,7 +37,7 @@ declare namespace code {
   /**
    * 码本分组
    */
-  export class Group {
+  export interface Group {
     /** createdTime */
     createdTime?: string;
 

@@ -1,124 +1,81 @@
 declare namespace acl {
   /**
-   * 操作按钮
+   * 增加权限
    */
-  export class Button {
+  export interface Permission {
     /** createdTime */
     createdTime?: string;
 
-    /** 资源描述 */
+    /** 权限描述 */
     description?: string;
 
     /** id */
     id?: number;
 
-    /** 是否内置,内置的没有资源归属 */
-    installed: boolean;
+    /** 权限key,英文 */
+    key?: string;
 
-    /** 操作key,英文,用来做业务 */
-    key: string;
+    /** 权限keyPath,用来做业务,(父级keyPath.key) */
+    keyPath?: string;
 
-    /** 归属资源key,如果内置为空 */
-    menuKey: string;
+    /** 权限名称,中文用来做标识 */
+    name?: string;
 
-    /** 操作名称,中文用来做标识 */
-    name: string;
-
-    /** updatedTime */
-    updatedTime?: string;
-  }
-
-  /**
-   * 菜单
-   */
-  export class Menu {
-    /** createdTime */
-    createdTime?: string;
-
-    /** 资源描述 */
-    description?: string;
-
-    /** id */
-    id?: number;
-
-    /** 资源key,英文,用来做业务 */
-    key: string;
-
-    /** 资源名称,中文用来做标识 */
-    name: string;
-
-    /** 上级菜单key */
+    /** 父权限key */
     parentKey?: string;
 
+    /** 权限类型 */
+    type?: 'MENU' | 'BUTTON' | 'OTHER';
+
+    /** typeInfo */
+    typeInfo?: acl.Codebook;
+
     /** updatedTime */
     updatedTime?: string;
   }
 
   /**
-   * 菜单信息
+   * 权限信息,包含是否选中标识
    */
-  export class MenuInfo {
-    /** buttons */
-    buttons?: Array<acl.Button>;
-
+  export interface PermissionInfo {
     /** createdTime */
     createdTime?: string;
 
-    /** 资源描述 */
+    /** 权限描述 */
     description?: string;
 
     /** id */
     id?: number;
 
-    /** 资源key,英文,用来做业务 */
-    key: string;
+    /** 权限key,英文 */
+    key?: string;
 
-    /** 资源名称,中文用来做标识 */
-    name: string;
+    /** 权限keyPath,用来做业务,(父级keyPath.key) */
+    keyPath?: string;
 
-    /** 上级菜单key */
-    parentKey?: string;
+    /** 权限名称,中文用来做标识 */
+    name?: string;
 
-    /** updatedTime */
-    updatedTime?: string;
-  }
-
-  /**
-   * 权限信息
-   */
-  export class PermissionInfo {
-    /** 按钮描述 */
-    description?: string;
-
-    /** 是否内置,内置的没有菜单归属 */
-    installed?: boolean;
-
-    /** 按钮key,英文,用来做业务 */
-    key: string;
-
-    /** 菜单描述 */
-    menuDescription?: string;
-
-    /** 菜单key,英文,用来做业务 */
-    menuKey: string;
-
-    /** 菜单名称,中文用来做标识 */
-    menuName: string;
-
-    /** 按钮名称,中文用来做标识 */
-    name: string;
-
-    /** 父菜单key */
+    /** 父权限key */
     parentKey?: string;
 
     /** 权限是否选中标识 */
     selected: boolean;
+
+    /** 权限类型 */
+    type?: 'MENU' | 'BUTTON' | 'OTHER';
+
+    /** typeInfo */
+    typeInfo?: acl.Codebook;
+
+    /** updatedTime */
+    updatedTime?: string;
   }
 
   /**
    * 角色
    */
-  export class Role {
+  export interface Role {
     /** createdTime */
     createdTime?: string;
 
@@ -141,7 +98,7 @@ declare namespace acl {
   /**
    * 角色信息,包含是否选中标识
    */
-  export class RoleInfo {
+  export interface RoleInfo {
     /** createdTime */
     createdTime?: string;
 
@@ -165,9 +122,49 @@ declare namespace acl {
   }
 
   /**
+   * 树
+   */
+  export interface TreeString {
+    /** 下级列表 */
+    children?: Array<acl.TreeString>;
+
+    /** 描述 */
+    description?: string;
+
+    /** ID */
+    key: string;
+
+    /** 名称 */
+    name: string;
+
+    /** originData */
+    originData: acl.TreeableString;
+
+    /** 父级 ID */
+    parentKey?: string;
+  }
+
+  /**
+   * 原始数据
+   */
+  export interface TreeableString {
+    /** description */
+    description?: string;
+
+    /** key */
+    key?: string;
+
+    /** name */
+    name?: string;
+
+    /** parentKey */
+    parentKey?: string;
+  }
+
+  /**
    * 用户
    */
-  export class User {
+  export interface User {
     /** createdTime */
     createdTime?: string;
 

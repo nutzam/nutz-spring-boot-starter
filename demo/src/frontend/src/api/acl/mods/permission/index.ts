@@ -2,74 +2,24 @@
  * @description 权限
  *
  */
-import type { GlobalError } from '@/api/api';
-import saveOrUpdateButton from './saveOrUpdateButton';
-import saveOrUpdateMenu from './saveOrUpdateMenu';
-import deleteMenu from './deleteMenu';
-import buttons from './buttons';
-import deleteButton from './deleteButton';
-import menus from './menus';
-export interface MenusParams {
-  /** 搜索关键词 */
-  key?: string;
-}
+import batchInitPermissions from './batchInitPermissions';
+import batchSyncPermissions from './batchSyncPermissions';
+import savePermission from './savePermission';
+import updatePermission from './updatePermission';
+import types from './types';
+import getPermission from './getPermission';
+import deletePermission from './deletePermission';
+import permissions from './permissions';
+import permissionTree from './permissionTree';
 
-export interface PermissionApi {
-  /** 增加/编辑操作按钮 */
-  saveOrUpdateButton: (
-    /** 请求体 */
-    requestBody: acl.Button,
-
-    success?: (data: acl.Button) => void,
-    fail?: (error: GlobalError) => void,
-  ) => void;
-
-  /** 增加/编辑菜单 */
-  saveOrUpdateMenu: (
-    /** 请求体 */
-    requestBody: acl.Menu,
-
-    success?: (data: acl.Menu) => void,
-    fail?: (error: GlobalError) => void,
-  ) => void;
-
-  /** 删除菜单 */
-  deleteMenu: (
-    /** 菜单key */
-    key: string,
-
-    success?: (data: void) => void,
-    fail?: (error: GlobalError) => void,
-  ) => void;
-
-  /** 菜单下的操作按钮列表 */
-  buttons: (
-    /** 菜单key */
-    key: string,
-
-    success?: (data: Array<acl.Button>) => void,
-    fail?: (error: GlobalError) => void,
-  ) => void;
-
-  /** 删除操作按钮 */
-  deleteButton: (
-    /** 菜单key */
-    key: string,
-    /** 操作按钮buttonKey */
-    buttonKey: string,
-
-    success?: (data: void) => void,
-    fail?: (error: GlobalError) => void,
-  ) => void;
-
-  /** 查询全部菜单 */
-  menus: (params: MenusParams, success?: (data: Array<acl.Menu>) => void, fail?: (error: GlobalError) => void) => void;
-}
 export default {
-  saveOrUpdateButton,
-  saveOrUpdateMenu,
-  deleteMenu,
-  buttons,
-  deleteButton,
-  menus,
-} as PermissionApi;
+  batchInitPermissions,
+  batchSyncPermissions,
+  savePermission,
+  updatePermission,
+  types,
+  getPermission,
+  deletePermission,
+  permissions,
+  permissionTree,
+};

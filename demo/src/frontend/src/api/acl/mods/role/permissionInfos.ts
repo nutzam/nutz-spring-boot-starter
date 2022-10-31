@@ -1,9 +1,10 @@
 /**
  * @desc 查询用于授权的权限信息
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
+import type { GlobalError } from '@/api/api';
+
 export default async function (
   /** 角色key */
   key: string,

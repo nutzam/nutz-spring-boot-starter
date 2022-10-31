@@ -5,46 +5,39 @@
     :confirm-loading="confirmLoading"
     @ok="handleOk"
   >
-    <a-transfer
-      v-model:target-keys="targetKeys"
-      v-model:selected-keys="selectedKeys"
-      :data-source="permissions"
-      show-search
-      :titles="titles"
-      :render="itemRender"
-      :list-style="{
-        width: '215px',
-        height: '300px',
-      }"
-    />
+    <a-tree
+      v-model:checkedKeys="checkedKeys"
+      default-expand-all
+      checkable
+      :height="233"
+      :tree-data="treeData"
+      :field-names="{ title: 'name', key: 'keyPath' }"
+    ></a-tree>
   </a-modal>
 </template>
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
+import { computed } from 'vue';
+import XEUtils from 'xe-utils';
 const emit = defineEmits(['ok']);
 
 const props = withDefaults(defineProps<{ permissions: Array<acl.PermissionInfo> }>(), {
   permissions: () => [],
 });
-const permissions = toRefs(props).permissions;
+const { permissions } = toRefs(props);
 const visible = ref(false);
 const confirmLoading = ref(false);
-const targetKeys = ref<string[]>([]);
-const selectedKeys = ref<string[]>([]);
-const titles = [t('page.modal.permission.source'), t('page.modal.permission.target')];
-
+const checkedKeys = ref<string[]>([]);
 watch(
   permissions,
-  (newVal: acl.PermissionInfo[]) => {
-    newVal.map(item =>
-      Object.assign(item, { key: item.key.startsWith(`${item.menuKey}.`) ? item.key : `${item.menuKey}.${item.key}` }),
-    );
-    targetKeys.value = newVal.filter(item => item.selected).map(item => item.key);
+  newVal => {
+    console.log(newVal);
+    checkedKeys.value = newVal.filter(item => item.selected).map(item => String(item.keyPath));
   },
-  { immediate: true, deep: true },
+  { deep: true, immediate: true },
 );
-
+const treeData = computed(() => {
+  return XEUtils.toArrayTree(permissions.value, { key: 'key', parentKey: 'parentKey' });
+});
 const open = () => {
   visible.value = true;
   confirmLoading.value = false;
@@ -55,13 +48,9 @@ const close = () => {
   confirmLoading.value = false;
 };
 
-const itemRender = (item: acl.PermissionInfo) => {
-  return `${item.menuName} - ${item.name}`;
-};
-
 const handleOk = () => {
   confirmLoading.value = true;
-  emit('ok', targetKeys.value);
+  emit('ok', checkedKeys.value);
 };
 
 defineExpose({ open, close });

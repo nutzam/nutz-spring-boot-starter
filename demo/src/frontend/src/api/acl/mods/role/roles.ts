@@ -1,21 +1,26 @@
 /**
  * @desc 分页查询角色
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
-import type { Pagination } from '@/api/api';
-import type { RolesParams } from './index';
+import type { Pagination, GlobalError } from '@/api/api';
+export interface Params {
+  /** 页码 */
+  page?: number;
+  /** 页面大小 */
+  size?: number;
+  /** 搜索关键词 */
+  key?: string;
+}
 
 export default async function (
-  params: RolesParams,
+  params: Params,
   success: (data: Pagination<acl.Role>) => void = defaultSuccess,
   fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
   return http({
     method: 'get',
     url: `/roles`,
-
     params,
   })
     .then((data: AxiosResponse<Pagination<acl.Role>, unknown>) => {

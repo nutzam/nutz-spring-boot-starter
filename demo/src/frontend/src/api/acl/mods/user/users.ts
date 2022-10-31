@@ -1,14 +1,22 @@
 /**
  * @desc 分页查询用户
  */
-import type { GlobalError } from '@/api/api';
 import { defaultSuccess, defaultError, http } from '@/plugins/axios';
 import type { AxiosResponse } from 'axios';
-import type { Pagination } from '@/api/api';
-import type { UsersParams } from './index';
+import type { Pagination, GlobalError } from '@/api/api';
+export interface Params {
+  /** 页码 */
+  page?: number;
+  /** 页面大小 */
+  size?: number;
+  /** 性别 */
+  sex?: 'MALE' | 'FEMALE';
+  /** 搜索关键词 */
+  key?: string;
+}
 
 export default async function (
-  params: UsersParams,
+  params: Params,
   success: (data: Pagination<acl.User>) => void = defaultSuccess,
   fail: (error: GlobalError) => void = defaultError,
 ): Promise<void> {
