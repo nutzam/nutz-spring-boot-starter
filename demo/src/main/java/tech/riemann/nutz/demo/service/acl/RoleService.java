@@ -5,13 +5,12 @@ import java.util.stream.Collectors;
 
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
-import org.nutz.spring.boot.service.interfaces.EntityService;
 import org.nutz.spring.boot.service.interfaces.IdNameEntityService;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import tech.riemann.nutz.demo.dto.response.MenuInfo;
 import tech.riemann.nutz.demo.dto.response.PermissionInfo;
+import tech.riemann.nutz.demo.entity.acl.Permission;
 import tech.riemann.nutz.demo.entity.acl.Role;
 import tech.riemann.nutz.demo.entity.acl.RolePermission;
 
@@ -27,7 +26,6 @@ import tech.riemann.nutz.demo.entity.acl.RolePermission;
 public class RoleService implements IdNameEntityService<Role> {
 
     private final Dao dao;
-
     private final RolePermissionService rolePermissionService;
 
     /**
@@ -43,8 +41,8 @@ public class RoleService implements IdNameEntityService<Role> {
      * @param key
      * @return
      */
-    public List<MenuInfo> permissionsByRoleKey(String key) {
-        return MenuInfo.from(permissionInfosByKey(key));
+    public List<Permission> permissionsByRoleKey(String key) {
+        return permissionInfosByKey(key).stream().filter(PermissionInfo::isSelected).collect(Collectors.toList());
     }
 
     /**
@@ -63,14 +61,10 @@ public class RoleService implements IdNameEntityService<Role> {
      * @return
      */
     public boolean grant(String key, List<String> permissions) {
-        rolePermissionService.clear(Cnd.where(RolePermission::getRoleKey, EntityService.EQ, key));
-        return rolePermissionService.insert(permissions.stream().map(item -> {
-            String[] infos = item.split("\\.");
-            return RolePermission.builder()
-                                 .roleKey(key)
-                                 .menuKey(infos[0])
-                                 .buttonKey(infos[1])
-                                 .build();
-        }).collect(Collectors.toList())).size() == permissions.size();
+        rolePermissionService.clear(Cnd.where(RolePermission::getRoleKey, EQ, key));
+        return rolePermissionService.insert(permissions.stream()
+                                                       .map(p -> RolePermission.builder().roleKey(key).permissionKeyPath(p).build())
+                                                       .collect(Collectors.toList()))
+                                    .size() == permissions.size();
     }
 }

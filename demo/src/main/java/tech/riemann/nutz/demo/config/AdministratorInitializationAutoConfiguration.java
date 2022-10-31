@@ -1,10 +1,7 @@
 package tech.riemann.nutz.demo.config;
 
-import static org.nutz.spring.boot.service.interfaces.EntityService.EQ;
-
 import javax.annotation.PostConstruct;
 
-import org.nutz.dao.Cnd;
 import org.nutz.spring.boot.dao.NutzDatabaseInitializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -12,15 +9,9 @@ import org.springframework.context.annotation.Configuration;
 
 import club.zhcs.auth.PasswordUtils;
 import lombok.RequiredArgsConstructor;
-import tech.riemann.nutz.demo.entity.acl.Button;
-import tech.riemann.nutz.demo.entity.acl.Menu;
 import tech.riemann.nutz.demo.entity.acl.Role;
-import tech.riemann.nutz.demo.entity.acl.RolePermission;
 import tech.riemann.nutz.demo.entity.acl.User;
 import tech.riemann.nutz.demo.entity.acl.UserRole;
-import tech.riemann.nutz.demo.service.acl.ButtonService;
-import tech.riemann.nutz.demo.service.acl.MenuService;
-import tech.riemann.nutz.demo.service.acl.RolePermissionService;
 import tech.riemann.nutz.demo.service.acl.RoleService;
 import tech.riemann.nutz.demo.service.acl.UserRoleService;
 import tech.riemann.nutz.demo.service.acl.UserService;
@@ -42,13 +33,7 @@ public class AdministratorInitializationAutoConfiguration {
 
     private final RoleService roleService;
 
-    private final MenuService menuService;
-
-    private final ButtonService buttonService;
-
     private final UserRoleService userRoleService;
-
-    private final RolePermissionService rolePermissionService;
 
     private final NutzDatabaseInitializer nutzDatabaseInitializer;
 
@@ -83,48 +68,11 @@ public class AdministratorInitializationAutoConfiguration {
         }
 
         /**
-         * 初始化角色权限
-         */
-        if (rolePermissionService.countByNutz() == 0) {
-            menuService.queryByNutz()
-                       .stream()
-                       .forEach(resource -> buttonService.queryByNutz()
-                                                         .stream()
-                                                         .forEach(operate -> rolePermissionService.insert(RolePermission.builder()
-                                                                                                                        .buttonKey(operate.getKey())
-                                                                                                                        .menuKey(resource.getKey())
-                                                                                                                        .roleKey(admin)
-                                                                                                                        .build())));
-        }
-
-        /**
          * 给用户授予角色
          */
         if (userRoleService.countByNutz() == 0) {
             userRoleService.insert(UserRole.builder().userName(su).roleKey(admin).build());
         }
 
-        InstalledMenu.menus().stream().forEach(menu -> {
-            if (menuService.count(Cnd.where(Menu::getKey, EQ, menu.getKey())) == 0) {
-                menuService.insert(menu);
-            }
-        });
-
-        InstalledButton.buttons().stream().forEach(button -> {
-            if (buttonService.count(Cnd.where(Button::getKey, EQ, button.getKey())
-                                       .and(Button::getMenuKey, EQ, button.getMenuKey())) == 0) {
-                buttonService.insert(button);
-            }
-            if (rolePermissionService.count(Cnd.where(RolePermission::getRoleKey, EQ, admin)
-                                               .and(RolePermission::getMenuKey, EQ, button.getMenuKey())
-                                               .and(RolePermission::getButtonKey, EQ, button.getKey())) == 0) {
-
-                rolePermissionService.insert(RolePermission.builder()
-                                                           .roleKey(admin)
-                                                           .menuKey(button.getMenuKey())
-                                                           .buttonKey(button.getKey())
-                                                           .build());
-            }
-        });
     }
 }

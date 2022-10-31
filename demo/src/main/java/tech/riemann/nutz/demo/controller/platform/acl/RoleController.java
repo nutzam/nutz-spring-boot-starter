@@ -21,8 +21,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import tech.riemann.nutz.demo.dto.response.MenuInfo;
 import tech.riemann.nutz.demo.dto.response.PermissionInfo;
+import tech.riemann.nutz.demo.entity.acl.Permission;
 import tech.riemann.nutz.demo.entity.acl.Role;
 import tech.riemann.nutz.demo.exception.BizException;
 import tech.riemann.nutz.demo.service.acl.RoleService;
@@ -55,9 +55,12 @@ public class RoleController {
     @GetMapping("roles")
     @Operation(summary = "分页查询角色")
     public Pagination<Role> roles(
-                                  @Parameter(description = "页码") @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                  @Parameter(description = "页面大小") @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                  @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false, defaultValue = "") String key) {
+                                  @Parameter(description = "页码") @RequestParam(value = "page", required = false,
+                                          defaultValue = "1") int page,
+                                  @Parameter(description = "页面大小") @RequestParam(value = "size", required = false,
+                                          defaultValue = "10") int size,
+                                  @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false,
+                                          defaultValue = "") String key) {
 
         return roleService.searchByKeyAndPage(key,
                                               page,
@@ -118,8 +121,8 @@ public class RoleController {
 
     @GetMapping("role/{key}/permissions")
     @Operation(summary = "查询角色权限")
-    public List<MenuInfo> permissions(
-                                      @Parameter(description = "角色key") @PathVariable("key") String key) {
+    public List<Permission> permissions(
+                                        @Parameter(description = "角色key") @PathVariable("key") String key) {
         return roleService.permissionsByRoleKey(key);
     }
 
@@ -135,7 +138,8 @@ public class RoleController {
     @ResponseStatus(HttpStatus.OK)
     public void grant(
                       @Parameter(description = "角色key") @PathVariable("key") String key,
-                      @Parameter(name = "permissions", description = "待授权信息['menuKey', 'menuKey.buttonKey']") @RequestBody List<String> permissions) {
+                      @Parameter(name = "permissions",
+                              description = "待授权信息[keyPath]") @RequestBody List<String> permissions) {
         if (!roleService.grant(key, permissions)) {
             throw BizException.create("授权失败");
         }

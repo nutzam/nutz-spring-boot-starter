@@ -31,7 +31,7 @@ import tech.riemann.nutz.demo.entity.IdBaseEntity;
 @Table("t_acl_user_permission")
 @Comment("用户权限")
 @Schema(name = "UserPermission", description = "用户权限")
-public class UserPermission extends IdBaseEntity{
+public class UserPermission extends IdBaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,13 +40,8 @@ public class UserPermission extends IdBaseEntity{
     @Comment("用户名")
     private String userName;
 
-    @Schema(description = "菜单key", required = true)
-    @Column("up_menu_key")
-    @Comment("菜单key")
-    private String menuKey;
-
-    @Schema(description = "操作按钮key", required = true)
-    @Column("up_button_key")
-    @Comment("操作按钮key")
-    private String buttonKey;
+    @Schema(description = "权限keyPath")
+    @Column("up_permission_key_path")
+    @Comment("权限keyPath")
+    private String permissionKeyPath;
 }

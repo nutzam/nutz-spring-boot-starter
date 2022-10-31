@@ -68,8 +68,9 @@ public class MysqlGenerator {
         String projectPath = System.getProperty("user.dir");
         List<String> relationTables = Lang.list("t_acl_role_permission", "t_acl_user_permission", "t_acl_user_role");
         NutMap.NEW()
-              .addv("acl", Lang.array("t_acl_button", "t_acl_menu", "t_acl_role", "t_acl_role_permission", "t_acl_user", "t_acl_user_permission", "t_acl_user_role"))
-              .addv("dictionary", Lang.array("t_dictionary_dictionary", "t_dictionary_group"))
+              .addv("acl", Lang.array("t_acl_permission"))
+              // .addv("dictionary", Lang.array("t_dictionary_dictionary",
+              // "t_dictionary_group"))
               .entrySet()
               .stream()
               .forEach(e -> {
@@ -79,7 +80,9 @@ public class MysqlGenerator {
                                        builder
                                               .author("Kerbores(kerbores@gmail.com)")
                                               .enableSpringdoc()
-                                              .commentDate(() -> LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.CHINESE)))
+                                              .commentDate(() -> LocalDateTime.now()
+                                                                              .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss",
+                                                                                                                  Locale.CHINESE)))
                                               .disableOpenDir()
                                               .dateType(DateType.TIME_PACK)
                                               .outputDir(projectPath + "/src/main/java");
@@ -93,7 +96,9 @@ public class MysqlGenerator {
                                               .service(String.format("service.%s", e.getKey()))
                                               .serviceImpl(String.format("service.%s.impl", e.getKey()))
                                               .controller(String.format("controller.platform.%s", e.getKey()))
-                                              .pathInfo(Collections.singletonMap(OutputFile.xml, String.format("%s/src/main/resources/mapper_", projectPath)));
+                                              .pathInfo(Collections.singletonMap(OutputFile.xml,
+                                                                                 String.format("%s/src/main/resources/mapper_",
+                                                                                               projectPath)));
                                    })
                                    .templateConfig(builder -> builder
                                                                      .disable(mode == Mode.NUTZ ? Lang.array(
@@ -101,12 +106,18 @@ public class MysqlGenerator {
                                                                                                              TemplateType.XML,
                                                                                                              TemplateType.SERVICE)
                                                                                                 : Lang.array())
-                                                                     .controller(String.format("templates/%s/controller.java", mode.name().toLowerCase()))
-                                                                     .serviceImpl(String.format("templates/%s/serviceImpl.java", mode.name().toLowerCase()))
-                                                                     .service(String.format("templates/%s/service.java", mode.name().toLowerCase()))
-                                                                     .xml(String.format("templates/%s/mapper.xml", mode.name().toLowerCase()))
-                                                                     .mapper(String.format("templates/%s/mapper.java", mode.name().toLowerCase()))
-                                                                     .entity(String.format("templates/%s/entity.java", mode.name().toLowerCase())))
+                                                                     .controller(String.format("templates/%s/controller.java",
+                                                                                               mode.name().toLowerCase()))
+                                                                     .serviceImpl(String.format("templates/%s/serviceImpl.java",
+                                                                                                mode.name().toLowerCase()))
+                                                                     .service(String.format("templates/%s/service.java",
+                                                                                            mode.name().toLowerCase()))
+                                                                     .xml(String.format("templates/%s/mapper.xml",
+                                                                                        mode.name().toLowerCase()))
+                                                                     .mapper(String.format("templates/%s/mapper.java",
+                                                                                           mode.name().toLowerCase()))
+                                                                     .entity(String.format("templates/%s/entity.java",
+                                                                                           mode.name().toLowerCase())))
                                    .strategyConfig(builder -> {
                                        builder.addTablePrefix(String.format("t_%s_", e.getKey()))
                                               .addFieldPrefix(prefixes(e.getKey()))
@@ -133,7 +144,8 @@ public class MysqlGenerator {
                                                   boolean isRelation = relationTables.stream().anyMatch(item -> {
                                                       String name = NamingStrategy.capitalFirst(
                                                                                                 NamingStrategy.underlineToCamel(
-                                                                                                                                item.replace(String.format("t_%s_", e.getKey()),
+                                                                                                                                item.replace(String.format("t_%s_",
+                                                                                                                                                           e.getKey()),
                                                                                                                                              "")));
                                                       return Strings.equals(entityName, name);
                                                   });
@@ -147,8 +159,12 @@ public class MysqlGenerator {
                                               .enableBaseResultMap()
                                               .enableBaseColumnList()
                                               .serviceBuilder()
-                                              .convertServiceFileName(entityName -> (mode == Mode.NUTZ ? "" : "I") + entityName + ConstVal.SERVICE)
-                                              .convertServiceImplFileName(entityName -> mode == Mode.NUTZ ? null : entityName + ConstVal.SERVICE_IMPL);
+                                              .convertServiceFileName(entityName -> (mode == Mode.NUTZ ? "" : "I")
+                                                                                    + entityName
+                                                                                    + ConstVal.SERVICE)
+                                              .convertServiceImplFileName(entityName -> mode == Mode.NUTZ ? null
+                                                                                                          : entityName
+                                                                                                            + ConstVal.SERVICE_IMPL);
                                    })
                                    .templateEngine(new BeetlTemplateEngine())
                                    .execute();

@@ -1,31 +1,31 @@
 package tech.riemann.nutz.demo.controller.platform.acl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.nutz.dao.Cnd;
-import org.nutz.dao.util.cri.Exps;
-import org.nutz.lang.Strings;
 import org.nutz.spring.boot.service.interfaces.EntityService;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import club.zhcs.enums.Codebook;
+import club.zhcs.enums.ICodeBook;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import tech.riemann.nutz.demo.entity.acl.Button;
-import tech.riemann.nutz.demo.entity.acl.Menu;
-import tech.riemann.nutz.demo.exception.BizException;
-import tech.riemann.nutz.demo.service.acl.ButtonService;
-import tech.riemann.nutz.demo.service.acl.MenuService;
+import tech.riemann.nutz.demo.entity.acl.Permission;
+import tech.riemann.nutz.demo.service.acl.PermissionService;
+import tech.riemann.nutz.demo.utils.Tree;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -43,92 +43,102 @@ import tech.riemann.nutz.demo.service.acl.MenuService;
 @Tag(name = "Permission", description = "权限")
 public class PermissionController {
 
-    private final MenuService menuService;
+    private final PermissionService permissionService;
 
-    private final ButtonService buttonService;
+    /**
+     * 权限类型码本
+     *
+     * @return
+     */
+    @GetMapping("permission/types")
+    @Operation(summary = "权限类型")
+    public List<Codebook> types() {
+        return Arrays.stream(Permission.Type.values())
+                     .map(ICodeBook::build)
+                     .toList();
+    }
 
-    @GetMapping("menus")
-    @Operation(summary = "查询全部菜单")
-    public List<Menu> menus(
-                            @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false, defaultValue = "") String key) {
-        if (Strings.isNotBlank(key)) {
-            return menuService.list(Cnd.NEW());
-        }
-        key = String.format("%%%s%%", key);
-        return menuService.list(Cnd.where(Menu::getKey, EntityService.LIKE, key)
-                                   .or(Menu::getName, EntityService.LIKE, key)
-                                   .or(Menu::getDescription, EntityService.LIKE, key));
+    @GetMapping("permissions/tree")
+    @Operation(summary = "权限树")
+    public List<Tree<String>> permissionTree(
+                                             @Parameter(description = "强制拉取") @RequestParam(value = "force",
+                                                     required = false) boolean force) {
+        return permissionService.permissionTree(force);
+    }
+
+    @GetMapping("permissions")
+    @Operation(summary = "权限列表")
+    public List<Permission> permissions(
+                                        @Parameter(description = "强制拉取") @RequestParam(value = "force", required = false) boolean force) {
+        return permissionService.permissions(force);
     }
 
     /**
-     * 添加或者更新菜单
-     * 
-     * @param menu
-     *            菜单数据
-     * @return 菜单
+     * 权限详情
+     *
+     * @param id
+     *            权限id
+     * @return 权限
      */
-    @PutMapping("menu")
-    @Operation(summary = "增加/编辑菜单")
-    public Menu saveOrUpdateMenu(@Validated @Parameter(description = "菜单") @RequestBody Menu menu) {
-        if (menu.getId() > 0) {
-            if (menuService.update(menu) == 1) {
-                return menu;
-            } else {
-                throw BizException.create("更新菜单失败!");
-            }
-        }
-        return menuService.insert(menu);
+    @GetMapping("permission/{id}")
+    @Operation(summary = "权限详情")
+    public Permission getPermission(@Parameter(description = "权限id", required = true) @PathVariable("id") long id) {
+        return permissionService.fetch(id);
     }
 
-    @DeleteMapping("menu/{key}")
-    @Operation(summary = "删除菜单")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteMenu(@Parameter(description = "菜单key", required = true) @PathVariable("key") String key) {
-        if (menuService.delete(key) != 1) {
-            throw BizException.create("删除菜单失败!");
-        }
+    /**
+     * 添加权限
+     *
+     * @param permission
+     *            权限数据
+     * @return 权限
+     */
+    @PutMapping("permission")
+    @Operation(summary = "增加权限")
+    public Permission savePermission(@Parameter(description = "增加权限") @RequestBody Permission permission) {
+        return permissionService.insert(permission);
     }
 
-    @GetMapping("menu/{key}/buttons")
-    @Operation(summary = "菜单下的操作按钮列表")
-    public List<Button> buttons(
-                                @Parameter(description = "菜单key", required = true) @PathVariable("key") String key,
-                                @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false, defaultValue = "") String searchKey) {
-        if (Strings.isNotBlank(key)) {
-            return buttonService.list(Cnd.where(Button::getMenuKey, EntityService.EQ, key));
-        }
-        searchKey = String.format("%%%s%%", searchKey);
-        return buttonService.list(Cnd.where(Button::getMenuKey, EntityService.EQ, key)
-                                     .and(Exps.begin()
-                                              .and(Button::getKey, EntityService.LIKE, searchKey)
-                                              .or(Button::getName, EntityService.LIKE, searchKey)
-                                              .or(Button::getDescription, EntityService.LIKE, searchKey)));
+    /**
+     * 添加权限
+     *
+     * @param permission
+     *            权限数据
+     * @return 权限
+     */
+    @PatchMapping("permission")
+    @Operation(summary = "编辑权限")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void updatePermission(@Parameter(description = "增加权限") @RequestBody Permission permission) {
+        permissionService.update(permission, Permission.Fields.name, Permission.Fields.description);
     }
 
-    @PutMapping("button")
-    @Operation(summary = "增加/编辑操作按钮")
-    public Button saveOrUpdateButton(@Validated @Parameter(description = "操作按钮") @RequestBody Button button) {
-        if (button.getId() > 0) {
-            if (buttonService.update(button) == 1) {
-                return button;
-            } else {
-                throw BizException.create("更新操作按钮失败!");
-            }
-        }
-        return buttonService.insert(button);
+    /**
+     * 删除权限
+     *
+     * @param id
+     *            权限id
+     * @return 是否删除成功
+     */
+    @DeleteMapping("permission/{key}")
+    @Operation(summary = "删除权限")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void deletePermission(@Parameter(description = "权限key", required = true) @PathVariable("key") String key) {
+        permissionService.clear(Cnd.where(Permission::getKey, EntityService.EQ, key));
     }
 
-    @DeleteMapping("menu/{key}button/{buttonKey}")
-    @Operation(summary = "删除操作按钮")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteButton(
-                             @Parameter(description = "菜单key", required = true) @PathVariable("key") String key,
-                             @Parameter(description = "操作按钮buttonKey", required = true) @PathVariable("buttonKey") String buttonKey) {
-        if (buttonService.clear(
-                                Cnd.where(Button::getKey, EntityService.EQ, buttonKey)
-                                   .and(Button::getMenuKey, EntityService.EQ, key)) != 1) {
-            throw BizException.create("删除操作按钮失败!");
-        }
+    @PostMapping("batch-init-permissions")
+    @Operation(summary = "批量新增权限")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void batchInitPermissions(
+                                     @RequestBody List<Permission> permissions) {
+        permissionService.batchAddPermissions(permissions);
     }
 
+    @PatchMapping("batch-sync-permissions")
+    @Operation(summary = "增量新增权限")
+    @ResponseStatus(value = HttpStatus.OK)
+    public void batchSyncPermissions(@RequestBody List<Permission> permissions) {
+        permissionService.updatePermissions(permissions);
+    }
 }

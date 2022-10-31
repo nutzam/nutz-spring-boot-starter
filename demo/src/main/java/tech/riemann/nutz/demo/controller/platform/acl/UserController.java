@@ -26,9 +26,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import tech.riemann.nutz.demo.dto.response.MenuInfo;
 import tech.riemann.nutz.demo.dto.response.PermissionInfo;
 import tech.riemann.nutz.demo.dto.response.RoleInfo;
+import tech.riemann.nutz.demo.entity.acl.Permission;
 import tech.riemann.nutz.demo.entity.acl.User;
 import tech.riemann.nutz.demo.entity.acl.User.Sex;
 import tech.riemann.nutz.demo.exception.BizException;
@@ -62,10 +62,13 @@ public class UserController {
     @GetMapping("users")
     @Operation(summary = "分页查询用户")
     public Pagination<User> users(
-                                  @Parameter(description = "页码") @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                  @Parameter(description = "页面大小") @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+                                  @Parameter(description = "页码") @RequestParam(value = "page", required = false,
+                                          defaultValue = "1") int page,
+                                  @Parameter(description = "页面大小") @RequestParam(value = "size", required = false,
+                                          defaultValue = "10") int size,
                                   @Parameter(description = "性别") @RequestParam(value = "sex", required = false, defaultValue = "") Sex sex,
-                                  @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false, defaultValue = "") String key) {
+                                  @Parameter(description = "搜索关键词") @RequestParam(name = "key", required = false,
+                                          defaultValue = "") String key) {
         return userService.searchByKeyAndPage(key,
                                               page,
                                               size,
@@ -139,8 +142,8 @@ public class UserController {
 
     @GetMapping("user/{name}/permissions")
     @Operation(summary = "查询用户权限")
-    public List<MenuInfo> permissions(
-                                      @Parameter(description = "用户名") @PathVariable("name") String name) {
+    public List<Permission> permissions(
+                                        @Parameter(description = "用户名") @PathVariable("name") String name) {
         return userService.permissionsByUserName(name);
     }
 
@@ -156,7 +159,8 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public void grant(
                       @Parameter(description = "用户名") @PathVariable("name") String name,
-                      @Parameter(name = "permissions", description = "待授权信息['menuKey', 'menuKey.buttonKey']") @RequestBody List<String> permissions) {
+                      @Parameter(name = "permissions",
+                              description = "待授权信息[keyPath]") @RequestBody List<String> permissions) {
         if (!userService.grant(name, permissions)) {
             throw BizException.create("授权失败");
         }

@@ -47,17 +47,5 @@ SELECT
 	p.*,
 	rp.id IS NOT NULL AS selected 
 FROM
-	(
-	SELECT
-		b.*,
-		m.m_key,
-		m.m_name,
-		m.m_description,
-		m.m_parent_key 
-	FROM
-		t_acl_menu m
-		RIGHT JOIN t_acl_button b ON m.m_key = b.b_menu_key 
-		OR b.b_menu_key = NULL 
-	) p
-	LEFT JOIN ( SELECT * FROM t_acl_role_permission WHERE rp_role_key = @roleKey ) rp ON rp.rp_menu_key = p.m_key 
-	AND rp.rp_button_key = p.b_key
+	t_acl_permission p
+	LEFT JOIN ( SELECT * FROM t_acl_role_permission WHERE rp_role_key = @roleKey ) rp ON p.p_key_path = rp.rp_permission_key_path
