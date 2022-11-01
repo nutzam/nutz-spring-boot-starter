@@ -38,16 +38,22 @@ public class RoleService implements IdNameEntityService<Role> {
     }
 
     /**
+     * 获取角色权限
+     * 
      * @param key
-     * @return
+     *            角色key
+     * @return 权限列表
      */
     public List<Permission> permissionsByRoleKey(String key) {
         return permissionInfosByKey(key).stream().filter(PermissionInfo::isSelected).collect(Collectors.toList());
     }
 
     /**
+     * 获取角色权限信息
+     * 
      * @param key
-     * @return
+     *            角色key
+     * @return 授权信息列表
      */
     public List<PermissionInfo> permissionInfosByKey(String key) {
         return list(sql("list.permissions.by.role.key")
@@ -56,9 +62,13 @@ public class RoleService implements IdNameEntityService<Role> {
     }
 
     /**
+     * 为角色授权
+     * 
      * @param key
+     *            角色key
      * @param permissions
-     * @return
+     *            权限列表 (权限keyPath列表)
+     * @return 是否授权成功
      */
     public boolean grant(String key, List<String> permissions) {
         rolePermissionService.clear(Cnd.where(RolePermission::getRoleKey, EQ, key));

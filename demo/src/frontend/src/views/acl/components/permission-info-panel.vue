@@ -17,7 +17,8 @@
       </a-space>
     </template>
     <a-tree
-      :default-expand-all="treeData.length > 0"
+      v-if="treeData.length > 0"
+      default-expand-all
       :height="233"
       :tree-data="treeData"
       :field-names="{ title: 'name', key: 'keyPath' }"

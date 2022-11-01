@@ -44,7 +44,7 @@ public class PermissionService implements IdEntityService<Permission> {
                                                                .build(new CacheLoader<String, List<Permission>>() {
 
                                                                    @Override
-                                                                   public List<Permission> load(String clientId) throws Exception {
+                                                                   public List<Permission> load(String key) throws Exception {
                                                                        return all();
                                                                    }
                                                                });
@@ -59,8 +59,11 @@ public class PermissionService implements IdEntityService<Permission> {
     }
 
     /**
+     * 获取权限树
+     * 
      * @param force
-     * @return
+     *            是否强制获取(跳过缓存)
+     * @return 权限树
      */
     public List<Tree<String>> permissionTree(boolean force) {
         List<Permission> permissions = permissions(force);
@@ -75,8 +78,11 @@ public class PermissionService implements IdEntityService<Permission> {
     }
 
     /**
+     * 获取权限列表
+     * 
      * @param force
-     * @return
+     *            是否强制获取(跳过缓存)
+     * @return 权限列表
      */
     public List<Permission> permissions(boolean force) {
         try {
@@ -91,7 +97,10 @@ public class PermissionService implements IdEntityService<Permission> {
     }
 
     /**
+     * 批量新增权限
+     * 
      * @param permissions
+     *            权限列表
      */
     public void batchAddPermissions(List<Permission> permissions) {
         clear();
@@ -99,7 +108,10 @@ public class PermissionService implements IdEntityService<Permission> {
     }
 
     /**
+     * 批量同步权限
+     * 
      * @param permissions
+     *            权限列表
      */
     public void updatePermissions(List<Permission> permissions) {
         permissions.stream().forEach(permission -> {
