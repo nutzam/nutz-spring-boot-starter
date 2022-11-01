@@ -8,12 +8,14 @@
   >
     <vxe-table
       ref="xTree"
+      max-height="600"
       :row-config="{ keyField: 'key' }"
       :column-config="{ resizable: true }"
       :tree-config="{ transform: true, rowField: 'key', parentField: 'parentKey', expandAll: true }"
       :data="permissions"
       :checkbox-config="checkboxConfig"
       @checkbox-change="selectChangeEvent"
+      @checkbox-all="checkAll"
     >
       <vxe-column show-overflow="tooltip" type="checkbox" title="key" width="280" tree-node></vxe-column>
       <vxe-column show-overflow="tooltip" field="keyPath" title="KeyPath"></vxe-column>
@@ -41,10 +43,11 @@ watch(
   newVal => {
     checkRowKeys.value = newVal
       .filter(item => item.selected)
-      .map(item => String(item.key))
+      .map(item => item.key)
       .filter(key => {
         return newVal.filter(p => p.parentKey === key && p.selected).length === 0;
       });
+    checkedKeys.value = newVal.filter(item => item.selected).map(item => item.key);
   },
   { deep: true, immediate: true },
 );
@@ -67,6 +70,15 @@ const selectChangeEvent = ({ $table }: { $table: VxeTableInstance }) => {
     ...$table.getCheckboxRecords().map(item => item.keyPath),
     ...$table.getCheckboxIndeterminateRecords().map(item => item.keyPath),
   ];
+};
+const checkAll = ({ checked }: { checked: boolean }) => {
+  if (checked) {
+    checkRowKeys.value = permissions.value.map(item => item.key);
+    checkedKeys.value = permissions.value.map(item => item.key);
+  } else {
+    checkRowKeys.value = [];
+    checkedKeys.value = [];
+  }
 };
 
 const handleOk = () => {
