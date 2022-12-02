@@ -1,12 +1,12 @@
 package org.nutz.spring.boot.service;
 
-import javax.annotation.Resource;
-
 import org.nutz.dao.Dao;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.service.IdEntityService;
 import org.nutz.spring.boot.service.entity.IdEntity;
+
+import jakarta.annotation.Resource;
 
 /**
  * @author kerbores(kerbores@gmail.com)

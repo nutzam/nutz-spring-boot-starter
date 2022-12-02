@@ -1,13 +1,12 @@
 package tech.riemann.nutz.demo.config;
 
-import javax.annotation.PostConstruct;
-
 import org.nutz.spring.boot.dao.NutzDatabaseInitializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import club.zhcs.auth.PasswordUtils;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import tech.riemann.nutz.demo.entity.acl.Role;
 import tech.riemann.nutz.demo.entity.acl.User;

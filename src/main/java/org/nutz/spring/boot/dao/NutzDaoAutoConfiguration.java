@@ -2,7 +2,6 @@ package org.nutz.spring.boot.dao;
 
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.nutz.dao.Dao;
@@ -30,6 +29,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 /**

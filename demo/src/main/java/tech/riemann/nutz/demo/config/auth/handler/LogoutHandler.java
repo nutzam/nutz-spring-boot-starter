@@ -2,16 +2,16 @@ package tech.riemann.nutz.demo.config.auth.handler;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 /**
- * @author Kerbores(kerbores@gmail.com)
+ * @author kerbores(kerbores@riemann.tech)
  *
  */
 public class LogoutHandler implements LogoutSuccessHandler {
@@ -22,8 +22,8 @@ public class LogoutHandler implements LogoutSuccessHandler {
      * @param authentication
      * @throws IOException
      * @throws ServletException
-     * @see org.springframework.security.web.authentication.logout.LogoutSuccessHandler#onLogoutSuccess(javax.servlet.http.HttpServletRequest,
-     *      javax.servlet.http.HttpServletResponse,
+     * @see org.springframework.security.web.authentication.logout.LogoutSuccessHandler#onLogoutSuccess(jakarta.servlet.http.HttpServletRequest,
+     *      jakarta.servlet.http.HttpServletResponse,
      *      org.springframework.security.core.Authentication)
      */
     @Override

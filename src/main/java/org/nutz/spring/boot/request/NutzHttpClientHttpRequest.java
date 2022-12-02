@@ -55,15 +55,6 @@ public class NutzHttpClientHttpRequest extends AbstractClientHttpRequest impleme
 
     /**
      * @return
-     * @see org.springframework.http.HttpRequest#getMethodValue()
-     */
-    @Override
-    public String getMethodValue() {
-        return httpMethod.name();
-    }
-
-    /**
-     * @return
      * @see org.springframework.http.HttpRequest#getURI()
      */
     @Override
@@ -90,7 +81,7 @@ public class NutzHttpClientHttpRequest extends AbstractClientHttpRequest impleme
      */
     @Override
     protected ClientHttpResponse executeInternal(HttpHeaders headers) throws IOException {
-        final Request request = Request.create(uri.toString(), METHOD.valueOf(getMethodValue()));
+        final Request request = Request.create(uri.toString(),  METHOD.valueOf(getMethod().name()) );
         headers.forEach((headerName, headerValues) -> {
             for (String headerValue : headerValues) {
                 request.header(headerName, headerValue);
@@ -155,6 +146,15 @@ public class NutzHttpClientHttpRequest extends AbstractClientHttpRequest impleme
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
+    }
+
+    /**
+     * @return
+     * @see org.springframework.http.HttpRequest#getMethod()
+     */
+    @Override
+    public HttpMethod getMethod() {
+        return httpMethod;
     }
 
 }

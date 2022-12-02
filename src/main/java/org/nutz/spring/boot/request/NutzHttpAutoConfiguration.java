@@ -83,7 +83,7 @@ public class NutzHttpAutoConfiguration {
     @Bean
     @ConditionalOnBean(ProxySwitcher.class)
     @ConditionalOnExpression("${nutz.http.proxy.enabled:false}")
-    public RestTemplate restTemplate(ProxySwitcher proxySwitcher) {
+    public RestTemplate proxyEnabledRestTemplate(ProxySwitcher proxySwitcher) {
         RestTemplate restTemplate = new RestTemplate(NutzHttpRequestFactory.builder()
                                                                            .proxySwitcher(proxySwitcher)
                                                                            .http(config.getHttp())

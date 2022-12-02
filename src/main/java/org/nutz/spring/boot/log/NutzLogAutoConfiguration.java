@@ -1,7 +1,5 @@
 package org.nutz.spring.boot.log;
 
-import javax.annotation.PostConstruct;
-
 import org.nutz.lang.Strings;
 import org.nutz.log.LogAdapter;
 import org.nutz.log.Logs;
@@ -13,6 +11,7 @@ import org.nutz.spring.boot.log.NutzLogConfigurationProperties.Type;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 /**

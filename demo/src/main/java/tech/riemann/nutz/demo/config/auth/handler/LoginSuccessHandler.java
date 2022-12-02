@@ -2,20 +2,19 @@ package tech.riemann.nutz.demo.config.auth.handler;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.nutz.json.Json;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import tech.riemann.nutz.demo.config.auth.JwtUser;
 import tech.riemann.nutz.demo.dto.response.LoginUser;
 
 /**
- * @author Kerbores(kerbores@gmail.com)
+ * @author kerbores(kerbores@riemann.tech)
  *
  */
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -26,9 +25,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
      * @param authentication
      * @throws IOException
      * @throws ServletException
-     * @see org.springframework.security.web.authentication.AuthenticationSuccessHandler#onAuthenticationSuccess(javax.servlet.http.HttpServletRequest,
-     *      javax.servlet.http.HttpServletResponse,
-     *      org.springframework.security.core.Authentication)
+     * @see org.springframework.security.web.authentication.AuthenticationSuccessHandler#onAuthenticationSuccess(jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse, org.springframework.security.core.Authentication)
      */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {

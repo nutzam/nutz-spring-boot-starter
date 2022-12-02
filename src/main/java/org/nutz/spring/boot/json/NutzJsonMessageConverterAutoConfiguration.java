@@ -2,9 +2,6 @@ package org.nutz.spring.boot.json;
 
 import java.util.TimeZone;
 
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 import org.nutz.json.handler.JsonLocalDateLikeHandler;
@@ -15,6 +12,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.HttpMessageConverter;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * @author kerbores(kerbores@gmail.com)

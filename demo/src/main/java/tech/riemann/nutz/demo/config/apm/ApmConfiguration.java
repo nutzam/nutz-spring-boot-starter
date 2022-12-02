@@ -1,12 +1,11 @@
 package tech.riemann.nutz.demo.config.apm;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import club.zhcs.apm.URLProvider;
 import club.zhcs.apm.UserCollector;
+import jakarta.servlet.http.HttpServletRequest;
 import tech.riemann.nutz.demo.config.auth.AuthService;
 
 /**

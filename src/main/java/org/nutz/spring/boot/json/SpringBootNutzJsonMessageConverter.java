@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 import org.nutz.lang.Lang;
@@ -16,6 +14,7 @@ import org.nutz.lang.Strings;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.AbstractJsonHttpMessageConverter;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 /**

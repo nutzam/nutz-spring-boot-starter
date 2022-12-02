@@ -2,8 +2,6 @@ package org.nutz.spring.boot.dao;
 
 import java.util.Arrays;
 
-import javax.annotation.PostConstruct;
-
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -12,6 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 /**

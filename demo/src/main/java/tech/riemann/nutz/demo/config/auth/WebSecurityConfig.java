@@ -2,12 +2,9 @@ package tech.riemann.nutz.demo.config.auth;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.nutz.json.Json;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +18,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import club.zhcs.auth.PasswordUtils;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import tech.riemann.nutz.demo.config.auth.filter.JwtAuthenticationTokenFilter;
 import tech.riemann.nutz.demo.config.auth.filter.LoginAuthenticationFilter;
 import tech.riemann.nutz.demo.config.auth.handler.AnonymousAuthenticationEntryPoint;
@@ -36,6 +36,7 @@ import tech.riemann.nutz.demo.service.acl.UserService;
  * @author Kerbores(kerbores@gmail.com)
  *
  */
+@Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
@@ -84,18 +85,17 @@ public class WebSecurityConfig {
         http.headers().frameOptions().disable();
         http.cors();
         http.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.authorizeRequests(authorize -> authorize
-                                                     .antMatchers("/index.html",
-                                                                  "/v3/api-docs/**",
-                                                                  "/swagger-ui.html",
-                                                                  "/swagger-ui/**",
-                                                                  "/webjars/**",
-                                                                  "/actuator/**",
-                                                                  "/swagger-customer",
-                                                                  "/swagger-themes")
-                                                     .permitAll()
-                                                     .anyRequest()
-                                                     .authenticated());
+        http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/index.html",
+                                                                          "/v3/api-docs/**",
+                                                                          "/swagger-ui.html",
+                                                                          "/swagger-ui/**",
+                                                                          "/webjars/**",
+                                                                          "/actuator/**",
+                                                                          "/swagger-customer",
+                                                                          "/swagger-themes")
+                                                         .permitAll()
+                                                         .anyRequest()
+                                                         .authenticated());
         http.formLogin(configurer -> configurer.successHandler(loginSuccessHandler).failureHandler(loginFailureHandler));
         http.logout(configurer -> configurer.logoutUrl("/auth/logout").logoutSuccessHandler(logoutHandler));
 
