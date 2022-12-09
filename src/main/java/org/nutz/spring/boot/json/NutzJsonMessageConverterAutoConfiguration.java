@@ -32,7 +32,7 @@ public class NutzJsonMessageConverterAutoConfiguration {
 
     @Bean
     @ConditionalOnExpression("${nutz.json.enabled:true}")
-    public HttpMessageConverter<Object> springBootNutzJsonHttpMessageConverter(
+     HttpMessageConverter<Object> springBootNutzJsonHttpMessageConverter(
                                                                                NutzJsonAutoConfigurationProperties properties,
                                                                                HttpServletRequest request) {
         JsonFormat format = null;

@@ -24,7 +24,7 @@ public class NgrokAutoConfiguration {
 
     @Bean(initMethod = "start", destroyMethod = "stop")
     @ConditionalOnProperty(name = "nutz.ngrok.client.token")
-    public NgrokClient ngrokClient(NgrokAutoConfigurationProperties ngrokConfigProperties) {
+     NgrokClient ngrokClient(NgrokAutoConfigurationProperties ngrokConfigProperties) {
         NgrokClient client = new NgrokClient();
         client.to_port = getPort(ngrokConfigProperties);
         client.auth_token = ngrokConfigProperties.getClient().getToken();
@@ -35,7 +35,7 @@ public class NgrokAutoConfiguration {
 
     @Bean(initMethod = "start", destroyMethod = "stop")
     @ConditionalOnExpression("${nutz.ngrok.server.enabled:false}")
-    public NgrokServer ngrokServer(NgrokAutoConfigurationProperties config) {
+     NgrokServer ngrokServer(NgrokAutoConfigurationProperties config) {
         NgrokServer server = new NgrokServer();
         server.ssl_jks_password = config.getServer().getSslJksPassword();
         server.ssl_jks_path = config.getServer().getSslJksPath();

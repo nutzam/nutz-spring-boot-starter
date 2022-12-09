@@ -17,12 +17,12 @@ import tech.riemann.nutz.demo.config.auth.AuthService;
 public class ApmConfiguration {
 
     @Bean
-    public UserCollector userCollector(AuthService authService) {
+     UserCollector userCollector(AuthService authService) {
         return authService::currentUserName;
     }
 
     @Bean
-    public URLProvider urlProvider(HttpServletRequest request) {
+     URLProvider urlProvider(HttpServletRequest request) {
         return request::getRequestURI;
     }
 

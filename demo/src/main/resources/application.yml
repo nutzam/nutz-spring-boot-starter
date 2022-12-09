@@ -58,12 +58,12 @@ spring:
   application:
     name: spring-boot-nutz-demo
   datasource:
-# 数据源
     url: jdbc:mysql://mysql.riemann.tech:13306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: thunder
     password: ZhaXcYaabZRKx5zw
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
+      db-type: mysql
       filters: stat,wall,log4j2
       initial-size: 10
       min-idle:  1

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 public class SpringResourceLoactionConfiguration {
 
     @Bean
-    public SpringResourceLoaction springResourceLoaction() {
+     SpringResourceLoaction springResourceLoaction() {
         return new SpringResourceLoaction();
     }
 }

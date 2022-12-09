@@ -40,17 +40,17 @@ import tech.riemann.nutz.demo.service.acl.UserService;
 public class WebSecurityConfig {
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserService userService) {
+     UserDetailsService userDetailsService(UserService userService) {
         return new JwtUserDetailsService(userService);
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+     PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
 
             @Override
@@ -66,12 +66,12 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public JwtAuthenticationTokenFilter authenticationTokenFilter(UserDetailsService userDetailsService) {
+     JwtAuthenticationTokenFilter authenticationTokenFilter(UserDetailsService userDetailsService) {
         return new JwtAuthenticationTokenFilter(userDetailsService);
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http,
+     SecurityFilterChain filterChain(HttpSecurity http,
                                            JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter,
                                            LoginAuthenticationFilter loginAuthenticationFilter,
                                            LoginSuccessHandler loginSuccessHandler,
@@ -92,6 +92,7 @@ public class WebSecurityConfig {
                                                                   "/webjars/**",
                                                                   "/actuator/**",
                                                                   "/swagger-customer",
+                                                                  "/**",
                                                                   "/swagger-themes")
                                                      .permitAll()
                                                      .anyRequest()
@@ -108,7 +109,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public AnonymousAuthenticationEntryPoint anonymousAuthenticationEntryPoint() {
+     AnonymousAuthenticationEntryPoint anonymousAuthenticationEntryPoint() {
         return new AnonymousAuthenticationEntryPoint();
     }
 
@@ -118,22 +119,22 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public NoPermissionHandler noPermissionHandler() {
+     NoPermissionHandler noPermissionHandler() {
         return new NoPermissionHandler();
     }
 
     @Bean
-    public LoginFailureHandler loginFailureHandler() {
+     LoginFailureHandler loginFailureHandler() {
         return new LoginFailureHandler();
     }
 
     @Bean
-    public LoginSuccessHandler loginSuccessHandler() {
+     LoginSuccessHandler loginSuccessHandler() {
         return new LoginSuccessHandler();
     }
 
     @Bean
-    public LoginAuthenticationFilter authenticationFilter(AuthenticationManager authenticationManager) {
+     LoginAuthenticationFilter authenticationFilter(AuthenticationManager authenticationManager) {
         LoginAuthenticationFilter filter = new LoginAuthenticationFilter();
         filter.setFilterProcessesUrl("/auth/login");
         filter.setAuthenticationManager(authenticationManager);

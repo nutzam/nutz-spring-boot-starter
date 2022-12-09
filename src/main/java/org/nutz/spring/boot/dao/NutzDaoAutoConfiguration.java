@@ -73,13 +73,13 @@ public class NutzDaoAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(DaoRunner.class)
-    public DaoRunner daoRunner() {
+     DaoRunner daoRunner() {
         return new SpringDaoRunner();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public SqlManager sqlManager() {
+     SqlManager sqlManager() {
         String[] paths = properties.getSqlManager().getPaths();
         if (paths == null) {
             paths = new String[]{"sqls"};
@@ -88,7 +88,7 @@ public class NutzDaoAutoConfiguration {
     }
 
     @Bean
-    public Dao dao(DataSource dataSource, SqlManager sqlManager, DaoRunner daoRunner, ApplicationContext context) {
+     Dao dao(DataSource dataSource, SqlManager sqlManager, DaoRunner daoRunner, ApplicationContext context) {
         NutDao dao = new NutDao(dataSource, sqlManager);
         dao.setRunner(daoRunner);
 

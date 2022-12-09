@@ -45,13 +45,13 @@ public class NutzHttpAutoConfiguration {
 
     @Bean
     @ConditionalOnExpression("${nutz.http.proxy.enabled:false}")
-    public Proxy proxy() {
+     Proxy proxy() {
         return new Proxy(Type.HTTP, new InetSocketAddress(config.getProxy().getHost(), config.getProxy().getPort()));
     }
 
     @Bean
     @ConditionalOnExpression("${nutz.http.proxy.enabled:false}")
-    public ProxySwitcher proxySwitcher(Proxy proxy) {
+     ProxySwitcher proxySwitcher(Proxy proxy) {
 
         return new ProxySwitcher() {
 
@@ -70,7 +70,7 @@ public class NutzHttpAutoConfiguration {
 
     @Bean
     @ConditionalOnExpression("${!nutz.http.proxy.enabled:true}")
-    public RestTemplate restTemplate() {
+     RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate(NutzHttpRequestFactory.builder()
                                                                            .http(config.getHttp())
                                                                            .build());
@@ -83,7 +83,7 @@ public class NutzHttpAutoConfiguration {
     @Bean
     @ConditionalOnBean(ProxySwitcher.class)
     @ConditionalOnExpression("${nutz.http.proxy.enabled:false}")
-    public RestTemplate proxyRestTemplate(ProxySwitcher proxySwitcher) {
+     RestTemplate proxyRestTemplate(ProxySwitcher proxySwitcher) {
         RestTemplate restTemplate = new RestTemplate(NutzHttpRequestFactory.builder()
                                                                            .proxySwitcher(proxySwitcher)
                                                                            .http(config.getHttp())

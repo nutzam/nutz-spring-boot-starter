@@ -17,7 +17,7 @@ public class FilePoolAutoConfiguration {
 
     @Bean
     @ConditionalOnExpression("${nutz.filepool.enabled:true}")
-    public FilePool filePool(FilePoolAutoConfigurationProperties config) {
+     FilePool filePool(FilePoolAutoConfigurationProperties config) {
         return new NutFilePool(config.getPath(), config.getSize());
     }
 }
