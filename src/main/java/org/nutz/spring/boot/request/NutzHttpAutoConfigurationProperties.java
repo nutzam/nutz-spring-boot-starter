@@ -19,7 +19,7 @@ public class NutzHttpAutoConfigurationProperties {
     /**
      * 是否启用
      */
-    boolean enabled = true;
+    boolean enabled = false;
 
     /**
      * sender http 配置
