@@ -1,5 +1,7 @@
 package tech.riemann.nutz.demo.config.auth;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -39,112 +41,97 @@ import tech.riemann.nutz.demo.service.acl.UserService;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    @Bean
-     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+			throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
+	}
 
-    @Bean
-     UserDetailsService userDetailsService(UserService userService) {
-        return new JwtUserDetailsService(userService);
-    }
+	@Bean
+	UserDetailsService userDetailsService(UserService userService) {
+		return new JwtUserDetailsService(userService);
+	}
 
-    @Bean
-     PasswordEncoder passwordEncoder() {
-        return new PasswordEncoder() {
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new PasswordEncoder() {
 
-            @Override
-            public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                return PasswordUtils.randomSaltVerify(rawPassword.toString(), encodedPassword);
-            }
+			@Override
+			public boolean matches(CharSequence rawPassword, String encodedPassword) {
+				return PasswordUtils.randomSaltVerify(rawPassword.toString(), encodedPassword);
+			}
 
-            @Override
-            public String encode(CharSequence rawPassword) {
-                return PasswordUtils.randomSaltEncode(rawPassword.toString());
-            }
-        };
-    }
+			@Override
+			public String encode(CharSequence rawPassword) {
+				return PasswordUtils.randomSaltEncode(rawPassword.toString());
+			}
+		};
+	}
 
-    @Bean
-     JwtAuthenticationTokenFilter authenticationTokenFilter(UserDetailsService userDetailsService) {
-        return new JwtAuthenticationTokenFilter(userDetailsService);
-    }
+	@Bean
+	JwtAuthenticationTokenFilter authenticationTokenFilter(UserDetailsService userDetailsService) {
+		return new JwtAuthenticationTokenFilter(userDetailsService);
+	}
 
-    @Bean
-     SecurityFilterChain filterChain(HttpSecurity http,
-                                           JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter,
-                                           LoginAuthenticationFilter loginAuthenticationFilter,
-                                           LoginSuccessHandler loginSuccessHandler,
-                                           LoginFailureHandler loginFailureHandler,
-                                           LogoutHandler logoutHandler,
-                                           AnonymousAuthenticationEntryPoint anonymousAuthenticationEntryPoint,
-                                           NoPermissionHandler noPermissionHandler)
-            throws Exception {
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
-        http.cors();
-        http.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.authorizeRequests(authorize -> authorize
-                                                     .antMatchers("/index.html",
-                                                                  "/v3/api-docs/**",
-                                                                  "/swagger-ui.html",
-                                                                  "/swagger-ui/**",
-                                                                  "/webjars/**",
-                                                                  "/actuator/**",
-                                                                  "/swagger-customer",
-                                                                  "/**",
-                                                                  "/swagger-themes")
-                                                     .permitAll()
-                                                     .anyRequest()
-                                                     .authenticated());
-        http.formLogin(configurer -> configurer.successHandler(loginSuccessHandler).failureHandler(loginFailureHandler));
-        http.logout(configurer -> configurer.logoutUrl("/auth/logout").logoutSuccessHandler(logoutHandler));
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter,
+			LoginAuthenticationFilter loginAuthenticationFilter, LoginSuccessHandler loginSuccessHandler,
+			LoginFailureHandler loginFailureHandler, LogoutHandler logoutHandler,
+			AnonymousAuthenticationEntryPoint anonymousAuthenticationEntryPoint,
+			NoPermissionHandler noPermissionHandler) throws Exception {
+		return http.csrf(c -> c.disable()).headers(headers -> headers.frameOptions().disable()).cors(withDefaults())
+				.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(authorize -> authorize
+						.antMatchers("/index.html", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**",
+								"/webjars/**", "/actuator/**", "/swagger-customer", "/**", "/swagger-themes")
+						.permitAll().anyRequest().authenticated())
+				.formLogin(configurer -> configurer.successHandler(loginSuccessHandler)
+						.failureHandler(loginFailureHandler))
+				.logout(configurer -> configurer.logoutUrl("/auth/logout").logoutSuccessHandler(logoutHandler))
+				.exceptionHandling(configurer -> configurer.accessDeniedHandler(noPermissionHandler)
+						.authenticationEntryPoint(anonymousAuthenticationEntryPoint))
+				.addFilterBefore(loginAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+				.addFilterAt(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class).build();
+	}
 
-        http.exceptionHandling(configurer -> configurer.accessDeniedHandler(noPermissionHandler).authenticationEntryPoint(anonymousAuthenticationEntryPoint));
+	@Bean
+	AnonymousAuthenticationEntryPoint anonymousAuthenticationEntryPoint() {
+		return new AnonymousAuthenticationEntryPoint();
+	}
 
-        http.addFilterBefore(loginAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .addFilterAt(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+	@Bean
+	LogoutHandler logoutHandler() {
+		return new LogoutHandler();
+	}
 
-        return http.build();
-    }
+	@Bean
+	NoPermissionHandler noPermissionHandler() {
+		return new NoPermissionHandler();
+	}
 
-    @Bean
-     AnonymousAuthenticationEntryPoint anonymousAuthenticationEntryPoint() {
-        return new AnonymousAuthenticationEntryPoint();
-    }
+	@Bean
+	LoginFailureHandler loginFailureHandler() {
+		return new LoginFailureHandler();
+	}
 
-    @Bean
-    LogoutHandler logoutHandler() {
-        return new LogoutHandler();
-    }
+	@Bean
+	LoginSuccessHandler loginSuccessHandler() {
+		return new LoginSuccessHandler();
+	}
 
-    @Bean
-     NoPermissionHandler noPermissionHandler() {
-        return new NoPermissionHandler();
-    }
+	@Bean
+	LoginAuthenticationFilter authenticationFilter(AuthenticationManager authenticationManager) {
+		LoginAuthenticationFilter filter = new LoginAuthenticationFilter();
+		filter.setFilterProcessesUrl("/auth/login");
+		filter.setAuthenticationManager(authenticationManager);
+		filter.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
 
-    @Bean
-     LoginFailureHandler loginFailureHandler() {
-        return new LoginFailureHandler();
-    }
-
-    @Bean
-     LoginSuccessHandler loginSuccessHandler() {
-        return new LoginSuccessHandler();
-    }
-
-    @Bean
-     LoginAuthenticationFilter authenticationFilter(AuthenticationManager authenticationManager) {
-        LoginAuthenticationFilter filter = new LoginAuthenticationFilter();
-        filter.setFilterProcessesUrl("/auth/login");
-        filter.setAuthenticationManager(authenticationManager);
-        filter.setAuthenticationSuccessHandler(new AuthenticationSuccessHandler() {
-
-            @Override
-            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                Json.toJson(response.getWriter(), LoginUser.from((JwtUser) authentication.getPrincipal()));
-            }
-        });
-        return filter;
-    }
+			@Override
+			public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+					Authentication authentication) throws IOException, ServletException {
+				Json.toJson(response.getWriter(), LoginUser.from((JwtUser) authentication.getPrincipal()));
+			}
+		});
+		return filter;
+	}
 }
